@@ -5,8 +5,8 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject open, closed;
-    private bool isOpen;
-    public void Interact()
+    protected bool isOpen;
+    public virtual void Interact()
     {
         if (!isOpen)
         {
