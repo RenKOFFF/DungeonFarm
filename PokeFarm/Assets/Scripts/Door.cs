@@ -13,14 +13,12 @@ public class Door : MonoBehaviour, IInteractable
             isOpen = true;
             open.SetActive(isOpen);
             closed.SetActive(!isOpen);
-            Debug.Log("Pi, Door is Opened!"); 
         }
         else
         {
             isOpen = false;
             open.SetActive(isOpen);
             closed.SetActive(!isOpen);
-            Debug.Log("Pi, Door is Closed!");
         }
     }
 }
