@@ -270,3 +270,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   open: {fileID: 838473703527319446}
   closed: {fileID: 3749520731199022130}
+  DurationTeleportBySceneName: 
