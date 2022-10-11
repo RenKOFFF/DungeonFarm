@@ -7,6 +7,18 @@ public class ItemSlot
 {
     public Item item;
     public int count;
+
+    public void PasteValues(ItemSlot slot)
+    {
+        item = slot.item;
+        count = slot.count;
+    }
+
+    public void CLear()
+    {
+        item = null;
+        count = 0;
+    }
 }
 
 [CreateAssetMenu(menuName = "Data/Item Container")]
