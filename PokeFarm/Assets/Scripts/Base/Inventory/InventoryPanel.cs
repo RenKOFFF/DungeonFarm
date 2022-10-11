@@ -10,6 +10,7 @@ public class InventoryPanel : MonoBehaviour
     private void Start()
     {
         SetButtonIndexes();
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
