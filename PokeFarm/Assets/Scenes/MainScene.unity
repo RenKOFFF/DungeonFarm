@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 812349701}
   - component: {fileID: 812349700}
   - component: {fileID: 812349702}
+  - component: {fileID: 812349703}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -754,6 +755,19 @@ MonoBehaviour:
     item: {fileID: 0}
     count: 0
   itemIcon: {fileID: 1843146817}
+--- !u!114 &812349703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812349699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff635538295e5b40badd32aa2a2b120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpItemPrefab: {fileID: 1865160586208585308, guid: 7b99120601782ab43800b606f6018e22, type: 3}
 --- !u!224 &830736940 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}

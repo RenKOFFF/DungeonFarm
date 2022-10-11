@@ -34,6 +34,6 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     {
         var inventory = GameManager.Instance.inventoryContainer;
         GameManager.Instance.dragAndDropController.OnClick(inventory.slots[index]);
-        transform.parent.GetComponent<InventoryPanel>().Refresh();
+        transform.parent.GetComponent<InventoryPanel>()?.Refresh();
     }
 }

@@ -42,11 +42,14 @@ public class ItemDragAndDropController : MonoBehaviour
     {
         if (!itemIcon.activeInHierarchy) return;
 
-        iconTransform.position = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+        var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+        iconTransform.position = worldPosition;
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            // TODO нужен обработчик клика вне панели
+            ItemSpawnManager.Instance.SpawnItem(worldPosition, draggingSlot.item, draggingSlot.count);
+            draggingSlot.Clear();
+            UpdateIcon();
         }
     }
 }
