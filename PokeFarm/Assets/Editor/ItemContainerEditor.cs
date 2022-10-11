@@ -9,7 +9,7 @@ public class ItemContainerEditor : Editor
         if (GUILayout.Button("Clear container"))
         {
             foreach (var slot in ((ItemContainer) target).slots)
-                slot.CLear();
+                slot.Clear();
         }
 
         DrawDefaultInspector();

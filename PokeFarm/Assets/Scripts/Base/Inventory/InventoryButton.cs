@@ -1,15 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryButton : MonoBehaviour
+public class InventoryButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text text;
 
-    private int _myIndex;
+    private int index;
 
-    public void SetIndex(int index) => _myIndex = index;
+    public void SetIndex(int givenIndex)
+        => index = givenIndex;
 
     public void Set(ItemSlot slot)
     {
@@ -26,5 +28,12 @@ public class InventoryButton : MonoBehaviour
         icon.sprite = null;
         icon.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        var inventory = GameManager.Instance.inventoryContainer;
+        GameManager.Instance.dragAndDropController.OnClick(inventory.slots[index]);
+        transform.parent.GetComponent<InventoryPanel>().Refresh();
     }
 }
