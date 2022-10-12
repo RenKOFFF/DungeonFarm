@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   Name: Stone
-  stackable: 1
+  isStackable: 1
   icon: {fileID: 21300000, guid: 40188da6de7c6c84aac75f66abc1a89c, type: 3}
