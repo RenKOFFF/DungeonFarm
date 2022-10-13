@@ -4,7 +4,7 @@ public class PickUpItem : MonoBehaviour
 {
     private Transform player;
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float pickUpDistance = 0.5f;
+    [SerializeField] private float pickUpDistance = 0.8f;
 
     private Item currentItem;
     private int currentCount = 1;

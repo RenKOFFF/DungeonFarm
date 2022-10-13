@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  pickUpDistance: 0.5
+  pickUpDistance: 0.8
