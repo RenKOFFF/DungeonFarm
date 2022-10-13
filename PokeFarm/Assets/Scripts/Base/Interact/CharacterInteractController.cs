@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,14 +19,38 @@ public class CharacterInteractController : MonoBehaviour
         OnPlayerOnIntacteTriggerEvent.AddListener(CanInteract);
         OnPlayerExitIntacteTriggerEvent.AddListener(CanNotInteract);
         OnPlayerIntactedEvent.AddListener(CanInteract);
+
+        if (ConditionalInteracteItem.IsInitialized)
+            ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(CanInteract);
+        else 
+            ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.AddListener(WaitConditionalInteracteItemInitialize);
+    }
+
+    private void WaitConditionalInteracteItemInitialize()
+    {
+        ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(CanInteract);
+        ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.RemoveListener(WaitConditionalInteracteItemInitialize);
     }
 
     private void CanInteract(IInteractable interactableObject)
     {
-        isCanPlayerInteract = interactableObject.isCanInteract;
+        bool interactableCondition = true;
+        if (interactableObject is IConditionInteractable conditionInteractableObject)
+        {
+            interactableCondition = conditionInteractableObject.Condition;
 
-        if (isCanPlayerInteract) this.interactableObject = interactableObject;
-        else this.interactableObject = null;
+            if (!ConditionalInteracteItem.IsInitialized)
+                ConditionalInteracteItem.Item = conditionInteractableObject;
+            else if (ConditionalInteracteItem.Item != conditionInteractableObject) 
+                ConditionalInteracteItem.Item = conditionInteractableObject;
+        }
+
+        isCanPlayerInteract = interactableObject.isCanInteract && interactableCondition;
+
+        if (isCanPlayerInteract)
+            this.interactableObject = interactableObject;
+        else 
+            this.interactableObject = null;
     }
 
     private void CanNotInteract()
