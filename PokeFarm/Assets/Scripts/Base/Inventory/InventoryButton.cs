@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text text;
+    [SerializeField] private Image hightlightImage;
 
     private int index;
 
@@ -32,8 +34,12 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        var inventory = GameManager.Instance.inventoryContainer;
-        GameManager.Instance.dragAndDropController.OnClick(inventory.slots[index]);
-        transform.parent.GetComponent<InventoryPanel>()?.Refresh();
+        var itemPanel = GetComponentInParent<ItemPanel>();
+        itemPanel.OnClick(index);
+    }
+
+    public void Hightlight(bool makeActive)
+    {
+        hightlightImage.gameObject.SetActive(makeActive);
     }
 }
