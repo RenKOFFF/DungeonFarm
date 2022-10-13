@@ -22,13 +22,11 @@ public class CharacterInteractController : MonoBehaviour
     {
         this.interactableObject = interactableObject;
         isCanPlayerInteract = true;
-        Debug.Log("CanInteract1true");
     }
 
     private void CanNotInteract()
     {
         isCanPlayerInteract = false;
-        Debug.Log("CanInteract1false");
     }
 
     void Update()
