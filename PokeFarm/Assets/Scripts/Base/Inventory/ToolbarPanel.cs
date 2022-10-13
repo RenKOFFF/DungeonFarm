@@ -21,9 +21,9 @@ public class ToolbarPanel : ItemPanel
 
     private void Hightlight(int id)
     {
-        buttons[currentSelectedItemIndex].Hightlight(false);
+        buttons[currentSelectedItemIndex].Highlight(false);
         currentSelectedItemIndex = id;
-        buttons[id].Hightlight(true);
+        buttons[id].Highlight(true);
     }
     public Item GetCurrentSelectedItem()
     {

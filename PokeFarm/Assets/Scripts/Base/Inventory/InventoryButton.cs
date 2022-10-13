@@ -41,7 +41,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
         itemPanel.OnClick(index);
     }
 
-    public void Hightlight(bool makeActive)
+    public void Highlight(bool makeActive)
     {
         hightlightImage.gameObject.SetActive(makeActive);
     }
