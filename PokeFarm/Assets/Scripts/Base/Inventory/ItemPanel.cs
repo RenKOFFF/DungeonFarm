@@ -44,8 +44,5 @@ public class ItemPanel : MonoBehaviour
         Refresh();
     }
 
-    public virtual void OnClick(int id)
-    {
-
-    }
+    public virtual void OnClick(int id) { }
 }

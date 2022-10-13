@@ -6,17 +6,24 @@ using UnityEngine.Events;
 
 public class ToolbarController : MonoBehaviour
 {
+    public static ToolbarController instanse;
+
     [SerializeField] int toolbarSize = 12;
     private int selectedToolbarItemSlotIndex;
 
-    public UnityEvent<int> OnSelectChangeEvent = new UnityEvent<int>();
+    [HideInInspector] public UnityEvent<int> OnSelectChangeEvent = new UnityEvent<int>();
 
-    public void Set(int id)
+    private void Awake()
     {
-        selectedToolbarItemSlotIndex = id;
-        //OnSelectChangeEvent.Invoke(selectedToolbarItemSlotIndex);
-    }
+        if (instanse == null)
+        {
+            instanse = this;
+            DontDestroyOnLoad(instanse);
+            return;
+        }
 
+        Destroy(gameObject);
+    }
     void Update()
     {
         float mouseScrollDelta = Input.mouseScrollDelta.y;
@@ -32,5 +39,11 @@ public class ToolbarController : MonoBehaviour
             }
             OnSelectChangeEvent.Invoke(selectedToolbarItemSlotIndex);
         }
+    }
+
+    public void Set(int id)
+    {
+        selectedToolbarItemSlotIndex = id;
+        OnSelectChangeEvent.Invoke(selectedToolbarItemSlotIndex);
     }
 }

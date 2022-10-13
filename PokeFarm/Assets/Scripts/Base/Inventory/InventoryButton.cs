@@ -10,6 +10,8 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image hightlightImage;
 
+    private ItemSlot slot { get; set; }
+
     private int index;
 
     public void SetIndex(int givenIndex)
@@ -17,6 +19,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 
     public void Set(ItemSlot slot)
     {
+        this.slot = slot;
         icon.gameObject.SetActive(true);
         icon.sprite = slot.item.icon;
         text.gameObject.SetActive(slot.item.isStackable);
@@ -41,5 +44,10 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     public void Hightlight(bool makeActive)
     {
         hightlightImage.gameObject.SetActive(makeActive);
+    }
+
+    public ItemSlot GetSlot()
+    {
+        return slot;
     }
 }
