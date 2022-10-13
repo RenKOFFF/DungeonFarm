@@ -47,8 +47,7 @@ public class CharacterInteractController : MonoBehaviour
 
         if (isCanPlayerInteract)
             this.interactableObject = interactableObject;
-        else 
-            this.interactableObject = null;
+        
     }
 
     private void CanNotInteract()

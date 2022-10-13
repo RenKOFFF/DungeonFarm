@@ -29,20 +29,24 @@ public class InteractUiTextHandler : MonoBehaviour
 
     private void ShowText(IInteractable interactableObject)
     {
-        var interactableCondition = false;
-
-        if (interactableObject is IConditionInteractable conditionInteractableObject)
-        {
-            interactableCondition = conditionInteractableObject.Condition;
-
-            if (!ConditionalInteracteItem.IsInitialized || ConditionalInteracteItem.Item != conditionInteractableObject)
-                ConditionalInteracteItem.Initialize(conditionInteractableObject);
-        }
-
-        if (!interactableObject.isCanInteract || !interactableCondition)
+        if (!interactableObject.isCanInteract)
         {
             HideText();
             return;
+        }
+
+        if (interactableObject is IConditionInteractable conditionInteractableObject)
+        {
+            var interactableCondition = conditionInteractableObject.Condition;
+
+            if (!ConditionalInteracteItem.IsInitialized || ConditionalInteracteItem.Item != conditionInteractableObject)
+                ConditionalInteracteItem.Initialize(conditionInteractableObject);
+
+            if (!interactableCondition)
+            {
+                HideText();
+                return;
+            }
         }
 
         gameObject.SetActive(true);

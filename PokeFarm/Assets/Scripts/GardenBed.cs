@@ -32,6 +32,8 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
 
     private void UpdateCondition()
     {
+        if (state != GardenBedState.Empty) return;
+
         Condition = HandBank.instance.itemOnTheHand == seed;
 
         Debug.Log($"Is Can posadit seed on the garden: {Condition}?");
@@ -44,10 +46,11 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
         switch (state)
         {
             case GardenBedState.Empty:
-                Debug.Log($"Interacted with {this}");
                 _isCanInteract = false;
+
                 empty.SetActive(false);
                 planted.SetActive(true);
+
                 StartCoroutine(Growing());
 
                 Condition = true;
@@ -55,11 +58,11 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
                 break;
 
             case GardenBedState.Growned:
-                Debug.Log($"Interacted with {this} to harvest");
                 growned.SetActive(false);
                 empty.SetActive(true);
 
                 state = GardenBedState.Empty;
+                UpdateCondition();
                 break;
 
             default:
