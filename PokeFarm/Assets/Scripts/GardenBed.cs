@@ -27,8 +27,6 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
     {
         state = GardenBedState.Empty;
 
-        ConditionalInteracteItem.Initialize(this);
-
         HandBank.instance.OnItemOnTheHandIsSwitchedEvent.AddListener(UpdateCondition);
     }
 

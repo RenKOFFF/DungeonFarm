@@ -39,10 +39,8 @@ public class CharacterInteractController : MonoBehaviour
         {
             interactableCondition = conditionInteractableObject.Condition;
 
-            if (!ConditionalInteracteItem.IsInitialized)
-                ConditionalInteracteItem.Item = conditionInteractableObject;
-            else if (ConditionalInteracteItem.Item != conditionInteractableObject) 
-                ConditionalInteracteItem.Item = conditionInteractableObject;
+            if (!ConditionalInteracteItem.IsInitialized || ConditionalInteracteItem.Item != conditionInteractableObject)
+                ConditionalInteracteItem.Initialize(conditionInteractableObject);
         }
 
         isCanPlayerInteract = interactableObject.isCanInteract && interactableCondition;
