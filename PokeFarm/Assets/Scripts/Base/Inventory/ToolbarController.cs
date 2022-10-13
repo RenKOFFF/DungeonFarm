@@ -8,7 +8,7 @@ public class ToolbarController : MonoBehaviour
 {
     public static ToolbarController instanse;
 
-    [SerializeField] int toolbarSize = 12;
+    private int toolbarSize = 12;
     private int selectedToolbarItemSlotIndex;
 
     [HideInInspector] public UnityEvent<int> OnSelectChangeEvent = new UnityEvent<int>();

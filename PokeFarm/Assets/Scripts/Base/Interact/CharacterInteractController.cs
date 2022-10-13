@@ -11,17 +11,21 @@ public class CharacterInteractController : MonoBehaviour
 
     public static UnityEvent<IInteractable> OnPlayerOnIntacteTriggerEvent = new UnityEvent<IInteractable>();
     public static UnityEvent OnPlayerExitIntacteTriggerEvent = new UnityEvent();
+    public static UnityEvent<IInteractable> OnPlayerIntactedEvent = new UnityEvent<IInteractable>();
 
     private void Awake() 
     {
         OnPlayerOnIntacteTriggerEvent.AddListener(CanInteract);
         OnPlayerExitIntacteTriggerEvent.AddListener(CanNotInteract);
+        OnPlayerIntactedEvent.AddListener(CanInteract);
     }
 
     private void CanInteract(IInteractable interactableObject)
     {
-        this.interactableObject = interactableObject;
-        isCanPlayerInteract = true;
+        isCanPlayerInteract = interactableObject.isCanInteract;
+
+        if (isCanPlayerInteract) this.interactableObject = interactableObject;
+        else this.interactableObject = null;
     }
 
     private void CanNotInteract()
@@ -33,8 +37,8 @@ public class CharacterInteractController : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact") && isCanPlayerInteract)
         {
-            Debug.Log("Interact EEEEEE");
             interactableObject.Interact();
+            OnPlayerIntactedEvent.Invoke(interactableObject);
         }   
     }
 
@@ -42,9 +46,8 @@ public class CharacterInteractController : MonoBehaviour
     {
         collidersList.Add(other);
 
-        Debug.Log("On Collider " + other.name);
         var interactableObject = other.GetComponent<IInteractable>();
-        if (interactableObject != null)
+        if (interactableObject != null && interactableObject.isCanInteract)
         {
             OnPlayerOnIntacteTriggerEvent.Invoke(interactableObject);
         }

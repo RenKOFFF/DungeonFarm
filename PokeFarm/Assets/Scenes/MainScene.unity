@@ -2573,7 +2573,6 @@ MonoBehaviour:
   - {fileID: 1274099950}
   - {fileID: 903716589}
   - {fileID: 826944106}
-  toolbarController: {fileID: 1787239523}
 --- !u!1001 &1676777956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2754,6 +2753,19 @@ MonoBehaviour:
   OnSelectChangeEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1787239530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787239509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554bc34e9decc094385d1920df62c8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolbar: {fileID: 1641903044}
 --- !u!224 &1790816583 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: b6793933e6dc7cb46b599c12fe685ce7, type: 3}
