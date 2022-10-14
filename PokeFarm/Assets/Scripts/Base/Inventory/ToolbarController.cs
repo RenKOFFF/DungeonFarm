@@ -29,7 +29,7 @@ public class ToolbarController : MonoBehaviour
         float mouseScrollDelta = Input.mouseScrollDelta.y;
         if (mouseScrollDelta != 0)
         {
-            if (mouseScrollDelta < 0)
+            if (mouseScrollDelta > 0)
             {
                 selectedToolbarItemSlotIndex = selectedToolbarItemSlotIndex - 1 < 0 ? toolbarSize - 1 : --selectedToolbarItemSlotIndex;
             }
