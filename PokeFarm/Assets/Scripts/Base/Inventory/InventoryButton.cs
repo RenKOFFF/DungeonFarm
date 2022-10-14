@@ -25,7 +25,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
         text.gameObject.SetActive(slot.item.isStackable);
 
         if (slot.item.isStackable)
-            text.text = slot.count.ToString();
+            text.text = slot.amount.ToString();
     }
 
     public void Clean()
@@ -41,7 +41,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
         itemPanel.OnClick(index);
     }
 
-    public void Hightlight(bool makeActive)
+    public void Highlight(bool makeActive)
     {
         hightlightImage.gameObject.SetActive(makeActive);
     }

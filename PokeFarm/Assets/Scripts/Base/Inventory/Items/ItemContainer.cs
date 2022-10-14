@@ -7,29 +7,29 @@ using UnityEngine;
 public class ItemSlot
 {
     [CanBeNull] public Item item;
-    public int count;
+    public int amount;
 
     public ItemSlot() { }
 
-    public ItemSlot(Item item, int count)
+    public ItemSlot(Item item, int amount)
     {
         this.item = item;
-        this.count = count;
+        this.amount = amount;
     }
 
     public ItemSlot Copy()
-        => new(item, count);
+        => new(item, amount);
 
     public void Paste(ItemSlot slot)
     {
         item = slot.item;
-        count = slot.count;
+        amount = slot.amount;
     }
 
     public void Clear()
     {
         item = null;
-        count = 0;
+        amount = 0;
     }
 
     public static void Swap(ItemSlot slotA, ItemSlot slotB)
@@ -50,7 +50,7 @@ public class ItemContainer : ScriptableObject
         var existingSlot = slots.Find(s => s.item == item);
         if (item.isStackable && existingSlot != null)
         {
-            existingSlot.count++;
+            existingSlot.amount++;
             return;
         }
 
@@ -58,6 +58,6 @@ public class ItemContainer : ScriptableObject
         if (emptySlot == null) return;
 
         emptySlot.item = item;
-        emptySlot.count = count;
+        emptySlot.amount = count;
     }
 }
