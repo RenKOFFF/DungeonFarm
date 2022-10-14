@@ -6,29 +6,25 @@ public class InteractUiTextHandler : MonoBehaviour
     private TextMeshProUGUI textUI;
 
     private void Start() {
-        HideText();
         textUI = GetComponent<TextMeshProUGUI>();
+        HideText();
     }
     private void OnEnable() 
     {
-        CharacterInteractController.OnPlayerOnIntacteTriggerEvent.AddListener(ShowText);
+        CharacterInteractController.OnPlayerOnIntacteTriggerEvent.AddListener(UpdateText);
         CharacterInteractController.OnPlayerExitIntacteTriggerEvent.AddListener(HideText);
-        CharacterInteractController.OnPlayerIntactedEvent.AddListener(ShowText);
+        CharacterInteractController.OnPlayerIntactedEvent.AddListener(UpdateText);
 
         if (ConditionalInteracteItem.IsInitialized)
-            ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(ShowText);
+            ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(UpdateText);
         else
             ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.AddListener(WaitConditionalInteracteItemInitialize);
     }
 
-    private void WaitConditionalInteracteItemInitialize()
+    private void UpdateText(IInteractable interactableObject)
     {
-        ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(ShowText);
-        ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.RemoveListener(WaitConditionalInteracteItemInitialize);
-    }
+        if (!CharacterInteractController.IsSomeoneItemsInPlayerCollider) return;
 
-    private void ShowText(IInteractable interactableObject)
-    {
         if (!interactableObject.isCanInteract)
         {
             HideText();
@@ -39,8 +35,8 @@ public class InteractUiTextHandler : MonoBehaviour
         {
             var interactableCondition = conditionInteractableObject.Condition;
 
-            if (!ConditionalInteracteItem.IsInitialized || ConditionalInteracteItem.Item != conditionInteractableObject)
-                ConditionalInteracteItem.Initialize(conditionInteractableObject);
+            /*if (!ConditionalInteracteItem.IsInitialized || ConditionalInteracteItem.Item != conditionInteractableObject)
+                ConditionalInteracteItem.Initialize(conditionInteractableObject);*/
 
             if (!interactableCondition)
             {
@@ -55,5 +51,10 @@ public class InteractUiTextHandler : MonoBehaviour
     private void HideText()
     {
         gameObject.SetActive(false);
+    }
+    private void WaitConditionalInteracteItemInitialize()
+    {
+        ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(UpdateText);
+        ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.RemoveListener(WaitConditionalInteracteItemInitialize);
     }
 }

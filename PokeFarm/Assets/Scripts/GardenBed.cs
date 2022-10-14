@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
+public class GardenBed : MonoBehaviour, IConditionInteractable
 {
     public Item seed;
     public float plantGrowingTime = 7f; 
@@ -26,7 +26,7 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
     private void Start()
     {
         state = GardenBedState.Empty;
-
+        //UpdateCondition();
         HandBank.instance.OnItemOnTheHandIsSwitchedEvent.AddListener(UpdateCondition);
     }
 
@@ -35,9 +35,7 @@ public class GardenBed : MonoBehaviour, IInteractable, IConditionInteractable
         if (state != GardenBedState.Empty) return;
 
         Condition = HandBank.instance.itemOnTheHand == seed;
-
         Debug.Log($"Is Can posadit seed on the garden: {Condition}?");
-
         OnConditionUpdatedEvent.Invoke(this);
     }
 

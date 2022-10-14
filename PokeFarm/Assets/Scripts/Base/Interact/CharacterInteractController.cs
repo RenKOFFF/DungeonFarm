@@ -6,9 +6,11 @@ using UnityEngine.Events;
 public class CharacterInteractController : MonoBehaviour
 {
     private bool isCanPlayerInteract;
-    private IInteractable interactableObject;
+    public static bool IsSomeoneItemsInPlayerCollider { get; private set; }
 
-    List<Collider2D> collidersList = new List<Collider2D>();
+    private IInteractable currentInteractableObject;
+
+    List<IInteractable> interactableObjectsList = new List<IInteractable>();
 
     public static UnityEvent<IInteractable> OnPlayerOnIntacteTriggerEvent = new UnityEvent<IInteractable>();
     public static UnityEvent OnPlayerExitIntacteTriggerEvent = new UnityEvent();
@@ -26,14 +28,23 @@ public class CharacterInteractController : MonoBehaviour
             ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.AddListener(WaitConditionalInteracteItemInitialize);
     }
 
-    private void WaitConditionalInteracteItemInitialize()
+    void Update()
     {
-        ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(CanInteract);
-        ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.RemoveListener(WaitConditionalInteracteItemInitialize);
+        if (Input.GetButtonDown("Interact") && isCanPlayerInteract)
+        {
+            if (currentInteractableObject == null) return;
+                    
+            currentInteractableObject.Interact();
+            SwitchInteractableObject();
+
+            OnPlayerIntactedEvent.Invoke(currentInteractableObject);
+        }   
     }
 
     private void CanInteract(IInteractable interactableObject)
     {
+        if (!IsSomeoneItemsInPlayerCollider || interactableObjectsList.Count == 0) return;
+
         bool interactableCondition = true;
         if (interactableObject is IConditionInteractable conditionInteractableObject)
         {
@@ -46,42 +57,55 @@ public class CharacterInteractController : MonoBehaviour
         isCanPlayerInteract = interactableObject.isCanInteract && interactableCondition;
 
         if (isCanPlayerInteract)
-            this.interactableObject = interactableObject;
-        
+            currentInteractableObject = interactableObject;
+
     }
 
     private void CanNotInteract()
     {
         isCanPlayerInteract = false;
+        currentInteractableObject = null;
     }
 
-    void Update()
+    private void SwitchInteractableObject()
     {
-        if (Input.GetButtonDown("Interact") && isCanPlayerInteract)
-        {
-            interactableObject.Interact();
-            OnPlayerIntactedEvent.Invoke(interactableObject);
-        }   
+        if (interactableObjectsList.Count < 2) return;
+
+        var lastIndexCurrentInteractableObject = interactableObjectsList.LastIndexOf(currentInteractableObject);
+
+        lastIndexCurrentInteractableObject = lastIndexCurrentInteractableObject < 1 ? interactableObjectsList.Count - 1 : --lastIndexCurrentInteractableObject;
+
+        currentInteractableObject = interactableObjectsList[lastIndexCurrentInteractableObject];
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        collidersList.Add(other);
-
-        var interactableObject = other.GetComponent<IInteractable>();
-        if (interactableObject != null && interactableObject.isCanInteract)
+        var collider = other.GetComponent<IInteractable>();
+        if (collider != null)
         {
-            OnPlayerOnIntacteTriggerEvent.Invoke(interactableObject);
+            interactableObjectsList.Add(collider);
+            IsSomeoneItemsInPlayerCollider = true;
+            OnPlayerOnIntacteTriggerEvent.Invoke(interactableObjectsList[interactableObjectsList.Count - 1]);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        collidersList.Remove(other);
-
-        if (other.GetComponent<IInteractable>() != null && collidersList.Count == 0)
+        var collider = other.GetComponent<IInteractable>();
+        if (collider != null)
         {
-            OnPlayerExitIntacteTriggerEvent.Invoke();
+            interactableObjectsList.Remove(collider);
+
+            if (interactableObjectsList.Count == 0)
+            {
+                IsSomeoneItemsInPlayerCollider = false;
+                OnPlayerExitIntacteTriggerEvent.Invoke();
+            }
         }
+    }
+    private void WaitConditionalInteracteItemInitialize()
+    {
+        ConditionalInteracteItem.Item.OnConditionUpdatedEvent.AddListener(CanInteract);
+        ConditionalInteracteItem.OnConditionalInteracteItemInitializedEvent.RemoveListener(WaitConditionalInteracteItemInitialize);
     }
 }
