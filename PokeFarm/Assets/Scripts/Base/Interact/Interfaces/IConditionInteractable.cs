@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-public interface IConditionInteractable
+public interface IConditionInteractable : IInteractable
 {
     public UnityEvent<IInteractable> OnConditionUpdatedEvent { get; }
     bool Condition { get; }
