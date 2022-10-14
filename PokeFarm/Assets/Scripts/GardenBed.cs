@@ -35,7 +35,6 @@ public class GardenBed : MonoBehaviour, IConditionInteractable
         if (state != GardenBedState.Empty) return;
 
         Condition = HandBank.instance.itemOnTheHand == seed;
-        Debug.Log($"Is Can posadit seed on the garden: {Condition}?");
         OnConditionUpdatedEvent.Invoke(this);
     }
 
