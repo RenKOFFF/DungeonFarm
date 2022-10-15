@@ -5,9 +5,11 @@ using UnityEngine;
 public class StateMachine
 {
     public State CurrentState { get; private set; }
+    public State DefaultState { get; private set; }
     public void Init(State startState)
     {
-        CurrentState = startState;
+        DefaultState = startState;
+        CurrentState = DefaultState;
         CurrentState.Enter();
     }
 

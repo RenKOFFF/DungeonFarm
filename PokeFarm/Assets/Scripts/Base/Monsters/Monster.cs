@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,19 +7,39 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    private StateMachine _stateMachine;
+    [SerializeField] private float _speed = 4f;
+    public float Speed { get => _speed; private set => _speed = value;  }
+
+    public StateMachine StateMachine;
+
+    [HideInInspector] public RestState RestState;
+    [SerializeField] private Transform _restPlace;
+
+    [HideInInspector] public PatrolState RatrolState;
+    [SerializeField] private PatrolData PatrolData;
 
     private void Start()
     {
-        _stateMachine = new StateMachine();
-        _stateMachine.Init(new IdleState());
+        InitializeStates();
+
+        StateMachine = new StateMachine();
+        StateMachine.Init(RestState);
     }
+
+    private void InitializeStates()
+    {
+        RestState = new RestState(this, Speed, _restPlace);
+        RatrolState = new PatrolState(this, Speed, PatrolData);
+}
 
     private void Update()
     {
+        StateMachine.CurrentState.Update();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _stateMachine.ChangeState(new PatrolState());
+            if (StateMachine.CurrentState.GetType() == RestState.GetType()) StateMachine.ChangeState(RatrolState);
+            else StateMachine.ChangeState(RestState);
         }
     }
 }
