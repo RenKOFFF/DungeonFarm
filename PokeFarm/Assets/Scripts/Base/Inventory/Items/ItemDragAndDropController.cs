@@ -9,18 +9,23 @@ public class ItemDragAndDropController : MonoBehaviour
     private RectTransform iconTransform;
     private Image iconImage;
 
-    public void OnClick(ItemSlot otherSlot)
+    public void OnClick(ItemSlot clickedSlot)
+    {
+        InteractWithSlot(clickedSlot);
+        UpdateIcon();
+    }
+
+    private void InteractWithSlot(ItemSlot clickedSlot)
     {
         if (draggingSlot.item == null)
         {
-            draggingSlot.Paste(otherSlot);
-            otherSlot.Clear();
-            UpdateIcon();
+            draggingSlot.Paste(clickedSlot);
+            clickedSlot.Clear();
             return;
         }
 
-        ItemSlot.Swap(draggingSlot, otherSlot);
-        UpdateIcon();
+        if (!ItemSlot.TryMerge(draggingSlot, clickedSlot))
+            ItemSlot.Swap(draggingSlot, clickedSlot);
     }
 
     private void UpdateIcon()

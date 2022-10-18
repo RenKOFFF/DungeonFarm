@@ -38,6 +38,21 @@ public class ItemSlot
         slotB.Paste(slotA);
         slotA.Paste(temp);
     }
+
+    public static bool TryMerge(ItemSlot from, ItemSlot to)
+    {
+        if (from.item == null
+            || !from.item.isStackable
+            || from.item != to.item)
+        {
+            return false;
+        }
+
+        to.amount += from.amount;
+        from.Clear();
+
+        return true;
+    }
 }
 
 [CreateAssetMenu(menuName = "Data/Item Container")]
