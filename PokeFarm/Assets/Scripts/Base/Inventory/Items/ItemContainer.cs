@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public class ItemSlot
 {
-    [CanBeNull] public Item item;
-    public int amount;
+    [SerializeField] [CanBeNull] public Item item;
+    [SerializeField] public int amount;
 
     public ItemSlot() { }
 
@@ -17,6 +17,11 @@ public class ItemSlot
         this.amount = amount;
     }
 
+    public void AddAmount(int amount)
+    {
+        this.amount += amount;
+    }
+
     public ItemSlot Copy()
         => new(item, amount);
 
@@ -24,6 +29,35 @@ public class ItemSlot
     {
         item = slot.item;
         amount = slot.amount;
+    }
+
+    public void Paste(Item item, int amount)
+    {
+        this.item = item;
+        this.amount = amount;
+    }
+
+    public void SendAmount(ItemSlot destination, int amount = 1)
+    {
+        if (amount > this.amount)
+        {
+            Debug.LogError($"Попытка передать в слот количество предметов [{amount}], превышающее текущее [{this.amount}].");
+            return;
+        }
+
+        if (destination.item == null)
+            destination.item = item;
+
+        destination.AddAmount(amount);
+        AddAmount(-amount);
+
+        if (this.amount == 0)
+            Clear();
+    }
+
+    public void SendAll(ItemSlot destination)
+    {
+        SendAmount(destination, amount);
     }
 
     public void Clear()
@@ -48,8 +82,7 @@ public class ItemSlot
             return false;
         }
 
-        to.amount += from.amount;
-        from.Clear();
+        from.SendAll(to);
 
         return true;
     }
