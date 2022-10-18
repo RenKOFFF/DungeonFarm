@@ -17,9 +17,25 @@ public class ItemSlot
         this.amount = amount;
     }
 
-    public void AddAmount(int amount)
+    public static void Swap(ItemSlot slotA, ItemSlot slotB)
     {
-        this.amount += amount;
+        var temp = slotB.Copy();
+        slotB.Paste(slotA);
+        slotA.Paste(temp);
+    }
+
+    public static bool TryMerge(ItemSlot from, ItemSlot to)
+    {
+        if (from.item == null
+            || !from.item.isStackable
+            || from.item != to.item)
+        {
+            return false;
+        }
+
+        from.SendAll(to);
+
+        return true;
     }
 
     public ItemSlot Copy()
@@ -35,6 +51,11 @@ public class ItemSlot
     {
         this.item = item;
         this.amount = amount;
+    }
+
+    public void AddAmount(int amount)
+    {
+        this.amount += amount;
     }
 
     public void SendAmount(ItemSlot destination, int amount = 1)
@@ -64,27 +85,6 @@ public class ItemSlot
     {
         item = null;
         amount = 0;
-    }
-
-    public static void Swap(ItemSlot slotA, ItemSlot slotB)
-    {
-        var temp = slotB.Copy();
-        slotB.Paste(slotA);
-        slotA.Paste(temp);
-    }
-
-    public static bool TryMerge(ItemSlot from, ItemSlot to)
-    {
-        if (from.item == null
-            || !from.item.isStackable
-            || from.item != to.item)
-        {
-            return false;
-        }
-
-        from.SendAll(to);
-
-        return true;
     }
 }
 

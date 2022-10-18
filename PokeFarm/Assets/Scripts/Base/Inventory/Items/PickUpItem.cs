@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
-    private Transform player;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float pickUpDistance = 0.8f;
 
+    private Transform player;
     private Item currentItem;
     private int currentAmount = 1;
 

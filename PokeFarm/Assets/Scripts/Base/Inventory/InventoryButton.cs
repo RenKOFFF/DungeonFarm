@@ -10,8 +10,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image hightlightImage;
 
     private ItemSlot slot { get; set; }
-
-    private int index;
+    private int index { get; set; }
 
     public void SetIndex(int givenIndex)
         => index = givenIndex;

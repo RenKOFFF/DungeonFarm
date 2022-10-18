@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +7,7 @@ public class ItemDragAndDropController : MonoBehaviour
 {
     [SerializeField] private ItemSlot draggingSlot;
     [SerializeField] private GameObject itemIcon;
+
     private RectTransform iconTransform;
     private Image iconImage;
 
