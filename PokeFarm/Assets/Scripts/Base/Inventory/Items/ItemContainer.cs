@@ -45,12 +45,13 @@ public class ItemContainer : ScriptableObject
 {
     public List<ItemSlot> slots;
 
-    public void Add(Item item, int count = 1)
+    public void Add(Item item, int amount = 1)
     {
         var existingSlot = slots.Find(s => s.item == item);
+
         if (item.isStackable && existingSlot != null)
         {
-            existingSlot.amount++;
+            existingSlot.amount += amount;
             return;
         }
 
@@ -58,6 +59,6 @@ public class ItemContainer : ScriptableObject
         if (emptySlot == null) return;
 
         emptySlot.item = item;
-        emptySlot.amount = count;
+        emptySlot.amount = amount;
     }
 }

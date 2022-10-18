@@ -11,9 +11,9 @@ public class ItemSpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject pickUpItemPrefab;
 
-    public void SpawnItem(Vector2 position, Item item, int count)
+    public void SpawnItem(Vector2 position, Item item, int amount)
     {
         var obj = Instantiate(pickUpItemPrefab, position, Quaternion.identity);
-        obj.GetComponent<PickUpItem>().Set(item, count);
+        obj.GetComponent<PickUpItem>().Set(item, amount);
     }
 }
