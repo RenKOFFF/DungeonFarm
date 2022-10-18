@@ -28,9 +28,7 @@ public class ItemContainerEditor : Editor
                     continue;
 
                 slot.item = allItems[random.NextInt(0, allItems.Length)];
-
-                if (slot.item!.isStackable)
-                    slot.amount = random.NextInt(1, 999);
+                slot.amount = slot.item.isStackable ? random.NextInt(1, 999) : 1;
             }
         }
 

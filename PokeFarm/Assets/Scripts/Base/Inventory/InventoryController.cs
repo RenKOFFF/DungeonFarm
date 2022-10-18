@@ -9,6 +9,7 @@ public class InventoryController : MonoBehaviour
     {
         inventoryPanel.gameObject.SetActive(false);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))

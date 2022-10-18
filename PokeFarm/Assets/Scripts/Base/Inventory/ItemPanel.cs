@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemPanel : MonoBehaviour
 {
     [SerializeField] protected ItemContainer inventory;
     [SerializeField] protected List<InventoryButton> buttons;
 
-    public void Refresh()
+    protected void Refresh()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
         {
@@ -23,6 +23,11 @@ public class ItemPanel : MonoBehaviour
         }
     }
 
+    protected void Init()
+    {
+        SetButtonIndexes();
+    }
+
     private void SetButtonIndexes()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
@@ -34,15 +39,10 @@ public class ItemPanel : MonoBehaviour
         Init();
     }
 
-    protected void Init()
-    {
-        SetButtonIndexes();
-    }
-
     private void OnEnable()
     {
         Refresh();
     }
 
-    public virtual void OnClick(int id) { }
+    public virtual void OnClick(int id, PointerEventData.InputButton inputButton) { }
 }

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class ToolbarPanel : ItemPanel
 {
@@ -14,7 +12,7 @@ public class ToolbarPanel : ItemPanel
 
         ToolbarController.instanse.OnSelectChangeEvent.AddListener(Hightlight);
     }
-    public override void OnClick(int id)
+    public override void OnClick(int id, PointerEventData.InputButton inputButton)
     {
         ToolbarController.instanse.Set(id);
     }

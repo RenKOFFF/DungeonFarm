@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,21 +7,52 @@ public class ItemDragAndDropController : MonoBehaviour
 {
     [SerializeField] private ItemSlot draggingSlot;
     [SerializeField] private GameObject itemIcon;
+
     private RectTransform iconTransform;
     private Image iconImage;
 
-    public void OnClick(ItemSlot otherSlot)
+    public void OnClick(ItemSlot clickedSlot, PointerEventData.InputButton inputButton)
+    {
+        switch (inputButton)
+        {
+            case PointerEventData.InputButton.Left:
+                InteractWithSlotLeftClick(clickedSlot);
+                break;
+            case PointerEventData.InputButton.Right:
+                InteractWithSlotRightClick(clickedSlot);
+                break;
+            default:
+                return;
+        }
+
+        UpdateIcon();
+    }
+
+    private void InteractWithSlotLeftClick(ItemSlot clickedSlot)
+    {
+        if (!ItemSlot.TryMerge(draggingSlot, clickedSlot))
+            ItemSlot.Swap(draggingSlot, clickedSlot);
+    }
+
+    private void InteractWithSlotRightClick(ItemSlot clickedSlot)
     {
         if (draggingSlot.item == null)
         {
-            draggingSlot.Paste(otherSlot);
-            otherSlot.Clear();
-            UpdateIcon();
+            var halfAmount = (int) Math.Ceiling(clickedSlot.amount / 2f);
+            clickedSlot.SendAmount(draggingSlot, halfAmount);
             return;
         }
 
-        ItemSlot.Swap(draggingSlot, otherSlot);
-        UpdateIcon();
+        if (clickedSlot.item == null
+            || (clickedSlot.item != null
+                && clickedSlot.item.isStackable
+                && clickedSlot.item == draggingSlot.item))
+        {
+            draggingSlot.SendAmount(clickedSlot);
+            return;
+        }
+
+        InteractWithSlotLeftClick(clickedSlot);
     }
 
     private void UpdateIcon()

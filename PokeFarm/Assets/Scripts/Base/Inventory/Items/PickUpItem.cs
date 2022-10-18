@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
-    private Transform player;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float pickUpDistance = 0.8f;
 
+    private Transform player;
     private Item currentItem;
-    private int currentCount = 1;
+    private int currentAmount = 1;
 
-    public void Set(Item item, int count)
+    public void Set(Item item, int amount)
     {
         currentItem = item;
-        currentCount = count;
+        currentAmount = amount;
 
         GetComponent<SpriteRenderer>().sprite = item.icon;
     }
@@ -33,7 +33,7 @@ public class PickUpItem : MonoBehaviour
 
         if (distance < 0.1)
         {
-            GameManager.Instance.inventoryContainer.Add(currentItem, currentCount);
+            GameManager.Instance.inventoryContainer.Add(currentItem, currentAmount);
             Destroy(gameObject);
         }
     }

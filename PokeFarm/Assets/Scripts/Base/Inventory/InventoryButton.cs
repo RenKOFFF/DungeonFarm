@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,8 +10,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image hightlightImage;
 
     private ItemSlot slot { get; set; }
-
-    private int index;
+    private int index { get; set; }
 
     public void SetIndex(int givenIndex)
         => index = givenIndex;
@@ -38,7 +36,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         var itemPanel = GetComponentInParent<ItemPanel>();
-        itemPanel.OnClick(index);
+        itemPanel.OnClick(index, eventData.button);
     }
 
     public void Highlight(bool makeActive)

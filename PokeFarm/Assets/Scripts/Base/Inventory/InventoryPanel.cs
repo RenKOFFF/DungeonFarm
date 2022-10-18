@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryPanel : ItemPanel
 {
-    public override void OnClick(int id)
+    public override void OnClick(int id, PointerEventData.InputButton inputButton)
     {
-        GameManager.Instance.dragAndDropController.OnClick(inventory.slots[id]);
+        GameManager.Instance.dragAndDropController.OnClick(inventory.slots[id], inputButton);
         Refresh();
     }
 }
