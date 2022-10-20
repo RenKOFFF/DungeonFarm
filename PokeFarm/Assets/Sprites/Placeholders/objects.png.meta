@@ -3079,7 +3079,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      objects_127: -440612240
+      objects_4: 1166525356
       objects_118: -1524665185
       objects_98: -683959040
       objects_84: -207816262
@@ -3140,11 +3140,11 @@ TextureImporter:
       objects_70: -127758483
       objects_106: -261946315
       objects_131: 172151075
-      objects_87: -1105237081
       objects_104: 1210772583
-      objects_80: -58315708
-      objects_7: 31725061
       objects_107: -394971609
+      objects_7: 31725061
+      objects_80: -58315708
+      objects_87: -1105237081
       objects_22: 763214933
       objects_47: -270366074
       objects_42: 1143646075
@@ -3216,9 +3216,9 @@ TextureImporter:
       objects_111: 1540155234
       objects_61: 1064854073
       objects_88: -1512284517
-      objects_4: 1166525356
-      objects_20: -924660589
+      objects_127: -440612240
       objects_128: 566234518
+      objects_20: -924660589
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
