@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public ItemContainer inventoryContainer;
     public ItemDragAndDropController dragAndDropController;
     public GameObject settingsPanel;
+    public GameObject activeUIPanel;
+
+    public bool HasActiveUIPanel => activeUIPanel != null && activeUIPanel.activeInHierarchy;
 
     private void Awake()
     {
@@ -16,7 +19,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Instance.HasActiveUIPanel && Instance.activeUIPanel != settingsPanel)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
+
+            if (settingsPanel.activeInHierarchy)
+                activeUIPanel = settingsPanel;
+        }
     }
 }
