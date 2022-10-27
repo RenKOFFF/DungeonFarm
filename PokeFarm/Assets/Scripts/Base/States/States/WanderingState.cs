@@ -39,7 +39,15 @@ public class WanderingState : State
     public override void Enter()
     {
         Debug.Log($"Enter {this}");
-        FindNewPoint(_maxWanderingDistance);
+
+        if (_centerWanderingArea != null)
+        {
+            _movePoint = _centerWanderingArea;
+        }
+        else
+        {
+            FindNewPoint(_maxWanderingDistance);
+        }
     }
 
     private void FindNewPoint(float maxWanderingDistance)
@@ -66,8 +74,6 @@ public class WanderingState : State
 
     public override void Update()
     {
-        //Gizmos.DrawLine(_monster.transform.position, _movePoint);
-
         MoveTo(_movePoint);
     }
     private void MoveTo(Vector2 movePoint)
