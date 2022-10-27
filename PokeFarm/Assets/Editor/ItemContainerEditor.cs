@@ -5,6 +5,13 @@ using UnityEngine;
 [CustomEditor(typeof(ItemContainer))]
 public class ItemContainerEditor : Editor
 {
+    private Unity.Mathematics.Random random;
+
+    private void Awake()
+    {
+        random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
+    }
+
     public override void OnInspectorGUI()
     {
         if (GUILayout.Button("Clear container"))
@@ -16,15 +23,14 @@ public class ItemContainerEditor : Editor
         if (GUILayout.Button("Set random"))
         {
             var allItems = Resources.LoadAll<Item>("Items");
-            var random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
 
             foreach (var slot in ((ItemContainer) target).slots)
             {
                 slot.Clear();
 
-                var slotIsEmpty = random.NextInt(0, 100) <= 20;
+                var isSlotEmpty = random.NextInt(1, 100) <= 20;
 
-                if (slotIsEmpty)
+                if (isSlotEmpty)
                     continue;
 
                 slot.item = allItems[random.NextInt(0, allItems.Length)];
