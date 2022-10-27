@@ -79,7 +79,7 @@ public class ItemDragAndDropController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            SpawnManager.Instance.SpawnItem(worldPosition, draggingSlot.item, draggingSlot.amount);
+            SpawnManager.Instance.SpawnPickUpItem(worldPosition, draggingSlot.item, draggingSlot.amount);
             draggingSlot.Clear();
             UpdateIcon();
         }
