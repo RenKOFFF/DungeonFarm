@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +9,9 @@ public class TileMapReader : MonoBehaviour
 
     private Dictionary<TileBase, TileData> dataFromTiles;
 
+    public Vector3Int GetCurrentGridPositionByMousePosition()
+        => GetGridPosition(Input.mousePosition, true);
+
     private TileBase GetTileBase(Vector2 position, bool isMousePosition = false)
     {
         var gridPosition = GetGridPosition(position, isMousePosition);
@@ -18,7 +20,7 @@ public class TileMapReader : MonoBehaviour
         return tile;
     }
 
-    private Vector3Int GetGridPosition(Vector2 position, bool isMousePosition)
+    private Vector3Int GetGridPosition(Vector2 position, bool isMousePosition = false)
     {
         Vector2 worldPosition = isMousePosition
             ? Camera.main.ScreenToWorldPoint(position)

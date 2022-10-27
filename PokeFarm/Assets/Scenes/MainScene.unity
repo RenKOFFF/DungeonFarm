@@ -3035,6 +3035,7 @@ MonoBehaviour:
   dragAndDropController: {fileID: 812349702}
   settingsPanel: {fileID: 1742877631}
   activeUIPanel: {fileID: 0}
+  tileMapReader: {fileID: 812349704}
 --- !u!4 &812349701
 Transform:
   m_ObjectHideFlags: 0

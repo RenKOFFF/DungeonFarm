@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,6 +11,8 @@ public class MarkerManager : MonoBehaviour
 
     private void Update()
     {
+        markedCellPosition = GameManager.Instance.tileMapReader.GetCurrentGridPositionByMousePosition();
+
         targetTilemap.SetTile(oldCellPosition, null);
         targetTilemap.SetTile(markedCellPosition, markerTile);
         oldCellPosition = markedCellPosition;
