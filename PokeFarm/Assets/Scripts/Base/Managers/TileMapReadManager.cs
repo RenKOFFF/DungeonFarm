@@ -1,34 +1,39 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class TileMapReadManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] public Tilemap backgroundTilemap;
+    [SerializeField] public Tilemap landscapeTilemap;
     [SerializeField] private List<TileData> tileDatas;
 
     public static TileMapReadManager Instance;
 
     private Dictionary<TileBase, TileData> dataFromTiles;
 
-    public Vector3Int GetCurrentGridPositionByMousePosition()
-        => GetGridPosition(Input.mousePosition, true);
+    public Vector3Int GetCurrentBackgroundGridPositionByMousePosition()
+        => GetBackgroundGridPosition(Input.mousePosition, true);
 
-    private TileBase GetTileBase(Vector2 position, bool isMousePosition = false)
-    {
-        var gridPosition = GetGridPosition(position, isMousePosition);
-        var tile = tilemap.GetTile(gridPosition);
+    private Vector3Int GetBackgroundGridPosition(Vector2 position, bool isMousePosition = false)
+        => GetGridPosition(backgroundTilemap, position, isMousePosition);
 
-        return tile;
-    }
-
-    private Vector3Int GetGridPosition(Vector2 position, bool isMousePosition = false)
+    private static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
     {
         Vector2 worldPosition = isMousePosition
             ? Camera.main.ScreenToWorldPoint(position)
             : position;
 
         return tilemap.WorldToCell(worldPosition);
+    }
+
+    private TileBase GetTileBase(Vector2 position, bool isMousePosition = false)
+    {
+        var gridPosition = GetBackgroundGridPosition(position, isMousePosition);
+        var tile = backgroundTilemap.GetTile(gridPosition);
+
+        return tile;
     }
 
     private TileData GetTileData(TileBase tileBase)

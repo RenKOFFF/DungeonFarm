@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class SpawnManager : MonoBehaviour
     {
         var obj = Instantiate(pickUpItemPrefab, position, Quaternion.identity);
         obj.GetComponent<PickUpItem>().Set(item, amount);
+    }
+
+    public void SpawnLandscapeObject(Tilemap targetTilemap, Vector3Int position, TileBase tileBase)
+    {
+        targetTilemap.SetTile(position, tileBase);
     }
 
     private void Awake()

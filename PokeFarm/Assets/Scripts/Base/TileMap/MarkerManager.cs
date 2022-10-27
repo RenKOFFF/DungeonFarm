@@ -11,7 +11,7 @@ public class MarkerManager : MonoBehaviour
 
     private void Update()
     {
-        markedCellPosition = TileMapReadManager.Instance.GetCurrentGridPositionByMousePosition();
+        markedCellPosition = TileMapReadManager.Instance.GetCurrentBackgroundGridPositionByMousePosition();
 
         targetTilemap.SetTile(oldCellPosition, null);
         targetTilemap.SetTile(markedCellPosition, markerTile);
