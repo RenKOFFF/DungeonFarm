@@ -18,18 +18,21 @@ public class Monster : MonoBehaviour
     [HideInInspector] public PatrolState RatrolState;
     [SerializeField] private PatrolData PatrolData;
 
+    [HideInInspector] public WanderingState WanderingState;
+
     private void Start()
     {
         InitializeStates();
 
         StateMachine = new StateMachine();
-        StateMachine.Init(RestState);
+        StateMachine.Init(WanderingState);
     }
 
     private void InitializeStates()
     {
         RestState = new RestState(this, Speed, _restPlace);
         RatrolState = new PatrolState(this, Speed, PatrolData);
+        WanderingState = new WanderingState(this, Speed, 5f);
 }
 
     private void Update()
