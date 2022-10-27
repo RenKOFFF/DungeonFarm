@@ -2264,7 +2264,8 @@ MonoBehaviour:
   rocksSpawnIntervalInSeconds: 10
   rockTile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
   availableToSpawnObjects:
-  - {fileID: 2127623444995590682, guid: 676d0cc5b02e584478380fcae1b8cf1a, type: 3}
+  - {fileID: 5422236667050310783, guid: c10d59e21a6e06c4e97adee73c06c838, type: 3}
+  - {fileID: 8299430867874479962, guid: dd7869b0f6511314c94a4a40141b5337, type: 3}
   safeFromObjectSpawningArea: {fileID: 436402993}
 --- !u!19719996 &551311234
 TilemapCollider2D:
@@ -4307,8 +4308,8 @@ Tilemap:
   - first: {x: -13, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4557,8 +4558,8 @@ Tilemap:
   - first: {x: 12, y: -8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8227,8 +8228,8 @@ Tilemap:
   - first: {x: -13, y: 6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8477,8 +8478,8 @@ Tilemap:
   - first: {x: 12, y: 6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8776,11 +8777,15 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 476
+  - m_RefCount: 472
     m_Data: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
+  - m_RefCount: 4
+    m_Data: {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 476
+  - m_RefCount: 472
     m_Data: {fileID: -675109993, guid: f3019d012c86c334a9d59000ba567165, type: 3}
+  - m_RefCount: 4
+    m_Data: {fileID: -419739600, guid: f3019d012c86c334a9d59000ba567165, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 476
     m_Data:
@@ -13918,6 +13923,10 @@ PrefabInstance:
     - target: {fileID: 8279661540096596502, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
       propertyPath: m_Name
       value: MainCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279661540096596502, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
