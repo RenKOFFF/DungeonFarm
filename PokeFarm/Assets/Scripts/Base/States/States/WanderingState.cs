@@ -70,9 +70,9 @@ public class WanderingState : State
 
         MoveTo(_movePoint);
     }
-    private void MoveTo(Vector3 movePoint)
+    private void MoveTo(Vector2 movePoint)
     {
-        _monster.transform.position = Vector3.MoveTowards(_monster.transform.position, movePoint, Time.deltaTime * _speed);
+        _monster.transform.position = Vector2.MoveTowards(_monster.transform.position, movePoint, Time.deltaTime * _speed);
 
         if (Vector2.Distance(_monster.transform.position, movePoint) <= ARRIVAL_TO_POINT_DISTANCE)
         {
