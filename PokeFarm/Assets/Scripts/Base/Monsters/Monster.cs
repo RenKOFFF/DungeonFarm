@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour, IInteractable
     public float Speed { get => _speed; private set => _speed = value;  }
 
     public bool isCanInteract => _isCanInteract;
-    private bool _isCanInteract = true;
+    private bool _isCanInteract;
 
     public StateMachine StateMachine;
 
@@ -56,12 +56,14 @@ public class Monster : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
+            _isCanInteract = true;
             StateMachine.ChangeState(new FollowingState(this, Speed, collider.gameObject));
         }
     }
 
     public void Interact()
     {
+        _isCanInteract = false;
         Debug.Log($"Im interact with {this.name}");
     }
 }
