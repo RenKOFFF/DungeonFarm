@@ -24,6 +24,7 @@ public class Monster : MonoBehaviour, IInteractable
     [HideInInspector] public WanderingState WanderingState;
 
     [HideInInspector] public FollowingState FollowingState;
+    [SerializeField] private MonstersMoveByClickController monstersMoveByClickController;
 
     private void Start()
     {
@@ -64,6 +65,7 @@ public class Monster : MonoBehaviour, IInteractable
     public void Interact()
     {
         _isCanInteract = false;
+        monstersMoveByClickController.enabled = true;
         Debug.Log($"Im interact with {this.name}");
     }
 }
