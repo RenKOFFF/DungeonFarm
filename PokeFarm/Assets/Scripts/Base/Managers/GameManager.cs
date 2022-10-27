@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public ItemDragAndDropController dragAndDropController;
     public GameObject settingsPanel;
     public GameObject activeUIPanel;
-    public TileMapReader tileMapReader;
 
     public bool HasActiveUIPanel => activeUIPanel != null && activeUIPanel.activeInHierarchy;
 

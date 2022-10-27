@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class ItemSpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject pickUpItemPrefab;
-    public static ItemSpawnManager Instance;
+
+    public static SpawnManager Instance;
 
     public void SpawnItem(Vector2 position, Item item, int amount)
     {

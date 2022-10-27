@@ -2,10 +2,12 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileMapReader : MonoBehaviour
+public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private List<TileData> tileDatas;
+
+    public static TileMapReadManager Instance;
 
     private Dictionary<TileBase, TileData> dataFromTiles;
 
@@ -31,6 +33,11 @@ public class TileMapReader : MonoBehaviour
 
     private TileData GetTileData(TileBase tileBase)
         => dataFromTiles[tileBase];
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
