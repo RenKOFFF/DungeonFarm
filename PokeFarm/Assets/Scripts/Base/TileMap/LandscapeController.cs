@@ -41,8 +41,8 @@ public class LandscapeController : MonoBehaviour
 
         if (_timeLeftToSpawnRockInSeconds < 0)
         {
-            // SpawnObjectAsTile(rockTile);
-            SpawnObjectAsInstance();
+            SpawnObjectAsTile(rockTile);
+            // SpawnObjectAsInstance();
             _timeLeftToSpawnRockInSeconds = rocksSpawnIntervalInSeconds;
         }
     }
