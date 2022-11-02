@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonstersMoveByClickController : MonoBehaviour
+public class MonstersMoveByClickController : MonstersInteractionWay
 {
     private Monster _monster;
 
