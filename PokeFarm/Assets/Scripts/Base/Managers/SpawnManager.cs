@@ -5,7 +5,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject pickUpItemPrefab;
 
-    public static SpawnManager Instance;
+    public static SpawnManager Instance { get; private set; }
 
     public void SpawnPickUpItem(Vector2 position, Item item, int amount)
     {
@@ -16,11 +16,6 @@ public class SpawnManager : MonoBehaviour
     public void SpawnObject(Vector2 position, GameObject objectToSpawn)
     {
         Instantiate(objectToSpawn, position, Quaternion.identity);
-    }
-
-    public void SpawnLandscapeObject(Tilemap targetTilemap, Vector3Int position, TileBase tileBase)
-    {
-        targetTilemap.SetTile(position, tileBase);
     }
 
     private void Awake()

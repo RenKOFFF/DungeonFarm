@@ -1,26 +1,33 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[Serializable]
+public class SpawnableTile
+{
+    public TileBase tile;
+    public float spawnIntervalInSeconds = 10;
+    public Vector3Int prefabTilemapPosition;
+
+    [NonSerialized] public float TimeLeftToSpawnRockInSeconds;
+}
+
 public class LandscapeController : MonoBehaviour
 {
-    [SerializeField] private float rocksSpawnIntervalInSeconds = 10;
-    [SerializeField] private TileBase rockTile;
-    [SerializeField] private GameObject[] availableToSpawnObjects;
     [SerializeField] private Collider2D safeFromObjectSpawningArea;
+    [SerializeField] public Tilemap prefabsTilemap;
+    [SerializeField] private SpawnableTile[] availableToSpawnTiles;
 
     private Vector3Int _minPosition;
     private Vector3Int _maxPosition;
-    private float _timeLeftToSpawnRockInSeconds;
     private Unity.Mathematics.Random _random;
     private TileMapReadManager _tileMapReadManager;
 
-    private readonly List<Vector3Int> _notAvailablePositions = new();
-
     private void Start()
     {
-        _timeLeftToSpawnRockInSeconds = rocksSpawnIntervalInSeconds;
+        foreach (var tile in availableToSpawnTiles)
+            tile.TimeLeftToSpawnRockInSeconds = tile.spawnIntervalInSeconds;
+
         _random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
         _tileMapReadManager = TileMapReadManager.Instance;
 
@@ -32,24 +39,24 @@ public class LandscapeController : MonoBehaviour
 
     private void Update()
     {
-        TrySpawnRock();
+        foreach (var tile in availableToSpawnTiles)
+            TrySpawnTile(tile);
     }
 
-    private void TrySpawnRock()
+    private void TrySpawnTile(SpawnableTile tile)
     {
-        _timeLeftToSpawnRockInSeconds -= Time.deltaTime;
+        tile.TimeLeftToSpawnRockInSeconds -= Time.deltaTime;
 
-        if (_timeLeftToSpawnRockInSeconds < 0)
+        if (tile.TimeLeftToSpawnRockInSeconds < 0)
         {
-            SpawnObjectAsTile(rockTile);
-            // SpawnObjectAsInstance();
-            _timeLeftToSpawnRockInSeconds = rocksSpawnIntervalInSeconds;
+            SpawnTile(tile);
+            tile.TimeLeftToSpawnRockInSeconds = tile.spawnIntervalInSeconds;
         }
     }
 
-    private void SpawnObjectAsTile(TileBase tileBase)
+    private void SpawnTile(SpawnableTile tile)
     {
-        var existingTile = tileBase;
+        var existingTile = tile.tile;
         Vector3Int randomPosition = default;
 
         var triesAvailable = 100;
@@ -63,42 +70,23 @@ public class LandscapeController : MonoBehaviour
                 _random.NextInt(_minPosition.x, _maxPosition.x),
                 _random.NextInt(_minPosition.y, _maxPosition.y));
 
-            existingTile = _tileMapReadManager.landscapeTilemap.GetTile(randomPosition);
-        }
-
-        SpawnManager.Instance.SpawnLandscapeObject(_tileMapReadManager.landscapeTilemap, randomPosition, tileBase);
-        Debug.Log($"Spawned [{tileBase}] in [{randomPosition}].");
-    }
-
-    private void SpawnObjectAsInstance()
-    {
-        Vector3Int randomPosition;
-        var triesAvailable = 100;
-        Vector3 spawnWorldPosition;
-
-        while (true)
-        {
-            if (triesAvailable-- == 0)
-                return;
-
-            randomPosition = new Vector3Int(
-                _random.NextInt(_minPosition.x, _maxPosition.x),
-                _random.NextInt(_minPosition.y, _maxPosition.y));
-
-            spawnWorldPosition = _tileMapReadManager.backgroundTilemap.CellToWorld(randomPosition) +
-                                 _tileMapReadManager.backgroundTilemap.layoutGrid.cellSize / 2;
+            var spawnWorldPosition = _tileMapReadManager.backgroundTilemap.CellToWorld(randomPosition) +
+                                     _tileMapReadManager.backgroundTilemap.layoutGrid.cellSize / 2;
 
             if (safeFromObjectSpawningArea.bounds.Contains(spawnWorldPosition))
                 continue;
 
-            if (!_notAvailablePositions.Contains(randomPosition))
-                break;
+            existingTile = _tileMapReadManager.landscapeTilemap.GetTile(randomPosition);
         }
 
-        var randomObject = availableToSpawnObjects[_random.NextInt(availableToSpawnObjects.Length)];
+        _tileMapReadManager.landscapeTilemap.SetTile(
+            new TileChangeData(
+                randomPosition,
+                tile.tile,
+                Color.white,
+                prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
+            false);
 
-        SpawnManager.Instance.SpawnObject(spawnWorldPosition, randomObject);
-        _notAvailablePositions.Add(randomPosition);
-        Debug.Log($"Spawned [{randomObject}] in [{randomPosition}].");
+        Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
 }
