@@ -18,11 +18,6 @@ public class SpawnManager : MonoBehaviour
         Instantiate(objectToSpawn, position, Quaternion.identity);
     }
 
-    public void SpawnLandscapeObject(Tilemap targetTilemap, Vector3Int position, TileBase tileBase)
-    {
-        targetTilemap.SetTile(position, tileBase);
-    }
-
     private void Awake()
     {
         Instance = this;
