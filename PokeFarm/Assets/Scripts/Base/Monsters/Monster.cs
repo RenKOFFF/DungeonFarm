@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Monster : MonoBehaviour, IInteractable
 {
@@ -25,8 +26,9 @@ public class Monster : MonoBehaviour, IInteractable
 
     [HideInInspector] public FollowingState FollowingState;
 
-    [SerializeField] private MonstersMoveByClickController _monstersMoveByClickController;
+    [SerializeField] private MonstersInteractionWay[] _monstersInteractionWays;
     [SerializeField] private MonsterInteractionMenu _interactionMenu;
+    public static UnityEvent<Monster, MonstersInteractionWay[]> OnPlayerCalledInteractionMenuEvent = new UnityEvent<Monster, MonstersInteractionWay[]>();
 
     private void Start()
     {
@@ -66,8 +68,10 @@ public class Monster : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        _isCanInteract = false;
-        _monstersMoveByClickController.enabled = true;
+        OnPlayerCalledInteractionMenuEvent.Invoke(this, _monstersInteractionWays);
+        //_isCanInteract = false;
+        //_interactionMenu.Show();
+        //_monstersMoveByClickController.enabled = true;
         Debug.Log($"Im interact with {this.name} - вызвана менюшка");
     }
 }
