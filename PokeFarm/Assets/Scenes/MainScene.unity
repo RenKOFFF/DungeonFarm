@@ -2361,6 +2361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eff2898f2df98e42b9dc922a3e3d667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  safeFromObjectSpawningArea: {fileID: 436402993}
+  prefabsTilemap: {fileID: 719381399}
   availableToSpawnTiles:
   - tile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
     spawnIntervalInSeconds: 10
@@ -2368,8 +2370,6 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: 705c3dec0681dbb43b6706ef13169f89, type: 2}
     spawnIntervalInSeconds: 10
     prefabTilemapPosition: {x: 1, y: 0, z: 0}
-  safeFromObjectSpawningArea: {fileID: 436402993}
-  prefabTilemap: {fileID: 719381399}
 --- !u!19719996 &551311234
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -13753,7 +13753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7394672114122086426, guid: 9e865dd4fdbe1d944b78f8ad84f9594c, type: 3}
       propertyPath: m_Name
-      value: Prefabs
+      value: PrefabsTilemap
       objectReference: {fileID: 0}
     - target: {fileID: 7394672114122086426, guid: 9e865dd4fdbe1d944b78f8ad84f9594c, type: 3}
       propertyPath: m_IsActive

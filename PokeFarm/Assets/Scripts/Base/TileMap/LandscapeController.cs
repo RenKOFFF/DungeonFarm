@@ -14,9 +14,9 @@ public class SpawnableTile
 
 public class LandscapeController : MonoBehaviour
 {
-    [SerializeField] private SpawnableTile[] availableToSpawnTiles;
     [SerializeField] private Collider2D safeFromObjectSpawningArea;
-    [SerializeField] public Tilemap prefabTilemap;
+    [SerializeField] public Tilemap prefabsTilemap;
+    [SerializeField] private SpawnableTile[] availableToSpawnTiles;
 
     private Vector3Int _minPosition;
     private Vector3Int _maxPosition;
@@ -84,7 +84,7 @@ public class LandscapeController : MonoBehaviour
                 randomPosition,
                 tile.tile,
                 Color.white,
-                prefabTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
+                prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
             false);
 
         Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
