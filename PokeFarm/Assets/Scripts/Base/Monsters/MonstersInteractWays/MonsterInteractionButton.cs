@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class MonsterInteractionButton : MonoBehaviour
 {
     public MonstersInteractionWayDataSO InteractData;
+    public MonstersInteractionWay InteractionWay;
 
     private Image _icon;
     private TextMeshProUGUI _name;
+
 
     private bool _isInited;
 
@@ -24,6 +26,11 @@ public class MonsterInteractionButton : MonoBehaviour
         _icon = GetComponent<Image>();
         _name = GetComponentInChildren<TextMeshProUGUI>();
         _isInited = true;
+    }
+
+    public void Interact()
+    {
+        InteractionWay.gameObject.SetActive(true);
     }
 
     public void RefreshButtonData()

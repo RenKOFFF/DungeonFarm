@@ -38,9 +38,11 @@ public class MonsterInteractionMenu : MonoBehaviour
 
         for (int i = 0; i < _interactionButtons.Length; i++)
         {
+            _interactionButtons[i].gameObject.SetActive(true);
             if (i <= maxWayIndex)
             {
                 _interactionButtons[i].InteractData = _monstersInteractionWays[i].MonstersInteractionWayData;
+                _interactionButtons[i].InteractionWay = _monstersInteractionWays[i];
                 _interactionButtons[i].RefreshButtonData();
             }
             else _interactionButtons[i].gameObject.SetActive(false);

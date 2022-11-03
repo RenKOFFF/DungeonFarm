@@ -307,7 +307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 54456068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 54456070}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &54456068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1 &57004801
 GameObject:
   m_ObjectHideFlags: 3
@@ -648,6 +661,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6793933e6dc7cb46b599c12fe685ce7, type: 3}
+--- !u!1 &171508981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171508982}
+  m_Layer: 0
+  m_Name: InteractWays
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &171508982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171508981}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 806924640}
+  m_Father: {fileID: 1046161380}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175267742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1523,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336971924}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 336971926}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &336971924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1530,6 +1587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1 &375983281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,7 +2536,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 501831585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 501831587}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &501831585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2530,6 +2600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,7 +3615,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662853109}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 662853111}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &662853109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3596,6 +3679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1001 &671172637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4378,6 +4462,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52efe0758f3e7c4c9a005f10f5e8087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &806924638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806924640}
+  - component: {fileID: 806924639}
+  m_Layer: 0
+  m_Name: MoveByClick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &806924639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806924638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e12a46ae123414a829d349cb0d0cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MonstersInteractionWayData>k__BackingField: {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+--- !u!4 &806924640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806924638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 171508982}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812349699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,6 +4690,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8279661540096596497, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
   m_PrefabInstance: {fileID: 8279661540300714196}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &958412218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 958412220}
+  - component: {fileID: 958412219}
+  m_Layer: 0
+  m_Name: MoveByClick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &958412219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958412218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e12a46ae123414a829d349cb0d0cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MonstersInteractionWayData>k__BackingField: {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+--- !u!4 &958412220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958412218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1359954321}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &981204629 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
@@ -4722,7 +4896,6 @@ GameObject:
   - component: {fileID: 1046161379}
   - component: {fileID: 1046161382}
   - component: {fileID: 1046161381}
-  - component: {fileID: 1046161383}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -4746,10 +4919,10 @@ MonoBehaviour:
   _restPlace: {fileID: 630700148}
   PatrolData: {fileID: 699217679}
   _monstersInteractionWays:
-  - {fileID: 1046161383}
-  - {fileID: 1046161383}
-  - {fileID: 1046161383}
-  - {fileID: 1046161383}
+  - {fileID: 806924639}
+  - {fileID: 806924639}
+  - {fileID: 806924639}
+  - {fileID: 806924639}
   _interactionMenu: {fileID: 375983283}
 --- !u!4 &1046161380
 Transform:
@@ -4764,6 +4937,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 191341119}
+  - {fileID: 171508982}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4819,19 +4993,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1046161383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1046161378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e12a46ae123414a829d349cb0d0cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MonstersInteractionWayData>k__BackingField: {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
 --- !u!1 &1068781695
 GameObject:
   m_ObjectHideFlags: 0
@@ -5151,7 +5312,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1090986549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090986551}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1090986549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5203,6 +5376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1001 &1093445306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10997,6 +11171,38 @@ Transform:
   m_Father: {fileID: 699217678}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1359954320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1359954321}
+  m_Layer: 0
+  m_Name: InteractWays
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1359954321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359954320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 958412220}
+  m_Father: {fileID: 1982137889}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400519383
 GameObject:
   m_ObjectHideFlags: 0
@@ -11089,7 +11295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12021,7 +12227,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1767635798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1767635800}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1767635798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12073,6 +12291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!224 &1777562741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
@@ -12406,7 +12625,6 @@ GameObject:
   - component: {fileID: 1982137888}
   - component: {fileID: 1982137887}
   - component: {fileID: 1982137886}
-  - component: {fileID: 1982137885}
   m_Layer: 0
   m_Name: Monster (1)
   m_TagString: Untagged
@@ -12414,19 +12632,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1982137885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982137884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e12a46ae123414a829d349cb0d0cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MonstersInteractionWayData>k__BackingField: {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
 --- !u!61 &1982137886
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12495,8 +12700,8 @@ MonoBehaviour:
   _restPlace: {fileID: 630700148}
   PatrolData: {fileID: 699217679}
   _monstersInteractionWays:
-  - {fileID: 1982137885}
-  - {fileID: 1982137885}
+  - {fileID: 958412219}
+  - {fileID: 958412219}
   _interactionMenu: {fileID: 375983283}
 --- !u!4 &1982137889
 Transform:
@@ -12505,12 +12710,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982137884}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.63, y: -2.64, z: 0.0038497727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 483451021}
+  - {fileID: 1359954321}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12614,7 +12820,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999691495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1999691497}
+        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1999691495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12666,6 +12884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
+  InteractionWay: {fileID: 0}
 --- !u!1 &2037171722
 GameObject:
   m_ObjectHideFlags: 0

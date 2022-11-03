@@ -12,10 +12,10 @@ public class MonstersMoveByClickController : MonstersInteractionWay
 
     private void Start()
     {
-        _monster = GetComponent<Monster>();
+        _monster = GetComponentInParent<Monster>();
         _cam = Camera.main;
 
-        enabled = false;
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -26,7 +26,7 @@ public class MonstersMoveByClickController : MonstersInteractionWay
             _movePosition = _cam.ScreenToWorldPoint(_mousePos);
 
             _monster.StateMachine.ChangeState(new WanderingState(_monster, _monster.Speed, 2f, _movePosition));
-            enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }
