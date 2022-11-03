@@ -5,7 +5,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject pickUpItemPrefab;
 
-    public static SpawnManager Instance;
+    public static SpawnManager Instance { get; private set; }
 
     public void SpawnPickUpItem(Vector2 position, Item item, int amount)
     {

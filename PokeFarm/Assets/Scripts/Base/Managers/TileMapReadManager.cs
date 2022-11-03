@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+
+public class TileData
+{
+    public bool plowable;
+    public bool toolInteractable;
+}
 
 public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] public Tilemap backgroundTilemap;
     [SerializeField] public Tilemap landscapeTilemap;
-    [SerializeField] private List<TileData> tileDatas;
+    [SerializeField] private List<TileBase> plowableTiles;
+    [SerializeField] private List<TileBase> toolInteractableTiles;
 
-    public static TileMapReadManager Instance;
+    public static TileMapReadManager Instance { get; private set; }
 
     private Dictionary<TileBase, TileData> dataFromTiles;
 
-    public Vector3Int GetCurrentBackgroundGridPositionByMousePosition()
-        => GetBackgroundGridPosition(Input.mousePosition, true);
-
-    private Vector3Int GetBackgroundGridPosition(Vector2 position, bool isMousePosition = false)
-        => GetGridPosition(backgroundTilemap, position, isMousePosition);
-
-    private static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
+    public static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
     {
         Vector2 worldPosition = isMousePosition
             ? Camera.main.ScreenToWorldPoint(position)
@@ -28,16 +29,27 @@ public class TileMapReadManager : MonoBehaviour
         return tilemap.WorldToCell(worldPosition);
     }
 
-    private TileBase GetTileBase(Vector2 position, bool isMousePosition = false)
+    public Vector3Int GetCurrentBackgroundGridPositionByMousePosition()
+        => GetGridPosition(backgroundTilemap, Input.mousePosition, true);
+
+    public TileData GetLandscapeTileDataByMousePosition()
+        => GetTileData(GetTileBase(landscapeTilemap, Input.mousePosition, true));
+
+    private TileBase GetTileBase(Tilemap tilemap, Vector2 position, bool isMousePosition = false)
     {
-        var gridPosition = GetBackgroundGridPosition(position, isMousePosition);
-        var tile = backgroundTilemap.GetTile(gridPosition);
+        var gridPosition = GetGridPosition(tilemap, position, isMousePosition);
+        var tile = tilemap.GetTile(gridPosition);
 
         return tile;
     }
 
     private TileData GetTileData(TileBase tileBase)
-        => dataFromTiles[tileBase];
+    {
+        if (tileBase == null || !dataFromTiles.ContainsKey(tileBase))
+            return new TileData();
+
+        return dataFromTiles[tileBase];
+    }
 
     private void Awake()
     {
@@ -48,12 +60,10 @@ public class TileMapReadManager : MonoBehaviour
     {
         dataFromTiles = new Dictionary<TileBase, TileData>();
 
-        foreach (var tileData in tileDatas)
-        {
-            foreach (var tile in tileData.tiles)
-            {
-                dataFromTiles.Add(tile, tileData);
-            }
-        }
+        foreach (var tileBase in plowableTiles)
+            dataFromTiles.Add(tileBase, new TileData { plowable = true });
+
+        foreach (var tileBase in toolInteractableTiles)
+            dataFromTiles.Add(tileBase, new TileData { toolInteractable = true });
     }
 }

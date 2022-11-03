@@ -11,7 +11,7 @@ public enum Scene
 
 public class GameSceneManager : MonoBehaviour
 {
-    public static GameSceneManager Instance;
+    public static GameSceneManager Instance { get; private set; }
 
     public void LoadScene(int sceneBuildIndex)
     {
