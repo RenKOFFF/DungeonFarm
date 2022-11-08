@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: -524949670, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
   _interactName: "\u0418\u0434\u0438 \u0442\u0443\u0434\u0430"
+  _interactionWay: {fileID: 7915782324389944965, guid: 3095aefeca6a26d4588951f0c61ec05e, type: 3}

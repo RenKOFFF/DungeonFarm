@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterName: "\u0417\u0438\u0433\u043E\u0442\u0430"
   _icon: {fileID: 1861525019, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
-  _interactionWay: {fileID: 7915782324389944965, guid: 3095aefeca6a26d4588951f0c61ec05e, type: 3}
+  _interactionWay:
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
