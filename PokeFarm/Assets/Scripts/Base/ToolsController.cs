@@ -17,18 +17,25 @@ public class ToolsController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        if (HandBank.instance.itemOnTheHand?.type != ItemType.Tool)
+        var currentItemOnTheHand = HandBank.instance.itemOnTheHand;
+
+        if (currentItemOnTheHand == null || currentItemOnTheHand.type != ItemType.Tool)
             return;
 
+        var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
+        var currentGridPosition = TileMapReadManager.GetGridPosition(landscapeTilemap, Input.mousePosition, true);
         var tileData = TileMapReadManager.Instance.GetLandscapeTileDataByMousePosition();
 
-        if (tileData.toolInteractable)
-        {
-            var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
+        if (!tileData.IsBreakable)
+            return;
 
-            landscapeTilemap.SetTile(
-                TileMapReadManager.GetGridPosition(landscapeTilemap, Input.mousePosition, true),
-                null);
-        }
+        var breakableTile = tileData.BreakableTile;
+
+        if (currentItemOnTheHand != breakableTile.breaksByTool)
+            return;
+
+        landscapeTilemap.SetTile(
+            currentGridPosition,
+            null);
     }
 }
