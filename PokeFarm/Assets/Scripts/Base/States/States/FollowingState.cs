@@ -1,14 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FollowingState : State
+public class FollowingState : BaseMonsterState
 {
-    private MonsterBehaviour _monsterBehaviour;
-    private float _speed;
-
-    private float _waitTime;
-    private float _startWaitTime = 2f;
-
     private Transform _target;
     private float _socialDistance = 1.2f;
     private float _stopFollowingDistance = 3f;

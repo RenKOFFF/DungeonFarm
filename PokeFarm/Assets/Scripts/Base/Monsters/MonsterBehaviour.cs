@@ -49,7 +49,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 
     private void InitializeInteractionWays()
     {
-        var interactionWaysDataSO = _monster.MonsterData.InteractionWay;
+        var interactionWaysDataSO = _monster?.MonsterData?.InteractionWay;
         foreach (var interactionWayDataSO in interactionWaysDataSO)
         {
             var interactionWay = Instantiate(interactionWayDataSO.InteractionWay, _monstersInteractionWaysParent.transform);
