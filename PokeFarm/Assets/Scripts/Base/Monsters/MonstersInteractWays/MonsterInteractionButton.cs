@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class MonsterInteractionButton : MonoBehaviour
 {
-    public MonstersInteractionWayDataSO InteractData;
-    public MonstersInteractionWay InteractionWay;
+    [HideInInspector] public MonstersInteractionWayDataSO InteractData;
+    [HideInInspector] public MonstersInteractionWay InteractionWay;
 
     private Image _icon;
     private TextMeshProUGUI _name;
-
 
     private bool _isInited;
 

@@ -22,10 +22,10 @@ public class MonsterInteractionMenu : MonoBehaviour
         Hide();
     }
 
-    private void Init(Monster currentMonster, MonstersInteractionWay[] monstersInteractionWays)
+    private void Init(Monster currentMonster, List<MonstersInteractionWay> monstersInteractionWays)
     {
         _currentMonster = currentMonster;
-        _monstersInteractionWays = monstersInteractionWays;
+        _monstersInteractionWays = monstersInteractionWays.ToArray();
 
         RefreshInteractButtons();
     }

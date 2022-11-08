@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,23 +27,34 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     [HideInInspector] public FollowingState FollowingState;
 
     [SerializeField] private GameObject _monstersInteractionWaysParent;
-    private MonstersInteractionWay[] _monstersInteractionWays;
+    private List<MonstersInteractionWay> _monstersInteractionWays = new List<MonstersInteractionWay>();
     private MonsterInteractionMenu _interactionMenu;
-    public static UnityEvent<Monster, MonstersInteractionWay[]> OnPlayerCalledInteractionMenuEvent = new UnityEvent<Monster, MonstersInteractionWay[]>();
+    public static UnityEvent<Monster, List<MonstersInteractionWay>> OnPlayerCalledInteractionMenuEvent = new UnityEvent<Monster, List<MonstersInteractionWay>>();
 
     private void Awake()
     {
         _interactionMenu = GameObject.FindGameObjectWithTag("MonstersInteractionMenu").GetComponent<MonsterInteractionMenu>();
-        _monstersInteractionWays = GetComponentsInChildren<MonstersInteractionWay>();
+        _monstersInteractionWays = GetComponentsInChildren<MonstersInteractionWay>().ToList();
     }
     private void Start()
     {
         _monster = GetComponent<Monster>();
 
+        InitializeInteractionWays();
         InitializeStates();
 
         StateMachine = new StateMachine();
         StateMachine.Init(WanderingState);
+    }
+
+    private void InitializeInteractionWays()
+    {
+        var interactionWaysDataSO = _monster.MonsterData.InteractionWay;
+        foreach (var interactionWayDataSO in interactionWaysDataSO)
+        {
+            var interactionWay = Instantiate(interactionWayDataSO.InteractionWay, _monstersInteractionWaysParent.transform);
+            _monstersInteractionWays.Add(interactionWay);
+        }
     }
 
     private void InitializeStates()
