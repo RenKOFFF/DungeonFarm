@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PatrolState : State
 {
-    private Monster _monster;
+    private MonsterBehaviour _monster;
     private float _speed;
 
     private Transform[] _patrolPoints;
@@ -15,7 +16,7 @@ public class PatrolState : State
 
     public PatrolState(Monster monster, float speed, PatrolData patrolData)
     {
-        _monster = monster;
+        _monster = monster.MonsterBehaviour;
         _speed = speed;
         _patrolPoints = patrolData.PatrolPoints;
 

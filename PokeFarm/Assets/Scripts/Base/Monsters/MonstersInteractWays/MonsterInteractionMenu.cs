@@ -14,7 +14,7 @@ public class MonsterInteractionMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        Monster.OnPlayerCalledInteractionMenuEvent.AddListener(Init);
+        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(Init);
     }
 
     void Start()
@@ -62,6 +62,6 @@ public class MonsterInteractionMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        Monster.OnPlayerCalledInteractionMenuEvent.RemoveListener(Init);
+        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.RemoveListener(Init);
     }
 }

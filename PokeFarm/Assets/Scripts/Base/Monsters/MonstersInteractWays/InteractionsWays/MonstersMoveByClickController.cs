@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonstersMoveByClickController : MonstersInteractionWay
 {
-    private Monster _monster;
+    private MonsterBehaviour _monsterBehaviour;
 
     private Camera _cam;
     private Vector2 _mousePos;
@@ -12,7 +12,7 @@ public class MonstersMoveByClickController : MonstersInteractionWay
 
     private void Start()
     {
-        _monster = GetComponentInParent<Monster>();
+        _monsterBehaviour = GetComponentInParent<MonsterBehaviour>();
         _cam = Camera.main;
 
         gameObject.SetActive(false);
@@ -25,7 +25,7 @@ public class MonstersMoveByClickController : MonstersInteractionWay
             _mousePos = Input.mousePosition;
             _movePosition = _cam.ScreenToWorldPoint(_mousePos);
 
-            _monster.StateMachine.ChangeState(new WanderingState(_monster, _monster.Speed, 2f, _movePosition));
+            _monsterBehaviour.StateMachine.ChangeState(new WanderingState(_monsterBehaviour.Monster, _monsterBehaviour.Monster.Speed, 2f, _movePosition));
             gameObject.SetActive(false);
         }
     }

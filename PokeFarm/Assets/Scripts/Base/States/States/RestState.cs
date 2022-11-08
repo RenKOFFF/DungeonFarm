@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RestState : State
 {
-    private Monster _monster;
+    private MonsterBehaviour _monster;
     private Transform _restPlace;
     private float Speed;
 
@@ -13,7 +13,7 @@ public class RestState : State
 
     public RestState(Monster monster, float speed, Transform restPlace)
     {
-        _monster = monster;
+        _monster = monster.MonsterBehaviour;
         _restPlace = restPlace;
         Speed = speed;
 

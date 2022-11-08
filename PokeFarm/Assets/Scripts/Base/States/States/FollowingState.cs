@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowingState : State
 {
-    private Monster _monster;
+    private MonsterBehaviour _monsterBehaviour;
     private float _speed;
 
     private float _waitTime;
@@ -14,7 +15,7 @@ public class FollowingState : State
 
     public FollowingState(Monster monster, float speed, GameObject target)
     {
-        _monster = monster;
+        _monsterBehaviour = monster.MonsterBehaviour;
         _speed = speed;
 
         _waitTime = _startWaitTime;
@@ -37,14 +38,14 @@ public class FollowingState : State
     }
     private void MoveToTargetPosition()
     {
-        if (Vector2.Distance(_monster.transform.position, _target.position) >= _socialDistance)
+        if (Vector2.Distance(_monsterBehaviour.transform.position, _target.position) >= _socialDistance)
         {
-            _monster.transform.position = Vector2.MoveTowards(_monster.transform.position, _target.position, Time.deltaTime * _speed);
+            _monsterBehaviour.transform.position = Vector2.MoveTowards(_monsterBehaviour.transform.position, _target.position, Time.deltaTime * _speed);
         }
 
-        if (Vector2.Distance(_monster.transform.position, _target.position) > _stopFollowingDistance)
+        if (Vector2.Distance(_monsterBehaviour.transform.position, _target.position) > _stopFollowingDistance)
         {
-            _monster.StateMachine.ChangeState(_monster.StateMachine.DefaultState);
+            _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
         }
     }
 }
