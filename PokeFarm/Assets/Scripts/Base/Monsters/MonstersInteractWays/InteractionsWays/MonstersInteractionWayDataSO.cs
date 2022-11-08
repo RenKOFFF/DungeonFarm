@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "MonstersInteractionWayData", menuName = "Interaction Way/new Interaction Way Data")]
+[CreateAssetMenu(fileName = "MonstersInteractionWayData", menuName = "Interaction Way/Interaction Way Data")]
 public class MonstersInteractionWayDataSO : ScriptableObject
 {
     public Sprite Icon { get => _icon; private set => _icon = value; }

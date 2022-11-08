@@ -16,19 +16,24 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     public StateMachine StateMachine;
 
     [HideInInspector] public RestState RestState;
-    [SerializeField] private Transform _restPlace;
+    //[SerializeField] private Transform _restPlace;
 
     [HideInInspector] public PatrolState RatrolState;
-    [SerializeField] private PatrolData PatrolData;
+    //[SerializeField] private PatrolData PatrolData;
 
     [HideInInspector] public WanderingState WanderingState;
-
     [HideInInspector] public FollowingState FollowingState;
 
-    [SerializeField] private MonstersInteractionWay[] _monstersInteractionWays;
-    [SerializeField] private MonsterInteractionMenu _interactionMenu;
+    [SerializeField] private GameObject _monstersInteractionWaysParent;
+    private MonstersInteractionWay[] _monstersInteractionWays;
+    private MonsterInteractionMenu _interactionMenu;
     public static UnityEvent<Monster, MonstersInteractionWay[]> OnPlayerCalledInteractionMenuEvent = new UnityEvent<Monster, MonstersInteractionWay[]>();
 
+    private void Awake()
+    {
+        _interactionMenu = GameObject.FindGameObjectWithTag("MonstersInteractionMenu").GetComponent<MonsterInteractionMenu>();
+        _monstersInteractionWays = GetComponentsInChildren<MonstersInteractionWay>();
+    }
     private void Start()
     {
         _monster = GetComponent<Monster>();
@@ -41,8 +46,8 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 
     private void InitializeStates()
     {
-        RestState = new RestState(_monster, _monster.Speed, _restPlace);
-        RatrolState = new PatrolState(_monster, _monster.Speed, PatrolData);
+        //RestState = new RestState(_monster, _monster.Speed, _restPlace);
+        //RatrolState = new PatrolState(_monster, _monster.Speed, PatrolData);
         WanderingState = new WanderingState(_monster, _monster.Speed, 5f);
     }
 
