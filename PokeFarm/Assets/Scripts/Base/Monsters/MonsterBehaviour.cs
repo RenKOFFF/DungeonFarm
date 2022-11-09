@@ -67,12 +67,6 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private void Update()
     {
         StateMachine.CurrentState.Update();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (StateMachine.CurrentState.GetType() == RestState.GetType()) StateMachine.ChangeState(RatrolState);
-            else StateMachine.ChangeState(RestState);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
