@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,7 +9,7 @@ public class MonsterInteractionButton : MonoBehaviour
     [HideInInspector] public MonstersInteractionWayDataSO InteractData;
     [HideInInspector] public MonstersInteractionWay InteractionWay;
 
-    //public static UnityEvent OnButtonPressedEvent = new UnityEvent();
+    public static UnityEvent OnInteractedEvent = new UnityEvent();
 
     private Image _icon;
     private TextMeshProUGUI _name;
@@ -44,6 +41,7 @@ public class MonsterInteractionButton : MonoBehaviour
     public void Interact()
     {
         InteractionWay.gameObject.SetActive(true);
+        OnInteractedEvent.Invoke();
     }
 
     public void RefreshButtonData()

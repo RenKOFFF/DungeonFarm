@@ -94,4 +94,15 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         OnPlayerCalledInteractionMenuEvent.Invoke(_monster, _monstersInteractionWays);
         Debug.Log($"Im interact with {_monster.name} - вызвана менюшка");
     }
+
+    public void MakeNonInteractive(float time)
+    {
+        _isCanInteract = false;
+        Invoke(nameof(MakeInteractive), time);
+    }
+
+    private void MakeInteractive()
+    {
+        _isCanInteract = true;
+    }
 }
