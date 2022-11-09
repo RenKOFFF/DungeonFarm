@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MonsterInteractionMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _menu;
+    [SerializeField] private RectTransform _interactionCircle;
     [SerializeField] private MonsterInteractionButton[] _interactionButtons;
 
     private Monster _currentMonster;
@@ -24,18 +25,21 @@ public class MonsterInteractionMenu : MonoBehaviour
         Hide();
     }
 
+    private void Update()
+    {
+        if (_currentMonster) _interactionCircle.position = _currentMonster.transform.position;
+    }
+
     private void Init(Monster currentMonster, List<MonstersInteractionWay> monstersInteractionWays)
     {
         _currentMonster = currentMonster;
         _monstersInteractionWays = monstersInteractionWays.ToArray();
 
-        RefreshInteractButtons();
+        Show();
     }
 
     private void RefreshInteractButtons()
     {
-        _menu.SetActive(true);
-
         var maxWayIndex = _monstersInteractionWays?.Length - 1;
 
         for (int i = 0; i < _interactionButtons.Length; i++)
