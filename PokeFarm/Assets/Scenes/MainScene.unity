@@ -307,19 +307,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 54456068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 54456070}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &54456068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,19 +1395,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336971924}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 336971926}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &336971924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2336,19 +2312,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 501831585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 501831587}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &501831585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3415,19 +3379,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662853109}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 662853111}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &662853109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4952,19 +4904,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1090986549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1090986551}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1090986549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11840,19 +11780,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1767635798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1767635800}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1767635798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12326,19 +12254,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999691495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1999691497}
-        m_TargetAssemblyTypeName: MonsterInteractionButton, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1999691495
 MonoBehaviour:
   m_ObjectHideFlags: 0

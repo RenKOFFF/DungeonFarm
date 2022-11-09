@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MonsterInteractionButton : MonoBehaviour
 {
+    private Button _button;
     [HideInInspector] public MonstersInteractionWayDataSO InteractData;
     [HideInInspector] public MonstersInteractionWay InteractionWay;
+
+    //public static UnityEvent OnButtonPressedEvent = new UnityEvent();
 
     private Image _icon;
     private TextMeshProUGUI _name;
 
     private bool _isInited;
+
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
+    private void OnEnable()
+    {
+        _button.onClick.AddListener(Interact);
+    }
 
     private void Start()
     {
