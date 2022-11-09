@@ -12,7 +12,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     public Monster Monster { get => _monster; private set => _monster = value; }
     public float MonsterSpeed { get => _monster.Speed;}
     public bool isCanInteract => _isCanInteract;
-    private bool _isCanInteract;
+    private bool _isCanInteract = true;
 
     [Header("States")]
     public StateMachine StateMachine;
@@ -30,6 +30,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private List<MonstersInteractionWay> _monstersInteractionWays = new List<MonstersInteractionWay>();
     private MonsterInteractionMenu _interactionMenu;
     public static UnityEvent<Monster, List<MonstersInteractionWay>> OnPlayerCalledInteractionMenuEvent = new UnityEvent<Monster, List<MonstersInteractionWay>>();
+    public static UnityEvent OnPlayerExitInteractionDistanceEvent = new UnityEvent();
 
     private void Awake()
     {
@@ -74,8 +75,17 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            _isCanInteract = true;
+            //_isCanInteract = true;
             StateMachine.ChangeState(new FollowingState(_monster, _monster.Speed, collider.gameObject));
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        var collider = collision.GetComponent<CharacterController2D>();
+        if (collider != null)
+        {
+            //_isCanInteract = false;
+            OnPlayerExitInteractionDistanceEvent.Invoke();
         }
     }
 
