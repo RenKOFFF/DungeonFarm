@@ -2,16 +2,6 @@
 
 public class ToolsController : MonoBehaviour
 {
-    private CharacterController2D _characterController2D;
-
-    [SerializeField] private float offsetDistance = 1f;
-    [SerializeField] private float interactableAreaSize = 1.2f;
-
-    private void Awake()
-    {
-        _characterController2D = GetComponent<CharacterController2D>();
-    }
-
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0))
@@ -22,16 +12,21 @@ public class ToolsController : MonoBehaviour
         if (currentItemOnTheHand == null || currentItemOnTheHand.type != ItemType.Tool)
             return;
 
+        UseTool(currentItemOnTheHand);
+    }
+
+    private static void UseTool(Item tool)
+    {
         var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
-        var currentGridPosition = TileMapReadManager.GetGridPosition(landscapeTilemap, Input.mousePosition, true);
-        var tileData = TileMapReadManager.Instance.GetLandscapeTileDataByMousePosition();
+        var currentGridPosition = MarkerManager.Instance.markedCellPosition;
+        var tileData = TileMapReadManager.Instance.GetLandscapeTileDataByGridPosition(currentGridPosition);
 
         if (!tileData.IsBreakable)
             return;
 
         var breakableTile = tileData.BreakableTile;
 
-        if (currentItemOnTheHand != breakableTile.breaksByTool)
+        if (tool != breakableTile.breaksByTool)
             return;
 
         landscapeTilemap.SetTile(

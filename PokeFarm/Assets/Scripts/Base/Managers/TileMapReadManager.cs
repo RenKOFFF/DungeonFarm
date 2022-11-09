@@ -40,6 +40,9 @@ public class TileMapReadManager : MonoBehaviour
     public TileData GetLandscapeTileDataByMousePosition()
         => GetTileData(GetTileBase(landscapeTilemap, Input.mousePosition, true));
 
+    public TileData GetLandscapeTileDataByGridPosition(Vector3Int gridPosition)
+        => GetTileData(GetTileBase(landscapeTilemap, gridPosition));
+
     private static TileBase GetTileBase(Tilemap tilemap, Vector2 position, bool isMousePosition = false)
         => GetTileBase(tilemap, GetGridPosition(tilemap, position, isMousePosition));
 
