@@ -7,6 +7,8 @@ public class FollowingState : BaseMonsterState
     private float _socialDistance = 1.2f;
     private float _stopFollowingDistance = 3f;
 
+    private float distanceToTarget;
+
     public FollowingState(Monster monster, float speed, GameObject target)
     {
         _monsterBehaviour = monster.MonsterBehaviour;
@@ -32,12 +34,18 @@ public class FollowingState : BaseMonsterState
     }
     private void MoveToTargetPosition()
     {
-        if (Vector2.Distance(_monsterBehaviour.transform.position, _target.position) >= _socialDistance)
+        distanceToTarget = Vector2.Distance(_monsterBehaviour.transform.position, _target.position);
+        if (distanceToTarget >= _socialDistance)
         {
             _monsterBehaviour.transform.position = Vector2.MoveTowards(_monsterBehaviour.transform.position, _target.position, Time.deltaTime * _speed);
         }
+        //TODO resolve wait state problem
+/*        else
+        {
+            _monsterBehaviour.StateMachine.ChangeState(new WaitState());
+        }*/
 
-        if (Vector2.Distance(_monsterBehaviour.transform.position, _target.position) > _stopFollowingDistance)
+        if (distanceToTarget > _stopFollowingDistance)
         {
             _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
         }
