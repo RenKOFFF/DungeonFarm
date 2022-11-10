@@ -12,12 +12,14 @@ public class ToolbarManager : MonoBehaviour
     public UnityEvent<int> OnSelectedSlotIndexChanged { get; } = new();
     public UnityEvent OnItemOnTheHandChanged { get; } = new();
 
+    private const string NumericKeyboardButtonsKeyCodeName = "Alpha";
+
     private int _toolbarSize;
     private int _selectedToolbarSlotIndex;
 
-    public void SetSlotIndex(int id)
+    public void SetSlotIndex(int index)
     {
-        _selectedToolbarSlotIndex = id;
+        _selectedToolbarSlotIndex = (index + _toolbarSize) % _toolbarSize;
         ChangeItemOnHand();
     }
 
@@ -42,11 +44,33 @@ public class ToolbarManager : MonoBehaviour
     private void Update()
     {
         var mouseScrollDelta = Input.mouseScrollDelta.y;
-        if (mouseScrollDelta == 0) return;
 
-        _selectedToolbarSlotIndex += mouseScrollDelta > 0 ? -1 : 1;
-        _selectedToolbarSlotIndex = (_selectedToolbarSlotIndex + _toolbarSize) % _toolbarSize;
+        if (mouseScrollDelta == 0)
+            return;
 
+        var newIndex = _selectedToolbarSlotIndex + (mouseScrollDelta > 0 ? -1 : 1);
+
+        SetSlotIndex(newIndex);
         ChangeItemOnHand();
+    }
+
+    private void OnGUI()
+    {
+        var currentEvent = Event.current;
+
+        if (currentEvent.type != EventType.KeyDown)
+            return;
+
+        var keyCodeString = currentEvent.keyCode.ToString();
+
+        if (!keyCodeString.Contains(NumericKeyboardButtonsKeyCodeName))
+            return;
+
+        var indexString = keyCodeString.Replace(NumericKeyboardButtonsKeyCodeName, "");
+
+        if (!int.TryParse(indexString, out var index))
+            return;
+
+        SetSlotIndex(--index);
     }
 }
