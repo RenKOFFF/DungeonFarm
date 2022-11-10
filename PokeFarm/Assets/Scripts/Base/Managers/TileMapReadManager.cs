@@ -31,6 +31,9 @@ public class TileMapReadManager : MonoBehaviour
         return tilemap.WorldToCell(worldPosition);
     }
 
+    public static Vector3 GetCellCenterWorldPosition(Tilemap tilemap, Vector3Int gridPosition)
+        => tilemap.CellToWorld(gridPosition) + tilemap.layoutGrid.cellSize / 2;
+
     public static TileBase GetTileBase(Tilemap tilemap, Vector3Int gridPosition)
         => tilemap.GetTile(gridPosition);
 

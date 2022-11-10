@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class ToolsController : MonoBehaviour
         landscapeTilemap.SetTile(
             currentGridPosition,
             null);
+
+        SpawnManager.Instance.SpawnPickUpItemsInArea(
+            TileMapReadManager.GetCellCenterWorldPosition(landscapeTilemap, currentGridPosition),
+            breakableTile.drops,
+            breakableTile.dropAmount);
     }
 }
