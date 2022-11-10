@@ -75,7 +75,6 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            //_isCanInteract = true;
             StateMachine.ChangeState(new FollowingState(_monster, _monster.Speed, collider.gameObject));
         }
     }
@@ -84,7 +83,6 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            //_isCanInteract = false;
             OnPlayerExitInteractionDistanceEvent.Invoke();
         }
     }

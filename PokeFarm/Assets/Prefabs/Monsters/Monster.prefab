@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99a4c595b81adb41a8996693142c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MonsterData>k__BackingField: {fileID: 11400000, guid: fa114e2ccb1c987459143b691973b8d2, type: 2}
   _speed: 1.5
 --- !u!114 &5889190248815067575
 MonoBehaviour:

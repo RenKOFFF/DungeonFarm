@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class MonstersInteractionWay : MonoBehaviour
 {
-    [field: SerializeField] public MonstersInteractionWayDataSO MonstersInteractionWayData { get; private set; }
+    public MonstersInteractionWayDataSO MonstersInteractionWayData { get; private set; }
 }
