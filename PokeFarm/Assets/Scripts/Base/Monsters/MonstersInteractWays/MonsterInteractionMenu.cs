@@ -67,8 +67,8 @@ public class MonsterInteractionMenu : MonoBehaviour
     }
     private void OnInteracted()
     {
+        _currentMonster?.MonsterBehaviour.MakeNonInteractive(.3f);
         Hide();
-        _currentMonster.MonsterBehaviour.MakeNonInteractive(.3f);
     }
 
     private void OnDisable()
