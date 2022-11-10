@@ -6,4 +6,5 @@ public class Item : ScriptableObject
     public string Name;
     public bool isStackable;
     public Sprite icon;
+    public bool isFood;
 }

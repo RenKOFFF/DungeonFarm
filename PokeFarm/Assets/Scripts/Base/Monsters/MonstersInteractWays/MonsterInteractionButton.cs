@@ -41,6 +41,7 @@ public class MonsterInteractionButton : MonoBehaviour
     public void Interact()
     {
         InteractionWay.gameObject.SetActive(true);
+        InteractionWay.Execute();
         OnInteractedEvent.Invoke();
     }
 
@@ -58,5 +59,10 @@ public class MonsterInteractionButton : MonoBehaviour
             _icon.color = Color.red;
             _name.text = "Default";
         }
+    }
+
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(Interact);
     }
 }

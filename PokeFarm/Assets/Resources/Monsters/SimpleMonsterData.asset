@@ -17,4 +17,3 @@ MonoBehaviour:
   _interactionWay:
   - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
   - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
-  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}

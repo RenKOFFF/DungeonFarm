@@ -10,6 +10,15 @@ public class MonstersMoveByClickController : MonstersInteractionWay
     private Vector2 _mousePos;
     private Vector2 _movePosition;
 
+    public override void Execute()
+    {
+    }
+
+    public override bool GetDisplayCondition()
+    {
+        return true;
+    }
+
     private void Start()
     {
         _monsterBehaviour = GetComponentInParent<MonsterBehaviour>();

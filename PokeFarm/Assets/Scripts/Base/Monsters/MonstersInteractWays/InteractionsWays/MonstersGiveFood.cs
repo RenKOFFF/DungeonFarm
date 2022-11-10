@@ -6,18 +6,29 @@ public class MonstersGiveFood : MonstersInteractionWay
 {
     private MonsterBehaviour _monsterBehaviour;
 
-    private void Start()
+    public override void Execute()
     {
-        _monsterBehaviour = GetComponentInParent<MonsterBehaviour>();
+        Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
+
+        if (HandBank.instance.itemOnTheHand.isFood)
+        {
+            _monsterBehaviour.Monster.Inventory.AddItem(HandBank.instance.itemOnTheHand);
+            //TODO delete this item from player inventory
+        }
+
+        Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
 
         gameObject.SetActive(false);
     }
 
-    private void Update()
+    public override bool GetDisplayCondition()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            gameObject.SetActive(false);
-        }
+        return true;
+    }
+
+    private void Awake()
+    {
+        _monsterBehaviour = GetComponentInParent<MonsterBehaviour>();
+        gameObject.SetActive(false);
     }
 }
