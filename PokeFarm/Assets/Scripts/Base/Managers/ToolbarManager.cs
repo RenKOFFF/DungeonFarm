@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ToolbarController : MonoBehaviour
+public class ToolbarManager : MonoBehaviour
 {
-    public static ToolbarController Instance { get; private set; }
+    public static ToolbarManager Instance { get; private set; }
 
     [SerializeField] private ToolbarPanel currentToolbar;
 
@@ -31,15 +31,6 @@ public class ToolbarController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        // if (Instance == null)
-        // {
-        //     Instance = this;
-        //     DontDestroyOnLoad(Instance);
-        //     return;
-        // }
-        //
-        // Destroy(gameObject);
     }
 
     private void Start()

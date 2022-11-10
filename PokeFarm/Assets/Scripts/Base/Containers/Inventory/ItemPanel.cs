@@ -9,7 +9,7 @@ public class ItemPanel : MonoBehaviour
 
     public int ButtonsCount => buttons.Count;
 
-    protected void Refresh()
+    public void Refresh()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
         {
@@ -25,20 +25,15 @@ public class ItemPanel : MonoBehaviour
         }
     }
 
-    protected void Init()
-    {
-        SetButtonIndexes();
-    }
-
     private void SetButtonIndexes()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
             buttons[i].SetIndex(i);
     }
 
-    private void Start()
+    protected void Start()
     {
-        Init();
+        SetButtonIndexes();
     }
 
     private void OnEnable()

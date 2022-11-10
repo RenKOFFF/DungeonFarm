@@ -1,9 +1,22 @@
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private InventoryPanel inventoryPanel;
     [SerializeField] private ToolbarPanel toolbarPanel;
+
+    public static InventoryManager Instance { get; private set; }
+
+    public void Refresh()
+    {
+        inventoryPanel.Refresh();
+        toolbarPanel.Refresh();
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

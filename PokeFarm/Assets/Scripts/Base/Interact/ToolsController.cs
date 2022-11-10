@@ -31,7 +31,7 @@ public class ToolsController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        var currentItemOnTheHand = ToolbarController.Instance.ItemOnTheHand;
+        var currentItemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
 
         if (currentItemOnTheHand == null || currentItemOnTheHand.type != ItemType.Tool)
             return;
