@@ -7,6 +7,8 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] protected ItemContainer inventory;
     [SerializeField] protected List<InventoryButton> buttons;
 
+    public int ButtonsCount => buttons.Count;
+
     protected void Refresh()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)

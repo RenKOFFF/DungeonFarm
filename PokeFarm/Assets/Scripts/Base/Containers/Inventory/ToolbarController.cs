@@ -3,44 +3,59 @@ using UnityEngine.Events;
 
 public class ToolbarController : MonoBehaviour
 {
-    public static ToolbarController instanse;
+    public static ToolbarController Instance { get; private set; }
 
-    private int toolbarSize = 12;
-    private int selectedToolbarItemSlotIndex;
+    [SerializeField] private ToolbarPanel currentToolbar;
 
-    [HideInInspector] public UnityEvent<int> OnSelectChangeEvent = new UnityEvent<int>();
+    public Item ItemOnTheHand { get; private set; }
+
+    public UnityEvent<int> OnSelectedSlotIndexChanged { get; } = new();
+    public UnityEvent OnItemOnTheHandChanged { get; } = new();
+
+    private int _toolbarSize;
+    private int _selectedToolbarSlotIndex;
+
+    public void SetSlotIndex(int id)
+    {
+        _selectedToolbarSlotIndex = id;
+        ChangeItemOnHand();
+    }
+
+    private void ChangeItemOnHand()
+    {
+        OnSelectedSlotIndexChanged.Invoke(_selectedToolbarSlotIndex);
+        ItemOnTheHand = currentToolbar.GetCurrentSelectedItem();
+        OnItemOnTheHandChanged.Invoke();
+    }
 
     private void Awake()
     {
-        if (instanse == null)
-        {
-            instanse = this;
-            DontDestroyOnLoad(instanse);
-            return;
-        }
+        Instance = this;
 
-        Destroy(gameObject);
-    }
-    void Update()
-    {
-        float mouseScrollDelta = Input.mouseScrollDelta.y;
-        if (mouseScrollDelta != 0)
-        {
-            if (mouseScrollDelta > 0)
-            {
-                selectedToolbarItemSlotIndex = selectedToolbarItemSlotIndex - 1 < 0 ? toolbarSize - 1 : --selectedToolbarItemSlotIndex;
-            }
-            else
-            {
-                selectedToolbarItemSlotIndex = selectedToolbarItemSlotIndex + 1 > toolbarSize - 1 ? 0 : ++selectedToolbarItemSlotIndex;
-            }
-            OnSelectChangeEvent.Invoke(selectedToolbarItemSlotIndex);
-        }
+        // if (Instance == null)
+        // {
+        //     Instance = this;
+        //     DontDestroyOnLoad(Instance);
+        //     return;
+        // }
+        //
+        // Destroy(gameObject);
     }
 
-    public void Set(int id)
+    private void Start()
     {
-        selectedToolbarItemSlotIndex = id;
-        OnSelectChangeEvent.Invoke(selectedToolbarItemSlotIndex);
+        ItemOnTheHand = currentToolbar.GetCurrentSelectedItem();
+        _toolbarSize = currentToolbar.ButtonsCount;
+    }
+
+    private void Update()
+    {
+        var mouseScrollDelta = Input.mouseScrollDelta.y;
+        if (mouseScrollDelta == 0) return;
+
+        _selectedToolbarSlotIndex += mouseScrollDelta > 0 ? -1 : 1;
+        _selectedToolbarSlotIndex = (_selectedToolbarSlotIndex + _toolbarSize) % _toolbarSize;
+
+        ChangeItemOnHand();
     }
 }
