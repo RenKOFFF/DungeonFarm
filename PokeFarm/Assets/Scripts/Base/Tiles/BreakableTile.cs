@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public class BreakableTile : ScriptableObject
 {
     public TileBase tile;
-    public Item drops;
+    public Item dropsItem;
     public int dropAmount;
     public Item breaksByTool;
 }

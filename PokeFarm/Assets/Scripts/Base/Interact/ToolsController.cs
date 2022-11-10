@@ -36,7 +36,7 @@ public class ToolsController : MonoBehaviour
 
         SpawnManager.Instance.SpawnPickUpItemsInArea(
             TileMapReadManager.GetCellCenterWorldPosition(landscapeTilemap, currentGridPosition),
-            breakableTile.drops,
+            breakableTile.dropsItem,
             breakableTile.dropAmount);
     }
 }
