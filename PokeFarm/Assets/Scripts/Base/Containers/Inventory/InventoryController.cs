@@ -12,7 +12,7 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.HasActiveUIPanel && GameManager.Instance.activeUIPanel != inventoryPanel.gameObject)
+        if (GameManager.Instance.HasDifferentActiveUIPanel(inventoryPanel.gameObject))
             return;
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -22,7 +22,10 @@ public class InventoryController : MonoBehaviour
         }
 
         if (inventoryPanel.gameObject.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.CanUseEscapeKey = false;
             SwitchInventoryPanelState();
+        }
     }
 
     private void SwitchInventoryPanelState()
@@ -31,6 +34,6 @@ public class InventoryController : MonoBehaviour
         toolbarPanel.gameObject.SetActive(!toolbarPanel.gameObject.activeInHierarchy);
 
         if (inventoryPanel.gameObject.activeInHierarchy)
-            GameManager.Instance.activeUIPanel = inventoryPanel.gameObject;
+            GameManager.Instance.ActiveUIPanel = inventoryPanel.gameObject;
     }
 }
