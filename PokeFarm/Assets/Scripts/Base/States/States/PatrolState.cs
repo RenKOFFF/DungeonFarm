@@ -1,21 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
-public class PatrolState : State
+public class PatrolState : BaseMonsterState
 {
-    private Monster _monster;
-    private float _speed;
-
     private Transform[] _patrolPoints;
     private int _currentPatrolPointIndex;
 
-    private float _waitTime;
-    private float _startWaitTime = 2f;
-
     public PatrolState(Monster monster, float speed, PatrolData patrolData)
     {
-        _monster = monster;
+        _monsterBehaviour = monster.MonsterBehaviour;
         _speed = speed;
         _patrolPoints = patrolData.PatrolPoints;
 
@@ -36,16 +31,16 @@ public class PatrolState : State
     {
         if (_patrolPoints == null && _patrolPoints.Length == 0)
         {
-            _monster.StateMachine.ChangeState(_monster.StateMachine.DefaultState);
+            _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
             Debug.Log("Нет точек?");
         } 
 
-        _monster.transform.position = Vector2.MoveTowards(
-            _monster.transform.position, 
+        _monsterBehaviour.transform.position = Vector2.MoveTowards(
+            _monsterBehaviour.transform.position, 
             _patrolPoints[_currentPatrolPointIndex].position, 
             _speed * Time.deltaTime);
 
-        if (Vector2.Distance(_monster.transform.position, _patrolPoints[_currentPatrolPointIndex].position) <= .2f)
+        if (Vector2.Distance(_monsterBehaviour.transform.position, _patrolPoints[_currentPatrolPointIndex].position) <= .2f)
         {
             if (_waitTime <= 0)
             {

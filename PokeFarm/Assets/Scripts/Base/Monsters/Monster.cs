@@ -4,68 +4,22 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Monster : MonoBehaviour, IInteractable
+[RequireComponent(typeof(MonsterBehaviour))]
+public class Monster : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1.5f;
+    [field:SerializeField] public MonsterDataSO MonsterData { get; private set; }
     public float Speed { get => _speed; private set => _speed = value;  }
+    [SerializeField] private float _speed = 1.5f;
+    public ItemStorageContainer Inventory { get; private set; }
+    public MonsterBehaviour MonsterBehaviour { get => _monsterBehaviour; }
+    private MonsterBehaviour _monsterBehaviour;
 
-    public bool isCanInteract => _isCanInteract;
-    private bool _isCanInteract;
-
-    public StateMachine StateMachine;
-
-    [HideInInspector] public RestState RestState;
-    [SerializeField] private Transform _restPlace;
-
-    [HideInInspector] public PatrolState RatrolState;
-    [SerializeField] private PatrolData PatrolData;
-
-    [HideInInspector] public WanderingState WanderingState;
-
-    [HideInInspector] public FollowingState FollowingState;
-    [SerializeField] private MonstersMoveByClickController monstersMoveByClickController;
-
-    private void Start()
+    private void Awake()
     {
-        InitializeStates();
-
-        StateMachine = new StateMachine();
-        StateMachine.Init(WanderingState);
-    }
-
-    private void InitializeStates()
-    {
-        RestState = new RestState(this, Speed, _restPlace);
-        RatrolState = new PatrolState(this, Speed, PatrolData);
-        WanderingState = new WanderingState(this, Speed, 5f);
-    }
-
-    private void Update()
-    {
-        StateMachine.CurrentState.Update();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (StateMachine.CurrentState.GetType() == RestState.GetType()) StateMachine.ChangeState(RatrolState);
-            else StateMachine.ChangeState(RestState);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        var collider = collision.GetComponent<CharacterController2D>();
-        if (collider != null)
-        {
-            _isCanInteract = true;
-            StateMachine.ChangeState(new FollowingState(this, Speed, collider.gameObject));
-        }
-    }
-
-    public void Interact()
-    {
-        _isCanInteract = false;
-        monstersMoveByClickController.enabled = true;
-        Debug.Log($"Im interact with {this.name}");
+        //TODO create in MonsterData container size
+        Inventory = new ItemStorageContainer(1);
+        _monsterBehaviour = GetComponent<MonsterBehaviour>();
     }
 }

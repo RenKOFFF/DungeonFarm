@@ -13,4 +13,5 @@ public class Item : ScriptableObject
     public Sprite icon;
     public bool isStackable;
     public ItemType type;
+    public bool isFood;
 }

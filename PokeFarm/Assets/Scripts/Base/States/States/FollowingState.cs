@@ -1,20 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class FollowingState : State
+public class FollowingState : BaseMonsterState
 {
-    private Monster _monster;
-    private float _speed;
-
-    private float _waitTime;
-    private float _startWaitTime = 2f;
-
     private Transform _target;
     private float _socialDistance = 1.2f;
     private float _stopFollowingDistance = 3f;
 
+    private float distanceToTarget;
+
     public FollowingState(Monster monster, float speed, GameObject target)
     {
-        _monster = monster;
+        _monsterBehaviour = monster.MonsterBehaviour;
         _speed = speed;
 
         _waitTime = _startWaitTime;
@@ -37,14 +34,20 @@ public class FollowingState : State
     }
     private void MoveToTargetPosition()
     {
-        if (Vector2.Distance(_monster.transform.position, _target.position) >= _socialDistance)
+        distanceToTarget = Vector2.Distance(_monsterBehaviour.transform.position, _target.position);
+        if (distanceToTarget >= _socialDistance)
         {
-            _monster.transform.position = Vector2.MoveTowards(_monster.transform.position, _target.position, Time.deltaTime * _speed);
+            _monsterBehaviour.transform.position = Vector2.MoveTowards(_monsterBehaviour.transform.position, _target.position, Time.deltaTime * _speed);
         }
-
-        if (Vector2.Distance(_monster.transform.position, _target.position) > _stopFollowingDistance)
+        //TODO resolve wait state problem
+/*        else
         {
-            _monster.StateMachine.ChangeState(_monster.StateMachine.DefaultState);
+            _monsterBehaviour.StateMachine.ChangeState(new WaitState());
+        }*/
+
+        if (distanceToTarget > _stopFollowingDistance)
+        {
+            _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
         }
     }
 }

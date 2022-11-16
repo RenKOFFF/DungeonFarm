@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: Seed
   isStackable: 1
   icon: {fileID: 215868686, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
+  isFood: 1
