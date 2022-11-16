@@ -90,6 +90,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     public void Interact()
     {
         OnPlayerCalledInteractionMenuEvent.Invoke(_monster, _monstersInteractionWays);
+        StateMachine.ChangeState(new WaitState(Monster, MonsterSpeed, StateMachine.CurrentState));
         Debug.Log($"Im interact with {_monster.name} - вызвана менюшка");
     }
 
