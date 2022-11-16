@@ -9,23 +9,17 @@ public class FollowingState : BaseMonsterState
 
     private float distanceToTarget;
 
-    public FollowingState(Monster monster, float speed, GameObject target)
+    public State PreviousState { get; private set; }
+
+    public FollowingState(Monster monster, float speed, GameObject target, State previousState)
     {
         _monsterBehaviour = monster.MonsterBehaviour;
         _speed = speed;
 
         _waitTime = _startWaitTime;
         _target = target.transform;
-    }
 
-    public override void Enter()
-    {
-        Debug.Log($"Enter {this}");
-    }
-
-    public override void Exit()
-    {
-        Debug.Log($"Exit {this}");
+        PreviousState = previousState;
     }
 
     public override void Update()
@@ -39,15 +33,10 @@ public class FollowingState : BaseMonsterState
         {
             _monsterBehaviour.transform.position = Vector2.MoveTowards(_monsterBehaviour.transform.position, _target.position, Time.deltaTime * _speed);
         }
-        //TODO resolve wait state problem
-/*        else
-        {
-            _monsterBehaviour.StateMachine.ChangeState(new WaitState());
-        }*/
 
         if (distanceToTarget > _stopFollowingDistance)
         {
-            _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
+            _monsterBehaviour.StateMachine.ChangeState(PreviousState);
         }
     }
 }
