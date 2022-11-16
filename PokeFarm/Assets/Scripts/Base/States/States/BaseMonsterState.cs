@@ -9,4 +9,14 @@ public abstract class BaseMonsterState : State
 
     protected float _waitTime;
     protected float _startWaitTime = 2f;
+
+    public override void Enter()
+    {
+        Debug.Log($"Enter {this}");
+    }
+
+    public override void Exit()
+    {
+        Debug.Log($"Exit {this}");
+    }
 }
