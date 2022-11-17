@@ -4,6 +4,8 @@ public enum ItemType
 {
     NotAssigned,
     Tool,
+    Food,
+    Building,
 }
 
 [CreateAssetMenu(menuName = "Data/Item")]
@@ -13,5 +15,4 @@ public class Item : ScriptableObject
     public Sprite icon;
     public bool isStackable;
     public ItemType type;
-    public bool isFood;
 }
