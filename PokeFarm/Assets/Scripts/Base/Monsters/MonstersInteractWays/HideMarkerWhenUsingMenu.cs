@@ -1,18 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HideMarkerWhenUsingMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private MarkerManager _gridMarker;
+
+    private void OnEnable()
     {
-        
+        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(HideMarker);
+        MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(ReturnMarker);
+        MonsterInteractionButton.OnInteractedEvent.AddListener(ReturnMarker);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HideMarker(Monster _, List<MonstersInteractionWay> __)
     {
-        
+        _gridMarker?.gameObject.SetActive(false);
     }
+
+    private void ReturnMarker()
+    {
+        _gridMarker?.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.RemoveListener(HideMarker);
+        MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.RemoveListener(ReturnMarker);
+        MonsterInteractionButton.OnInteractedEvent.RemoveListener(ReturnMarker);
+    }
+
 }
