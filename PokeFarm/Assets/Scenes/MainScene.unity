@@ -3007,6 +3007,14 @@ MonoBehaviour:
   - {fileID: 5422236667050310783, guid: c10d59e21a6e06c4e97adee73c06c838, type: 3}
   - {fileID: 8299430867874479962, guid: dd7869b0f6511314c94a4a40141b5337, type: 3}
   safeFromObjectSpawningArea: {fileID: 436402993}
+  prefabsTilemap: {fileID: 7394672114122086425, guid: 9e865dd4fdbe1d944b78f8ad84f9594c, type: 3}
+  availableToSpawnTiles:
+  - tile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
+    spawnIntervalInSeconds: 10
+    prefabTilemapPosition: {x: 0, y: 0, z: 0}
+  - tile: {fileID: 11400000, guid: 705c3dec0681dbb43b6706ef13169f89, type: 2}
+    spawnIntervalInSeconds: 10
+    prefabTilemapPosition: {x: 1, y: 0, z: 0}
 --- !u!19719996 &551311234
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -4255,6 +4263,7 @@ GameObject:
   - component: {fileID: 812349702}
   - component: {fileID: 812349703}
   - component: {fileID: 812349704}
+  - component: {fileID: 812349705}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4278,7 +4287,6 @@ MonoBehaviour:
   inventoryContainer: {fileID: 11400000, guid: 95dce3b73701c2a429346f683108f4ba, type: 2}
   dragAndDropController: {fileID: 812349702}
   settingsPanel: {fileID: 1742877631}
-  activeUIPanel: {fileID: 0}
 --- !u!4 &812349701
 Transform:
   m_ObjectHideFlags: 0
@@ -4337,9 +4345,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundTilemap: {fileID: 1228060978}
   landscapeTilemap: {fileID: 551311232}
-  tileDatas:
-  - {fileID: 11400000, guid: d84eed094178ca24a9d903c8a3c661de, type: 2}
-  - {fileID: 11400000, guid: 8cce8e06d9c399448b496e815e88fcd7, type: 2}
+  plowableTiles:
+  - {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
+--- !u!114 &812349705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812349699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3c459a8fa346a1bddec163d0efe32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &826944105 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: b6793933e6dc7cb46b599c12fe685ce7, type: 3}
@@ -10594,53 +10613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52efe0758f3e7c4c9a005f10f5e8087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1329903434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1329903435}
-  - component: {fileID: 1329903436}
-  m_Layer: 0
-  m_Name: ToolbarController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1329903435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329903434}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1329903436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329903434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f10040996a1fac740a0c2913f1ae5cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnSelectChangeEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!224 &1330687154 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
@@ -12058,6 +12030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTilemap: {fileID: 1964482601}
   markerTile: {fileID: 11400000, guid: 39216c9d589e12245adc79cb42675643, type: 2}
+  offsetDistance: 2
   markedCellPosition: {x: 0, y: 0, z: 0}
 --- !u!224 &1983275593 stripped
 RectTransform:
@@ -16104,10 +16077,6 @@ PrefabInstance:
       propertyPath: inventoryPanel
       value: 
       objectReference: {fileID: 5813353004045532384}
-    - target: {fileID: 1787239530, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
-      propertyPath: toolbar
-      value: 
-      objectReference: {fileID: 1641903044}
     - target: {fileID: 8279661540096596497, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -16160,6 +16129,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9091087370559078292, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+      propertyPath: currentToolbar
+      value: 
+      objectReference: {fileID: 1641903044}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
 --- !u!1001 &8334346796651337389

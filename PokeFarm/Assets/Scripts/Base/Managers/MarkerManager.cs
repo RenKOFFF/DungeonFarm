@@ -5,6 +5,7 @@ public class MarkerManager : MonoBehaviour
 {
     [SerializeField] private Tilemap targetTilemap;
     [SerializeField] private TileBase markerTile;
+    [SerializeField] private float offsetDistance = 2f;
 
     public static MarkerManager Instance { get; private set; }
 
@@ -18,7 +19,19 @@ public class MarkerManager : MonoBehaviour
 
     private void Update()
     {
-        markedCellPosition = TileMapReadManager.Instance.GetCurrentBackgroundGridPositionByMousePosition();
+        var playerInstance = GameManager.Instance.player;
+        var playerPosition = playerInstance.GetComponent<Rigidbody2D>().position;
+        var limitedMouseVector = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerPosition;
+
+        if (limitedMouseVector.magnitude > offsetDistance)
+            limitedMouseVector = limitedMouseVector.normalized * offsetDistance;
+
+        var newMarkerPosition = limitedMouseVector + playerPosition;
+
+        markedCellPosition = TileMapReadManager.GetGridPosition(
+            TileMapReadManager.Instance.backgroundTilemap,
+            newMarkerPosition,
+            false);
 
         targetTilemap.SetTile(oldCellPosition, null);
         targetTilemap.SetTile(markedCellPosition, markerTile);

@@ -70,8 +70,9 @@ public class LandscapeController : MonoBehaviour
                 _random.NextInt(_minPosition.x, _maxPosition.x),
                 _random.NextInt(_minPosition.y, _maxPosition.y));
 
-            var spawnWorldPosition = _tileMapReadManager.backgroundTilemap.CellToWorld(randomPosition) +
-                                     _tileMapReadManager.backgroundTilemap.layoutGrid.cellSize / 2;
+            var spawnWorldPosition = TileMapReadManager.GetCellCenterWorldPosition(
+                _tileMapReadManager.backgroundTilemap,
+                randomPosition);
 
             if (safeFromObjectSpawningArea.bounds.Contains(spawnWorldPosition))
                 continue;

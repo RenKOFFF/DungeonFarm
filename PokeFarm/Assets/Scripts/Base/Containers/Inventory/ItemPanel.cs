@@ -7,7 +7,9 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] protected ItemContainer inventory;
     [SerializeField] protected List<InventoryButton> buttons;
 
-    protected void Refresh()
+    public int ButtonsCount => buttons.Count;
+
+    public void Refresh()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
         {
@@ -23,20 +25,15 @@ public class ItemPanel : MonoBehaviour
         }
     }
 
-    protected void Init()
-    {
-        SetButtonIndexes();
-    }
-
     private void SetButtonIndexes()
     {
         for (var i = 0; i < inventory.slots.Count && i < buttons.Count; i++)
             buttons[i].SetIndex(i);
     }
 
-    private void Start()
+    protected void Start()
     {
-        Init();
+        SetButtonIndexes();
     }
 
     private void OnEnable()

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
-  m_Name: Sword
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  Name: Sword
-  icon: {fileID: 21300000, guid: 3a125fa85b28eed46be5ad79c0f8af34, type: 3}
+  Name: Axe
+  icon: {fileID: 1119437427, guid: 3de3095b7a1c337499614d430d97df62, type: 3}
   isStackable: 0
-  type: 0
+  type: 1

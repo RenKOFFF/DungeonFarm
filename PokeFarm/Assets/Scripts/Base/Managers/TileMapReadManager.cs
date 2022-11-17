@@ -5,8 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class TileData
 {
-    public bool plowable;
-    public bool toolInteractable;
+    public bool IsPlowable;
+
+    public bool IsBreakable;
+    public BreakableTile BreakableTile;
 }
 
 public class TileMapReadManager : MonoBehaviour
@@ -14,11 +16,11 @@ public class TileMapReadManager : MonoBehaviour
     [SerializeField] public Tilemap backgroundTilemap;
     [SerializeField] public Tilemap landscapeTilemap;
     [SerializeField] private List<TileBase> plowableTiles;
-    [SerializeField] private List<TileBase> toolInteractableTiles;
 
     public static TileMapReadManager Instance { get; private set; }
 
-    private Dictionary<TileBase, TileData> dataFromTiles;
+    private static Dictionary<TileBase, BreakableTile> _breakableTiles;
+    private static Dictionary<TileBase, TileData> _dataFromTiles;
 
     public static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
     {
@@ -29,41 +31,54 @@ public class TileMapReadManager : MonoBehaviour
         return tilemap.WorldToCell(worldPosition);
     }
 
+    public static Vector3 GetCellCenterWorldPosition(Tilemap tilemap, Vector3Int gridPosition)
+        => tilemap.CellToWorld(gridPosition) + tilemap.layoutGrid.cellSize / 2;
+
+    public static TileBase GetTileBase(Tilemap tilemap, Vector3Int gridPosition)
+        => tilemap.GetTile(gridPosition);
+
     public Vector3Int GetCurrentBackgroundGridPositionByMousePosition()
         => GetGridPosition(backgroundTilemap, Input.mousePosition, true);
 
     public TileData GetLandscapeTileDataByMousePosition()
         => GetTileData(GetTileBase(landscapeTilemap, Input.mousePosition, true));
 
-    private TileBase GetTileBase(Tilemap tilemap, Vector2 position, bool isMousePosition = false)
-    {
-        var gridPosition = GetGridPosition(tilemap, position, isMousePosition);
-        var tile = tilemap.GetTile(gridPosition);
+    public TileData GetLandscapeTileDataByGridPosition(Vector3Int gridPosition)
+        => GetTileData(GetTileBase(landscapeTilemap, gridPosition));
 
-        return tile;
-    }
+    private static TileBase GetTileBase(Tilemap tilemap, Vector2 position, bool isMousePosition = false)
+        => GetTileBase(tilemap, GetGridPosition(tilemap, position, isMousePosition));
 
-    private TileData GetTileData(TileBase tileBase)
+    private static TileData GetTileData(TileBase tileBase)
     {
-        if (tileBase == null || !dataFromTiles.ContainsKey(tileBase))
+        if (tileBase == null || !_dataFromTiles.ContainsKey(tileBase))
             return new TileData();
 
-        return dataFromTiles[tileBase];
+        return _dataFromTiles[tileBase];
     }
 
     private void Awake()
     {
         Instance = this;
+
+        _breakableTiles = Resources.LoadAll<BreakableTile>("BreakableTiles")
+            .ToDictionary(bt => bt.tile);
     }
 
     private void Start()
     {
-        dataFromTiles = new Dictionary<TileBase, TileData>();
+        _dataFromTiles = new Dictionary<TileBase, TileData>();
 
         foreach (var tileBase in plowableTiles)
-            dataFromTiles.Add(tileBase, new TileData { plowable = true });
+            _dataFromTiles.Add(tileBase, new TileData { IsPlowable = true });
 
-        foreach (var tileBase in toolInteractableTiles)
-            dataFromTiles.Add(tileBase, new TileData { toolInteractable = true });
+        foreach (var (tileBase, breakableTile) in _breakableTiles)
+            _dataFromTiles.Add(
+                tileBase,
+                new TileData
+                {
+                    IsBreakable = true,
+                    BreakableTile = breakableTile
+                });
     }
 }

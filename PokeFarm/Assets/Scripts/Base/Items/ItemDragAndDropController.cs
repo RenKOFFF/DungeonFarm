@@ -8,8 +8,8 @@ public class ItemDragAndDropController : MonoBehaviour
     [SerializeField] private ItemSlot draggingSlot;
     [SerializeField] private GameObject itemIcon;
 
-    private RectTransform iconTransform;
-    private Image iconImage;
+    private RectTransform _iconTransform;
+    private Image _iconImage;
 
     public void OnClick(ItemSlot clickedSlot, PointerEventData.InputButton inputButton)
     {
@@ -60,14 +60,14 @@ public class ItemDragAndDropController : MonoBehaviour
         itemIcon.SetActive(draggingSlot.item != null);
 
         if (draggingSlot.item != null)
-            iconImage.sprite = draggingSlot.item.icon;
+            _iconImage.sprite = draggingSlot.item.icon;
     }
 
     private void Start()
     {
         draggingSlot = new ItemSlot();
-        iconTransform = itemIcon.GetComponent<RectTransform>();
-        iconImage = itemIcon.GetComponent<Image>();
+        _iconTransform = itemIcon.GetComponent<RectTransform>();
+        _iconImage = itemIcon.GetComponent<Image>();
     }
 
     private void Update()
@@ -75,7 +75,7 @@ public class ItemDragAndDropController : MonoBehaviour
         if (!itemIcon.activeInHierarchy) return;
 
         var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-        iconTransform.position = worldPosition;
+        _iconTransform.position = worldPosition;
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {

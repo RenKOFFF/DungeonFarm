@@ -27,14 +27,14 @@ public class GardenBed : MonoBehaviour, IConditionInteractable
     {
         state = GardenBedState.Empty;
         //UpdateCondition();
-        HandBank.instance.OnItemOnTheHandIsSwitchedEvent.AddListener(UpdateCondition);
+        ToolbarManager.Instance.OnItemOnTheHandChanged.AddListener(UpdateCondition);
     }
 
     private void UpdateCondition()
     {
         if (state != GardenBedState.Empty) return;
 
-        Condition = HandBank.instance.itemOnTheHand == seed;
+        Condition = ToolbarManager.Instance.ItemOnTheHand == seed;
         OnConditionUpdatedEvent.Invoke(this);
     }
 

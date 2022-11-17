@@ -10,9 +10,9 @@ public class MonstersGiveFood : MonstersInteractionWay
     {
         Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
 
-        if (HandBank.instance.itemOnTheHand.isFood)
+        if (ToolbarManager.Instance.ItemOnTheHand.isFood)
         {
-            _monsterBehaviour.Monster.Inventory.AddItem(HandBank.instance.itemOnTheHand);
+            _monsterBehaviour.Monster.Inventory.AddItem(ToolbarManager.Instance.ItemOnTheHand);
             //TODO delete this item from player inventory
         }
 

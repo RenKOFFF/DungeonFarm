@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f61d8776b6e430ebf03f8a82824323f, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
+  tile: {fileID: 11400000, guid: 705c3dec0681dbb43b6706ef13169f89, type: 2}
+  dropsItem: {fileID: 11400000, guid: 8f09babc866257947a6bf484b0697591, type: 2}
+  dropAmount: 25
+  breaksByTool: {fileID: 11400000, guid: 14ceaa5d0d448df47a168477a22ffa64, type: 2}

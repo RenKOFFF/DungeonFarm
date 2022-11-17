@@ -8,26 +8,46 @@ public class GameManager : MonoBehaviour
     public ItemContainer inventoryContainer;
     public ItemDragAndDropController dragAndDropController;
     public GameObject settingsPanel;
-    public GameObject activeUIPanel;
 
-    public bool HasActiveUIPanel => activeUIPanel != null && activeUIPanel.activeInHierarchy;
+    public GameObject ActiveUIPanel { get; set; }
+    public bool CanUseEscapeKey { get; set; } = true;
+
+    private bool HasActiveUIPanel => ActiveUIPanel != null && ActiveUIPanel.activeInHierarchy;
+
+    public bool HasDifferentActiveUIPanel(GameObject uiPanelToCompare)
+        => HasActiveUIPanel && ActiveUIPanel != uiPanelToCompare;
 
     private void Awake()
     {
         Instance = this;
+
+        // if (Instance == null)
+        // {
+        //     Instance = this;
+        //     DontDestroyOnLoad(Instance);
+        //     return;
+        // }
+        //
+        // Destroy(gameObject);
     }
 
     private void Update()
     {
-        if (Instance.HasActiveUIPanel && Instance.activeUIPanel != settingsPanel)
+        if (HasDifferentActiveUIPanel(settingsPanel))
             return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (!CanUseEscapeKey)
+            {
+                CanUseEscapeKey = true;
+                return;
+            }
+
             settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
 
             if (settingsPanel.activeInHierarchy)
-                activeUIPanel = settingsPanel;
+                ActiveUIPanel = settingsPanel;
         }
     }
 }

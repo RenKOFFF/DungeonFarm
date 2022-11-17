@@ -1,38 +1,31 @@
-using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ToolbarPanel : ItemPanel
 {
-    private int currentSelectedItemIndex;
+    private int _currentSelectedItemIndex;
 
-    private void Start()
-    {
-        Init();
-        Hightlight(currentSelectedItemIndex);
-
-        ToolbarController.instanse.OnSelectChangeEvent.AddListener(Hightlight);
-    }
     public override void OnClick(int id, PointerEventData.InputButton inputButton)
     {
-        ToolbarController.instanse.Set(id);
+        ToolbarManager.Instance.SetSlotIndex(id);
     }
 
-    private void Hightlight(int id)
-    {
-        buttons[currentSelectedItemIndex].Highlight(false);
-        currentSelectedItemIndex = id;
-        buttons[id].Highlight(true);
-    }
     public Item GetCurrentSelectedItem()
+        => GetItemOnIndex(_currentSelectedItemIndex);
+
+    private void HighlightSlotOnIndex(int index)
     {
-        var returnItem = buttons[currentSelectedItemIndex].GetSlot()?.item;
-        Debug.Log($"Current item: {returnItem} on slot index: {currentSelectedItemIndex}");
-        return returnItem;
+        buttons[_currentSelectedItemIndex].Highlight(false);
+        _currentSelectedItemIndex = index;
+        buttons[index].Highlight(true);
     }
-    public Item GetCurrentSelectedItem(int index)
+
+    private Item GetItemOnIndex(int index)
+        => buttons[index].GetSlot()?.item;
+
+    private new void Start()
     {
-        var returnItem = buttons[index].GetSlot()?.item;
-        Debug.Log($"Current item: {returnItem} on slot index: {index}");
-        return returnItem;
+        base.Start();
+        HighlightSlotOnIndex(_currentSelectedItemIndex);
+        ToolbarManager.Instance.OnSelectedSlotIndexChanged.AddListener(HighlightSlotOnIndex);
     }
 }
