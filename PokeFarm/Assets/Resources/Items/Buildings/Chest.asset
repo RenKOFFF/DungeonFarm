@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  Name: "\u0417\u0430\u0431\u043E\u0440"
+  Name: "\u0421\u0443\u043D\u0434\u0443\u043A"
   icon: {fileID: 89483155, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
   isStackable: 0
-  type: 0
+  type: 3
