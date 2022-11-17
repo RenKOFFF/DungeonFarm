@@ -5,9 +5,19 @@ using UnityEngine;
 
 public static class GameDataController
 {
-    public static void Save(object data, string savedFileName)
+    public enum DataCategory
     {
-        var savedFilePath = GetSavedFilePath(savedFileName);
+        Containers,
+    }
+
+    public static void Save(object data, DataCategory dataCategory, string savedFileName)
+    {
+        var directoryPath = AddToPersistentDataPath(dataCategory.ToString());
+
+        if (!Directory.Exists(directoryPath))
+            Directory.CreateDirectory(directoryPath);
+
+        var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
 
         try
         {
@@ -20,9 +30,9 @@ public static class GameDataController
         }
     }
 
-    public static T Load<T>(string savedFileName)
+    public static T Load<T>(DataCategory dataCategory, string savedFileName)
     {
-        var savedFilePath = GetSavedFilePath(savedFileName);
+        var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
 
         if (!File.Exists(savedFilePath))
         {
@@ -42,6 +52,9 @@ public static class GameDataController
         }
     }
 
-    private static string GetSavedFilePath(string saveFileName)
-        => Application.persistentDataPath + $"/{saveFileName}.json";
+    private static string GetSavedFilePath(DataCategory dataCategory, string saveFileName)
+        => AddToPersistentDataPath($"{dataCategory}/{saveFileName}.json");
+
+    private static string AddToPersistentDataPath(string pathPart)
+        => $"{Application.persistentDataPath}/{pathPart}";
 }
