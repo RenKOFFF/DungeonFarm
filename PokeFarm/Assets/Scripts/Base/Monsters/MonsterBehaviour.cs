@@ -75,7 +75,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            StateMachine.ChangeState(new FollowingState(_monster, _monster.Speed, collider.gameObject));
+            StateMachine.ChangeState(new FollowingState(_monster, _monster.Speed, collider.gameObject, StateMachine.CurrentState));
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
