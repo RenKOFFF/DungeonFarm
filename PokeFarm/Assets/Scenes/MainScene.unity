@@ -1530,6 +1530,7 @@ GameObject:
   - component: {fileID: 375983282}
   - component: {fileID: 375983284}
   - component: {fileID: 375983283}
+  - component: {fileID: 375983285}
   m_Layer: 5
   m_Name: MonstersInteractionMenu
   m_TagString: MonstersInteractionMenu
@@ -1588,6 +1589,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375983281}
   m_CullTransparentMesh: 1
+--- !u!114 &375983285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375983281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55073e91057409945adca54ff4976e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridMarker: {fileID: 1964482602}
 --- !u!1 &378296252
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,20 +3015,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eff2898f2df98e42b9dc922a3e3d667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocksSpawnIntervalInSeconds: 10
-  rockTile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
-  availableToSpawnObjects:
-  - {fileID: 5422236667050310783, guid: c10d59e21a6e06c4e97adee73c06c838, type: 3}
-  - {fileID: 8299430867874479962, guid: dd7869b0f6511314c94a4a40141b5337, type: 3}
   safeFromObjectSpawningArea: {fileID: 436402993}
-  prefabsTilemap: {fileID: 7394672114122086425, guid: 9e865dd4fdbe1d944b78f8ad84f9594c, type: 3}
-  availableToSpawnTiles:
-  - tile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
-    spawnIntervalInSeconds: 10
-    prefabTilemapPosition: {x: 0, y: 0, z: 0}
-  - tile: {fileID: 11400000, guid: 705c3dec0681dbb43b6706ef13169f89, type: 2}
-    spawnIntervalInSeconds: 10
-    prefabTilemapPosition: {x: 1, y: 0, z: 0}
+  prefabsTilemap: {fileID: 0}
+  availableToSpawnTiles: []
 --- !u!19719996 &551311234
 TilemapCollider2D:
   m_ObjectHideFlags: 0
