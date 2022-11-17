@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-public class ToolbarPanel : ItemPanel
+public class ToolbarPanel : ContainerPanel
 {
     private int _currentSelectedItemIndex;
 
@@ -14,13 +14,13 @@ public class ToolbarPanel : ItemPanel
 
     private void HighlightSlotOnIndex(int index)
     {
-        buttons[_currentSelectedItemIndex].Highlight(false);
+        inventoryButtons[_currentSelectedItemIndex].Highlight(false);
         _currentSelectedItemIndex = index;
-        buttons[index].Highlight(true);
+        inventoryButtons[index].Highlight(true);
     }
 
     private Item GetItemOnIndex(int index)
-        => buttons[index].GetSlot()?.item;
+        => inventoryButtons[index].GetSlot()?.item;
 
     private new void Start()
     {

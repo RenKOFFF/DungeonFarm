@@ -3,21 +3,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryButton : MonoBehaviour, IPointerClickHandler
+public class ContainerButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text text;
-    [SerializeField] private Image hightlightImage;
+    [SerializeField] private Image highlightImage;
 
-    private ItemSlot slot { get; set; }
-    private int index { get; set; }
+    private ItemSlot Slot { get; set; }
+    private int Index { get; set; }
 
     public void SetIndex(int givenIndex)
-        => index = givenIndex;
+        => Index = givenIndex;
 
     public void Set(ItemSlot slot)
     {
-        this.slot = slot;
+        Slot = slot;
         icon.gameObject.SetActive(true);
         icon.sprite = slot.item.icon;
         text.gameObject.SetActive(slot.item.isStackable);
@@ -35,17 +35,15 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        var itemPanel = GetComponentInParent<ItemPanel>();
-        itemPanel.OnClick(index, eventData.button);
+        var itemPanel = GetComponentInParent<ContainerPanel>();
+        itemPanel.OnClick(Index, eventData.button);
     }
 
     public void Highlight(bool makeActive)
     {
-        hightlightImage.gameObject.SetActive(makeActive);
+        highlightImage.gameObject.SetActive(makeActive);
     }
 
     public ItemSlot GetSlot()
-    {
-        return slot;
-    }
+        => Slot;
 }

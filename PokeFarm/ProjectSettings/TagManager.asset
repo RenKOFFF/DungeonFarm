@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MonstersInteractionMenu
+  - Canvas
   layers:
   - Default
   - TransparentFX

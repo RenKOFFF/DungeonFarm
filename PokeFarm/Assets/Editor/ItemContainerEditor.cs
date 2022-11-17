@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ItemContainer))]
+[CustomEditor(typeof(ItemContainerOld))]
 public class ItemContainerEditor : Editor
 {
     private Unity.Mathematics.Random random;
@@ -16,7 +16,7 @@ public class ItemContainerEditor : Editor
     {
         if (GUILayout.Button("Clear container"))
         {
-            foreach (var slot in ((ItemContainer) target).slots)
+            foreach (var slot in ((ItemContainerOld) target).slots)
                 slot.Clear();
         }
 
@@ -24,7 +24,7 @@ public class ItemContainerEditor : Editor
         {
             var allItems = Resources.LoadAll<Item>("Items");
 
-            foreach (var slot in ((ItemContainer) target).slots)
+            foreach (var slot in ((ItemContainerOld) target).slots)
             {
                 slot.Clear();
 

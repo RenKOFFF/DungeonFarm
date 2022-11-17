@@ -24,7 +24,7 @@ public class ItemStorageContainer
         var item = Container[index];
         if (item)
         {
-            GameManager.Instance.inventoryContainer.Add(item);
+            GameManager.Instance.inventoryContainerOld.Add(item);
             Container[index] = null;
             OnContainerChangedContentEvent.Invoke();
         }

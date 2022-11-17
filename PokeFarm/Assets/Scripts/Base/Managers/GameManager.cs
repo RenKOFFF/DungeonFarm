@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     public GameObject player;
-    public ItemContainer inventoryContainer;
+    public ItemContainerOld inventoryContainerOld;
     public ItemDragAndDropController dragAndDropController;
     public GameObject settingsPanel;
 
