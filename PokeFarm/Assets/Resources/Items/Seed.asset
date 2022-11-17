@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Seed
   m_EditorClassIdentifier: 
+  id: 3
   Name: Seed
   icon: {fileID: 215868686, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
   isStackable: 1

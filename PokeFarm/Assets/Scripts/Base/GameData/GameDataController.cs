@@ -3,13 +3,13 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
+public enum DataCategory
+{
+    Containers,
+}
+
 public static class GameDataController
 {
-    public enum DataCategory
-    {
-        Containers,
-    }
-
     public static void Save(object data, DataCategory dataCategory, string savedFileName)
     {
         var directoryPath = AddToPersistentDataPath(dataCategory.ToString());

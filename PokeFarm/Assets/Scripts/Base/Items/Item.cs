@@ -11,6 +11,7 @@ public enum ItemType
 [CreateAssetMenu(menuName = "Data/Item")]
 public class Item : ScriptableObject
 {
+    public int id;
     public string Name;
     public Sprite icon;
     public bool isStackable;

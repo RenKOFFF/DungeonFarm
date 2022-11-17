@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
+  id: 4
   Name: Stone
-  isStackable: 1
   icon: {fileID: 21300000, guid: 40188da6de7c6c84aac75f66abc1a89c, type: 3}
+  isStackable: 1
+  type: 0
+  isFood: 0

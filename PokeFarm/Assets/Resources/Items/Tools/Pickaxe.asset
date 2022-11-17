@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
+  id: 2
   Name: Pickaxe
   icon: {fileID: -1191090462, guid: 3de3095b7a1c337499614d430d97df62, type: 3}
   isStackable: 0
   type: 1
+  isFood: 0

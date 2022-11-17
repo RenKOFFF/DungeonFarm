@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  id: 6
   Name: Wood
-  isStackable: 1
   icon: {fileID: 21300000, guid: effe50000ac672c4cb9c8050fe0cbdde, type: 3}
+  isStackable: 1
+  type: 0
+  isFood: 0
