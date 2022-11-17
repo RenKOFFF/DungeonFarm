@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "MonstersInteractionWayData", menuName = "Interaction Way/Interaction Way Data")]
 public class MonstersInteractionWayDataSO : ScriptableObject

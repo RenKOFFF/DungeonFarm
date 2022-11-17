@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public class WanderingState : State
@@ -13,7 +9,7 @@ public class WanderingState : State
     private float _waitTime;
     private float _startWaitTime = 2f;
 
-    //точка от которой чача будет перемещаться на расстояние не больше чем maxWanderingDistance
+    //С‚РѕС‡РєР° РѕС‚ РєРѕС‚РѕСЂРѕР№ С‡Р°С‡Р° Р±СѓРґРµС‚ РїРµСЂРµРјРµС‰Р°С‚СЊСЃСЏ РЅР° СЂР°СЃСЃС‚РѕСЏРЅРёРµ РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј maxWanderingDistance
     private Vector2 _centerWanderingArea;
     private Vector2 _movePoint;
     private float _maxWanderingDistance = 3f;
@@ -54,7 +50,7 @@ public class WanderingState : State
     {
         var rndDistance = Random.Range(0, maxWanderingDistance);
 
-        //рандомное движение в точку на окружности
+        //СЂР°РЅРґРѕРјРЅРѕРµ РґРІРёР¶РµРЅРёРµ РІ С‚РѕС‡РєСѓ РЅР° РѕРєСЂСѓР¶РЅРѕСЃС‚Рё
         var randAng = Random.Range(0, Mathf.PI * 2);
 
         if (_centerWanderingArea != null)

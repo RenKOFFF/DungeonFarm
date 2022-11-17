@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -91,7 +89,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     {
         OnPlayerCalledInteractionMenuEvent.Invoke(_monster, _monstersInteractionWays);
         StateMachine.ChangeState(new WaitState(Monster, MonsterSpeed, StateMachine.CurrentState));
-        Debug.Log($"Im interact with {_monster.name} - вызвана менюшка");
+        Debug.Log($"Im interact with {_monster.name} - РІС‹Р·РІР°РЅР° РјРµРЅСЋС€РєР°");
     }
 
     public void MakeNonInteractive(float time)

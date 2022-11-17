@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class PatrolState : BaseMonsterState
@@ -32,7 +29,7 @@ public class PatrolState : BaseMonsterState
         if (_patrolPoints == null && _patrolPoints.Length == 0)
         {
             _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
-            Debug.Log("Нет точек?");
+            Debug.Log("РќРµС‚ С‚РѕС‡РµРє?");
         } 
 
         _monsterBehaviour.transform.position = Vector2.MoveTowards(
