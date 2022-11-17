@@ -27,7 +27,7 @@ public class BuildingsGrid : MonoBehaviour
 
     void Update()
     {
-        if (HandBank.instance?.itemOnTheHand?.type == ItemType.Building)
+        if (ToolbarManager.Instance?.ItemOnTheHand?.type == ItemType.Building)
         {
             _flyingBuilding?.gameObject.SetActive(true);
             _flyingBuilding.transform.position = TileMapReadManager.Instance.GetCurrentBackgroundGridPositionByMousePosition();

@@ -10,7 +10,7 @@ public class MonstersGiveFood : MonstersInteractionWay
     {
         Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
 
-        Item itemOnTheHand = HandBank.instance.itemOnTheHand;
+        Item itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
         if (itemOnTheHand != null && itemOnTheHand.type is ItemType.Food)
         {
             _monsterBehaviour.Monster.Inventory.AddItem(itemOnTheHand);
