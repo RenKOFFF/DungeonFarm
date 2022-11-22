@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -10,6 +12,15 @@ public enum DataCategory
 
 public static class GameDataController
 {
+    public static Dictionary<string, Item> AllItems;
+
+    static GameDataController()
+    {
+        AllItems = Resources
+            .LoadAll<Item>("Items")
+            .ToDictionary(i => i.Name);
+    }
+
     public static void Save(object data, DataCategory dataCategory, string savedFileName)
     {
         var directoryPath = AddToPersistentDataPath(dataCategory.ToString());

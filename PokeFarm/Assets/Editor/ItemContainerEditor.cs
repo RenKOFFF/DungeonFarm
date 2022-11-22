@@ -1,15 +1,18 @@
 using System;
+using Base.Items;
 using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(ItemContainerOld))]
 public class ItemContainerEditor : Editor
 {
-    private Unity.Mathematics.Random random;
+    private const string SavedInventoryFileName = "MainCharacter";
+
+    private Unity.Mathematics.Random _random;
 
     private void Awake()
     {
-        random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
+        _random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
     }
 
     public override void OnInspectorGUI()
@@ -18,6 +21,8 @@ public class ItemContainerEditor : Editor
         {
             foreach (var slot in ((ItemContainerOld) target).slots)
                 slot.Clear();
+
+            Save();
         }
 
         if (GUILayout.Button("Set random"))
@@ -28,16 +33,24 @@ public class ItemContainerEditor : Editor
             {
                 slot.Clear();
 
-                var isSlotEmpty = random.NextInt(1, 100) <= 20;
+                var isSlotEmpty = _random.NextInt(1, 100) <= 20;
 
                 if (isSlotEmpty)
                     continue;
 
-                slot.item = allItems[random.NextInt(0, allItems.Length)];
-                slot.amount = slot.item.isStackable ? random.NextInt(1, 999) : 1;
+                slot.item = allItems[_random.NextInt(0, allItems.Length)];
+                slot.amount = slot.item.isStackable ? _random.NextInt(1, 999) : 1;
             }
+
+            Save();
         }
 
         DrawDefaultInspector();
+    }
+
+    private void Save()
+    {
+        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(((ItemContainerOld) target).slots);
+        GameDataController.Save(slotSaveItems, DataCategory.Containers, SavedInventoryFileName);
     }
 }
