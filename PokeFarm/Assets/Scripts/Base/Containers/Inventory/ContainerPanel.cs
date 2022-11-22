@@ -29,7 +29,7 @@ public class ContainerPanel : MonoBehaviour
     {
         if (!_isInitialized)
         {
-            gameObject.SetActive(false);
+            Close();
             return;
         }
 
@@ -45,6 +45,16 @@ public class ContainerPanel : MonoBehaviour
 
             inventoryButtons[i].Set(currentSlot);
         }
+    }
+
+    public void Open()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 
     private void SetButtonIndexes()

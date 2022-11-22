@@ -116,4 +116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemContainer: {fileID: 0}
   inventoryButtons: []
-  inventoryButtonPrefab: {fileID: 1201753732079294936, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
+  containerButtonPrefab: {fileID: 1201753732079294936, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}

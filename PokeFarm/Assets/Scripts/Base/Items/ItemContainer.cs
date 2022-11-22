@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Base.Items;
 using UnityEngine;
 
 public class ItemContainer : MonoBehaviour
@@ -9,14 +10,15 @@ public class ItemContainer : MonoBehaviour
 
     public List<ItemSlot> Slots { get; private set; }
 
-    public void SpawnPanel()
+    public ContainerPanel SpawnPanel()
     {
         var canvas = GameObject.FindWithTag("Canvas");
         var containerPanel = Instantiate(containerPanelPrefab, canvas.transform, false);
 
         containerPanel.Init(this);
+        containerPanel.Open();
 
-        containerPanel.gameObject.SetActive(true);
+        return containerPanel;
     }
 
     public void Add(Item item, int amount = 1)
@@ -55,11 +57,13 @@ public class ItemContainer : MonoBehaviour
 
     private void Save()
     {
-        GameDataController.Save(Slots, DataCategory.Containers, gameObject.name);
+        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(Slots);
+        GameDataController.Save(slotSaveItems, DataCategory.Containers, gameObject.name);
     }
 
     private void Load()
     {
-        Slots = GameDataController.Load<List<ItemSlot>>(DataCategory.Containers, gameObject.name);
+        var savedItems = GameDataController.Load<List<SlotSaveItem>>(DataCategory.Containers, gameObject.name);
+        Slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 }
