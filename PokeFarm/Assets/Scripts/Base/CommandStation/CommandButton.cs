@@ -11,9 +11,9 @@ public class CommandButton : MonoBehaviour
 
     public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
 
-    private Image _icon;
-    private TextMeshProUGUI _name;
-    //private TextMeshProUGUI _discription;
+    [SerializeField] private Image _icon;
+    [SerializeField] private TextMeshProUGUI _name;
+    [SerializeField] private TextMeshProUGUI _discription;
 
     private bool _isInited;
 
@@ -34,8 +34,8 @@ public class CommandButton : MonoBehaviour
 
     private void Init()
     {
-        _icon = GetComponent<Image>();
-        _name = GetComponentInChildren<TextMeshProUGUI>();
+        //_icon = GetComponentInChildren<Image>();
+        //_name = GetComponentInChildren<TextMeshProUGUI>();
         //_discription = GetComponentInChildren<TextMeshProUGUI>();
 
         _isInited = true;
@@ -56,13 +56,13 @@ public class CommandButton : MonoBehaviour
         {
             _icon.sprite = InteractData.Icon;
             _name.text = InteractData.InteractName;
-            //_discription.text = "abra barabra";
+            _discription.text = "abra barabra";
         }
         else
         {
             _icon.color = Color.red;
             _name.text = "Default";
-            //_discription.text = "DefaultDescr";
+            _discription.text = "DefaultDescr";
         }
     }
 

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -211, y: -0.000067711}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 64.01, y: -0.000067711}
+  m_SizeDelta: {x: 711.97, y: 86.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8397747477886696558
 CanvasRenderer:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Command 1
+  m_text: "\u0421\u043B\u0430\u0431\u0430\u044F \u0437\u0438\u0433\u043E\u0442\u0430 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1119437427, guid: 3de3095b7a1c337499614d430d97df62, type: 3}
+  m_Sprite: {fileID: 1532693760, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -347,5 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4d12703132047409749d442ccfd438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterData: {fileID: 0}
-  InteractionWay: []
+  MonsterData: {fileID: 11400000, guid: c45676a8393f97b48a3b37c61a53e854, type: 2}
+  InteractionWays:
+  - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
+  - {fileID: 11400000, guid: 14de9ba4844a79645ada5ca091dff668, type: 2}
+  _icon: {fileID: 8397747478714729975}
+  _name: {fileID: 8397747477886696559}

@@ -485,3 +485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractData: {fileID: 0}
   InteractionWay: {fileID: 0}
+  _icon: {fileID: 8397747478714729975}
+  _name: {fileID: 8397747477886696559}
+  _discription: {fileID: 8397747479709082791}

@@ -16,9 +16,9 @@ public class MonsterButton : MonoBehaviour
 
     //public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
 
-    private Image _icon;
-    private TextMeshProUGUI _name;
-    //private TextMeshProUGUI _discription;
+    [SerializeField] private Image _icon;
+    [SerializeField] private TextMeshProUGUI _name;
+    //[SerializeField] private TextMeshProUGUI _discription;
 
     private bool _isInited;
 
@@ -40,8 +40,8 @@ public class MonsterButton : MonoBehaviour
 
     private void Init()
     {
-        _icon = GetComponent<Image>();
-        _name = GetComponentInChildren<TextMeshProUGUI>();
+        //_icon = GetComponent<Image>();
+        //_name = GetComponentInChildren<TextMeshProUGUI>();
         //_discription = GetComponentInChildren<TextMeshProUGUI>();
 
         _isInited = true;
@@ -61,7 +61,7 @@ public class MonsterButton : MonoBehaviour
         if (MonsterData != null)
         {
             _icon.sprite = MonsterData.Icon;
-            _name.text = MonsterData.name;
+            _name.text = MonsterData.MonsterName;
             //_discription.text = "abra barabra";
         }
         else
