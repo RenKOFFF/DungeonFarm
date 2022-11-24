@@ -13,7 +13,7 @@ public class CommandButton : MonoBehaviour
 
     private Image _icon;
     private TextMeshProUGUI _name;
-    private TextMeshProUGUI _discription;
+    //private TextMeshProUGUI _discription;
 
     private bool _isInited;
 
@@ -43,9 +43,9 @@ public class CommandButton : MonoBehaviour
 
     public void Interact()
     {
-        InteractionWay.gameObject.SetActive(true);
-        InteractionWay.Execute();
-        OnInteractedEvent.Invoke();
+        //InteractionWay.gameObject.SetActive(true);
+        //InteractionWay.Execute();
+        //OnInteractedEvent.Invoke();
     }
 
     public void RefreshButtonData()
