@@ -8,6 +8,7 @@ using UnityEngine;
 public enum DataCategory
 {
     Containers,
+    Time,
 }
 
 public static class GameDataController
