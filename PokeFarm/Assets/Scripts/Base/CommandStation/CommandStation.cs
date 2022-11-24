@@ -17,7 +17,7 @@ public class CommandStation : MonoBehaviour, IInteractable
     [SerializeField] private CommandButton _commandButtonPrefab;
     [SerializeField] private MonsterButton _monsterButtonPrefab;
 
-    public static UnityEvent<MonstersInteractionWay> OnCommandChangededEvent = new UnityEvent<MonstersInteractionWay>();
+    //public static UnityEvent<MonstersInteractionWay> OnCommandChangededEvent = new UnityEvent<MonstersInteractionWay>();
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class CommandStation : MonoBehaviour, IInteractable
     {
         CurrentCommand = selectedCommand;
 
-        OnCommandChangededEvent.Invoke(CurrentCommand);
+        //OnCommandChangededEvent.Invoke(CurrentCommand);
 
     }
 

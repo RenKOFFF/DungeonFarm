@@ -11,7 +11,7 @@ public class CommandStationUI : MonoBehaviour
 
     private void Awake()
     {
-        MonstersList.gameObject.SetActive(false);
+        //MonstersList.gameObject.SetActive(false);
 
     }
 

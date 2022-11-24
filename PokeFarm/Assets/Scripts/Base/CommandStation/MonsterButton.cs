@@ -29,7 +29,7 @@ public class MonsterButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(Interact);
-        CommandStation.OnCommandChangededEvent.AddListener(SelectMonstersByCommand);
+        CommandButton.OnCommandSelectedEvent.AddListener(SelectMonstersByCommand);
     }
 
     private void Start()
@@ -72,17 +72,9 @@ public class MonsterButton : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        CommandStation.OnCommandChangededEvent.RemoveListener(SelectMonstersByCommand);
-        _button.onClick.RemoveListener(Interact);
-    }
-
     private void SelectMonstersByCommand(MonstersInteractionWay command)
     {
-        if (InteractionWays.
-            ToList().
-            Where(arr => arr == command.MonstersInteractionWayData) != null)
+        if (InteractionWays.ToList().Find(arr => arr == command.MonstersInteractionWayData))
         {
             gameObject.SetActive(true);
         }
@@ -90,5 +82,11 @@ public class MonsterButton : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        CommandButton.OnCommandSelectedEvent.RemoveListener(SelectMonstersByCommand);
+        _button.onClick.RemoveListener(Interact);
     }
 }
