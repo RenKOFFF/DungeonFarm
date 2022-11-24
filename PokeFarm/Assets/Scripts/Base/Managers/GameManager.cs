@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public GameObject player;
-    public ItemContainerOld inventoryContainerOld;
+    public ContainerController inventory;
     public ItemDragAndDropController dragAndDropController;
     public GameObject settingsPanel;
 

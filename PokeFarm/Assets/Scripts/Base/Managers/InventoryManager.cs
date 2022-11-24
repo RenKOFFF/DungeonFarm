@@ -4,7 +4,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private ContainerPanel inventoryPanel;
     [SerializeField] private ToolbarPanel toolbarPanel;
-    [SerializeField] private Container container;
+    [SerializeField] private ContainerController containerController;
 
     public static InventoryManager Instance { get; private set; }
 
@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        inventoryPanel = container.SpawnPanel();
+        inventoryPanel = containerController.SpawnPanel();
         inventoryPanel.Close();
     }
 

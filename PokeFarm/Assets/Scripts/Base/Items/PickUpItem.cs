@@ -37,7 +37,7 @@ public class PickUpItem : MonoBehaviour
 
     private void AddItemToInventory()
     {
-        GameManager.Instance.inventoryContainerOld.Add(_currentItem, _currentAmount);
+        GameManager.Instance.inventory.Add(_currentItem, _currentAmount);
         InventoryManager.Instance.Refresh();
         Destroy(gameObject);
     }

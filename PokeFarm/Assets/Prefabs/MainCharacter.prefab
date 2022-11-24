@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 0}
   toolbarPanel: {fileID: 0}
-  container: {fileID: 1358569940079202378}
+  containerController: {fileID: 1358569940079202378}
 --- !u!114 &9091087370559078292
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Base.Items;
 using UnityEngine;
 
-public class Container : MonoBehaviour
+public class ContainerController : MonoBehaviour
 {
     [SerializeField] public int slotsCount;
 

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class ContainerPanel : MonoBehaviour
 {
-    [SerializeField] protected Container container;
+    [SerializeField] protected ContainerController containerController;
     [SerializeField] protected List<ContainerButton> inventoryButtons;
     [SerializeField] private ContainerButton containerButtonPrefab;
 
@@ -13,11 +12,11 @@ public class ContainerPanel : MonoBehaviour
 
     private bool _isInitialized;
 
-    public void Init(Container container)
+    public void Init(ContainerController containerController)
     {
-        this.container = container;
+        this.containerController = containerController;
 
-        foreach (var _ in container.Slots)
+        foreach (var _ in containerController.Slots)
         {
             var inventoryButton = Instantiate(containerButtonPrefab, transform, false);
             inventoryButtons.Add(inventoryButton);
@@ -34,9 +33,9 @@ public class ContainerPanel : MonoBehaviour
             return;
         }
 
-        for (var i = 0; i < container.slotsCount && i < inventoryButtons.Count; i++)
+        for (var i = 0; i < containerController.slotsCount && i < inventoryButtons.Count; i++)
         {
-            var currentSlot = container.Slots[i];
+            var currentSlot = containerController.Slots[i];
 
             if (currentSlot.item == null)
             {
@@ -60,7 +59,7 @@ public class ContainerPanel : MonoBehaviour
 
     private void SetButtonIndexes()
     {
-        for (var i = 0; i < container.Slots.Count && i < inventoryButtons.Count; i++)
+        for (var i = 0; i < containerController.Slots.Count && i < inventoryButtons.Count; i++)
             inventoryButtons[i].SetIndex(i);
     }
 
@@ -76,7 +75,7 @@ public class ContainerPanel : MonoBehaviour
 
     public virtual void OnClick(int id, PointerEventData.InputButton inputButton)
     {
-        GameManager.Instance.dragAndDropController.OnClick(container.Slots[id], inputButton);
+        GameManager.Instance.dragAndDropController.OnClick(containerController.Slots[id], inputButton);
         Refresh();
     }
 }

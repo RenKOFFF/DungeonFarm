@@ -4011,7 +4011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1787239509}
-  inventoryContainerOld: {fileID: 11400000, guid: 95dce3b73701c2a429346f683108f4ba, type: 2}
+  inventory: {fileID: 1787239510}
   dragAndDropController: {fileID: 812349702}
   settingsPanel: {fileID: 1742877631}
 --- !u!4 &812349701
@@ -10953,7 +10953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a8899c972a937418830a8878820127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
+  containerController: {fileID: 0}
   inventoryButtons:
   - {fileID: 543238797}
   - {fileID: 444876522}
@@ -11336,6 +11336,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8279661540096596502, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
   m_PrefabInstance: {fileID: 8279661540300714196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1787239510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1358569940079202378, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+  m_PrefabInstance: {fileID: 8279661540300714196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787239509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679d199d6c90f5f4d97fb48335a124c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1790816583 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: b6793933e6dc7cb46b599c12fe685ce7, type: 3}
