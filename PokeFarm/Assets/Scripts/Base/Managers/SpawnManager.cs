@@ -38,6 +38,21 @@ public class SpawnManager : MonoBehaviour
         Instantiate(objectToSpawn, position, Quaternion.identity);
     }
 
+    public TScript SpawnObjectWithScriptOnCanvas<TScript>(TScript objectToSpawn) where TScript : MonoBehaviour
+    {
+        var canvas = GetCanvas();
+        return Instantiate(objectToSpawn, canvas.transform, false);
+    }
+
+    private static GameObject GetCanvas()
+        => GameObject.FindWithTag("Canvas");
+
+    public GameObject SpawnObjectOnCanvas(GameObject objectToSpawn)
+    {
+        var canvas = GetCanvas();
+        return Instantiate(objectToSpawn, canvas.transform, false);
+    }
+
     private void Awake()
     {
         Instance = this;

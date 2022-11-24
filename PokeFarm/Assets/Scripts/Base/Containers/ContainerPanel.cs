@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class ContainerPanel : MonoBehaviour
 {
-    [SerializeField] protected ItemContainer itemContainer;
+    [SerializeField] protected Container container;
     [SerializeField] protected List<ContainerButton> inventoryButtons;
     [SerializeField] private ContainerButton containerButtonPrefab;
 
@@ -12,9 +13,9 @@ public class ContainerPanel : MonoBehaviour
 
     private bool _isInitialized;
 
-    public void Init(ItemContainer container)
+    public void Init(Container container)
     {
-        itemContainer = container;
+        this.container = container;
 
         foreach (var _ in container.Slots)
         {
@@ -33,9 +34,9 @@ public class ContainerPanel : MonoBehaviour
             return;
         }
 
-        for (var i = 0; i < itemContainer.slotsCount && i < inventoryButtons.Count; i++)
+        for (var i = 0; i < container.slotsCount && i < inventoryButtons.Count; i++)
         {
-            var currentSlot = itemContainer.Slots[i];
+            var currentSlot = container.Slots[i];
 
             if (currentSlot.item == null)
             {
@@ -59,7 +60,7 @@ public class ContainerPanel : MonoBehaviour
 
     private void SetButtonIndexes()
     {
-        for (var i = 0; i < itemContainer.Slots.Count && i < inventoryButtons.Count; i++)
+        for (var i = 0; i < container.Slots.Count && i < inventoryButtons.Count; i++)
             inventoryButtons[i].SetIndex(i);
     }
 
@@ -73,5 +74,9 @@ public class ContainerPanel : MonoBehaviour
         Refresh();
     }
 
-    public virtual void OnClick(int id, PointerEventData.InputButton inputButton) { }
+    public virtual void OnClick(int id, PointerEventData.InputButton inputButton)
+    {
+        GameManager.Instance.dragAndDropController.OnClick(container.Slots[id], inputButton);
+        Refresh();
+    }
 }

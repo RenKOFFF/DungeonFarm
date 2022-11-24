@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Base.Items;
 using UnityEngine;
 
-public class ItemContainer : MonoBehaviour
+public class Container : MonoBehaviour
 {
     [SerializeField] public int slotsCount;
 
@@ -38,6 +38,8 @@ public class ItemContainer : MonoBehaviour
 
         emptySlot.item = item;
         emptySlot.amount = amount;
+
+        Save();
     }
 
     private void OnEnable()
