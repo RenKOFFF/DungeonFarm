@@ -245,7 +245,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.5
+  m_fontSize: 18.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -426,4 +426,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 2102775889640886431}
   text: {fileID: 5980717918794496666}
-  hightlightImage: {fileID: 6613454213993178736}
+  highlightImage: {fileID: 6613454213993178736}

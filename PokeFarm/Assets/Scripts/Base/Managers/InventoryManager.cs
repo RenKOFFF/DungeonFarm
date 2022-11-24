@@ -10,8 +10,8 @@ public class InventoryManager : MonoBehaviour
 
     public void Refresh()
     {
-        inventoryPanel.Refresh();
-        toolbarPanel.Refresh();
+        inventoryPanel?.Refresh();
+        toolbarPanel?.Refresh();
     }
 
     private void Awake()

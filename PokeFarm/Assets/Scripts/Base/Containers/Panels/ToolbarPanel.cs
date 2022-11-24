@@ -4,11 +4,6 @@ public class ToolbarPanel : ContainerPanel
 {
     private int _currentSelectedItemIndex;
 
-    public override void OnClick(int id, PointerEventData.InputButton inputButton)
-    {
-        ToolbarManager.Instance.SetSlotIndex(id);
-    }
-
     public Item GetCurrentSelectedItem()
         => GetItemOnIndex(_currentSelectedItemIndex);
 
@@ -27,5 +22,10 @@ public class ToolbarPanel : ContainerPanel
         base.Start();
         HighlightSlotOnIndex(_currentSelectedItemIndex);
         ToolbarManager.Instance.OnSelectedSlotIndexChanged.AddListener(HighlightSlotOnIndex);
+    }
+
+    public override void OnClick(int id, PointerEventData.InputButton inputButton)
+    {
+        ToolbarManager.Instance.SetSlotIndex(id);
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,32 +6,13 @@ public class ContainerPanel : MonoBehaviour
 {
     [SerializeField] protected ContainerController containerController;
     [SerializeField] protected List<ContainerButton> inventoryButtons;
-    [SerializeField] private ContainerButton containerButtonPrefab;
 
     public int ButtonsCount => inventoryButtons.Count;
 
-    private bool _isInitialized;
-
-    public void Init(ContainerController containerController)
+    public virtual void Refresh()
     {
-        this.containerController = containerController;
-
-        foreach (var _ in containerController.Slots)
-        {
-            var inventoryButton = Instantiate(containerButtonPrefab, transform, false);
-            inventoryButtons.Add(inventoryButton);
-        }
-
-        _isInitialized = true;
-    }
-
-    public void Refresh()
-    {
-        if (!_isInitialized)
-        {
-            Close();
+        if (containerController.Slots == null)
             return;
-        }
 
         for (var i = 0; i < containerController.slotsCount && i < inventoryButtons.Count; i++)
         {
@@ -45,6 +26,8 @@ public class ContainerPanel : MonoBehaviour
 
             inventoryButtons[i].Set(currentSlot);
         }
+
+        containerController.Save();
     }
 
     public void Open()

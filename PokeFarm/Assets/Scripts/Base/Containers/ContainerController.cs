@@ -6,11 +6,11 @@ public class ContainerController : MonoBehaviour
 {
     [SerializeField] public int slotsCount;
 
-    [SerializeField] private ContainerPanel containerPanelPrefab;
+    [SerializeField] private ContainerPanelSpawnable containerPanelPrefab;
 
     public List<ItemSlot> Slots { get; private set; }
 
-    public ContainerPanel SpawnPanel()
+    public ContainerPanelSpawnable SpawnPanel()
     {
         var canvas = GameObject.FindWithTag("Canvas");
         var containerPanel = Instantiate(containerPanelPrefab, canvas.transform, false);
@@ -42,6 +42,24 @@ public class ContainerController : MonoBehaviour
         Save();
     }
 
+    public void Save()
+    {
+        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(Slots);
+        GameDataController.Save(slotSaveItems, DataCategory.Containers, gameObject.name);
+    }
+
+    private void Load()
+    {
+        var savedItems = GameDataController.Load<List<SlotSaveItem>>(DataCategory.Containers, gameObject.name);
+        Slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
+    }
+
+    private void Awake()
+    {
+        OnEnable();
+        InventoryManager.Instance.Refresh();
+    }
+
     private void OnEnable()
     {
         Load();
@@ -55,17 +73,5 @@ public class ContainerController : MonoBehaviour
             Slots.Add(new ItemSlot());
 
         Save();
-    }
-
-    private void Save()
-    {
-        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(Slots);
-        GameDataController.Save(slotSaveItems, DataCategory.Containers, gameObject.name);
-    }
-
-    private void Load()
-    {
-        var savedItems = GameDataController.Load<List<SlotSaveItem>>(DataCategory.Containers, gameObject.name);
-        Slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 }

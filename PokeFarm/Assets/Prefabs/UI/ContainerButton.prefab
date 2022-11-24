@@ -426,4 +426,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 2102775889640886431}
   text: {fileID: 5980717918794496666}
-  hightlightImage: {fileID: 6613454213993178736}
+  highlightImage: {fileID: 6613454213993178736}
