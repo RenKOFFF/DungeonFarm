@@ -1,15 +1,20 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CommandButton : MonoBehaviour
+public class MonsterButton : MonoBehaviour
 {
     private Button _button;
-    [HideInInspector] public MonstersInteractionWayDataSO InteractData;
-    [HideInInspector] public MonstersInteractionWay InteractionWay;
+    [HideInInspector] public MonsterDataSO MonsterData;
+    [HideInInspector] public MonstersInteractionWayDataSO[] InteractionWays;
 
-    public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
+    //public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
 
     private Image _icon;
     private TextMeshProUGUI _name;
@@ -24,6 +29,7 @@ public class CommandButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(Interact);
+        CommandStation.OnCommandChangededEvent.AddListener(SelectMonstersByCommand);
     }
 
     private void Start()
@@ -45,17 +51,17 @@ public class CommandButton : MonoBehaviour
     {
         //InteractionWay.gameObject.SetActive(true);
         //InteractionWay.Execute();
-        OnCommandSelectedEvent.Invoke(InteractionWay);
+        //OnCommandSelectedEvent.Invoke(InteractionWay);
     }
 
     public void RefreshButtonData()
     {
         if (!_isInited) Init();
 
-        if (InteractData != null)
+        if (MonsterData != null)
         {
-            _icon.sprite = InteractData.Icon;
-            _name.text = InteractData.InteractName;
+            _icon.sprite = MonsterData.Icon;
+            _name.text = MonsterData.name;
             //_discription.text = "abra barabra";
         }
         else
@@ -68,6 +74,21 @@ public class CommandButton : MonoBehaviour
 
     private void OnDisable()
     {
+        CommandStation.OnCommandChangededEvent.RemoveListener(SelectMonstersByCommand);
         _button.onClick.RemoveListener(Interact);
+    }
+
+    private void SelectMonstersByCommand(MonstersInteractionWay command)
+    {
+        if (InteractionWays.
+            ToList().
+            Where(arr => arr == command.MonstersInteractionWayData) != null)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

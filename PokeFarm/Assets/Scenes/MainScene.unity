@@ -442,6 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 60672882}
   - component: {fileID: 60672885}
+  - component: {fileID: 60672886}
   m_Layer: 5
   m_Name: CommandStationUI
   m_TagString: MonstersInteractionMenu
@@ -478,6 +479,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60672881}
   m_CullTransparentMesh: 1
+--- !u!114 &60672886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60672881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40656995fb886349ae98eae99807a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CommandList>k__BackingField: {fileID: 1367101147}
+  <MonstersList>k__BackingField: {fileID: 1158192909}
 --- !u!224 &74024350 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5980717919778568640, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
@@ -3275,11 +3290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb240ed9c6bf5c4ba0285ef65ccc74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _usingInterface: {fileID: 60672881}
+  _allMonstersOnTheFarm: []
+  _usingInterface: {fileID: 60672886}
   _commandButtonPrefab: {fileID: 2495541394138187765, guid: 00149a783ea72c24a9b4486ba6ad455e, type: 3}
-  OnCommandSelectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  _monsterButtonPrefab: {fileID: -7093769972111886281, guid: b52af2206c512184fa5a3e864310c168, type: 3}
 --- !u!61 &725699872
 BoxCollider2D:
   m_ObjectHideFlags: 0
