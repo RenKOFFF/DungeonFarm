@@ -1,25 +1,31 @@
 using System;
+using System.Collections.Generic;
 using Base.Items;
+using DeveloperTools.Scripts;
 using UnityEditor;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
-[CustomEditor(typeof(ItemContainerOld))]
+[CustomEditor(typeof(InventoryEditTool))]
 public class ItemContainerEditor : Editor
 {
     private const string SavedInventoryFileName = "MainCharacter";
 
-    private Unity.Mathematics.Random _random;
+    private Random _random;
+    private InventoryEditTool _currentInventory;
 
     private void Awake()
     {
-        _random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
+        _random = new Random((uint) DateTime.Now.Millisecond);
+        _currentInventory = (InventoryEditTool) target;
+        Load();
     }
 
     public override void OnInspectorGUI()
     {
-        if (GUILayout.Button("Clear container"))
+        if (GUILayout.Button("Clear"))
         {
-            foreach (var slot in ((ItemContainerOld) target).slots)
+            foreach (var slot in _currentInventory.slots)
                 slot.Clear();
 
             Save();
@@ -29,7 +35,7 @@ public class ItemContainerEditor : Editor
         {
             var allItems = Resources.LoadAll<Item>("Items");
 
-            foreach (var slot in ((ItemContainerOld) target).slots)
+            foreach (var slot in _currentInventory.slots)
             {
                 slot.Clear();
 
@@ -45,12 +51,23 @@ public class ItemContainerEditor : Editor
             Save();
         }
 
+        if (GUILayout.Button("Save"))
+        {
+            Save();
+        }
+
         DrawDefaultInspector();
     }
 
     private void Save()
     {
-        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(((ItemContainerOld) target).slots);
+        var slotSaveItems = ItemSaveHelper.ItemSlotsToSlotSaveItems(_currentInventory.slots);
         GameDataController.Save(slotSaveItems, DataCategory.Containers, SavedInventoryFileName);
+    }
+
+    private void Load()
+    {
+        var savedItems = GameDataController.Load<List<SlotSaveItem>>(DataCategory.Containers, SavedInventoryFileName);
+        _currentInventory.slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 }
