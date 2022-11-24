@@ -41,6 +41,7 @@ public static class GameDataController
         }
     }
 
+    /// <returns>default(T), если не удалось загрузить данные</returns>
     public static T Load<T>(DataCategory dataCategory, string savedFileName)
     {
         var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
@@ -61,6 +62,15 @@ public static class GameDataController
             Debug.LogError($"Не удалось загрузить данные по пути [{savedFilePath}]. [{e.Message}].");
             return default;
         }
+    }
+
+    /// <returns>new T(), если не удалось загрузить данные</returns>
+    public static T LoadWithInitializationIfEmpty<T>(DataCategory dataCategory, string savedFileName) where T : new()
+    {
+        var result = Load<T>(dataCategory, savedFileName);
+        return result.Equals(default)
+            ? new T()
+            : result;
     }
 
     private static string GetSavedFilePath(DataCategory dataCategory, string saveFileName)
