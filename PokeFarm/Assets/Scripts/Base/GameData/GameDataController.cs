@@ -67,12 +67,7 @@ public static class GameDataController
 
     /// <returns>new T(), если не удалось загрузить данные</returns>
     public static T LoadWithInitializationIfEmpty<T>(DataCategory dataCategory, string savedFileName) where T : new()
-    {
-        var result = Load<T>(dataCategory, savedFileName);
-        return result.Equals(default)
-            ? new T()
-            : result;
-    }
+        => Load<T>(dataCategory, savedFileName) ?? new T();
 
     private static string GetSavedFilePath(DataCategory dataCategory, string saveFileName)
         => AddToPersistentDataPath($"{dataCategory}/{saveFileName}.json");
