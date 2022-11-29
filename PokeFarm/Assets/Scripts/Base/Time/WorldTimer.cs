@@ -11,6 +11,9 @@ namespace Base.Time
         public DateTime Time { get; set; }
         public int Days { get; set; }
 
+        private const int MorningTimeHours = 8;
+        private const int NeedDaysToResetTime = 1;
+
         public WorldTime() { }
 
         public WorldTime(DateTime time, int days)
@@ -24,17 +27,17 @@ namespace Base.Time
         {
             Time = Time.AddMinutes(minutes);
 
-            if (Time.Day != 2)
+            if (Time.Day <= NeedDaysToResetTime)
                 return false;
 
             Days++;
-            Time = Time.AddDays(-1);
+            Time = Time.AddDays(-NeedDaysToResetTime);
             return true;
         }
 
         public void SetMorningTime()
         {
-            Time = new DateTime().AddHours(8);
+            Time = new DateTime().AddHours(MorningTimeHours);
         }
     }
 
@@ -44,6 +47,8 @@ namespace Base.Time
 
         public static WorldTimer Instance { get; set; }
         public WorldTime CurrentTime { get; set; }
+
+        private const int RealSecondsInOneWorldMinute = 1;
 
         private readonly UnityEvent _onDayChanged = new();
         private DateTime _lastWorldSecondInRealTime;
@@ -58,7 +63,7 @@ namespace Base.Time
             var realTimePassedFromLastWorldSecond = DateTime.Now - _lastWorldSecondInRealTime;
             var passedSeconds = realTimePassedFromLastWorldSecond.Seconds;
 
-            if (passedSeconds < 1)
+            if (passedSeconds < RealSecondsInOneWorldMinute)
                 return;
 
             _lastWorldSecondInRealTime = DateTime.Now;
