@@ -3695,7 +3695,7 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 1228060978}
   landscapeTilemap: {fileID: 551311232}
   plowableTiles:
-  - {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
+  - {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
 --- !u!114 &812349705
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,47 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
 {
     private static void UseTool(Item tool)
     {
-        var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
         var currentGridPosition = MarkerManager.Instance.markedCellPosition;
-        var tileData = TileMapReadManager.Instance.GetLandscapeTileDataByGridPosition(currentGridPosition);
 
-        if (!tileData.IsBreakable)
+        var backgroundTilemap = TileMapReadManager.Instance.backgroundTilemap;
+        var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
+
+        var backgroundTileData = TileMapReadManager.Instance.GetBackgroundTileDataByGridPosition(currentGridPosition);
+        var landscapeTileData = TileMapReadManager.Instance.GetLandscapeTileDataByGridPosition(currentGridPosition);
+
+        if (landscapeTileData.IsBreakable)
+        {
+            UseToolOnBreakableTile(
+                tool,
+                landscapeTileData,
+                landscapeTilemap,
+                currentGridPosition);
             return;
+        }
 
+        if (backgroundTileData.IsPlowable)
+        {
+            if (tool != GameDataController.AllItems["Hoe"])
+                return;
+
+            backgroundTilemap.SetTile(
+                currentGridPosition,
+                null);
+
+            return;
+        }
+    }
+
+    private static void UseToolOnBreakableTile(
+        Item tool,
+        TileData tileData,
+        Tilemap landscapeTilemap,
+        Vector3Int currentGridPosition)
+    {
         var breakableTile = tileData.BreakableTile;
 
         if (tool != breakableTile.breaksByTool)
