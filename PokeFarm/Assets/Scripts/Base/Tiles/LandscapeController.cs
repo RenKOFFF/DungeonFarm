@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 [Serializable]
@@ -8,9 +9,9 @@ public class SpawnableTile
 {
     public TileBase tile;
     public float spawnIntervalInSeconds = 10;
-    public Vector3Int prefabTilemapPosition;
+    public Vector3Int prefabsTilemapPosition;
 
-    [NonSerialized] public float TimeLeftToSpawnRockInSeconds;
+    [NonSerialized] public float TimeLeftToSpawnTileInSeconds;
 }
 
 public class LandscapeController : MonoBehaviour
@@ -35,7 +36,7 @@ public class LandscapeController : MonoBehaviour
     private void Start()
     {
         foreach (var tile in availableToSpawnTiles)
-            tile.TimeLeftToSpawnRockInSeconds = tile.spawnIntervalInSeconds;
+            tile.TimeLeftToSpawnTileInSeconds = tile.spawnIntervalInSeconds;
 
         _random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
         _tileMapReadManager = TileMapReadManager.Instance;
@@ -54,12 +55,12 @@ public class LandscapeController : MonoBehaviour
 
     private void TrySpawnTile(SpawnableTile tile)
     {
-        tile.TimeLeftToSpawnRockInSeconds -= Time.deltaTime;
+        tile.TimeLeftToSpawnTileInSeconds -= Time.deltaTime;
 
-        if (tile.TimeLeftToSpawnRockInSeconds < 0)
+        if (tile.TimeLeftToSpawnTileInSeconds < 0)
         {
             SpawnTile(tile);
-            tile.TimeLeftToSpawnRockInSeconds = tile.spawnIntervalInSeconds;
+            tile.TimeLeftToSpawnTileInSeconds = tile.spawnIntervalInSeconds;
         }
     }
 
@@ -94,7 +95,7 @@ public class LandscapeController : MonoBehaviour
                 randomPosition,
                 tile.tile,
                 Color.white,
-                prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
+                prefabsTilemap.GetTransformMatrix(tile.prefabsTilemapPosition)),
             false);
 
         if (!SpawnableTilesDictionary.ContainsKey(tile.tile))
