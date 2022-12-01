@@ -2649,10 +2649,10 @@ MonoBehaviour:
   availableToSpawnTiles:
   - tile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
     spawnIntervalInSeconds: 10
-    prefabTilemapPosition: {x: 0, y: 0, z: 0}
+    prefabsTilemapPosition: {x: 0, y: 0, z: 0}
   - tile: {fileID: 11400000, guid: 705c3dec0681dbb43b6706ef13169f89, type: 2}
     spawnIntervalInSeconds: 15
-    prefabTilemapPosition: {x: 1, y: 0, z: 0}
+    prefabsTilemapPosition: {x: 1, y: 0, z: 0}
 --- !u!19719996 &551311234
 TilemapCollider2D:
   m_ObjectHideFlags: 0
