@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -22,6 +23,12 @@ public class LandscapeController : MonoBehaviour
     private Vector3Int _maxPosition;
     private Unity.Mathematics.Random _random;
     private TileMapReadManager _tileMapReadManager;
+    public readonly List<Vector3Int> SpawnableTilesList = new();
+    public static LandscapeController Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -87,6 +94,8 @@ public class LandscapeController : MonoBehaviour
                 Color.white,
                 prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
             false);
+
+        SpawnableTilesList.Add(randomPosition);
 
         Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
