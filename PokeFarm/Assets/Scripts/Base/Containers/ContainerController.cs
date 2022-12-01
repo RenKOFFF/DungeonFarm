@@ -106,7 +106,7 @@ public class ContainerController : MonoBehaviour
     private void Awake()
     {
         OnEnable();
-        InventoryManager.Instance.Refresh();
+        InventoryManager.Instance?.Refresh();
     }
 
     private void OnEnable()
