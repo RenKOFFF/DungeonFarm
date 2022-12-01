@@ -13,8 +13,8 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private bool _isCanInteract = true;
 
     [Header("States")]
-    public StateMachine StateMachine;
-
+    public StateMachine StateMachine = new();
+    
     [HideInInspector] public RestState RestState;
     //[SerializeField] private Transform _restPlace;
 
@@ -41,8 +41,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 
         InitializeInteractionWays();
         InitializeStates();
-
-        StateMachine = new StateMachine();
+        
         StateMachine.Init(WanderingState);
     }
 

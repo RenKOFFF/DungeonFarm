@@ -13020,6 +13020,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
+      propertyPath: <MonsterData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: fa114e2ccb1c987459143b691973b8d2, type: 2}
     - target: {fileID: 5889190249189664536, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.39
