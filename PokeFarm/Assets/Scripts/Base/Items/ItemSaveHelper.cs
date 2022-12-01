@@ -3,6 +3,18 @@ using System.Linq;
 
 namespace Base.Items
 {
+    public class SlotSaveItem
+    {
+        public string ItemName { get; }
+        public int Amount { get; }
+
+        public SlotSaveItem(string itemName, int amount)
+        {
+            ItemName = itemName;
+            Amount = amount;
+        }
+    }
+
     public static class ItemSaveHelper
     {
         public static List<SlotSaveItem> ItemSlotsToSlotSaveItems(IEnumerable<ItemSlot> itemSlots)

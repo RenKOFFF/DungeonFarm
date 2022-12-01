@@ -1,5 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[Serializable]
+public enum Scene
+{
+    StartMenu = 0,
+    MainScene = 1,
+}
 
 public class GameSceneManager : MonoBehaviour
 {
