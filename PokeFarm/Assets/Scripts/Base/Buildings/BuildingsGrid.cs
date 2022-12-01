@@ -35,6 +35,8 @@ public class BuildingsGrid : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(_flyingBuilding, _parentBuilding);
+                GameManager.Instance.inventory.Remove(ToolbarManager.Instance.ItemOnTheHand);
+                _flyingBuilding?.gameObject.SetActive(false);
             }
         }
         else
