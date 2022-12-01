@@ -30,6 +30,11 @@ public class ToolbarManager : MonoBehaviour
         OnItemOnTheHandChanged.Invoke();
     }
 
+    public void RefreshItemOnTheHand()
+    {
+        ChangeItemOnHand();
+    }
+
     private void Awake()
     {
         Instance = this;

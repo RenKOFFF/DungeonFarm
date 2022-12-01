@@ -28,4 +28,29 @@ public class ToolbarPanel : ContainerPanel
     {
         ToolbarManager.Instance.SetSlotIndex(id);
     }
+
+    public override void Refresh()
+    {
+        if (containerController.Slots == null)
+            return;
+
+        for (var i = 0; i < containerController.slotsCount && i < inventoryButtons.Count; i++)
+        {
+            var currentSlot = containerController.Slots[i];
+
+            if (currentSlot.item == null)
+            {
+                if (i == _currentSelectedItemIndex)
+                {
+                    ToolbarManager.Instance?.RefreshItemOnTheHand();
+                }
+                inventoryButtons[i].Clean();
+                continue;
+            }
+
+            inventoryButtons[i].Set(currentSlot);
+        }
+
+        containerController.Save();
+    }
 }

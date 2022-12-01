@@ -62,11 +62,15 @@ public class ContainerController : MonoBehaviour
             {
                 existingSlot.item = null;
                 existingSlot.amount = 0;
-                //ToolbarManager.Instance.
 
             }
             InventoryManager.Instance.Refresh();
             return;
+        }
+        if (!item.isStackable && existingSlot != null)
+        {
+            existingSlot.item = null;
+            existingSlot.amount = 0;
         }
 
         var emptySlot = Slots.Find(s => s.item == null);
