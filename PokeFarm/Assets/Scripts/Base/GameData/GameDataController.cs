@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,12 +43,15 @@ public static class GameDataController
     }
 
     /// <returns>default(T), если не удалось загрузить данные</returns>
-    public static T? Load<T>(DataCategory dataCategory, string savedFileName)
+    public static T Load<T>(DataCategory dataCategory, string savedFileName)
     {
         var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
 
         if (!File.Exists(savedFilePath))
+        {
+            Debug.LogError($"Не удалось загрузить данные. Не найден файл по пути [{savedFilePath}].");
             return default;
+        }
 
         try
         {

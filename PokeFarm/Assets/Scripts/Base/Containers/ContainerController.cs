@@ -93,10 +93,7 @@ public class ContainerController : MonoBehaviour
 
     private void Load()
     {
-        var savedItems = GameDataController.LoadWithInitializationIfEmpty<List<SlotSaveItem>>(
-            DataCategory.Containers,
-            gameObject.name);
-
+        var savedItems = GameDataController.Load<List<SlotSaveItem>>(DataCategory.Containers, gameObject.name);
         Slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 

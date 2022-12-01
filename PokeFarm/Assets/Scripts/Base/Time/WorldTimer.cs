@@ -79,16 +79,18 @@ namespace Base.Time
             GameDataController.Save(CurrentTime, DataCategory.Time, gameObject.name);
         }
 
-        private void Load()
-        {
-            CurrentTime = GameDataController.LoadWithInitializationIfEmpty<WorldTime>(DataCategory.Time, gameObject.name);
-        }
-
         private void Awake()
         {
             Instance = this;
+
+            CurrentTime = GameDataController.Load<WorldTime>(DataCategory.Time, gameObject.name);
             _lastWorldSecondInRealTime = DateTime.Now;
-            Load();
+
+            if (CurrentTime != null)
+                return;
+
+            CurrentTime = new WorldTime();
+            Save();
         }
 
         private void Update()
