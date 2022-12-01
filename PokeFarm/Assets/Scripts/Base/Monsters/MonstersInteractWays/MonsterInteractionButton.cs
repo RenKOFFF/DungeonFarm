@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MonsterInteractionButton : MonoBehaviour
 {
-    private Button _button;
+    public Button Button { get; private set; }
     [HideInInspector] public MonstersInteractionWayDataSO InteractData;
     [HideInInspector] public MonstersInteractionWay InteractionWay;
 
@@ -18,17 +18,19 @@ public class MonsterInteractionButton : MonoBehaviour
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
+        Button = GetComponent<Button>();
     }
     private void OnEnable()
     {
-        _button.onClick.AddListener(Interact);
+        Button.onClick.AddListener(Interact);
+        
     }
 
     private void Start()
     {
         Init();
         RefreshButtonData();
+        //_button.interactable = false;
     }
 
     private void Init()
@@ -63,6 +65,6 @@ public class MonsterInteractionButton : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(Interact);
+        Button.onClick.RemoveListener(Interact);
     }
 }

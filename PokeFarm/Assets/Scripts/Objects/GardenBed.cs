@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class GardenBed : MonoBehaviour, IConditionInteractable
 {
     public Item seed;
+    public Item plod;
     public float plantGrowingTime = 7f; 
 
     public bool isCanInteract { get => _isCanInteract; private set => _isCanInteract = value; }
@@ -25,6 +26,10 @@ public class GardenBed : MonoBehaviour, IConditionInteractable
         state = GardenBedState.Empty;
         //UpdateCondition();
         ToolbarManager.Instance.OnItemOnTheHandChanged.AddListener(UpdateCondition);
+
+        
+        
+
     }
 
     private void UpdateCondition()
@@ -42,21 +47,27 @@ public class GardenBed : MonoBehaviour, IConditionInteractable
             case GardenBedState.Empty:
                 _isCanInteract = false;
 
-                empty.SetActive(false);
+                //empty.SetActive(false);
                 planted.SetActive(true);
 
                 StartCoroutine(Growing());
 
                 Condition = true;
                 state = GardenBedState.Planted;
+
+                GameManager.Instance.inventory.Remove(seed);
+
                 break;
 
             case GardenBedState.Growned:
                 growned.SetActive(false);
-                empty.SetActive(true);
+                //empty.SetActive(true);
 
                 state = GardenBedState.Empty;
                 UpdateCondition();
+
+                GameManager.Instance.inventory.Add(plod);
+
                 break;
 
             default:

@@ -94,7 +94,7 @@ namespace Base.Time
         private void Update()
         {
             CalculateWorldTime();
-            timerText.text = $"День: {CurrentTime.Days}, Время: {CurrentTime.Time:HH:mm}";
+            timerText.text = $"Day: {CurrentTime.Days}, \nTime: {CurrentTime.Time:HH:mm}";
         }
     }
 }

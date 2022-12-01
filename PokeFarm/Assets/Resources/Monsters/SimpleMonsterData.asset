@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92f19710ac66074bbe793568242080d, type: 3}
   m_Name: SimpleMonsterData
   m_EditorClassIdentifier: 
-  _monsterName: "\u0417\u0438\u0433\u043E\u0442\u0430"
+  _monsterName: "\u0411\u0435\u0441\u043E\u043C\u043E\u043D"
   _icon: {fileID: 1861525019, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
   _interactionWay:
-  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
   - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
-  - {fileID: 11400000, guid: 14de9ba4844a79645ada5ca091dff668, type: 2}
+  - {fileID: 11400000, guid: 15b2740b83c7c8c4dab66129f56e5423, type: 2}
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}

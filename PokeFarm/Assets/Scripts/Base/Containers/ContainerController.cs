@@ -28,16 +28,59 @@ public class ContainerController : MonoBehaviour
         if (item.isStackable && existingSlot != null)
         {
             existingSlot.amount += amount;
+            InventoryManager.Instance.Refresh();
             return;
         }
 
         var emptySlot = Slots.Find(s => s.item == null);
 
         if (emptySlot == null)
+        {
+            InventoryManager.Instance.Refresh();
             return;
+        }
 
         emptySlot.item = item;
         emptySlot.amount = amount;
+
+        InventoryManager.Instance.Refresh();
+
+        Save();
+    }
+
+    public void Remove(Item item, int amount = 1)
+    {
+        var existingSlot = Slots.Find(s => s.item == item);
+
+        if (item.isStackable && existingSlot != null)
+        {
+            if (existingSlot.amount > 0)
+            {
+                existingSlot.amount -= amount;
+            }
+            else
+            {
+                existingSlot.item = null;
+                existingSlot.amount = 0;
+                //ToolbarManager.Instance.
+
+            }
+            InventoryManager.Instance.Refresh();
+            return;
+        }
+
+        var emptySlot = Slots.Find(s => s.item == null);
+
+        if (emptySlot == null)
+        {
+            InventoryManager.Instance.Refresh();
+            return;
+        }
+
+        //emptySlot.item = item;
+        //emptySlot.amount = amount;
+
+        InventoryManager.Instance.Refresh();
 
         Save();
     }

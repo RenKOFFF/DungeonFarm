@@ -9,9 +9,9 @@ public class MonstersGiveFood : MonstersInteractionWay
         Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
 
         Item itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
-        if (itemOnTheHand != null && itemOnTheHand.type is ItemType.Food)
         {
             _monsterBehaviour.Monster.Inventory.AddItem(itemOnTheHand);
+            GameManager.Instance.inventory.Remove(itemOnTheHand);
             //TODO delete this item from player inventory
         }
 
@@ -22,7 +22,8 @@ public class MonstersGiveFood : MonstersInteractionWay
 
     public override bool GetDisplayCondition()
     {
-        return true;
+        Item itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
+        return (itemOnTheHand != null && itemOnTheHand.type is ItemType.Food);
     }
 
     private void Awake()

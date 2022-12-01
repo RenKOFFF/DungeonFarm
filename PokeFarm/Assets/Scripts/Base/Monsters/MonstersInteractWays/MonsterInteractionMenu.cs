@@ -41,7 +41,8 @@ public class MonsterInteractionMenu : MonoBehaviour
 
         for (int i = 0; i < _interactionButtons.Length; i++)
         {
-            _interactionButtons[i].gameObject.SetActive(true);
+            //_interactionButtons[i].gameObject.SetActive(true);
+            _interactionButtons[i].Button.interactable = true;
             if (i <= maxWayIndex)
             {
                 _interactionButtons[i].InteractData = _monstersInteractionWays[i].MonstersInteractionWayData;
@@ -49,9 +50,15 @@ public class MonsterInteractionMenu : MonoBehaviour
                 _interactionButtons[i].RefreshButtonData();
 
                 if (!_monstersInteractionWays[i].GetDisplayCondition())
-                    _interactionButtons[i].gameObject.SetActive(false);
+                {
+                    //_interactionButtons[i].gameObject.SetActive(false);
+                    _interactionButtons[i].Button.interactable = false;
+                }
             }
-            else _interactionButtons[i].gameObject.SetActive(false);
+            else
+            {
+                _interactionButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 
