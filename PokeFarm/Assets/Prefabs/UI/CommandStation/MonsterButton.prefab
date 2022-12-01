@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 7238794245116943963}
   - component: {fileID: -7093769972111886281}
   m_Layer: 5
-  m_Name: Monster
+  m_Name: MonsterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

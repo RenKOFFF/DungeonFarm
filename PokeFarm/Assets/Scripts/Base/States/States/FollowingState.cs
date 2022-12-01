@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowingState : BaseMonsterState
 {
     private Transform _target;
-    private float _socialDistance = 1.2f;
+    private float _socialDistance = 1.5f;
     private float _stopFollowingDistance = 3f;
 
     private float distanceToTarget;

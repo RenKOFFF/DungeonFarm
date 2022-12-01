@@ -1,21 +1,26 @@
 using System.Linq;
+using Base.CommandStation.Commands;
+using Base.Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MonsterButton : MonoBehaviour
 {
     private Button _button;
     [HideInInspector] public MonsterDataSO MonsterData;
-    [HideInInspector] public MonstersInteractionWayDataSO[] InteractionWays;
+    [HideInInspector] public CommandDataSO[] CommandDataSO;
 
-    //public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
+    public static UnityEvent OnCommandExecutedEvent = new ();
 
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _name;
     //[SerializeField] private TextMeshProUGUI _discription;
 
     private bool _isInited;
+
+    private Command _command;
 
     private void Awake()
     {
@@ -44,9 +49,9 @@ public class MonsterButton : MonoBehaviour
 
     public void Interact()
     {
-        //InteractionWay.gameObject.SetActive(true);
-        //InteractionWay.Execute();
-        //OnCommandSelectedEvent.Invoke(InteractionWay);
+        _command.CurrentMonster = MonstersManager.Instance.GetMonsterInstance(MonsterData);
+        _command.Execute();
+        OnCommandExecutedEvent.Invoke();
     }
 
     public void RefreshButtonData()
@@ -63,18 +68,20 @@ public class MonsterButton : MonoBehaviour
         {
             _icon.color = Color.red;
             _name.text = "Default";
-            //_discription.text = "DefaultDescr";
+            //_discription.text = "DefaultDescription";
         }
     }
 
-    private void SelectMonstersByCommand(MonstersInteractionWay command)
+    private void SelectMonstersByCommand(Command command)
     {
-        if (InteractionWays.ToList().Find(arr => arr == command.MonstersInteractionWayData))
+        if (CommandDataSO.ToList().Find(arr => arr == command.CommandDataSO))
         {
             gameObject.SetActive(true);
+            _command = command;
         }
         else
         {
+            _command = null;
             gameObject.SetActive(false);
         }
     }

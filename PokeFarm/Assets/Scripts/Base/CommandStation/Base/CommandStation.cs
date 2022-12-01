@@ -1,18 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using Base.CommandStation.Commands;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class CommandStation : MonoBehaviour, IInteractable
 {
     public bool isCanInteract => true;
 
-    private MonstersInteractionWayDataSO[] _allMonstersInteractionWays;
+    private CommandDataSO[] _allMonstersCommands;
     public MonsterDataSO[] _allMonstersOnTheFarm;
-    public MonstersInteractionWay CurrentCommand { get;  private set; }
+    //public Command CurrentCommand { get;  private set; }
     [SerializeField] private CommandStationUI _usingInterface;
     [SerializeField] private CommandButton _commandButtonPrefab;
     [SerializeField] private MonsterButton _monsterButtonPrefab;
@@ -27,13 +22,13 @@ public class CommandStation : MonoBehaviour, IInteractable
 
     private void Init()
     {
-        _allMonstersInteractionWays = Resources.LoadAll<MonstersInteractionWayDataSO>("Monsters/InteractionsWays");
+        _allMonstersCommands = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
 
-        foreach (var command in _allMonstersInteractionWays)
+        foreach (var command in _allMonstersCommands)
         {
             var button = _commandButtonPrefab;
-            button.InteractData = command;
-            button.InteractionWay = command.InteractionWay;
+            button.commandDataSO = command;
+            button.Command = command.Command;
             button.RefreshButtonData();
 
             Instantiate(button, _usingInterface.CommandList.transform);
@@ -48,7 +43,7 @@ public class CommandStation : MonoBehaviour, IInteractable
         {
             var button = _monsterButtonPrefab;
             button.MonsterData = monster;
-            button.InteractionWays = monster.InteractionWay;
+            button.CommandDataSO = monster.CommandData;
             button.RefreshButtonData();
 
             Instantiate(button, _usingInterface.MonstersList.transform);
@@ -64,15 +59,21 @@ public class CommandStation : MonoBehaviour, IInteractable
     {
         _usingInterface?.gameObject.SetActive(true);
     }
+    
+    private void HideInterface()
+    {
+        _usingInterface?.gameObject.SetActive(false);
+    }
 
     private void OnEnable()
     {
         CommandButton.OnCommandSelectedEvent.AddListener(ChangeCurrentCommand);
+        MonsterButton.OnCommandExecutedEvent.AddListener(HideInterface);
     }
 
-    private void ChangeCurrentCommand(MonstersInteractionWay selectedCommand)
+    private void ChangeCurrentCommand(Command selectedCommand)
     {
-        CurrentCommand = selectedCommand;
+        //CurrentCommand = selectedCommand;
 
         //OnCommandChangededEvent.Invoke(CurrentCommand);
 
@@ -81,5 +82,6 @@ public class CommandStation : MonoBehaviour, IInteractable
     private void OnDisable()
     {
         CommandButton.OnCommandSelectedEvent.RemoveListener(ChangeCurrentCommand);
+        MonsterButton.OnCommandExecutedEvent.RemoveListener(HideInterface);
     }
 }

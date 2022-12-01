@@ -1,3 +1,4 @@
+using Base.CommandStation.Commands;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,10 +7,10 @@ using UnityEngine.UI;
 public class CommandButton : MonoBehaviour
 {
     private Button _button;
-    [HideInInspector] public MonstersInteractionWayDataSO InteractData;
-    [HideInInspector] public MonstersInteractionWay InteractionWay;
+    [HideInInspector] public CommandDataSO commandDataSO;
+    [HideInInspector] public Command Command;
 
-    public static UnityEvent<MonstersInteractionWay> OnCommandSelectedEvent = new UnityEvent<MonstersInteractionWay>();
+    public static UnityEvent<Command> OnCommandSelectedEvent = new();
 
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _name;
@@ -45,24 +46,24 @@ public class CommandButton : MonoBehaviour
     {
         //InteractionWay.gameObject.SetActive(true);
         //InteractionWay.Execute();
-        OnCommandSelectedEvent.Invoke(InteractionWay);
+        OnCommandSelectedEvent.Invoke(Command);
     }
 
     public void RefreshButtonData()
     {
         if (!_isInited) Init();
 
-        if (InteractData != null)
+        if (commandDataSO != null)
         {
-            _icon.sprite = InteractData.Icon;
-            _name.text = InteractData.InteractName;
-            _discription.text = "abra barabra";
+            _icon.sprite = commandDataSO.Icon;
+            _name.text = commandDataSO.CommandName;
+            _discription.text = "-----------";
         }
         else
         {
             _icon.color = Color.red;
             _name.text = "Default";
-            _discription.text = "DefaultDescr";
+            _discription.text = "DefaultDescription";
         }
     }
 

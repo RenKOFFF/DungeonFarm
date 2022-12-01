@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de81f1a3cf504e81b4dcae72251a59c5, type: 3}
+  m_Name: BreakeRocksCommand
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 40188da6de7c6c84aac75f66abc1a89c, type: 3}
+  commandName: "\u041B\u043E\u043C\u0430\u0442\u044C \u043A\u0430\u043C\u043D\u0438"
+  Command: {fileID: -3255432001417856796, guid: fd5f095ab9c51c74da15fd7fb0babde1, type: 3}

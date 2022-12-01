@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a92f19710ac66074bbe793568242080d, type: 3}
-  m_Name: SimpleMonsterData
+  m_Name: RockMonsterData
   m_EditorClassIdentifier: 
-  _monsterName: "\u0411\u0435\u0441\u043E\u043C\u043E\u043D"
-  _icon: {fileID: 1861525019, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
+  _monsterName: "\u041A\u0430\u043C\u0435\u043D\u0449\u0438\u043A"
+  _icon: {fileID: 21300000, guid: 3840d47f621954242bd7973a0863ce84, type: 3}
   _interactionWay:
   - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
-  - {fileID: 11400000, guid: 15b2740b83c7c8c4dab66129f56e5423, type: 2}
-  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+  - {fileID: 11400000, guid: 14de9ba4844a79645ada5ca091dff668, type: 2}
+  _commandDataSO:
+  - {fileID: 11400000, guid: 817ec3a0c1b0c324c892d6e4d15b09df, type: 2}
+  _prefab: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}

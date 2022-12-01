@@ -7,12 +7,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public enum DataCategory
-{
-    Containers,
-    Time,
-}
-
 public static class GameDataController
 {
     public static Dictionary<string, Item> AllItems;

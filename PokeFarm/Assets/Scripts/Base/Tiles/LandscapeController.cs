@@ -1,16 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
-[Serializable]
-public class SpawnableTile
-{
-    public TileBase tile;
-    public float spawnIntervalInSeconds = 10;
-    public Vector3Int prefabTilemapPosition;
-
-    [NonSerialized] public float TimeLeftToSpawnRockInSeconds;
-}
 
 public class LandscapeController : MonoBehaviour
 {
@@ -22,6 +13,15 @@ public class LandscapeController : MonoBehaviour
     private Vector3Int _maxPosition;
     private Unity.Mathematics.Random _random;
     private TileMapReadManager _tileMapReadManager;
+
+    public readonly List<Vector3Int> SpawnableTilesList = new();
+
+    public static LandscapeController Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -88,6 +88,8 @@ public class LandscapeController : MonoBehaviour
                 prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
             false);
 
+        SpawnableTilesList.Add(randomPosition);
+        
         Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
 }
