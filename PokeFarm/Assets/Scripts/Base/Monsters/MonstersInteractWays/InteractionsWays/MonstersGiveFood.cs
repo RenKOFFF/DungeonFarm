@@ -12,7 +12,6 @@ public class MonstersGiveFood : MonstersInteractionWay
         {
             _monsterBehaviour.Monster.Inventory.AddItem(itemOnTheHand);
             GameManager.Instance.inventory.Remove(itemOnTheHand);
-            //TODO delete this item from player inventory
         }
 
         Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
