@@ -23,8 +23,10 @@ public class LandscapeController : MonoBehaviour
     private Vector3Int _maxPosition;
     private Unity.Mathematics.Random _random;
     private TileMapReadManager _tileMapReadManager;
-    public readonly List<Vector3Int> SpawnableTilesList = new();
+    
+    public readonly Dictionary<TileBase, List<Vector3Int>> SpawnableTilesDictionary = new();
     public static LandscapeController Instance;
+    
     private void Awake()
     {
         Instance = this;
@@ -95,8 +97,12 @@ public class LandscapeController : MonoBehaviour
                 prefabsTilemap.GetTransformMatrix(tile.prefabTilemapPosition)),
             false);
 
-        SpawnableTilesList.Add(randomPosition);
+        if (!SpawnableTilesDictionary.ContainsKey(tile.tile))
+        {
+            SpawnableTilesDictionary[tile.tile] = new List<Vector3Int>();
+        }
+        SpawnableTilesDictionary[tile.tile].Add(randomPosition);
 
-        Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
+        //Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
 }
