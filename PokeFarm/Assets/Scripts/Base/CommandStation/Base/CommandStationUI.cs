@@ -30,7 +30,7 @@ public class CommandStationUI : MonoBehaviour
     private void HideMonstersAndShowCommand()
     {
         CommandList.gameObject.SetActive(true);
-        MonstersList.gameObject.SetActive(false);
+        //MonstersList.gameObject.SetActive(false);
     }
 
     private void OnDisable()
