@@ -23,15 +23,9 @@ public class ToolsController : MonoBehaviour
             return;
         }
 
-        if (backgroundTileData.IsPlowable)
+        if (backgroundTileData.IsPlantingCycleTile)
         {
-            if (tool != GameDataController.AllItems["Hoe"])
-                return;
-
-            backgroundTilemap.SetTile(
-                currentGridPosition,
-                null);
-
+            UseToolOnPlantingCycleTile(tool, backgroundTileData, backgroundTilemap, currentGridPosition);
             return;
         }
     }
@@ -55,6 +49,22 @@ public class ToolsController : MonoBehaviour
             TileMapReadManager.GetCellCenterWorldPosition(landscapeTilemap, currentGridPosition),
             breakableTile.dropsItem,
             breakableTile.dropAmount);
+    }
+
+    private static void UseToolOnPlantingCycleTile(
+        Item tool,
+        TileData backgroundTileData,
+        Tilemap backgroundTilemap,
+        Vector3Int currentGridPosition)
+    {
+        var plantingCycleTile = backgroundTileData.PlantingCycleTile;
+
+        if (tool != plantingCycleTile.interactsWithTool)
+            return;
+
+        backgroundTilemap.SetTile(
+            currentGridPosition,
+            plantingCycleTile.nextCycleTile);
     }
 
     private void Update()

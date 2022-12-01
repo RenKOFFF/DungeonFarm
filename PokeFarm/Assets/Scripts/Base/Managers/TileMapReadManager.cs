@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileData
 {
-    public bool IsPlowable;
+    public bool IsBreakable => BreakableTile != null;
+    [CanBeNull] public BreakableTile BreakableTile;
 
-    public bool IsBreakable;
-    public BreakableTile BreakableTile;
+    public bool IsPlantingCycleTile => PlantingCycleTile != null;
+    [CanBeNull] public PlantingCycleTile PlantingCycleTile;
 }
 
 public class TileMapReadManager : MonoBehaviour
@@ -19,7 +22,6 @@ public class TileMapReadManager : MonoBehaviour
 
     public static TileMapReadManager Instance { get; private set; }
 
-    private static Dictionary<TileBase, BreakableTile> _breakableTiles;
     private static Dictionary<TileBase, TileData> _dataFromTiles;
 
     public static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
@@ -64,24 +66,19 @@ public class TileMapReadManager : MonoBehaviour
     {
         Instance = this;
 
-        _breakableTiles = Resources.LoadAll<BreakableTile>("BreakableTiles")
-            .ToDictionary(bt => bt.tile);
-    }
-
-    private void Start()
-    {
         _dataFromTiles = new Dictionary<TileBase, TileData>();
 
-        foreach (var tileBase in plowableTiles)
-            _dataFromTiles.Add(tileBase, new TileData { IsPlowable = true });
+        LoadScriptableTilesData<BreakableTile>(tile => new TileData { BreakableTile = tile });
+        LoadScriptableTilesData<PlantingCycleTile>(tile => new TileData { PlantingCycleTile = tile });
+    }
 
-        foreach (var (tileBase, breakableTile) in _breakableTiles)
-            _dataFromTiles.Add(
-                tileBase,
-                new TileData
-                {
-                    IsBreakable = true,
-                    BreakableTile = breakableTile
-                });
+    private static void LoadScriptableTilesData<T>(Func<T, TileData> setTileData)
+        where T : ScriptableTileData
+    {
+        var scriptableTilesData = Resources.LoadAll<T>($"{typeof(T)}s")
+            .ToDictionary(t => t.tile);
+
+        foreach (var (tileBase, scriptableTileData) in scriptableTilesData)
+            _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
     }
 }

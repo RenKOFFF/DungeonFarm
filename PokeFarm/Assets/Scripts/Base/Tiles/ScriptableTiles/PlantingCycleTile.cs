@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Data/PlantingCycleTile")]
-public class PlantingCycleTile : ScriptableObject
+public class PlantingCycleTile : ScriptableTileData
 {
-    public TileBase tile;
-
     [CanBeNull] public TileBase previousCycleTile;
     [CanBeNull] public TileBase nextCycleTile;
 
