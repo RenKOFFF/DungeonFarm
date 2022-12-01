@@ -3,6 +3,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public class TileData
+{
+    public bool IsPlowable;
+
+    public bool IsBreakable;
+    public BreakableTile BreakableTile;
+}
+
 public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] public Tilemap backgroundTilemap;
