@@ -16,4 +16,12 @@ public class Monster : MonoBehaviour
         Inventory = new ItemStorageContainer(1);
         _monsterBehaviour = GetComponent<MonsterBehaviour>();
     }
+
+    public static Monster Spawn(MonsterDataSO monsterData)
+    {
+        var m = monsterData.Prefab;
+        m.MonsterData = monsterData;
+        m = Instantiate(m);
+        return m;
+    }
 }

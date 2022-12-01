@@ -20,7 +20,7 @@ namespace Base.Managers
             }
             else
             {
-                var monster = Instantiate(monsterDataSo.Prefab);
+                var monster = Monster.Spawn(monsterDataSo);
                 AllMonstersOnTheFarm.Add(monster);
                 return monster;
             }
