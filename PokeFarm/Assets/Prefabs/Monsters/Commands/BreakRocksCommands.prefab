@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommandDataSO: {fileID: 11400000, guid: 817ec3a0c1b0c324c892d6e4d15b09df, type: 2}
+  _breakTile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
