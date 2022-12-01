@@ -77,7 +77,7 @@ public class TileMapReadManager : MonoBehaviour
         Action<TileData> updateTileData = null)
         where T : ScriptableTileData
     {
-        var path = $"{typeof(T)}s";
+        var path = $"ScriptableTiles/{typeof(T)}s";
         var scriptableTilesData = Resources.LoadAll<T>(path)
             .ToDictionary(t => t.tile);
 
