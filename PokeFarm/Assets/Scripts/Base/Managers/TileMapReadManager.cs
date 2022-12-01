@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Base.Time;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -18,7 +19,6 @@ public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] public Tilemap backgroundTilemap;
     [SerializeField] public Tilemap landscapeTilemap;
-    [SerializeField] private List<TileBase> plowableTiles;
 
     public static TileMapReadManager Instance { get; private set; }
 
@@ -70,6 +70,8 @@ public class TileMapReadManager : MonoBehaviour
 
         LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
         LoadScriptableTilesData<PlantingCycleTile>(setTileData: tile => new TileData { PlantingCycleTile = tile });
+
+        WorldTimer.AddOnDayChangedHandler(UpdatePlantingCycleTiles);
     }
 
     private static void LoadScriptableTilesData<T>(
@@ -84,7 +86,7 @@ public class TileMapReadManager : MonoBehaviour
         if (scriptableTilesData.Count == 0)
         {
             Debug.LogError($"Не найдено ни одного [{typeof(T)}] в директории [Resources/{path}]." +
-                             " Проверьте правильность названия директории.");
+                           " Проверьте правильность названия директории.");
             return;
         }
 
@@ -124,5 +126,27 @@ public class TileMapReadManager : MonoBehaviour
         }
 
         updateTileData.Invoke(_dataFromTiles[tileBase]);
+    }
+
+    private void UpdatePlantingCycleTiles()
+    {
+        var cellBounds = backgroundTilemap.cellBounds;
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        {
+            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+            {
+                var gridPosition = new Vector3Int(x, y);
+                var tileData = GetBackgroundTileDataByGridPosition(gridPosition);
+
+                if (!tileData.IsPlantingCycleTile)
+                    continue;
+
+                var plantingCycleTile = tileData.PlantingCycleTile;
+
+                if (plantingCycleTile.previousCycleTile != null)
+                    backgroundTilemap.SetTile(gridPosition, plantingCycleTile.previousCycleTile);
+            }
+        }
     }
 }
