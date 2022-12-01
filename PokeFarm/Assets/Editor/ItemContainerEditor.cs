@@ -68,7 +68,9 @@ public class ItemContainerEditor : Editor
 
     private void Load()
     {
-        var savedItems = GameDataController.LoadWithInitializationIfEmpty<List<SlotSaveItem>>(DataCategory.Containers, SavedInventoryFileName);
+        var savedItems = GameDataController.LoadWithInitializationIfEmpty<List<SlotSaveItem>>(
+            DataCategory.Containers,
+            SavedInventoryFileName);
         _currentInventory.slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 }
