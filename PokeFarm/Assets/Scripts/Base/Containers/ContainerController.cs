@@ -62,11 +62,12 @@ public class ContainerController : MonoBehaviour
             {
                 existingSlot.item = null;
                 existingSlot.amount = 0;
-
             }
+
             InventoryManager.Instance.Refresh();
             return;
         }
+
         if (!item.isStackable && existingSlot != null)
         {
             existingSlot.item = null;
@@ -100,6 +101,7 @@ public class ContainerController : MonoBehaviour
         var savedItems = GameDataController.LoadWithInitializationIfEmpty<List<SlotSaveItem>>(
             DataCategory.Containers,
             gameObject.name);
+
         Slots = ItemSaveHelper.SlotSaveItemsToItemSlots(savedItems);
     }
 
