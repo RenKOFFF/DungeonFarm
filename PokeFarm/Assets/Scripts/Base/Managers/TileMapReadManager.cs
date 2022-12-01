@@ -68,17 +68,61 @@ public class TileMapReadManager : MonoBehaviour
 
         _dataFromTiles = new Dictionary<TileBase, TileData>();
 
-        LoadScriptableTilesData<BreakableTile>(tile => new TileData { BreakableTile = tile });
-        LoadScriptableTilesData<PlantingCycleTile>(tile => new TileData { PlantingCycleTile = tile });
+        LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
+        LoadScriptableTilesData<PlantingCycleTile>(setTileData: tile => new TileData { PlantingCycleTile = tile });
     }
 
-    private static void LoadScriptableTilesData<T>(Func<T, TileData> setTileData)
+    private static void LoadScriptableTilesData<T>(
+        Func<T, TileData> setTileData = null,
+        Action<TileData> updateTileData = null)
         where T : ScriptableTileData
     {
-        var scriptableTilesData = Resources.LoadAll<T>($"{typeof(T)}s")
+        var path = $"{typeof(T)}s";
+        var scriptableTilesData = Resources.LoadAll<T>(path)
             .ToDictionary(t => t.tile);
 
+        if (scriptableTilesData.Count == 0)
+        {
+            Debug.LogError($"Не найдено ни одного [{typeof(T)}] в директории [Resources/{path}]." +
+                             " Проверьте правильность названия директории.");
+            return;
+        }
+
         foreach (var (tileBase, scriptableTileData) in scriptableTilesData)
-            _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
+        {
+            if (_dataFromTiles.ContainsKey(tileBase))
+            {
+                UpdateTileData(updateTileData, scriptableTileData, tileBase);
+                continue;
+            }
+
+            SetTileData(setTileData, scriptableTileData, tileBase);
+        }
+    }
+
+    private static void SetTileData<T>(Func<T, TileData> setTileData, T scriptableTileData, TileBase tileBase)
+        where T : ScriptableTileData
+    {
+        if (setTileData == null)
+        {
+            Debug.LogError($"Не удалось загрузить данные тайла [{scriptableTileData.name}]." +
+                           $" Явно укажите параметр [{nameof(setTileData)}].");
+            return;
+        }
+
+        _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
+    }
+
+    private static void UpdateTileData<T>(Action<TileData> updateTileData, T scriptableTileData, TileBase tileBase)
+        where T : ScriptableTileData
+    {
+        if (updateTileData == null)
+        {
+            Debug.LogError($"Не удалось обновить данные тайла [{scriptableTileData.name}]." +
+                           $" Явно укажите параметр [{nameof(updateTileData)}].");
+            return;
+        }
+
+        updateTileData.Invoke(_dataFromTiles[tileBase]);
     }
 }
