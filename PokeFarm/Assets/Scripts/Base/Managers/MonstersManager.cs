@@ -6,9 +6,11 @@ namespace Base.Managers
 {
     public class MonstersManager : MonoBehaviour
     {
-        public static MonstersManager Instance;
-
         public List<Monster> AllMonstersOnTheFarm = new();
+        [SerializeField] private Transform _parentMonsters; 
+        
+        public static MonstersManager Instance;
+        
         private void Awake() => Instance = this;
         
         public Monster GetMonsterInstance(MonsterDataSO monsterDataSo)
@@ -20,7 +22,7 @@ namespace Base.Managers
             }
             else
             {
-                var monster = Monster.Spawn(monsterDataSo);
+                var monster = Monster.Spawn(monsterDataSo, _parentMonsters);
                 AllMonstersOnTheFarm.Add(monster);
                 return monster;
             }

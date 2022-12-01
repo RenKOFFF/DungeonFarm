@@ -17,11 +17,11 @@ public class Monster : MonoBehaviour
         _monsterBehaviour = GetComponent<MonsterBehaviour>();
     }
 
-    public static Monster Spawn(MonsterDataSO monsterData)
+    public static Monster Spawn(MonsterDataSO monsterData, Transform parentMonsters)
     {
         var m = monsterData.Prefab;
         m.MonsterData = monsterData;
-        m = Instantiate(m);
+        m = Instantiate(m, parentMonsters);
         return m;
     }
 }
