@@ -23,6 +23,14 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryPanel = containerController.SpawnPanel();
         inventoryPanel.Close();
+        
+        // TODO delete this
+        var items = Resources.LoadAll<Item>("Items");
+
+        foreach (var item in items)
+        {
+            GameManager.Instance.inventory.Add(item, 20);
+        }
     }
 
     private void Update()
