@@ -8,7 +8,9 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 {
     private Monster _monster;
     public Monster Monster { get => _monster; private set => _monster = value; }
-    public float MonsterSpeed { get => _monster.Speed;}
+    public float Speed { get => _monster.Speed;}
+    public float CurrentEnergy { get => _currentEnergy; private set => _currentEnergy = value; }
+    private float _currentEnergy;
     public bool isCanInteract => _isCanInteract;
     private bool _isCanInteract = true;
 
@@ -38,6 +40,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private void Start()
     {
         _monster = GetComponent<Monster>();
+        _currentEnergy = _monster.MaxEnergy;
 
         InitializeInteractionWays();
         InitializeStates();
@@ -67,6 +70,31 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         StateMachine.CurrentState.Update();
     }
 
+    public bool GiveCommand(BaseMonsterCommandState commandState)
+    {
+        if (SpendEnergy())
+        {
+            StateMachine.ChangeState(commandState);
+            return true;
+        }
+        else return false;
+    }
+
+    public bool SpendEnergy()
+    {
+        if (CurrentEnergy > 0)
+        {
+            CurrentEnergy--;
+            return true;
+        }
+        else return false;
+    }
+
+    private void RestoreEnergy()
+    {
+        CurrentEnergy = Monster.MaxEnergy;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var collider = collision.GetComponent<CharacterController2D>();
@@ -87,7 +115,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     public void Interact()
     {
         OnPlayerCalledInteractionMenuEvent.Invoke(_monster, _monstersInteractionWays);
-        StateMachine.ChangeState(new WaitState(Monster, MonsterSpeed, StateMachine.CurrentState));
+        StateMachine.ChangeState(new WaitState(Monster, Speed, StateMachine.CurrentState));
         Debug.Log($"Im interact with {_monster.name} - вызвана менюшка");
     }
 

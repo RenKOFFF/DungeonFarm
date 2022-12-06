@@ -6,6 +6,8 @@ public class Monster : MonoBehaviour
     [field:SerializeField] public MonsterDataSO MonsterData { get; private set; }
     public float Speed { get => _speed; private set => _speed = value;  }
     [SerializeField] private float _speed = 1.5f;
+    public float MaxEnergy { get => _maxEnergy; private set => _maxEnergy = value;  }
+    [SerializeField] private float _maxEnergy = 8f;
     public ItemStorageContainer Inventory { get; private set; }
     public MonsterBehaviour MonsterBehaviour { get => _monsterBehaviour; }
     private MonsterBehaviour _monsterBehaviour;

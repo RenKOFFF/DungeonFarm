@@ -9,7 +9,7 @@ namespace Base.CommandStation.Commands
         [SerializeField] private Item _workTool;
         public override void Execute()
         {
-            CurrentMonster.MonsterBehaviour.StateMachine.ChangeState(
+            CurrentMonster.MonsterBehaviour.GiveCommand(
                 new CutDownTreesState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool));
         }
     }

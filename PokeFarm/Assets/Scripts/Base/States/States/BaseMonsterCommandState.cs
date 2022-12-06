@@ -68,7 +68,13 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
                 _currentTileIndex = -1;
 
                 MonsterToolController.UseTool(_workTool, _monsterBehaviour.Monster, _currentTilePosition);
+
+                if (_monsterBehaviour.CurrentEnergy <= 0)
+                {
+                    _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
+                }
                 
+                _monsterBehaviour.SpendEnergy();
                 FindNearestTilePosition();   
             }
         }
