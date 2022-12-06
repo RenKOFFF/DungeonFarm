@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public abstract class BaseMonsterCommandState : BaseMonsterState
@@ -6,6 +7,7 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
     protected Vector3Int _currentTilePosition;
     protected TileBase _breakTile;
     protected  int _currentTileIndex = -1;
+    protected Item _workTool;
     
     public override void Update()
     {
@@ -59,11 +61,27 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
         }
         else
         {
-            //TODO сделать условие удаления - вырубку дерева
-            LandscapeController.Instance.SpawnableTilesDictionary[_breakTile].RemoveAt(_currentTileIndex);
-            Debug.Log($"Break {_breakTile.name}");
-            _currentTileIndex = -1;
-            FindNearestTilePosition();
+            if (IsWorkDone())
+            {
+                LandscapeController.Instance.SpawnableTilesDictionary[_breakTile].RemoveAt(_currentTileIndex);
+                Debug.Log($"Break {_breakTile.name}");
+                _currentTileIndex = -1;
+
+                MonsterToolController.UseTool(_workTool, _monsterBehaviour.Monster, _currentTilePosition);
+                
+                FindNearestTilePosition();   
+            }
         }
+    }
+
+    private bool IsWorkDone()
+    {
+        _waitTime -= Time.deltaTime;
+        if (_waitTime <= 0)
+        {
+            _waitTime = _startWaitTime;
+            return true;
+        }
+        return false;
     }
 }

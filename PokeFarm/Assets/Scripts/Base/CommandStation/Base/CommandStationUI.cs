@@ -23,14 +23,13 @@ public class CommandStationUI : MonoBehaviour
 
     private void HideCommandAndShowMonsters(Command _)
     {
-        CommandList.gameObject.SetActive(false);
-        MonstersList.gameObject.SetActive(true);
+        //CommandList.gameObject.SetActive(false);
+        //MonstersList.gameObject.SetActive(true);
     }
     
     private void HideMonstersAndShowCommand()
     {
-        CommandList.gameObject.SetActive(true);
-        //MonstersList.gameObject.SetActive(false);
+        //CommandList.gameObject.SetActive(true);
     }
 
     private void OnDisable()

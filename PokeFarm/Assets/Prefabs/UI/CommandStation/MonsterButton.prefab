@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8397747477886696528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043B\u0430\u0431\u0430\u044F \u0437\u0438\u0433\u043E\u0442\u0430 "
+  m_text: "\u041B\u0435\u0441\u043E\u0440\u0443\u0431"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -170,8 +170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 43.34497, y: -0.000067711}
-  m_SizeDelta: {x: 86.69, y: 86.683}
+  m_AnchoredPosition: {x: 45.001, y: -0.83}
+  m_SizeDelta: {x: 85.075, y: 47.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8397747478714729974
 CanvasRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1532693760, guid: 3d01221847a29de4ab3c8dff10b7d0a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3840d47f621954242bd7973a0863ce84, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4ad7c68684279b348a07b4498d7ff13c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -347,9 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4d12703132047409749d442ccfd438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterData: {fileID: 11400000, guid: c45676a8393f97b48a3b37c61a53e854, type: 2}
-  InteractionWays:
-  - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
-  - {fileID: 11400000, guid: 14de9ba4844a79645ada5ca091dff668, type: 2}
+  MonsterData: {fileID: 11400000, guid: fa114e2ccb1c987459143b691973b8d2, type: 2}
+  CommandDataSO:
+  - {fileID: 11400000, guid: a7e5adcba80f4814fb5282d611af2b76, type: 2}
   _icon: {fileID: 8397747478714729975}
   _name: {fileID: 8397747477886696559}
