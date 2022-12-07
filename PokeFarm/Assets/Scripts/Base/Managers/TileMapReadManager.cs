@@ -19,6 +19,7 @@ public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] public Tilemap backgroundTilemap;
     [SerializeField] public Tilemap landscapeTilemap;
+    [SerializeField] public Tilemap plantsTilemap;
 
     public static TileMapReadManager Instance { get; private set; }
 
