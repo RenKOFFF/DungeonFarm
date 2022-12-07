@@ -41,6 +41,6 @@ public class MonstersPet : MonstersInteractionWay
 
     private void DestroyHeart()
     {
-        Destroy(_heart.gameObject);
+        if (_heart) Destroy(_heart.gameObject);
     }
 }

@@ -8,10 +8,11 @@ public class BreakeRocksCommand : Command, ICommand
 {
     [SerializeField] private TileBase _breakTile; 
     [SerializeField] private Item _workTool;
+    [SerializeField] private int _commandEnergyCost = 5;
     public override void Execute()
     {
         //TODO сделать вариант с отказом от работы
         CurrentMonster.MonsterBehaviour.GiveCommand(
-            new BreakRocksState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool));
+            new BreakRocksState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool, _commandEnergyCost));
     }
 }

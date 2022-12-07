@@ -7,10 +7,12 @@ namespace Base.CommandStation.Commands
     { 
         [SerializeField] private TileBase _breakTile;
         [SerializeField] private Item _workTool;
+        [SerializeField] private int _commandEnergyCost = 3;
+
         public override void Execute()
         {
             CurrentMonster.MonsterBehaviour.GiveCommand(
-                new CutDownTreesState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool));
+                new CutDownTreesState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool, _commandEnergyCost));
         }
     }
 }

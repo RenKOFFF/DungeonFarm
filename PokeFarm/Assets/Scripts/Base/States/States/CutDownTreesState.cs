@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class CutDownTreesState : BaseMonsterCommandState
 {
-    public CutDownTreesState(Monster monster, float speed, TileBase breakTile, Item workTool)
+    public CutDownTreesState(Monster monster, float speed, TileBase breakTile, Item workTool, int commandEnergyCost)
     {
         _monsterBehaviour = monster.MonsterBehaviour;
         _speed = speed;
@@ -12,5 +12,6 @@ public class CutDownTreesState : BaseMonsterCommandState
         _waitTime = _startWaitTime;
         _breakTile = breakTile;
         _workTool = workTool;
+        CommandEnergyCost = commandEnergyCost;
     }
 }

@@ -9,8 +9,6 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private Monster _monster;
     public Monster Monster { get => _monster; private set => _monster = value; }
     public float Speed { get => _monster.Speed;}
-    public float CurrentEnergy { get => _currentEnergy; private set => _currentEnergy = value; }
-    private float _currentEnergy;
     public bool isCanInteract => _isCanInteract;
     private bool _isCanInteract = true;
 
@@ -40,7 +38,6 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     private void Start()
     {
         _monster = GetComponent<Monster>();
-        _currentEnergy = _monster.MaxEnergy;
 
         InitializeInteractionWays();
         InitializeStates();
@@ -72,27 +69,12 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 
     public bool GiveCommand(BaseMonsterCommandState commandState)
     {
-        if (SpendEnergy())
+        if (Monster.SpendAttachment())
         {
             StateMachine.ChangeState(commandState);
             return true;
         }
-        else return false;
-    }
-
-    public bool SpendEnergy()
-    {
-        if (CurrentEnergy > 0)
-        {
-            CurrentEnergy--;
-            return true;
-        }
-        else return false;
-    }
-
-    private void RestoreEnergy()
-    {
-        CurrentEnergy = Monster.MaxEnergy;
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

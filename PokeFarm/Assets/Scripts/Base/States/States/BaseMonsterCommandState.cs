@@ -8,7 +8,8 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
     protected TileBase _breakTile;
     protected  int _currentTileIndex = -1;
     protected Item _workTool;
-    
+    public int CommandEnergyCost { get; protected set; }
+
     public override void Update()
     {
         FindNearestTilePosition();
@@ -69,12 +70,11 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
 
                 MonsterToolController.UseTool(_workTool, _monsterBehaviour.Monster, _currentTilePosition);
 
-                if (_monsterBehaviour.CurrentEnergy <= 0)
+                if (!_monsterBehaviour.Monster.SpendEnergy(CommandEnergyCost))
                 {
                     _monsterBehaviour.StateMachine.ChangeState(_monsterBehaviour.StateMachine.DefaultState);
                 }
                 
-                _monsterBehaviour.SpendEnergy();
                 FindNearestTilePosition();   
             }
         }
