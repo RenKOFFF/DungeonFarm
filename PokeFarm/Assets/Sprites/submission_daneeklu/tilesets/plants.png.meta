@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tomato_begin
+      name: tomato_start
       rect:
         serializedVersion: 2
         x: 10
@@ -1004,6 +1004,7 @@ TextureImporter:
       plants_16: -1332602792
       plants_9: 1441471521
       plants_5: 82013980
+      tomato_start: -1809167875
       plants_13: 685986199
       tomato_middle: 53519275
       plants_19: -2005437545
@@ -1020,7 +1021,6 @@ TextureImporter:
       plants_23: 966927863
       plants_11: 1568289909
       plants_34: -1269183160
-      tomato_begin: -1809167875
       plants_36: 178357824
       plants_2: -1563428628
       plants_22: 1242031467
