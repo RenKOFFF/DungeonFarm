@@ -13,6 +13,9 @@ public class TileData
 
     public bool IsPlantingCycleTile => PlantingCycleTile != null;
     [CanBeNull] public PlantingCycleTile PlantingCycleTile;
+
+    public bool IsGrowCycleTile => GrowCycleTile != null;
+    [CanBeNull] public GrowCycleTile GrowCycleTile;
 }
 
 public class TileMapReadManager : MonoBehaviour
@@ -73,14 +76,22 @@ public class TileMapReadManager : MonoBehaviour
         _dataFromTiles = new Dictionary<TileBase, TileData>();
 
         LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
-        LoadScriptableTilesData<PlantingCycleTile>(setTileData: tile => new TileData { PlantingCycleTile = tile });
+
+        LoadScriptableTilesData<PlantingCycleTile>(
+            setTileData: tile => new TileData { PlantingCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.PlantingCycleTile = tile);
+
+        LoadScriptableTilesData<GrowCycleTile>(
+            setTileData: tile => new TileData { GrowCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.GrowCycleTile = tile);
 
         WorldTimer.AddOnDayChangedHandler(UpdatePlantingCycleTiles);
+        WorldTimer.AddOnDayChangedHandler(UpdateGrowCycleTiles);
     }
 
     private static void LoadScriptableTilesData<T>(
         Func<T, TileData> setTileData = null,
-        Action<TileData> updateTileData = null)
+        Action<TileData, T> updateTileData = null)
         where T : ScriptableTileData
     {
         var path = $"ScriptableTiles/{typeof(T)}s";
@@ -119,7 +130,7 @@ public class TileMapReadManager : MonoBehaviour
         _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
     }
 
-    private static void UpdateTileData<T>(Action<TileData> updateTileData, T scriptableTileData, TileBase tileBase)
+    private static void UpdateTileData<T>(Action<TileData, T> updateTileData, T scriptableTileData, TileBase tileBase)
         where T : ScriptableTileData
     {
         if (updateTileData == null)
@@ -129,7 +140,7 @@ public class TileMapReadManager : MonoBehaviour
             return;
         }
 
-        updateTileData.Invoke(_dataFromTiles[tileBase]);
+        updateTileData.Invoke(_dataFromTiles[tileBase], scriptableTileData);
     }
 
     private void UpdatePlantingCycleTiles()
@@ -150,6 +161,32 @@ public class TileMapReadManager : MonoBehaviour
 
                 if (plantingCycleTile.previousCycleTile != null)
                     backgroundTilemap.SetTile(gridPosition, plantingCycleTile.previousCycleTile);
+            }
+        }
+    }
+
+    private void UpdateGrowCycleTiles()
+    {
+        var cellBounds = plantsTilemap.cellBounds;
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        {
+            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+            {
+                var gridPosition = new Vector3Int(x, y);
+                var plantsTileData = GetPlantsTileDataByGridPosition(gridPosition);
+
+                if (!plantsTileData.IsGrowCycleTile)
+                    continue;
+
+                var backgroundTileData = GetBackgroundTileDataByGridPosition(gridPosition);
+                var growCycleTile = plantsTileData.GrowCycleTile;
+
+                if (growCycleTile.nextCycleTile != null)
+                    plantsTilemap.SetTile(gridPosition, growCycleTile.nextCycleTile);
+
+                if (!backgroundTileData.IsPlantingCycleTile || !backgroundTileData.PlantingCycleTile.availableForPlant)
+                    plantsTilemap.SetTile(gridPosition, null);
             }
         }
     }
