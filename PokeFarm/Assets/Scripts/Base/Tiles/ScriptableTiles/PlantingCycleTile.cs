@@ -9,4 +9,6 @@ public class PlantingCycleTile : ScriptableTileData
     [CanBeNull] public TileBase nextCycleTile;
 
     [CanBeNull] public Item interactsWithTool;
+
+    public bool availableForPlant;
 }

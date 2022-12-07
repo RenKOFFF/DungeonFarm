@@ -16,3 +16,4 @@ MonoBehaviour:
   previousCycleTile: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
   nextCycleTile: {fileID: 11400000, guid: 61ae52053fc8b9046843968510f706f2, type: 2}
   interactsWithTool: {fileID: 11400000, guid: 475100fa20d19354b905c6b38cf1dfe1, type: 2}
+  availableForPlant: 1

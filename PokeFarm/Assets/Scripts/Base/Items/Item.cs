@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public enum ItemType
@@ -6,14 +7,21 @@ public enum ItemType
     Tool,
     Food,
     Building,
+    Seed,
 }
 
 [CreateAssetMenu(menuName = "Data/Item")]
 public class Item : ScriptableObject
 {
     public int id;
+
     public string Name;
+
     public Sprite icon;
+
     public bool isStackable;
+
     public ItemType type;
+
+    [CanBeNull] public GrowCycleTile growCycleStartTile;
 }
