@@ -10,7 +10,7 @@ public class ItemStorageContainer
     {
         Container = new Item[containerSize];
     }
-
+//TODO fix this
     public void AddItem(Item item)
     {
         Container[0] = item;

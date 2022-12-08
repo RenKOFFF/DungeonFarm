@@ -8,23 +8,26 @@ public class CommandStation : MonoBehaviour, IInteractable
 
     private CommandDataSO[] _allMonstersCommands;
     private Monster[] _allMonstersOnTheFarm;
-    //public Command CurrentCommand { get;  private set; }
+    public Command CurrentCommand { get;  private set; }
     [SerializeField] private CommandStationUI _usingInterface;
     [SerializeField] private CommandButton _commandButtonPrefab;
     [SerializeField] private MonsterButton _monsterButtonPrefab;
+    
+    private bool isInited;
 
     //public static UnityEvent<MonstersInteractionWay> OnCommandChangedEvent = new UnityEvent<MonstersInteractionWay>();
 
     private void Awake()
     {
-        Init();
-        _usingInterface?.gameObject.SetActive(false);
+        PrepareToInit();
+        _usingInterface.gameObject.SetActive(false);
     }
 
-    private void Init()
+    private void PrepareToInit()
     {
-        _allMonstersCommands = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
-
+        _allMonstersOnTheFarm = MonstersManager.Instance.AllMonstersOnTheFarm.ToArray();
+        _allMonstersCommands = MonstersManager.Instance.AllMonstersCommand;
+        
         foreach (var command in _allMonstersCommands)
         {
             var button = _commandButtonPrefab;
@@ -34,9 +37,7 @@ public class CommandStation : MonoBehaviour, IInteractable
 
             Instantiate(button, _usingInterface.CommandList.transform);
         }
-
-        _allMonstersOnTheFarm = MonstersManager.Instance.AllMonstersOnTheFarm.ToArray();
-
+        
         foreach (var monster in _allMonstersOnTheFarm)
         {
             var button = _monsterButtonPrefab;
@@ -47,10 +48,24 @@ public class CommandStation : MonoBehaviour, IInteractable
             Instantiate(button, _usingInterface.MonstersList.transform);
         }
     }
+    private void Init(Command command)
+    {
+        CurrentCommand = command;
+        isInited = true;
+    }
 
     public void Interact()
     {
-        ShowInterface();
+        if (isInited)
+        {
+            ShowInterface();
+        }
+        ShowInitInterface();
+    }
+
+    private void ShowInitInterface()
+    {
+        _usingInterface.gameObject.SetActive(true);
     }
 
     private void ShowInterface()
