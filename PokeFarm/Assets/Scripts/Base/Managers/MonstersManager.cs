@@ -7,12 +7,17 @@ namespace Base.Managers
     public class MonstersManager : MonoBehaviour
     {
         public List<Monster> AllMonstersOnTheFarm = new();
+        public MonsterDataSO[] AllMonstersData;
         [SerializeField] private Transform _parentMonsters; 
         
         public static MonstersManager Instance;
         
-        private void Awake() => Instance = this;
-        
+        private void Awake()
+        {
+            Instance = this;
+            AllMonstersData = Resources.LoadAll<MonsterDataSO>("Monsters");
+        }
+
         public Monster GetMonsterInstance(MonsterDataSO monsterDataSo)
         {
             var m = AllMonstersOnTheFarm.Find(m => m.MonsterData == monsterDataSo);

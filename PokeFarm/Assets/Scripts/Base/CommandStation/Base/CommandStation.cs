@@ -1,4 +1,5 @@
 using Base.CommandStation.Commands;
+using Base.Managers;
 using UnityEngine;
 
 public class CommandStation : MonoBehaviour, IInteractable
@@ -6,13 +7,13 @@ public class CommandStation : MonoBehaviour, IInteractable
     public bool isCanInteract => true;
 
     private CommandDataSO[] _allMonstersCommands;
-    public MonsterDataSO[] _allMonstersOnTheFarm;
+    private Monster[] _allMonstersOnTheFarm;
     //public Command CurrentCommand { get;  private set; }
     [SerializeField] private CommandStationUI _usingInterface;
     [SerializeField] private CommandButton _commandButtonPrefab;
     [SerializeField] private MonsterButton _monsterButtonPrefab;
 
-    //public static UnityEvent<MonstersInteractionWay> OnCommandChangededEvent = new UnityEvent<MonstersInteractionWay>();
+    //public static UnityEvent<MonstersInteractionWay> OnCommandChangedEvent = new UnityEvent<MonstersInteractionWay>();
 
     private void Awake()
     {
@@ -34,16 +35,13 @@ public class CommandStation : MonoBehaviour, IInteractable
             Instantiate(button, _usingInterface.CommandList.transform);
         }
 
-        // TODO сделать менеджер в котором будут храниться все монстры
-        //_allMonstersOnTheFarm = сюда напиши то что сверху;
-
-        _allMonstersOnTheFarm = Resources.LoadAll<MonsterDataSO>("Monsters");
+        _allMonstersOnTheFarm = MonstersManager.Instance.AllMonstersOnTheFarm.ToArray();
 
         foreach (var monster in _allMonstersOnTheFarm)
         {
             var button = _monsterButtonPrefab;
-            button.MonsterData = monster;
-            button.CommandDataSO = monster.CommandData;
+            button.MonsterData = monster.MonsterData;
+            button.CommandDataSO = monster.MonsterData.CommandData;
             button.RefreshButtonData();
 
             Instantiate(button, _usingInterface.MonstersList.transform);
@@ -57,12 +55,12 @@ public class CommandStation : MonoBehaviour, IInteractable
 
     private void ShowInterface()
     {
-        _usingInterface?.gameObject.SetActive(true);
+        _usingInterface.gameObject.SetActive(true);
     }
     
     private void HideInterface()
     {
-        _usingInterface?.gameObject.SetActive(false);
+        _usingInterface.gameObject.SetActive(false);
     }
 
     private void OnEnable()
