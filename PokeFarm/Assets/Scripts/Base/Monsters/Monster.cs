@@ -39,9 +39,8 @@ public class Monster : MonoBehaviour
     public ItemStorageContainer Inventory { get; private set; }
     private void Awake()
     {
-        //TODO create in MonsterData container size
-        Inventory = new ItemStorageContainer(1);
         _monsterBehaviour = GetComponent<MonsterBehaviour>();
+        Inventory = new ItemStorageContainer(Stats.InventorySize);
         CurrentEnergy = MaxEnergy;
     }
     
