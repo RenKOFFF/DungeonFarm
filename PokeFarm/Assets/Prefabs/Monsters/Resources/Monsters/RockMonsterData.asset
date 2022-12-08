@@ -20,3 +20,7 @@ MonoBehaviour:
   _commandDataSO:
   - {fileID: 11400000, guid: 817ec3a0c1b0c324c892d6e4d15b09df, type: 2}
   _prefab: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
+  _strength: 4
+  _speed: 1.1
+  _health: 90
+  _inventorySize: 1
