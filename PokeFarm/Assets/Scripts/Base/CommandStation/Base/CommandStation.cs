@@ -17,7 +17,7 @@ public class CommandStation : MonoBehaviour, IInteractable
 
     //public static UnityEvent<MonstersInteractionWay> OnCommandChangedEvent = new UnityEvent<MonstersInteractionWay>();
 
-    private void Awake()
+    private void Start()
     {
         PrepareToInit();
         _usingInterface.gameObject.SetActive(false);
