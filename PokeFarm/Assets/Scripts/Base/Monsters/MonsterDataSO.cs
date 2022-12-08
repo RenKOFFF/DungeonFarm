@@ -1,5 +1,6 @@
 using Base.CommandStation.Commands;
 using Base.Managers;
+using Base.Monsters;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MonsterData", menuName = "Monsters Data/Monster Data")]
@@ -18,4 +19,14 @@ public class MonsterDataSO : ScriptableObject
     [SerializeField] private MonstersInteractionWayDataSO[] _interactionWay;
     [SerializeField] private CommandDataSO[] _commandDataSO;
     [SerializeField] private Monster _prefab;
+
+    [Header("Stats")] 
+    [SerializeField] private float _strength;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _health;
+
+    public MonsterStats GetStats()
+    {
+        return new MonsterStats(_strength, _speed, _health);
+    }
 }

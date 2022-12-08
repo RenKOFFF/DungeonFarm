@@ -12,7 +12,7 @@ namespace Base.CommandStation.Commands
         public override void Execute()
         {
             CurrentMonster.MonsterBehaviour.GiveCommand(
-                new CutDownTreesState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool, _commandEnergyCost));
+                new CutDownTreesState(CurrentMonster, _breakTile, _workTool, _commandEnergyCost));
         }
     }
 }

@@ -8,7 +8,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
 {
     private Monster _monster;
     public Monster Monster { get => _monster; private set => _monster = value; }
-    public float Speed { get => _monster.Speed;}
+    public float Speed { get => _monster.Stats.Speed;}
     public bool isCanInteract => _isCanInteract;
     private bool _isCanInteract = true;
 
@@ -59,7 +59,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     {
         //RestState = new RestState(_monster, _monster.Speed, _restPlace);
         //RatrolState = new PatrolState(_monster, _monster.Speed, PatrolData);
-        WanderingState = new WanderingState(_monster, _monster.Speed, 5f);
+        WanderingState = new WanderingState(_monster, _monster.Stats.Speed, 5f);
     }
 
     private void Update()
@@ -82,7 +82,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            StateMachine.ChangeState(new FollowingState(_monster, _monster.Speed, collider.gameObject, StateMachine.CurrentState));
+            StateMachine.ChangeState(new FollowingState(_monster, _monster.Stats.Speed, collider.gameObject, StateMachine.CurrentState));
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

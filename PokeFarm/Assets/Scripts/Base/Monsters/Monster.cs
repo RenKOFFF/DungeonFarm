@@ -1,13 +1,10 @@
+using Base.Monsters;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterBehaviour))]
 public class Monster : MonoBehaviour
 {
     [field:SerializeField] public MonsterDataSO MonsterData { get; private set; }
-    
-    public float Speed { get => _speed; private set => _speed = value;  }
-    [SerializeField] private float _speed = 1.5f;
-    
     public float MaxEnergy
     {
         get => _maxEnergy;
@@ -24,16 +21,18 @@ public class Monster : MonoBehaviour
 
     public float Attachment
     {
-        get => _attachment;
+        get => _startAttachment;
         private set
         {
-            _attachment = value;
-            MaxEnergy = _attachment;
+            _startAttachment = value;
+            MaxEnergy = _startAttachment;
         }
     }
 
-    [SerializeField] private float _attachment = 30f;
+    [SerializeField] private float _startAttachment = 30f;
 
+    public MonsterStats Stats => MonsterData.GetStats();
+    
     public MonsterBehaviour MonsterBehaviour { get => _monsterBehaviour; }
     private MonsterBehaviour _monsterBehaviour;
 

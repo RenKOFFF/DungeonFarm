@@ -13,6 +13,6 @@ public class BreakeRocksCommand : Command, ICommand
     {
         //TODO сделать вариант с отказом от работы
         CurrentMonster.MonsterBehaviour.GiveCommand(
-            new BreakRocksState(CurrentMonster, CurrentMonster.Speed, _breakTile, _workTool, _commandEnergyCost));
+            new BreakRocksState(CurrentMonster, _breakTile, _workTool, _commandEnergyCost));
     }
 }

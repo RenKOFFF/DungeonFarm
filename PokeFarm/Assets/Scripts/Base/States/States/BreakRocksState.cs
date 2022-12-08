@@ -3,10 +3,10 @@ using UnityEngine.Tilemaps;
 
 public class BreakRocksState : BaseMonsterCommandState
 {
-    public BreakRocksState(Monster monster, float speed, TileBase breakTile, Item workTool, int _commandEnergyCost)
+    public BreakRocksState(Monster monster, TileBase breakTile, Item workTool, int _commandEnergyCost)
     {
         _monsterBehaviour = monster.MonsterBehaviour;
-        _speed = speed;
+        _speed = monster.Stats.Speed;
 
         _waitTime = _startWaitTime;
 

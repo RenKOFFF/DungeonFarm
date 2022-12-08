@@ -32,7 +32,7 @@ public class MonstersMoveByClickController : MonstersInteractionWay
             _mousePos = Input.mousePosition;
             _movePosition = _cam.ScreenToWorldPoint(_mousePos);
 
-            _monsterBehaviour.StateMachine.ChangeState(new WanderingState(_monsterBehaviour.Monster, _monsterBehaviour.Monster.Speed, 2f, _movePosition));
+            _monsterBehaviour.StateMachine.ChangeState(new WanderingState(_monsterBehaviour.Monster, _monsterBehaviour.Monster.Stats.Speed, 2f, _movePosition));
             gameObject.SetActive(false);
         }
     }
