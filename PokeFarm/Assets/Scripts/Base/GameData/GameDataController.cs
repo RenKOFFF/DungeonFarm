@@ -15,7 +15,7 @@ public enum DataCategory
 
 public static class GameDataController
 {
-    public static Dictionary<string, Item> AllItems;
+    public static readonly Dictionary<string, Item> AllItems;
 
     static GameDataController()
     {
@@ -50,9 +50,7 @@ public static class GameDataController
         var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
 
         if (!File.Exists(savedFilePath))
-        {
             return default;
-        }
 
         try
         {

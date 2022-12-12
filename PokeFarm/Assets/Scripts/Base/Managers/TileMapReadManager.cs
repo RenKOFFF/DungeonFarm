@@ -1,25 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Base.Time;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileData
 {
-    public bool IsPlowable;
+    public bool IsBreakable => BreakableTile != null;
+    [CanBeNull] public BreakableTile BreakableTile;
 
-    public bool IsBreakable;
-    public BreakableTile BreakableTile;
+    public bool IsPlantingCycleTile => PlantingCycleTile != null;
+    [CanBeNull] public PlantingCycleTile PlantingCycleTile;
+
+    public bool IsGrowCycleTile => GrowCycleTile != null;
+    [CanBeNull] public GrowCycleTile GrowCycleTile;
 }
 
 public class TileMapReadManager : MonoBehaviour
 {
     [SerializeField] public Tilemap backgroundTilemap;
     [SerializeField] public Tilemap landscapeTilemap;
-    [SerializeField] private List<TileBase> plowableTiles;
+    [SerializeField] public Tilemap plantsTilemap;
 
     public static TileMapReadManager Instance { get; private set; }
 
-    private static Dictionary<TileBase, BreakableTile> _breakableTiles;
     private static Dictionary<TileBase, TileData> _dataFromTiles;
 
     public static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
@@ -43,8 +49,14 @@ public class TileMapReadManager : MonoBehaviour
     public TileData GetLandscapeTileDataByMousePosition()
         => GetTileData(GetTileBase(landscapeTilemap, Input.mousePosition, true));
 
+    public TileData GetBackgroundTileDataByGridPosition(Vector3Int gridPosition)
+        => GetTileData(GetTileBase(backgroundTilemap, gridPosition));
+
     public TileData GetLandscapeTileDataByGridPosition(Vector3Int gridPosition)
         => GetTileData(GetTileBase(landscapeTilemap, gridPosition));
+
+    public TileData GetPlantsTileDataByGridPosition(Vector3Int gridPosition)
+        => GetTileData(GetTileBase(plantsTilemap, gridPosition));
 
     private static TileBase GetTileBase(Tilemap tilemap, Vector2 position, bool isMousePosition = false)
         => GetTileBase(tilemap, GetGridPosition(tilemap, position, isMousePosition));
@@ -61,24 +73,121 @@ public class TileMapReadManager : MonoBehaviour
     {
         Instance = this;
 
-        _breakableTiles = Resources.LoadAll<BreakableTile>("BreakableTiles")
-            .ToDictionary(bt => bt.tile);
-    }
-
-    private void Start()
-    {
         _dataFromTiles = new Dictionary<TileBase, TileData>();
 
-        foreach (var tileBase in plowableTiles)
-            _dataFromTiles.Add(tileBase, new TileData { IsPlowable = true });
+        LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
 
-        foreach (var (tileBase, breakableTile) in _breakableTiles)
-            _dataFromTiles.Add(
-                tileBase,
-                new TileData
-                {
-                    IsBreakable = true,
-                    BreakableTile = breakableTile
-                });
+        LoadScriptableTilesData<PlantingCycleTile>(
+            setTileData: tile => new TileData { PlantingCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.PlantingCycleTile = tile);
+
+        LoadScriptableTilesData<GrowCycleTile>(
+            setTileData: tile => new TileData { GrowCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.GrowCycleTile = tile);
+
+        WorldTimer.AddOnDayChangedHandler(UpdatePlantingCycleTiles);
+        WorldTimer.AddOnDayChangedHandler(UpdateGrowCycleTiles);
+    }
+
+    private static void LoadScriptableTilesData<T>(
+        Func<T, TileData> setTileData = null,
+        Action<TileData, T> updateTileData = null)
+        where T : ScriptableTileData
+    {
+        var path = $"ScriptableTiles/{typeof(T)}s";
+        var scriptableTilesData = Resources.LoadAll<T>(path)
+            .ToDictionary(t => t.tile);
+
+        if (scriptableTilesData.Count == 0)
+        {
+            Debug.LogError($"Не найдено ни одного [{typeof(T)}] в директории [Resources/{path}]." +
+                           " Проверьте правильность названия директории.");
+            return;
+        }
+
+        foreach (var (tileBase, scriptableTileData) in scriptableTilesData)
+        {
+            if (_dataFromTiles.ContainsKey(tileBase))
+            {
+                UpdateTileData(updateTileData, scriptableTileData, tileBase);
+                continue;
+            }
+
+            SetTileData(setTileData, scriptableTileData, tileBase);
+        }
+    }
+
+    private static void SetTileData<T>(Func<T, TileData> setTileData, T scriptableTileData, TileBase tileBase)
+        where T : ScriptableTileData
+    {
+        if (setTileData == null)
+        {
+            Debug.LogError($"Не удалось загрузить данные тайла [{scriptableTileData.name}]." +
+                           $" Явно укажите параметр [{nameof(setTileData)}].");
+            return;
+        }
+
+        _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
+    }
+
+    private static void UpdateTileData<T>(Action<TileData, T> updateTileData, T scriptableTileData, TileBase tileBase)
+        where T : ScriptableTileData
+    {
+        if (updateTileData == null)
+        {
+            Debug.LogError($"Не удалось обновить данные тайла [{scriptableTileData.name}]." +
+                           $" Явно укажите параметр [{nameof(updateTileData)}].");
+            return;
+        }
+
+        updateTileData.Invoke(_dataFromTiles[tileBase], scriptableTileData);
+    }
+
+    private void UpdatePlantingCycleTiles()
+    {
+        var cellBounds = backgroundTilemap.cellBounds;
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        {
+            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+            {
+                var gridPosition = new Vector3Int(x, y);
+                var tileData = GetBackgroundTileDataByGridPosition(gridPosition);
+
+                if (!tileData.IsPlantingCycleTile)
+                    continue;
+
+                var plantingCycleTile = tileData.PlantingCycleTile;
+
+                if (plantingCycleTile.previousCycleTile != null)
+                    backgroundTilemap.SetTile(gridPosition, plantingCycleTile.previousCycleTile);
+            }
+        }
+    }
+
+    private void UpdateGrowCycleTiles()
+    {
+        var cellBounds = plantsTilemap.cellBounds;
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        {
+            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+            {
+                var gridPosition = new Vector3Int(x, y);
+                var plantsTileData = GetPlantsTileDataByGridPosition(gridPosition);
+
+                if (!plantsTileData.IsGrowCycleTile)
+                    continue;
+
+                var backgroundTileData = GetBackgroundTileDataByGridPosition(gridPosition);
+                var growCycleTile = plantsTileData.GrowCycleTile;
+
+                if (growCycleTile.nextCycleTile != null)
+                    plantsTilemap.SetTile(gridPosition, growCycleTile.nextCycleTile);
+
+                if (!backgroundTileData.IsPlantingCycleTile || !backgroundTileData.PlantingCycleTile.availableForPlant)
+                    plantsTilemap.SetTile(gridPosition, null);
+            }
+        }
     }
 }

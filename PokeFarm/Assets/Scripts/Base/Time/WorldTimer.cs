@@ -61,14 +61,20 @@ namespace Base.Time
         private void CalculateWorldTime()
         {
             var realTimePassedFromLastWorldSecond = DateTime.Now - _lastWorldSecondInRealTime;
-            var passedSeconds = realTimePassedFromLastWorldSecond.Seconds;
+            var passedSeconds = realTimePassedFromLastWorldSecond.TotalSeconds;
+
+#if DEBUG
+            const int developersTimeMultiplier = 50;
+
+            passedSeconds *= developersTimeMultiplier;
+#endif
 
             if (passedSeconds < RealSecondsInOneWorldMinute)
                 return;
 
             _lastWorldSecondInRealTime = DateTime.Now;
 
-            if (CurrentTime.AddMinutes(passedSeconds))
+            if (CurrentTime.AddMinutes((int) passedSeconds))
                 _onDayChanged.Invoke();
 
             Save();

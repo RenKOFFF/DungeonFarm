@@ -525,7 +525,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tools_20
+      name: Showel
       rect:
         serializedVersion: 2
         x: 4
@@ -623,7 +623,6 @@ TextureImporter:
       tools_3: -1550123411
       tools_13: 2105739836
       tools_22: -971992520
-      tools_20: -1328808494
       tools_23: 1871856871
       tools_0: -339692023
       tools_2: -855770537
@@ -639,6 +638,7 @@ TextureImporter:
       tools_5: -414587696
       Pickaxe: -1191090462
       tools_7: 1291541296
+      Showel: -1328808494
       Axe: 1119437427
       tools_18: -1279408202
       tools_17: -1050616071

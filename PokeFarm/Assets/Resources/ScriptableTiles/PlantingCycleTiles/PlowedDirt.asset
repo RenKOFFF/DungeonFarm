@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5500dc83e7994740a612946f1e31b078, type: 3}
+  m_Name: PlowedDirt
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
+  previousCycleTile: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
+  nextCycleTile: {fileID: 11400000, guid: 61ae52053fc8b9046843968510f706f2, type: 2}
+  interactsWithTool: {fileID: 11400000, guid: 475100fa20d19354b905c6b38cf1dfe1, type: 2}
+  availableForPlant: 1
