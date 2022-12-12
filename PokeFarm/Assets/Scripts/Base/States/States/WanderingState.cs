@@ -24,6 +24,7 @@ public class WanderingState : State
         _waitTime = _startWaitTime;
 
         _maxWanderingDistance = maxWanderingDistance;
+        _centerWanderingArea = _monster.transform.position;
     }
 
     public WanderingState(Monster monster, float speed, float maxWanderingDistance, Vector2 centerWanderingArea) : 
@@ -35,31 +36,25 @@ public class WanderingState : State
     public override void Enter()
     {
         Debug.Log($"Enter {this}");
-
-        if (_centerWanderingArea != null)
-        {
-            _movePoint = _centerWanderingArea;
-        }
-        else
-        {
-            FindNewPoint(_maxWanderingDistance);
-        }
+        FindNewPoint(_maxWanderingDistance);
     }
 
     private void FindNewPoint(float maxWanderingDistance)
     {
-        var rndDistance = Random.Range(0, maxWanderingDistance);
-
-        //рандомное движение в точку на окружности
-        var randAng = Random.Range(0, Mathf.PI * 2);
-
-        if (_centerWanderingArea != null)
+        var findStopCount = 100;
+        while (findStopCount > 0)
         {
-            _movePoint = _centerWanderingArea + new Vector2(Mathf.Cos(randAng) * rndDistance, Mathf.Sin(randAng) * rndDistance);
-        }
-        else
-        {
-            _movePoint = (Vector2)_monster.transform.position + new Vector2(Mathf.Cos(randAng) * rndDistance, Mathf.Sin(randAng) * rndDistance);
+            var rndDistance = Random.Range(0, maxWanderingDistance);
+
+            //рандомное движение в точку на окружности
+            var randAng = Random.Range(0, Mathf.PI * 2);
+            _movePoint = _centerWanderingArea +
+                         new Vector2(Mathf.Cos(randAng) * rndDistance, Mathf.Sin(randAng) * rndDistance);
+            
+            findStopCount--;
+            
+            if (/*LandscapeController.Instance.prefabsTilema*/
+                true) break;
         }
     }
 
