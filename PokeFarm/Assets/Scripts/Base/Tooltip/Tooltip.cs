@@ -22,6 +22,8 @@ public class Tooltip : MonoBehaviour {
 	private Image[] img;
 	private Color BGColorFade;
 	private Color textColorFade;
+	
+	[SerializeField] private GameObject _commandStationUI;
 
 	void Awake()
 	{
@@ -49,8 +51,7 @@ public class Tooltip : MonoBehaviour {
 		
 		RaycastHit2D hit = Physics2D.Raycast(
 			_camera.ScreenToWorldPoint(Input.mousePosition),
-			Vector2.zero,
-			LayerMask.NameToLayer("UI"));
+			Vector2.zero);
 		if(hit.transform != null)
 		{
 			if(hit.transform.GetComponent<TooltipTextUI>() || hit.transform.GetComponentInParent<TooltipTextUI>())
@@ -67,7 +68,7 @@ public class Tooltip : MonoBehaviour {
 
 		float arrowShift = width / 4; // сдвиг позиции стрелки по Х
 
-		if(show || isUI)
+		if(_commandStationUI.activeInHierarchy && (show || isUI))
 		{
 			float arrowPositionY = -(arrow.sizeDelta.y / 2 - 1); // позиция стрелки по умолчанию (внизу)
 			float arrowPositionX = arrowShift;

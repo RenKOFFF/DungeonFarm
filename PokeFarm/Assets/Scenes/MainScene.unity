@@ -2800,6 +2800,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &627867297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2329803085741880372, guid: 6fbcaedfe32b25744a767c49b09651da, type: 3}
+  m_PrefabInstance: {fileID: 1206171425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &630700146
 GameObject:
   m_ObjectHideFlags: 0
@@ -10060,7 +10065,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2329803085741880371, guid: 6fbcaedfe32b25744a767c49b09651da, type: 3}
   m_PrefabInstance: {fileID: 1206171425}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 627867297}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40656995fb886349ae98eae99807a87, type: 3}
@@ -11654,6 +11659,7 @@ MonoBehaviour:
   boxText: {fileID: 521749091}
   _camera: {fileID: 519420031}
   speed: 10
+  _commandStationUI: {fileID: 627867297}
 --- !u!1 &1767635795
 GameObject:
   m_ObjectHideFlags: 0
