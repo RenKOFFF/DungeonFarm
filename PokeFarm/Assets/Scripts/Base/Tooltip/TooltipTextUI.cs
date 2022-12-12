@@ -6,11 +6,11 @@ using System.Collections;
 public class TooltipTextUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public string Text => $"Бесомон\nИмя: {_button.MonsterData.MonsterName}";
-    private MonsterButton _button;
+    private MonsterCommandStationButton _button;
 
     private void Start()
     {
-        _button = GetComponent<MonsterButton>();
+        _button = GetComponent<MonsterCommandStationButton>();
     }
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData e)

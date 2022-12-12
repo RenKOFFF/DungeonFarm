@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class MonsterButton : MonoBehaviour
+public class MonsterCommandStationButton : MonoBehaviour
 {
     private Button _button;
     [HideInInspector] public MonsterDataSO MonsterData;

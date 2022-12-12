@@ -11,7 +11,7 @@ public class CommandStation : MonoBehaviour, IInteractable
     public Command CurrentCommand { get;  private set; }
     [SerializeField] private CommandStationUI _usingInterface;
     [SerializeField] private CommandButton _commandButtonPrefab;
-    [SerializeField] private MonsterButton _monsterButtonPrefab;
+    [SerializeField] private MonsterCommandStationButton _monsterButtonPrefab;
     
     private bool isInited;
 
@@ -81,7 +81,7 @@ public class CommandStation : MonoBehaviour, IInteractable
     private void OnEnable()
     {
         CommandButton.OnCommandSelectedEvent.AddListener(ChangeCurrentCommand);
-        MonsterButton.OnCommandExecutedEvent.AddListener(HideInterface);
+        MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideInterface);
     }
 
     private void ChangeCurrentCommand(Command selectedCommand)
@@ -95,6 +95,6 @@ public class CommandStation : MonoBehaviour, IInteractable
     private void OnDisable()
     {
         CommandButton.OnCommandSelectedEvent.RemoveListener(ChangeCurrentCommand);
-        MonsterButton.OnCommandExecutedEvent.RemoveListener(HideInterface);
+        MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideInterface);
     }
 }

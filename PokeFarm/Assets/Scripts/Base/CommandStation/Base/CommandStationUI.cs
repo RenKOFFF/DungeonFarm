@@ -13,7 +13,7 @@ public class CommandStationUI : MonoBehaviour
     private void OnEnable()
     {
         CommandButton.OnCommandSelectedEvent.AddListener(HideCommandAndShowMonsters);
-        MonsterButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
+        MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
     }
     
     public void SetDefaultState()
@@ -35,6 +35,6 @@ public class CommandStationUI : MonoBehaviour
     private void OnDisable()
     {
         CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommandAndShowMonsters);
-        MonsterButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
+        MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
     }
 }
