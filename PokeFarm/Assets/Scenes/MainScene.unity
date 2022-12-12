@@ -11537,6 +11537,10 @@ PrefabInstance:
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
+      propertyPath: _startAttachment
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
       propertyPath: <MonsterData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: c45676a8393f97b48a3b37c61a53e854, type: 2}
@@ -12777,10 +12781,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
-      propertyPath: <MonsterData>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: fa114e2ccb1c987459143b691973b8d2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
 --- !u!1001 &6078015470805558959
