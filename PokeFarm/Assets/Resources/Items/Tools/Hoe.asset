@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7
   Name: Hoe
-  icon: {fileID: -1328808494, guid: 3de3095b7a1c337499614d430d97df62, type: 3}
+  icon: {fileID: 828861682, guid: bac64618c27186641b8e0c25c32e4f34, type: 3}
   isStackable: 0
   type: 1
+  growCycleStartTile: {fileID: 0}

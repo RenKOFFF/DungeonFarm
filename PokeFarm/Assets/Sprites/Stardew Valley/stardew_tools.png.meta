@@ -462,7 +462,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stardew_tools_17
+      name: Hoe
       rect:
         serializedVersion: 2
         x: 81
@@ -3023,6 +3023,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: stardew_tools_114
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 322
+        width: 3
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85cad1075ab456e4e95c907e7a96282f
+      internalID: -1809284644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3063,7 +3084,7 @@ TextureImporter:
       stardew_tools_135: -1316892860
       stardew_tools_75: -311071788
       stardew_tools_131: 1243993436
-      stardew_tools_17: 828861682
+      stardew_tools_114: -1809284644
       stardew_tools_41: -316631340
       stardew_tools_94: -2085688582
       stardew_tools_89: 92090816
@@ -3111,6 +3132,7 @@ TextureImporter:
       stardew_tools_38: -728799909
       stardew_tools_7: 1660410140
       stardew_tools_115: -330927334
+      Hoe: 828861682
       stardew_tools_98: 522728393
       stardew_tools_50: 1731820199
       stardew_tools_53: -636615804
