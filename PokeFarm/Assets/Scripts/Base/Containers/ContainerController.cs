@@ -25,68 +25,46 @@ public class ContainerController : MonoBehaviour
     {
         var existingSlot = Slots.Find(s => s.item == item);
 
-        if (item.isStackable && existingSlot != null)
+        if (existingSlot == null && amount <= 0)
         {
-            existingSlot.amount += amount;
-            InventoryManager.Instance.Refresh();
+            Debug.LogError($"Попытка удалить несуществующий предмет [{item.Name}]. Количество: {amount}.");
             return;
         }
 
+        if (existingSlot == null || !item.isStackable && amount > 0)
+        {
+            TryAddToEmptySlot(item, amount);
+            return;
+        }
+
+        existingSlot.amount += amount;
+
+        if (existingSlot.amount == 0)
+            existingSlot.Clear();
+
+        SaveAndRefresh();
+    }
+
+    private bool TryAddToEmptySlot(Item item, int amount = 1)
+    {
         var emptySlot = Slots.Find(s => s.item == null);
 
         if (emptySlot == null)
-        {
-            InventoryManager.Instance.Refresh();
-            return;
-        }
+            return false;
 
         emptySlot.item = item;
         emptySlot.amount = amount;
 
-        InventoryManager.Instance.Refresh();
-
-        Save();
+        SaveAndRefresh();
+        return true;
     }
 
     public void Remove(Item item, int amount = 1)
+        => Add(item, -amount);
+
+    private void SaveAndRefresh()
     {
-        var existingSlot = Slots.Find(s => s.item == item);
-
-        if (item.isStackable && existingSlot != null)
-        {
-            if (existingSlot.amount > 0)
-            {
-                existingSlot.amount -= amount;
-            }
-            else
-            {
-                existingSlot.item = null;
-                existingSlot.amount = 0;
-            }
-
-            InventoryManager.Instance.Refresh();
-            return;
-        }
-
-        if (!item.isStackable && existingSlot != null)
-        {
-            existingSlot.item = null;
-            existingSlot.amount = 0;
-        }
-
-        var emptySlot = Slots.Find(s => s.item == null);
-
-        if (emptySlot == null)
-        {
-            InventoryManager.Instance.Refresh();
-            return;
-        }
-
-        //emptySlot.item = item;
-        //emptySlot.amount = amount;
-
         InventoryManager.Instance.Refresh();
-
         Save();
     }
 
