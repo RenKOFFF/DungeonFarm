@@ -19,7 +19,7 @@ public class CharacterMouseInteractController : MonoBehaviour
 
         if (plantsTileData.IsBreakable)
         {
-            InteractWithBreakableTile(plantsTileData, plantsTilemap, currentGridPosition);
+            InteractWithBreakableTile(plantsTileData, plantsTilemap, backgroundTilemap, currentGridPosition);
             return;
         }
     }
@@ -41,9 +41,7 @@ public class CharacterMouseInteractController : MonoBehaviour
         if (itemOnTheHand is not { type: ItemType.Seed })
             return;
 
-        plantsTilemap.SetTile(
-            currentGridPosition,
-            itemOnTheHand.growCycleStartTile.tile);
+        plantsTilemap.SetTile(currentGridPosition, itemOnTheHand.growCycleStartTile.tile);
 
         GameManager.Instance.inventory.Remove(itemOnTheHand);
     }
@@ -51,6 +49,7 @@ public class CharacterMouseInteractController : MonoBehaviour
     private static void InteractWithBreakableTile(
         TileData plantsTileData,
         Tilemap plantsTilemap,
+        Tilemap backgroundTilemap,
         Vector3Int currentGridPosition)
     {
         var breakableTile = plantsTileData.BreakableTile;
@@ -58,9 +57,10 @@ public class CharacterMouseInteractController : MonoBehaviour
         if (!breakableTile.breaksByAny)
             return;
 
-        plantsTilemap.SetTile(
-            currentGridPosition,
-            null);
+        plantsTilemap.SetTile(currentGridPosition, null);
+
+        if (breakableTile.backgroundTileToSetAfterDestruction != null)
+            backgroundTilemap.SetTile(currentGridPosition, breakableTile.backgroundTileToSetAfterDestruction);
 
         SpawnManager.Instance.SpawnPickUpItemsInArea(
             TileMapReadManager.GetCellCenterWorldPosition(plantsTilemap, currentGridPosition),

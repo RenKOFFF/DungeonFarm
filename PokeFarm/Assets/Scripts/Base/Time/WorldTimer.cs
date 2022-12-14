@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Base.Time
 {
@@ -62,8 +63,10 @@ namespace Base.Time
         {
             CurrentTime.Days++;
             CurrentTime.SetMorningTime();
+            OnDayChanged();
             Save();
         }
+
         private void CalculateWorldTime()
         {
             var realTimePassedFromLastWorldSecond = DateTime.Now - _lastWorldSecondInRealTime;
@@ -81,9 +84,18 @@ namespace Base.Time
             _lastWorldSecondInRealTime = DateTime.Now;
 
             if (CurrentTime.AddMinutes((int) passedSeconds))
-                _onDayChanged.Invoke();
+                OnDayChanged();
 
             Save();
+        }
+
+        private void OnDayChanged()
+        {
+            //TODO temp solve
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene"))
+                return;
+
+            _onDayChanged.Invoke();
         }
 
         private void Save()

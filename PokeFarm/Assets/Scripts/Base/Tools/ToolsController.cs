@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
@@ -70,6 +71,10 @@ public class ToolsController : MonoBehaviour
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0))
+            return;
+
+        //TODO temp solve
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene"))
             return;
 
         var currentItemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
