@@ -58,6 +58,12 @@ namespace Base.Time
             Instance._onDayChanged.AddListener(onDayChanged);
         }
 
+        public void SkipOneDay()
+        {
+            CurrentTime.Days++;
+            CurrentTime.SetMorningTime();
+            Save();
+        }
         private void CalculateWorldTime()
         {
             var realTimePassedFromLastWorldSecond = DateTime.Now - _lastWorldSecondInRealTime;
