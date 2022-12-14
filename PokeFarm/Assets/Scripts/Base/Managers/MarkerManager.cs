@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class MarkerManager : MonoBehaviour
@@ -19,6 +20,9 @@ public class MarkerManager : MonoBehaviour
 
     private void Update()
     {
+        //TODO temp solve
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainHouseScene")) return;
+        
         var playerInstance = GameManager.Instance.player;
         var playerPosition = playerInstance.GetComponent<Rigidbody2D>().position;
         var limitedMouseVector = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerPosition;

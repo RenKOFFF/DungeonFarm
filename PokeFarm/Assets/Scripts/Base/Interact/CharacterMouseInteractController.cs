@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class CharacterMouseInteractController : MonoBehaviour
@@ -69,6 +70,9 @@ public class CharacterMouseInteractController : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0))
             return;
+
+        //TODO temp solve
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainHouseScene")) return;
 
         Interact();
     }
