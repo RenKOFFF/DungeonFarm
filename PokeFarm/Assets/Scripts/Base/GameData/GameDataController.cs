@@ -11,6 +11,7 @@ public enum DataCategory
 {
     Containers,
     Time,
+    WorldData,
 }
 
 public static class GameDataController

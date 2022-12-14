@@ -1,3 +1,4 @@
+using Base.GameData;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -23,14 +24,20 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryPanel = containerController.SpawnPanel();
         inventoryPanel.Close();
-        
-        // TODO delete this
-        var items = Resources.LoadAll<Item>("Items");
 
-        foreach (var item in items)
-        {
+        var worldData = GameDataController.LoadWithInitializationIfEmpty<WorldData>(
+            DataCategory.WorldData,
+            WorldData.SaveName);
+
+        if (worldData.IsInitialized)
+            return;
+
+        worldData.IsInitialized = true;
+        GameDataController.Save(worldData, DataCategory.WorldData, WorldData.SaveName);
+
+        // TODO заменить на выдачу определённых вещей, а не всех
+        foreach (var (_, item) in GameDataController.AllItems)
             GameManager.Instance.inventory.Add(item, 20);
-        }
     }
 
     private void Update()
