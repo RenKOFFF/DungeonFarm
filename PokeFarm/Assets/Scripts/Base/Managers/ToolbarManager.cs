@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,7 @@ public class ToolbarManager : MonoBehaviour
 
     [SerializeField] private ToolbarPanel currentToolbar;
 
-    public Item ItemOnTheHand { get; private set; }
+    [CanBeNull] public Item ItemOnTheHand { get; private set; }
 
     public UnityEvent<int> OnSelectedSlotIndexChanged { get; } = new();
     public UnityEvent OnItemOnTheHandChanged { get; } = new();

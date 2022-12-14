@@ -38,12 +38,14 @@ public class CharacterMouseInteractController : MonoBehaviour
 
         var itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
 
-        if (itemOnTheHand.type != ItemType.Seed)
+        if (itemOnTheHand is not { type: ItemType.Seed })
             return;
 
         plantsTilemap.SetTile(
             currentGridPosition,
             itemOnTheHand.growCycleStartTile.tile);
+
+        GameManager.Instance.inventory.Remove(itemOnTheHand);
     }
 
     private static void InteractWithBreakableTile(
@@ -72,7 +74,8 @@ public class CharacterMouseInteractController : MonoBehaviour
             return;
 
         //TODO temp solve
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainHouseScene")) return;
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene"))
+            return;
 
         Interact();
     }

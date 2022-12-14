@@ -26,6 +26,7 @@ public class ItemDragAndDropController : MonoBehaviour
                 return;
         }
 
+        GameManager.Instance.inventory.Save();
         UpdateIcon();
     }
 

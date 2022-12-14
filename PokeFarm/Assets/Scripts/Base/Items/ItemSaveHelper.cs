@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Base.Items
 {
     public class SlotSaveItem
     {
-        public string ItemName { get; }
+        [CanBeNull] public string ItemName { get; }
         public int Amount { get; }
 
         public SlotSaveItem(string itemName, int amount)
