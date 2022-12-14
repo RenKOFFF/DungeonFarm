@@ -1649,8 +1649,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 5, y: 0}
       - {x: -9, y: 0}
-      - {x: -8.94256, y: -12.537692}
-      - {x: 4.5404873, y: -11.963302}
+      - {x: -9, y: -10}
+      - {x: 5, y: -10}
 --- !u!4 &436402994
 Transform:
   m_ObjectHideFlags: 0
