@@ -2,14 +2,18 @@
 {
     public struct MonsterStats
     {
-        public float Strength, Speed, Health;
+        public float Strength, Speed, Health, Luck, Protection, Agility;
         public int InventorySize; 
 
-        public MonsterStats(float strength, float speed, float health, int inventorySize)
+        public MonsterStats(float strength, float luck, float protection, float health, float agility, float speed, int inventorySize)
         {
             Strength = strength;
-            Speed = speed;
+            Luck = luck;
+            Protection = protection;
             Health = health;
+            Agility = agility;
+            
+            Speed = speed;
             InventorySize = inventorySize;
         }
     }

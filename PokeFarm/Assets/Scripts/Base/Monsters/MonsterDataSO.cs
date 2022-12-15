@@ -21,13 +21,18 @@ public class MonsterDataSO : ScriptableObject
     [SerializeField] private Monster _prefab;
 
     [Header("Stats")] 
-    [SerializeField] private float _strength;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _health;
-    [SerializeField] private int _inventorySize;
+    [SerializeField, Min(1)] private float _strength;
+    [SerializeField, Min(1)] private int _luck;
+    [SerializeField, Min(1)] private int _protection;
+    [SerializeField, Min(1)] private float _health;
+    [SerializeField, Min(1)] private float _agility;
+    
+    [SerializeField, Min(1)] private float _speed;
+    [SerializeField, Min(1)] private int _inventorySize;
+    
 
     public MonsterStats GetStats()
     {
-        return new MonsterStats(_strength, _speed, _health, _inventorySize);
+        return new MonsterStats(_strength, _luck, _protection, _health, _agility, _speed, _inventorySize);
     }
 }
