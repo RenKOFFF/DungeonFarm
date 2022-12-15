@@ -10,7 +10,7 @@ public class TeleportDoor : Door
         Teleport();
     }
 
-    private void Teleport()
+    protected void Teleport()
     {
         SceneManager.LoadScene(DurationTeleportBySceneName);
     }
