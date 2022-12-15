@@ -7,6 +7,13 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
+public enum SaveSlot
+{
+    Slot1,
+    Slot2,
+    Slot3,
+}
+
 public enum DataCategory
 {
     Containers,
@@ -18,6 +25,12 @@ public static class GameDataController
 {
     public static readonly Dictionary<string, Item> AllItems;
 
+    private static SaveSlot CurrentSaveSlot { get; set; } = SaveSlot.Slot1;
+
+    private static string PersistentDataPath => Application.persistentDataPath;
+
+    private const char PathSeparator = '/';
+
     static GameDataController()
     {
         AllItems = Resources
@@ -25,23 +38,30 @@ public static class GameDataController
             .ToDictionary(i => i.Name);
     }
 
+    /// <summary>
+    /// Вызывается при выборе игроком доступного сохранения.
+    /// </summary>
+    public static void SetSaveSlot(SaveSlot slot)
+    {
+        CurrentSaveSlot = slot;
+    }
+
     public static void Save(object data, DataCategory dataCategory, string savedFileName)
     {
-        var directoryPath = AddToPersistentDataPath(dataCategory.ToString());
+        var saveDirectoryPath = GetSaveDirectoryPath(dataCategory);
+        var saveFilePath = GetSavedFilePath(dataCategory, savedFileName);
 
-        if (!Directory.Exists(directoryPath))
-            Directory.CreateDirectory(directoryPath);
-
-        var savedFilePath = GetSavedFilePath(dataCategory, savedFileName);
+        if (!Directory.Exists(saveDirectoryPath))
+            Directory.CreateDirectory(saveDirectoryPath);
 
         try
         {
             var jsonData = JsonConvert.SerializeObject(data);
-            File.WriteAllText(savedFilePath, jsonData);
+            File.WriteAllText(saveFilePath, jsonData);
         }
         catch (Exception e)
         {
-            Debug.LogError($"Не удалось сохранить данные по пути [{savedFilePath}]. [{e.Message}].");
+            Debug.LogError($"Не удалось сохранить данные по пути [{saveFilePath}]. [{e.Message}].");
         }
     }
 
@@ -69,9 +89,20 @@ public static class GameDataController
     public static T LoadWithInitializationIfEmpty<T>(DataCategory dataCategory, string savedFileName) where T : new()
         => Load<T>(dataCategory, savedFileName) ?? new T();
 
+    private static string GetSaveDirectoryPath(DataCategory dataCategory)
+    {
+        var pathParts = new[]
+        {
+            CurrentSaveSlot.ToString(),
+            dataCategory.ToString(),
+        };
+
+        return AddToPersistentDataPath(string.Join(PathSeparator, pathParts));
+    }
+
     private static string GetSavedFilePath(DataCategory dataCategory, string saveFileName)
-        => AddToPersistentDataPath($"{dataCategory}/{saveFileName}.json");
+        => $"{GetSaveDirectoryPath(dataCategory)}{PathSeparator}{saveFileName}.json";
 
     private static string AddToPersistentDataPath(string pathPart)
-        => $"{Application.persistentDataPath}/{pathPart}";
+        => $"{PersistentDataPath}{PathSeparator}{pathPart}";
 }
