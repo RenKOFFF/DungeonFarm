@@ -8,8 +8,9 @@ namespace Base.Managers
     public class MonstersManager : MonoBehaviour
     {
         public CommandDataSO[] AllMonstersCommand { get; set; }
-        public MonsterDataSO[] AllMonstersData;
+        private MonsterDataSO[] _allMonstersData;
         public List<Monster> AllMonstersOnTheFarm = new();
+        public List<Monster> SelectedCombatMonsters = new();
 
         [SerializeField] private Transform _parentMonsters;
 
@@ -18,8 +19,37 @@ namespace Base.Managers
         private void Awake()
         {
             Instance = this;
+            _allMonstersData = Resources.LoadAll<MonsterDataSO>("Monsters");
             AllMonstersCommand = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
             AllMonstersData = GetAllMonstersData();
+        }
+
+        public bool SelectCombatMonster(Monster monster)
+        {
+            var combatMonster = AllMonstersOnTheFarm.Find(m => m == monster);
+            if (combatMonster)
+            {
+                AllMonstersOnTheFarm.Remove(combatMonster);
+                SelectedCombatMonsters.Add(combatMonster);
+                
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool DeselectCombatMonster(Monster monster)
+        {
+            var combatMonster = SelectedCombatMonsters.Find(m => m == monster);
+            if (combatMonster)
+            {
+                SelectedCombatMonsters.Remove(combatMonster);
+                AllMonstersOnTheFarm.Add(combatMonster);
+                
+                return true;
+            }
+
+            return false;
         }
 
         public static MonsterDataSO[] GetAllMonstersData()
