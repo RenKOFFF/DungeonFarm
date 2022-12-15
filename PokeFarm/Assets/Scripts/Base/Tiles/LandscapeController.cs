@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Base.Time;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,14 +20,15 @@ public class LandscapeController : MonoBehaviour
     [SerializeField] public Tilemap prefabsTilemap;
     [SerializeField] private SpawnableTile[] availableToSpawnTiles;
 
+    public static LandscapeController Instance;
+
+    public readonly Dictionary<TileBase, List<Vector3Int>> SpawnableTilesDictionary = new();
+
     private Vector3Int _minPosition;
     private Vector3Int _maxPosition;
     private Unity.Mathematics.Random _random;
     private TileMapReadManager _tileMapReadManager;
-    
-    public readonly Dictionary<TileBase, List<Vector3Int>> SpawnableTilesDictionary = new();
-    public static LandscapeController Instance;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -44,13 +46,16 @@ public class LandscapeController : MonoBehaviour
 
         _minPosition = cellBounds.min;
         _maxPosition = cellBounds.max;
+
+        foreach (var tile in availableToSpawnTiles)
+            WorldTimer.AddOnDayChangedHandler(() => SpawnTile(tile));
     }
 
-    private void Update()
-    {
-        foreach (var tile in availableToSpawnTiles)
-            TrySpawnTile(tile);
-    }
+    // private void Update()
+    // {
+    //     foreach (var tile in availableToSpawnTiles)
+    //         TrySpawnTile(tile);
+    // }
 
     private void TrySpawnTile(SpawnableTile tile)
     {
@@ -101,6 +106,7 @@ public class LandscapeController : MonoBehaviour
         {
             SpawnableTilesDictionary[tile.tile] = new List<Vector3Int>();
         }
+
         SpawnableTilesDictionary[tile.tile].Add(randomPosition);
 
         //Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
