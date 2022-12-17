@@ -39,7 +39,7 @@ public class ContainerController : MonoBehaviour
 
         existingSlot.amount += amount;
 
-        if (existingSlot.amount == 0)
+        if (existingSlot.amount <= 0)
             existingSlot.Clear();
 
         SaveAndRefresh();
