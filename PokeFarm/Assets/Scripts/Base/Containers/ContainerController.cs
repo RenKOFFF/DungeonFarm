@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Base.Items;
 using UnityEngine;
@@ -86,6 +87,11 @@ public class ContainerController : MonoBehaviour
     private void Awake()
     {
         OnEnable();
+        
+    }
+
+    private void Start()
+    {
         InventoryManager.Instance?.Refresh();
     }
 

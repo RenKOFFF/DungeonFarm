@@ -19,6 +19,7 @@ namespace Base.Combat
         {
             InitSelectCmb();
             InitDeselectCmb();
+            gameObject.SetActive(false);
         }
 
         private void InitSelectCmb()
