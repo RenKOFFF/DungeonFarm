@@ -29,14 +29,26 @@ public class BuildingsGrid : MonoBehaviour
     {
         if (ToolbarManager.Instance?.ItemOnTheHand?.type == ItemType.Building)
         {
-            _flyingBuilding?.gameObject.SetActive(true);
+            _flyingBuilding.gameObject.SetActive(true);
+            
+            _flyingBuilding.RefreshItem(ToolbarManager.Instance.ItemOnTheHand);
             _flyingBuilding.transform.position = TileMapReadManager.Instance.GetCurrentBackgroundGridPositionByMousePosition();
             _flyingBuilding.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 255, 255, 128);
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(_flyingBuilding, _parentBuilding);
+                if (ToolbarManager.Instance.ItemOnTheHand.BuildingPrefab)
+                {
+                    Instantiate(ToolbarManager.Instance.ItemOnTheHand.BuildingPrefab,
+                        _flyingBuilding.transform.position,
+                        Quaternion.identity,
+                        _parentBuilding);
+                }
+                else
+                {
+                    Instantiate(_flyingBuilding, _parentBuilding);
+                }
+                
                 GameManager.Instance.inventory.Remove(ToolbarManager.Instance.ItemOnTheHand);
-                _flyingBuilding?.gameObject.SetActive(false);
             }
         }
         else
