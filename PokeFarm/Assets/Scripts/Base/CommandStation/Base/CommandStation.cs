@@ -9,7 +9,7 @@ public class CommandStation : MonoBehaviour, IInteractable
     private CommandDataSO[] _allMonstersCommands;
     private Monster[] _allMonstersOnTheFarm;
     public Command CurrentCommand { get;  private set; }
-    [SerializeField] private CommandStationUI _usingInterface;
+    private CommandStationUI _usingInterface;
     [SerializeField] private CommandButton _commandButtonPrefab;
     [SerializeField] private CommandStationMonsterButton _commandStationMonsterButtonPrefab;
 

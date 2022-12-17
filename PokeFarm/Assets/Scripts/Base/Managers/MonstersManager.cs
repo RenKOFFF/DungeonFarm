@@ -21,7 +21,6 @@ namespace Base.Managers
             Instance = this;
             _allMonstersData = Resources.LoadAll<MonsterDataSO>("Monsters");
             AllMonstersCommand = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
-            AllMonstersData = GetAllMonstersData();
         }
 
         public bool SelectCombatMonster(Monster monster)
