@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2364672055132454710}
   - component: {fileID: 2364672055132454705}
+  - component: {fileID: 8268677263742636336}
   m_Layer: 0
   m_Name: AutobattleMonster
   m_TagString: Untagged
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &8268677263742636336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364672055132454711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2978f758376a2ef45a52003cce184123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <TimeToMakeMoveInSeconds>k__BackingField: 1
+  <TimeLeftToMakeMoveInSeconds>k__BackingField: 1

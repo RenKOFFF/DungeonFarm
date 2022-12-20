@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 1321894003}
   - component: {fileID: 1321894002}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -100
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -583,7 +583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BackgroundTilemap>k__BackingField: {fileID: 1321894003}
-  <MonsterPrefab>k__BackingField: {fileID: 2364672055132454711, guid: 2817eff68ae283a40ba53cf456694d48, type: 3}
-  <TimeToMakeMoveInSeconds>k__BackingField: 1
+  <MonsterPrefab>k__BackingField: {fileID: 8268677263742636336, guid: 2817eff68ae283a40ba53cf456694d48, type: 3}
   <GridOffset>k__BackingField: {x: -3, y: -1, z: 0}
   <CellDistanceBetweenFields>k__BackingField: 3
