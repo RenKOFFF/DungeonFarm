@@ -1,8 +1,10 @@
 using Base.Monsters;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AutobattleMonster : MonoBehaviour
 {
+    [field: SerializeField] public Slider Slider { get; set; }
     [field: SerializeField] public float TimeToMakeMoveInSeconds { get; set; } = 1;
     [field: SerializeField] public float TimeLeftToMakeMoveInSeconds { get; set; } = 1;
 
@@ -15,6 +17,9 @@ public class AutobattleMonster : MonoBehaviour
     {
         Stats = stats;
         Health = stats.Health;
+
+        Slider.maxValue = Health;
+        Slider.value = Health;
     }
 
     public void Attack(AutobattleMonster enemy)
@@ -29,11 +34,11 @@ public class AutobattleMonster : MonoBehaviour
         if (Health < 0)
             Health = 0;
 
-        Debug.Log($"[-{enemyStrength} hp] Ouch!. {Health} hp left.");
+        Slider.value = Health;
     }
 
     public void Die()
     {
-        Debug.Log("I'm dead!!");
+        GetComponent<SpriteRenderer>().color = Color.gray;
     }
 }

@@ -104,8 +104,6 @@ public class AutobattleController : MonoBehaviour
             if (cell.SpawnedMonster is { IsDead: true })
             {
                 cell.SpawnedMonster.Die();
-                Destroy(cell.SpawnedMonster.gameObject);
-
                 cell.SpawnedMonster = null;
             }
         });
