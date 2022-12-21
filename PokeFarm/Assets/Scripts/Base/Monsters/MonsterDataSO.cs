@@ -23,9 +23,9 @@ public class MonsterDataSO : ScriptableObject
     [Header("Stats")] 
     [SerializeField, Min(1)] private float _strength;
     [SerializeField, Min(1)] private int _luck;
-    [SerializeField, Min(1)] private int _protection;
+    [SerializeField, Min(1)] private int _defense;
     [SerializeField, Min(1)] private float _health;
-    [SerializeField, Min(1)] private float _agility;
+    [SerializeField, Min(1)] private float _dexterity;
     
     [SerializeField, Min(1)] private float _speed;
     [SerializeField, Min(1)] private int _inventorySize;
@@ -33,6 +33,6 @@ public class MonsterDataSO : ScriptableObject
 
     public MonsterStats GetStats()
     {
-        return new MonsterStats(_strength, _luck, _protection, _health, _agility, _speed, _inventorySize);
+        return new MonsterStats(_strength, _luck, _defense, _health, _dexterity, _speed, _inventorySize);
     }
 }

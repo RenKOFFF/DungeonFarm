@@ -2,16 +2,16 @@
 {
     public struct MonsterStats
     {
-        public float Strength, Speed, Health, Luck, Protection, Agility;
+        public float Strength, Speed, Health, Luck, Defense, Dexterity;
         public int InventorySize; 
 
-        public MonsterStats(float strength, float luck, float protection, float health, float agility, float speed, int inventorySize)
+        public MonsterStats(float strength, float luck, float defense, float health, float dexterity, float speed, int inventorySize)
         {
             Strength = strength;
             Luck = luck;
-            Protection = protection;
+            Defense = defense;
             Health = health;
-            Agility = agility;
+            Dexterity = dexterity;
             
             Speed = speed;
             InventorySize = inventorySize;
