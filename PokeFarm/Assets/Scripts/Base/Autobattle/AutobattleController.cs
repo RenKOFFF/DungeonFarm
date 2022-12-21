@@ -102,7 +102,7 @@ public class AutobattleController : MonoBehaviour
     private void Update()
     {
         PlayerField.AttackOnField(EnemyField);
-        EnemyField.AttackOnField(PlayerField);
+        EnemyField.AttackOnField(PlayerField, reverseDefenderFieldByXAxis: true);
 
         ForEachFieldCell(cell =>
         {
@@ -124,7 +124,17 @@ internal static class FieldExtensions
             action.Invoke(field[x, y]);
     }
 
-    internal static void AttackOnField(this FieldCell[,] attackerField, FieldCell[,] defenderField)
+    internal static void ForEachWithXReversed(this FieldCell[,] field, Action<FieldCell> action)
+    {
+        for (var x = field.GetLength(0) - 1; x >= 0; x--)
+        for (var y = 0; y < field.GetLength(1); y++)
+            action.Invoke(field[x, y]);
+    }
+
+    internal static void AttackOnField(
+        this FieldCell[,] attackerField,
+        FieldCell[,] defenderField,
+        bool reverseDefenderFieldByXAxis = false)
     {
         attackerField.ForEach(playerCell =>
         {
@@ -138,14 +148,22 @@ internal static class FieldExtensions
             if (!attackingMonster.IsReadyToAttack)
                 return;
 
-            defenderField.ForEach(enemyCell =>
+            void DefenderAction(FieldCell enemyCell)
             {
                 if (!attackingMonster.IsReadyToAttack)
                     return;
 
                 if (enemyCell.SpawnedMonster != null && !enemyCell.SpawnedMonster.IsDead)
                     attackingMonster.Attack(enemyCell.SpawnedMonster);
-            });
+            }
+
+            if (reverseDefenderFieldByXAxis)
+            {
+                defenderField.ForEachWithXReversed(DefenderAction);
+                return;
+            }
+
+            defenderField.ForEach(DefenderAction);
         });
     }
 }
