@@ -139,6 +139,7 @@ MonoBehaviour:
   <EnergySlider>k__BackingField: {fileID: 8999179776518623297}
   <TimeToMakeMoveInSeconds>k__BackingField: 1
   <TimeLeftToMakeMoveInSeconds>k__BackingField: 1
+  <AttackTimeInSeconds>k__BackingField: 0.3
 --- !u!1 &2832160826356806397
 GameObject:
   m_ObjectHideFlags: 0
