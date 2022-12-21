@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Base.Managers;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine.Tilemaps;
 
 internal class FieldCell
 {
-    public Vector2 Position { get; set; }
     [CanBeNull] public MonsterDataSO MonsterData { get; set; }
     [CanBeNull] public AutobattleMonster SpawnedMonster { get; set; }
 }
@@ -24,22 +24,21 @@ public class AutobattleController : MonoBehaviour
     private FieldCell[,] PlayerField { get; set; }
     private FieldCell[,] EnemyField { get; set; }
 
-    private void Initialize()
+    private void Initialize(IList<MonsterDataSO> availableMonsters)
     {
         PlayerField = new FieldCell[FieldWidth, FieldHeight];
         EnemyField = new FieldCell[FieldWidth, FieldHeight];
 
-        for (var w = 0; w < FieldWidth; w++)
+        for (var x = 0; x < FieldWidth; x++)
         {
-            for (var h = 0; h < FieldHeight; h++)
+            for (var y = 0; y < FieldHeight; y++)
             {
-                PlayerField[w, h] = new FieldCell();
-                EnemyField[w, h] = new FieldCell();
+                PlayerField[x, y] = new FieldCell();
+                EnemyField[x, y] = new FieldCell();
             }
         }
 
-        var availableMonsters = MonstersManager.GetAllMonstersData();
-
+        // TODO: Убрать, заменить на случайную генерацию
         PlayerField[0, 0].MonsterData = availableMonsters[0];
         PlayerField[1, 1].MonsterData = availableMonsters[1];
         PlayerField[0, 2].MonsterData = availableMonsters[1];
@@ -48,50 +47,56 @@ public class AutobattleController : MonoBehaviour
         EnemyField[1, 1].MonsterData = availableMonsters[1];
         EnemyField[0, 2].MonsterData = availableMonsters[1];
 
-        for (var w = 0; w < FieldWidth; w++)
+        for (var x = 0; x < FieldWidth; x++)
         {
-            for (var h = 0; h < FieldHeight; h++)
+            for (var y = 0; y < FieldHeight; y++)
             {
-                SpawnMonster(PlayerField, w, h);
-                SpawnMonster(EnemyField, w, h, true);
+                SpawnMonster(PlayerField, x, y);
+                SpawnMonster(EnemyField, x, y, true);
             }
         }
     }
 
-    private void SpawnMonster(FieldCell[,] field, int w, int h, bool isSecondField = false)
+    private void SpawnMonster(FieldCell[,] field, int x, int y, bool isSecondField = false)
     {
-        var cell = field[w, h];
+        var cell = field[x, y];
 
         if (cell.MonsterData != null)
         {
             var secondFieldOffset = new Vector3Int(isSecondField ? CellDistanceBetweenFields + FieldWidth : 0, 0);
 
-            cell.Position = TileMapReadManager.GetCellCenterWorldPosition(
+            var position = TileMapReadManager.GetCellCenterWorldPosition(
                 BackgroundTilemap,
-                new Vector3Int(w, h) + GridOffset + secondFieldOffset);
+                new Vector3Int(x, FieldHeight - 1 - y) + GridOffset + secondFieldOffset);
 
-            cell.SpawnedMonster = SpawnManager.SpawnObject(cell.Position, MonsterPrefab);
+            cell.SpawnedMonster = SpawnManager.SpawnObject(position, MonsterPrefab);
             var spawnedMonster = cell.SpawnedMonster;
 
+            if (isSecondField)
+            {
+                var spriteRenderer = spawnedMonster.GetComponent<SpriteRenderer>();
+                spriteRenderer.flipX = !spriteRenderer.flipX;
+            }
+
             spawnedMonster.transform.parent = transform;
-            spawnedMonster.name = $"Monster [{w},{h}]";
+            spawnedMonster.name = $"Monster [{x},{y}]";
             spawnedMonster.Initialize(cell.MonsterData.GetStats());
         }
     }
 
     private void ForEachFieldCell(Action<FieldCell> action)
     {
-        for (var w = 0; w < FieldWidth; w++)
-        for (var h = 0; h < FieldHeight; h++)
+        for (var x = 0; x < FieldWidth; x++)
+        for (var y = 0; y < FieldHeight; y++)
         {
-            action.Invoke(PlayerField[w, h]);
-            action.Invoke(EnemyField[w, h]);
+            action.Invoke(PlayerField[x, y]);
+            action.Invoke(EnemyField[x, y]);
         }
     }
 
     private void Start()
     {
-        Initialize();
+        Initialize(MonstersManager.GetAllMonstersData());
     }
 
     private void Update()
@@ -114,9 +119,9 @@ internal static class FieldExtensions
 {
     internal static void ForEach(this FieldCell[,] field, Action<FieldCell> action)
     {
-        for (var w = 0; w < field.GetLength(0); w++)
-        for (var h = 0; h < field.GetLength(1); h++)
-            action.Invoke(field[w, h]);
+        for (var x = 0; x < field.GetLength(0); x++)
+        for (var y = 0; y < field.GetLength(1); y++)
+            action.Invoke(field[x, y]);
     }
 
     internal static void AttackOnField(this FieldCell[,] attackerField, FieldCell[,] defenderField)
