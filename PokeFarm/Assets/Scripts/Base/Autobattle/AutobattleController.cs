@@ -128,18 +128,19 @@ internal static class FieldExtensions
             if (attackingMonster == null)
                 return;
 
-            attackingMonster.TimeLeftToMakeMoveInSeconds -= Time.deltaTime;
+            attackingMonster.ReduceTimeLeftToMakeMove(Time.deltaTime);
 
-            if (attackingMonster.TimeLeftToMakeMoveInSeconds < 0)
+            if (!attackingMonster.IsReadyToAttack)
+                return;
+
+            defenderField.ForEach(enemyCell =>
             {
-                defenderField.ForEach(enemyCell =>
-                {
-                    if (enemyCell.SpawnedMonster != null && !enemyCell.SpawnedMonster.IsDead)
-                        attackingMonster.Attack(enemyCell.SpawnedMonster);
-                });
+                if (!attackingMonster.IsReadyToAttack)
+                    return;
 
-                attackingMonster.TimeLeftToMakeMoveInSeconds = attackingMonster.TimeToMakeMoveInSeconds;
-            }
+                if (enemyCell.SpawnedMonster != null && !enemyCell.SpawnedMonster.IsDead)
+                    attackingMonster.Attack(enemyCell.SpawnedMonster);
+            });
         });
     }
 }

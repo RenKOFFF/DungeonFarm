@@ -4,11 +4,14 @@ using UnityEngine.UI;
 
 public class AutobattleMonster : MonoBehaviour
 {
-    [field: SerializeField] public Slider Slider { get; set; }
+    [field: SerializeField] public Slider HealthSlider { get; set; }
+    [field: SerializeField] public Slider EnergySlider { get; set; }
+
     [field: SerializeField] public float TimeToMakeMoveInSeconds { get; set; } = 1;
     [field: SerializeField] public float TimeLeftToMakeMoveInSeconds { get; set; } = 1;
 
     public bool IsDead => Health == 0;
+    public bool IsReadyToAttack => TimeLeftToMakeMoveInSeconds <= 0;
 
     private MonsterStats Stats { get; set; }
     private float Health { get; set; }
@@ -18,13 +21,23 @@ public class AutobattleMonster : MonoBehaviour
         Stats = stats;
         Health = stats.Health;
 
-        Slider.maxValue = Health;
-        Slider.value = Health;
+        HealthSlider.maxValue = Health;
+        UpdateHealthSliderValue();
+
+        EnergySlider.maxValue = TimeToMakeMoveInSeconds;
+        UpdateEnergySliderValue();
+    }
+
+    public void ReduceTimeLeftToMakeMove(float seconds)
+    {
+        TimeLeftToMakeMoveInSeconds -= seconds;
+        UpdateEnergySliderValue();
     }
 
     public void Attack(AutobattleMonster enemy)
     {
         enemy.GetDamage(Stats.Strength);
+        TimeLeftToMakeMoveInSeconds = TimeToMakeMoveInSeconds;
     }
 
     private void GetDamage(float enemyStrength)
@@ -34,7 +47,17 @@ public class AutobattleMonster : MonoBehaviour
         if (Health < 0)
             Health = 0;
 
-        Slider.value = Health;
+        UpdateHealthSliderValue();
+    }
+
+    private void UpdateHealthSliderValue()
+    {
+        HealthSlider.value = Health;
+    }
+
+    private void UpdateEnergySliderValue()
+    {
+        EnergySlider.value = TimeToMakeMoveInSeconds - TimeLeftToMakeMoveInSeconds;
     }
 
     public void Die()
