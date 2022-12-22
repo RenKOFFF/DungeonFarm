@@ -17,4 +17,4 @@ MonoBehaviour:
   dropAmount: 5
   breaksByTool: {fileID: 0}
   breaksByAny: 1
-  backgroundTileToSetAfterDestruction: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
+  backgroundTileToSetAfterDestruction: {fileID: 11400000, guid: d74aabfd05829c24db89249f97147cfd, type: 2}

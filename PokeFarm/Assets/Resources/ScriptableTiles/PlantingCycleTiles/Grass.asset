@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5500dc83e7994740a612946f1e31b078, type: 3}
   m_Name: Grass
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
+  tile: {fileID: 11400000, guid: d74aabfd05829c24db89249f97147cfd, type: 2}
   previousCycleTile: {fileID: 0}
-  nextCycleTile: {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
+  nextCycleTile: {fileID: 11400000, guid: a38fadcc5938a4e48966399a22daf0cc, type: 2}
   interactsWithTool: {fileID: 11400000, guid: d8de2184553a0204196d1cd07c230be7, type: 2}
+  availableForPlant: 0

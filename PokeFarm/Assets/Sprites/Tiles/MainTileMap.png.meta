@@ -427,11 +427,18 @@ TextureImporter:
         y: 3334
         width: 220
         height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5077359, y: 0.21803924}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -50, y: -62.5}
+        - {x: -88, y: -38.5}
+        - {x: -107, y: -0.5}
+        - {x: -101, y: 18.5}
+        - {x: 12, y: 17.5}
+        - {x: 86, y: -41.5}
+        - {x: 31, y: -82.5}
       tessellationDetail: 0
       bones: []
       spriteID: 462691ead3629c5488846b5d56ebe658
@@ -612,15 +619,19 @@ TextureImporter:
       name: Tree
       rect:
         serializedVersion: 2
-        x: 1299
-        y: 1511
+        x: 1308
+        y: 1505
         width: 963
         height: 1326
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5306393, y: 0.059841428}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -45.5, y: -619}
+        - {x: -43.5, y: -551}
+        - {x: 96.5, y: -551}
+        - {x: 105.5, y: -620}
       tessellationDetail: 0
       bones: []
       spriteID: ca2607c9d6d7054478b4c64b2237741e
@@ -776,6 +787,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PlowedDirtDark_0
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1678
+        width: 262
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a9b805b835588a47a49644f74005ddd
+      internalID: -594593283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -808,6 +840,7 @@ TextureImporter:
       Logs_2: 1590874111
       MainTileMap_21: 2096725616
       Grass_3: -1210404675
+      PlowedDirtDark_0: -594593283
       MainTileMap_22: 2029124785
       MainTileMap_23: -878288734
       MainTileMap_19: -1627735126

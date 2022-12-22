@@ -8,10 +8,7 @@ using UnityEngine.Tilemaps;
 public class SpawnableTile
 {
     public TileBase tile;
-    public float spawnIntervalInSeconds = 10;
     public Vector3Int prefabsTilemapPosition;
-
-    [NonSerialized] public float TimeLeftToSpawnTileInSeconds;
 }
 
 public class LandscapeController : MonoBehaviour
@@ -36,9 +33,6 @@ public class LandscapeController : MonoBehaviour
 
     private void Start()
     {
-        foreach (var tile in availableToSpawnTiles)
-            tile.TimeLeftToSpawnTileInSeconds = tile.spawnIntervalInSeconds;
-
         _random = new Unity.Mathematics.Random((uint) DateTime.Now.Millisecond);
         _tileMapReadManager = TileMapReadManager.Instance;
 
@@ -47,25 +41,11 @@ public class LandscapeController : MonoBehaviour
         _minPosition = cellBounds.min;
         _maxPosition = cellBounds.max;
 
+        Debug.Log(_minPosition);
+        Debug.Log(_maxPosition);
+
         foreach (var tile in availableToSpawnTiles)
             WorldTimer.AddOnDayChangedHandler(() => SpawnTile(tile));
-    }
-
-    // private void Update()
-    // {
-    //     foreach (var tile in availableToSpawnTiles)
-    //         TrySpawnTile(tile);
-    // }
-
-    private void TrySpawnTile(SpawnableTile tile)
-    {
-        tile.TimeLeftToSpawnTileInSeconds -= Time.deltaTime;
-
-        if (tile.TimeLeftToSpawnTileInSeconds < 0)
-        {
-            SpawnTile(tile);
-            tile.TimeLeftToSpawnTileInSeconds = tile.spawnIntervalInSeconds;
-        }
     }
 
     private void SpawnTile(SpawnableTile tile)
@@ -103,12 +83,10 @@ public class LandscapeController : MonoBehaviour
             false);
 
         if (!SpawnableTilesDictionary.ContainsKey(tile.tile))
-        {
             SpawnableTilesDictionary[tile.tile] = new List<Vector3Int>();
-        }
 
         SpawnableTilesDictionary[tile.tile].Add(randomPosition);
 
-        //Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
+        Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
 }

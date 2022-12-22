@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f61d8776b6e430ebf03f8a82824323f, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
-  tile: {fileID: 11400000, guid: a834596e08baf284788d505000629252, type: 2}
+  tile: {fileID: 11400000, guid: 1948daba0d5ca004cb43ee4d99f8c968, type: 2}
   dropsItem: {fileID: 11400000, guid: 5867b9d667ee2d04a82495a4586ddfad, type: 2}
   dropAmount: 2
   breaksByTool: {fileID: 11400000, guid: b98fb8bd251255a48ab0d343d064efe3, type: 2}
+  breaksByAny: 0
+  backgroundTileToSetAfterDestruction: {fileID: 0}

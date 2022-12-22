@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5500dc83e7994740a612946f1e31b078, type: 3}
   m_Name: PlowedDirt
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 0f0c437d5296e904997c6c33b4762574, type: 2}
-  previousCycleTile: {fileID: 11400000, guid: 1c46bf8a86827d442b2aca2d4e0d3918, type: 2}
-  nextCycleTile: {fileID: 11400000, guid: 61ae52053fc8b9046843968510f706f2, type: 2}
+  tile: {fileID: 11400000, guid: a38fadcc5938a4e48966399a22daf0cc, type: 2}
+  previousCycleTile: {fileID: 11400000, guid: d74aabfd05829c24db89249f97147cfd, type: 2}
+  nextCycleTile: {fileID: 11400000, guid: a9cacf72e78dee8499a7b066eee4fc4e, type: 2}
   interactsWithTool: {fileID: 11400000, guid: 475100fa20d19354b905c6b38cf1dfe1, type: 2}
   availableForPlant: 1
