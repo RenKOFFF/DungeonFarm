@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Base.Managers;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,10 +14,11 @@ internal class FieldCell
 
 public class AutobattleController : MonoBehaviour
 {
-    [field: SerializeField] private Tilemap BackgroundTilemap { get; set; }
-    [field: SerializeField] private AutobattleMonster MonsterPrefab { get; set; }
     [field: SerializeField] private Vector3Int GridOffset { get; set; } = new(-3, -1);
     [field: SerializeField] private int CellDistanceBetweenFields { get; set; } = 3;
+    [field: SerializeField] private Tilemap BackgroundTilemap { get; set; }
+    [field: SerializeField] private AutobattleMonster MonsterPrefab { get; set; }
+    [field: SerializeField] private TMP_Text EndGameText { get; set; }
 
     private const int FieldWidth = 2;
     private const int FieldHeight = 3;
@@ -112,6 +114,51 @@ public class AutobattleController : MonoBehaviour
                 cell.SpawnedMonster = null;
             }
         });
+
+        CheckWinCondition();
+    }
+
+    private void CheckWinCondition()
+    {
+        var isPlayerWon = true;
+        var isEnemyWon = true;
+
+        PlayerField.ForEach(cell =>
+        {
+            if (cell.SpawnedMonster is { IsDead: false })
+                isEnemyWon = false;
+        });
+
+        EnemyField.ForEach(cell =>
+        {
+            if (cell.SpawnedMonster is { IsDead: false })
+                isPlayerWon = false;
+        });
+
+        if (!isPlayerWon && !isEnemyWon)
+            return;
+
+        ChangeEndGameText(isPlayerWon, isEnemyWon);
+        EndGameText.transform.parent.gameObject.SetActive(true);
+    }
+
+    private void ChangeEndGameText(bool isPlayerWon, bool isEnemyWon)
+    {
+        switch (isPlayerWon)
+        {
+            case true when isEnemyWon:
+                EndGameText.text = "Ничья";
+                EndGameText.color = Color.white;
+                return;
+            case true:
+                EndGameText.text = "Победа";
+                EndGameText.color = Color.green;
+                return;
+            default:
+                EndGameText.text = "Поражение";
+                EndGameText.color = Color.red;
+                break;
+        }
     }
 }
 
