@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class CharacterMouseInteractController : MonoBehaviour
 {
+    
+    public static UnityEvent<PlantingCycleTile, Vector3Int> OnPlantHarvestedEvent = new();
     private static void Interact()
     {
         var currentGridPosition = MarkerManager.Instance.markedCellPosition;
@@ -44,6 +47,8 @@ public class CharacterMouseInteractController : MonoBehaviour
         plantsTilemap.SetTile(currentGridPosition, itemOnTheHand.growCycleStartTile.tile);
 
         GameManager.Instance.inventory.Remove(itemOnTheHand);
+        
+            //посадили семечко
     }
 
     private static void InteractWithBreakableTile(
@@ -62,6 +67,9 @@ public class CharacterMouseInteractController : MonoBehaviour
         if (breakableTile.backgroundTileToSetAfterDestruction != null)
             backgroundTilemap.SetTile(currentGridPosition, breakableTile.backgroundTileToSetAfterDestruction);
 
+        //cобрали ресурсы
+        OnPlantHarvestedEvent.Invoke(null, currentGridPosition);
+        
         SpawnManager.Instance.SpawnPickUpItemsInArea(
             TileMapReadManager.GetCellCenterWorldPosition(plantsTilemap, currentGridPosition),
             breakableTile.dropsItem,

@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
 {
+
+    public static UnityEvent<PlantingCycleTile, Vector3Int> OnGardenBedDigUpEvent = new();
+    
     private static void UseTool(Item tool)
     {
         var currentGridPosition = MarkerManager.Instance.markedCellPosition;
@@ -66,6 +70,9 @@ public class ToolsController : MonoBehaviour
         backgroundTilemap.SetTile(
             currentGridPosition,
             plantingCycleTile.nextCycleTile);
+        
+        //поставили грядку или полили
+        OnGardenBedDigUpEvent.Invoke(plantingCycleTile, currentGridPosition);
     }
 
     private void Update()
