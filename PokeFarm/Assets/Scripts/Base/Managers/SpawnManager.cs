@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -33,12 +34,10 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnObject(Vector2 position, GameObject objectToSpawn)
-    {
-        Instantiate(objectToSpawn, position, Quaternion.identity);
-    }
+    public static T SpawnObject<T>(Vector2 position, T objectToSpawn) where T : Object
+        => Instantiate(objectToSpawn, position, Quaternion.identity);
 
-    public TScript SpawnObjectWithScriptOnCanvas<TScript>(TScript objectToSpawn) where TScript : MonoBehaviour
+    public static T SpawnObjectWithScriptOnCanvas<T>(T objectToSpawn) where T : Object
     {
         var canvas = GetCanvas();
         return Instantiate(objectToSpawn, canvas.transform, false);

@@ -2,7 +2,7 @@
 
 public class MonsterToolController : MonoBehaviour
 {
-    public static void UseTool(Item tool, Monster monster, Vector3Int currentGridPosition)
+    public static void BreakTileUsingTool(Item tool, Monster monster, Vector3Int currentGridPosition)
     {
         var landscapeTilemap = TileMapReadManager.Instance.landscapeTilemap;
         var tileData = TileMapReadManager.Instance.GetLandscapeTileDataByGridPosition(currentGridPosition);
@@ -21,5 +21,15 @@ public class MonsterToolController : MonoBehaviour
 
         monster.Inventory.AddItem(breakableTile.dropsItem/*,
             breakableTile.dropAmount*/);
+    }
+
+    public static void SwitchCycleTileUsingTool(Item tool, Monster monster, PlantingCycleTile diggingUpPlantingCycleTile, Vector3Int currentGridPosition)
+    {
+        if (tool != diggingUpPlantingCycleTile.interactsWithTool)
+            return;
+
+        TileMapReadManager.Instance.backgroundTilemap.SetTile(
+            currentGridPosition,
+            diggingUpPlantingCycleTile.nextCycleTile);
     }
 }

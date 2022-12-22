@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Base.Items;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class ContainerController : MonoBehaviour
 
         existingSlot.amount += amount;
 
-        if (existingSlot.amount == 0)
+        if (existingSlot.amount <= 0)
             existingSlot.Clear();
 
         SaveAndRefresh();
@@ -86,6 +87,11 @@ public class ContainerController : MonoBehaviour
     private void Awake()
     {
         OnEnable();
+        
+    }
+
+    private void Start()
+    {
         InventoryManager.Instance?.Refresh();
     }
 

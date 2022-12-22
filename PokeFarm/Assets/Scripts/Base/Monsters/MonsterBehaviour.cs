@@ -67,7 +67,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         StateMachine.CurrentState.Update();
     }
 
-    public bool GiveCommand(BaseMonsterCommandState commandState)
+    public bool GiveCommand(BaseMonsterState commandState)
     {
         if (Monster.SpendAttachment())
         {

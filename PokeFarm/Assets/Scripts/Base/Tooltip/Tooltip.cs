@@ -68,7 +68,7 @@ public class Tooltip : MonoBehaviour {
 
 		float arrowShift = width / 4; // сдвиг позиции стрелки по Х
 
-		if(_commandStationUI.activeInHierarchy && (show || isUI))
+		if(_commandStationUI && _commandStationUI.activeInHierarchy && (show || isUI))
 		{
 			float arrowPositionY = -(arrow.sizeDelta.y / 2 - 1); // позиция стрелки по умолчанию (внизу)
 			float arrowPositionX = arrowShift;

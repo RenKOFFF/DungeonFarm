@@ -9,22 +9,33 @@ public class CommandStation : MonoBehaviour, IInteractable
     private CommandDataSO[] _allMonstersCommands;
     private Monster[] _allMonstersOnTheFarm;
     public Command CurrentCommand { get;  private set; }
-    [SerializeField] private CommandStationUI _usingInterface;
-    [SerializeField] private CommandButton _commandButtonPrefab;
-    [SerializeField] private MonsterCommandStationButton _monsterButtonPrefab;
     
-    private bool isInited;
+    private CommandStationUI _usingInterface;
+    [SerializeField] private CommandStationUI _prefabUI;
+    [SerializeField] private CommandButton _commandButtonPrefab;
+    [SerializeField] private CommandStationMonsterButton _commandStationMonsterButtonPrefab;
+
+
+    private bool IsInitiated { get; set; }
+    private bool _isPrepareToInitEnded;
 
     //public static UnityEvent<MonstersInteractionWay> OnCommandChangedEvent = new UnityEvent<MonstersInteractionWay>();
 
     private void Start()
     {
-        PrepareToInit();
-        _usingInterface.gameObject.SetActive(false);
+        Interact();
     }
 
     private void PrepareToInit()
     {
+        if(_isPrepareToInitEnded) return;
+
+        if (_usingInterface == null)
+        {
+            var canvas = GameObject.FindWithTag("Canvas");
+            _usingInterface = canvas ? Instantiate(_prefabUI, canvas.transform) : Instantiate(_prefabUI);
+        }
+        
         _allMonstersOnTheFarm = MonstersManager.Instance.AllMonstersOnTheFarm.ToArray();
         _allMonstersCommands = MonstersManager.Instance.AllMonstersCommand;
         
@@ -40,31 +51,36 @@ public class CommandStation : MonoBehaviour, IInteractable
         
         foreach (var monster in _allMonstersOnTheFarm)
         {
-            var button = _monsterButtonPrefab;
+            var button = _commandStationMonsterButtonPrefab;
             button.MonsterData = monster.MonsterData;
             button.CommandDataSO = monster.MonsterData.CommandData;
             button.RefreshButtonData();
 
             Instantiate(button, _usingInterface.MonstersList.transform);
+
+            _isPrepareToInitEnded = true;
         }
     }
     private void Init(Command command)
     {
         CurrentCommand = command;
-        isInited = true;
+        IsInitiated = true;
     }
 
     public void Interact()
     {
-        if (isInited)
+        if (!IsInitiated)
         {
-            ShowInterface();
+            PrepareToInit();
+            //ShowInitInterface();
         }
-        ShowInitInterface();
+        
+        ShowInterface();
     }
 
     private void ShowInitInterface()
     {
+        _usingInterface.CommandList.gameObject.SetActive(true);
         _usingInterface.gameObject.SetActive(true);
     }
 
@@ -80,21 +96,13 @@ public class CommandStation : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
-        CommandButton.OnCommandSelectedEvent.AddListener(ChangeCurrentCommand);
-        MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideInterface);
-    }
-
-    private void ChangeCurrentCommand(Command selectedCommand)
-    {
-        //CurrentCommand = selectedCommand;
-
-        //OnCommandChangededEvent.Invoke(CurrentCommand);
-
+        CommandButton.OnCommandSelectedEvent.AddListener(Init);
+        CommandStationMonsterButton.OnCommandExecutedEvent.AddListener(HideInterface);
     }
 
     private void OnDisable()
     {
-        CommandButton.OnCommandSelectedEvent.RemoveListener(ChangeCurrentCommand);
-        MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideInterface);
+        CommandButton.OnCommandSelectedEvent.RemoveListener(Init);
+        CommandStationMonsterButton.OnCommandExecutedEvent.RemoveListener(HideInterface);
     }
 }
