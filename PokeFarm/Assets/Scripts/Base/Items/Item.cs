@@ -25,5 +25,7 @@ public class Item : ScriptableObject
 
     [CanBeNull] public GrowCycleTile growCycleStartTile;
 
-    [CanBeNull, Header("Buildings")] public GameObject BuildingPrefab;
+    [CanBeNull, Header("Buildings")] 
+    
+    public GameObject BuildingPrefab;
 }

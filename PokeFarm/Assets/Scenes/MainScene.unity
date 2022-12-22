@@ -10155,22 +10155,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1220441154, guid: f8a346bea575621498e0212dedc40777, type: 3}
-      propertyPath: durationTeleportBySceneName
-      value: MainHouseScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220441154, guid: f8a346bea575621498e0212dedc40777, type: 3}
-      propertyPath: _durationTeleportBySceneName
-      value: MainHouseScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 3431860375407345110, guid: f8a346bea575621498e0212dedc40777, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417839102368820320, guid: f8a346bea575621498e0212dedc40777, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8016925784224578914, guid: f8a346bea575621498e0212dedc40777, type: 3}
       propertyPath: m_RootOrder
       value: 12
