@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   Name: Stone
-  icon: {fileID: 21300000, guid: 40188da6de7c6c84aac75f66abc1a89c, type: 3}
+  icon: {fileID: 1035373724, guid: 80a9728edbaa54c40a7a8829228d5695, type: 3}
   isStackable: 1
   type: 0
-  isFood: 0
+  growCycleStartTile: {fileID: 0}

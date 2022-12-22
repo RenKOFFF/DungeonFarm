@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logs_1
+      name: Wood_1
       rect:
         serializedVersion: 2
         x: 2459
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Logs_2
+      name: Wood_2
       rect:
         serializedVersion: 2
         x: 2754
@@ -399,7 +399,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock_1
+      name: Stone_1
       rect:
         serializedVersion: 2
         x: 2473
@@ -420,7 +420,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock_2
+      name: Stone_2
       rect:
         serializedVersion: 2
         x: 2770
@@ -431,14 +431,7 @@ TextureImporter:
       pivot: {x: 0.5077359, y: 0.21803924}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -50, y: -62.5}
-        - {x: -88, y: -38.5}
-        - {x: -107, y: -0.5}
-        - {x: -101, y: 18.5}
-        - {x: 12, y: 17.5}
-        - {x: 86, y: -41.5}
-        - {x: 31, y: -82.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 462691ead3629c5488846b5d56ebe658
@@ -595,7 +588,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainTileMap_23
+      name: Rock_2
       rect:
         serializedVersion: 2
         x: 811
@@ -606,7 +599,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 8, y: -58}
+        - {x: -68, y: -47}
+        - {x: -109, y: 4}
+        - {x: -21, y: 26}
+        - {x: 95, y: 3}
+        - {x: 115, y: -2}
+        - {x: 115, y: -31}
       tessellationDetail: 0
       bones: []
       spriteID: 35e44cb2e25d6fd46a8fcf725ac513f8
@@ -683,7 +683,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainTileMap_27
+      name: Rock_1
       rect:
         serializedVersion: 2
         x: 803
@@ -694,7 +694,13 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -24, y: -62.5}
+        - {x: -85, y: -22.5}
+        - {x: -114, y: 19.5}
+        - {x: -24, y: 37.5}
+        - {x: 107, y: 19.5}
+        - {x: 107, y: -6.5}
       tessellationDetail: 0
       bones: []
       spriteID: a88ff266212786c48961e29613b2124a
@@ -821,6 +827,7 @@ TextureImporter:
     nameFileIdTable:
       MainTileMap_20: -861928072
       MainTileMap_10: -766337870
+      Wood_2: 1590874111
       Tree: 348281840
       MainTileMap_1: -1562870715
       MainTileMap_9: -1511234405
@@ -829,28 +836,27 @@ TextureImporter:
       PlowedDirt_0: 1874008625
       Grass_2: 122744606
       MainTileMap_16: 1901660898
+      Stone_1: 199425396
       MainTileMap_13: 683450972
+      Stone_2: 1035373724
       MainTileMap_0: 924950058
       MainTileMap_3: 1595095764
       House: -1345554612
       MainTileMap_2: 1322933882
       MainTileMap_18: 1001223151
       Grass_1: -1614118580
-      Rock_2: 1035373724
-      Logs_2: 1590874111
+      Rock_2: -878288734
       MainTileMap_21: 2096725616
       Grass_3: -1210404675
       PlowedDirtDark_0: -594593283
       MainTileMap_22: 2029124785
-      MainTileMap_23: -878288734
       MainTileMap_19: -1627735126
       MainTileMap_31: 2101428552
-      MainTileMap_27: -1726549351
       MainTileMap_17: -800936270
       MainTileMap_12: -752700605
       MainTileMap_8: 756943070
-      Logs_1: 450117936
-      Rock_1: 199425396
+      Wood_1: 450117936
+      Rock_1: -1726549351
       MainTileMap_5: 1190301214
       MainTileMap_25: -1463107790
   spritePackingTag: 
