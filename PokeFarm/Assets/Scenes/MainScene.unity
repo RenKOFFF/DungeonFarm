@@ -10052,6 +10052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParentBuildings
       objectReference: {fileID: 0}
+    - target: {fileID: 8509686063478968972, guid: f8a346bea575621498e0212dedc40777, type: 3}
+      propertyPath: durationTeleportBySceneName
+      value: CombatScene
+      objectReference: {fileID: 0}
     - target: {fileID: 8509686063478968973, guid: f8a346bea575621498e0212dedc40777, type: 3}
       propertyPath: _ui
       value: 
