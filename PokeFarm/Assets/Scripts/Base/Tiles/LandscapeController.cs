@@ -41,9 +41,6 @@ public class LandscapeController : MonoBehaviour
         _minPosition = cellBounds.min;
         _maxPosition = cellBounds.max;
 
-        Debug.Log(_minPosition);
-        Debug.Log(_maxPosition);
-
         foreach (var tile in availableToSpawnTiles)
             WorldTimer.AddOnDayChangedHandler(() => SpawnTile(tile));
     }
@@ -87,6 +84,6 @@ public class LandscapeController : MonoBehaviour
 
         SpawnableTilesDictionary[tile.tile].Add(randomPosition);
 
-        Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
+        // Debug.Log($"Spawned [{tile.tile.name}] on coordinates {randomPosition}.");
     }
 }

@@ -19,7 +19,7 @@ namespace Base.Managers
         private void Awake()
         {
             Instance = this;
-            _allMonstersData = Resources.LoadAll<MonsterDataSO>("Monsters");
+            _allMonstersData = GetAllMonstersData();
             AllMonstersCommand = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
         }
 
