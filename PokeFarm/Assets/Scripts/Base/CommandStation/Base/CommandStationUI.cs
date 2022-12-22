@@ -7,26 +7,12 @@ using UnityEngine.UI;
 
 public class CommandStationUI : MonoBehaviour
 {
-    public static CommandStationUI Instance;
     [field : SerializeField] public GridLayoutGroup CommandList { get; private set; }
     [field: SerializeField] public GridLayoutGroup MonstersList { get; private set; }
 
-    private void Awake()
-    {
-        if (!Instance)
-        {
-            Instance = this;
-        }
-    }
-
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
-        CommandButton.OnCommandSelectedEvent.AddListener(HideCommandAndShowMonsters);
+        CommandButton.OnCommandSelectedEvent.AddListener(HideCommand);
         //MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
     }
     
@@ -35,20 +21,14 @@ public class CommandStationUI : MonoBehaviour
         CommandList.gameObject.SetActive(true);
     }
 
-    private void HideCommandAndShowMonsters(Command _)
+    private void HideCommand(Command _)
     {
         CommandList.gameObject.SetActive(false);
-        //MonstersList.gameObject.SetActive(true);
-    }
-    
-    private void HideMonstersAndShowCommand()
-    {
-        //CommandList.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-        CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommandAndShowMonsters);
+        CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommand);
         //MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
     }
 }
