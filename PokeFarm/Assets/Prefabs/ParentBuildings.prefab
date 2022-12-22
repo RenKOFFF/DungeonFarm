@@ -720,6 +720,10 @@ PrefabInstance:
       propertyPath: DurationTeleportBySceneName
       value: MainHouseScene
       objectReference: {fileID: 0}
+    - target: {fileID: 9122893112062000820, guid: 70443fdde6112954a9826717ae626ca7, type: 3}
+      propertyPath: durationTeleportBySceneName
+      value: MainHouseScene
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1903974831927151051, guid: 70443fdde6112954a9826717ae626ca7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 70443fdde6112954a9826717ae626ca7, type: 3}

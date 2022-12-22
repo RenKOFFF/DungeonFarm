@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BuildingsGrid : MonoBehaviour
 {
-    private BoundsInt _cellBounds;
-    private Buildings[,] _gridBuildings;
+    public static BoundsInt CellBounds { get; private set; }
+    public static Buildings[,] GridBuildings { get; private set; }
 
     [SerializeField] private Transform _parentBuilding;
     [SerializeField] private Buildings _flyingBuilding;
@@ -21,8 +21,8 @@ public class BuildingsGrid : MonoBehaviour
 
     private void Start()
     {
-        _cellBounds = TileMapReadManager.Instance.backgroundTilemap.cellBounds;
-        _gridBuildings = new Buildings[_cellBounds.size.x, _cellBounds.size.y];
+        CellBounds = TileMapReadManager.Instance.backgroundTilemap.cellBounds;
+        GridBuildings = new Buildings[CellBounds.size.x, CellBounds.size.y];
 
         var startBuildings = GameObject.FindGameObjectsWithTag("Building");
         InitStartBuildings(startBuildings);
@@ -105,10 +105,10 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < building.Size.y; y++)
             {
-                _gridBuildings
+                GridBuildings
                 [
-                    placeX - halfSizeX - _cellBounds.xMin + x,
-                    placeY - halfSizeY - _cellBounds.yMin + y
+                    placeX - halfSizeX - CellBounds.xMin + x,
+                    placeY - halfSizeY - CellBounds.yMin + y
                 ] = building;
             }
         }
@@ -116,10 +116,10 @@ public class BuildingsGrid : MonoBehaviour
 
     private bool CheckBoundsForBuildAvailable(Vector3Int mousePosition)
     {
-        return !(mousePosition.x - _flyingBuilding.Size.x / 2 < _cellBounds.xMin ||
-                mousePosition.x + 1  + _flyingBuilding.Size.x / 2 > _cellBounds.xMax ||
-                mousePosition.y - _flyingBuilding.Size.y / 2 < _cellBounds.yMin ||
-                mousePosition.y + 1  + _flyingBuilding.Size.y / 2 > _cellBounds.yMax);
+        return !(mousePosition.x - _flyingBuilding.Size.x / 2 < CellBounds.xMin ||
+                mousePosition.x + 1  + _flyingBuilding.Size.x / 2 > CellBounds.xMax ||
+                mousePosition.y - _flyingBuilding.Size.y / 2 < CellBounds.yMin ||
+                mousePosition.y + 1  + _flyingBuilding.Size.y / 2 > CellBounds.yMax);
     }
 
     private bool IsPlaceTaken(int placeX, int placeY)
@@ -131,10 +131,10 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
-                if (_gridBuildings
+                if (GridBuildings
                     [
-                        placeX - halfSizeX - _cellBounds.xMin + x, 
-                        placeY - halfSizeY - _cellBounds.yMin + y
+                        placeX - halfSizeX - CellBounds.xMin + x, 
+                        placeY - halfSizeY - CellBounds.yMin + y
                     ] != null)
                 {
                     return true;
