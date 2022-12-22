@@ -23,8 +23,15 @@ public class AutobattleController : MonoBehaviour
     private const int FieldWidth = 2;
     private const int FieldHeight = 3;
 
+    private bool IsGameStarted { get; set; }
+
     private FieldCell[,] PlayerField { get; set; }
     private FieldCell[,] EnemyField { get; set; }
+
+    public void StartGame()
+    {
+        IsGameStarted = true;
+    }
 
     private void Initialize(IList<MonsterDataSO> availableMonsters)
     {
@@ -41,12 +48,10 @@ public class AutobattleController : MonoBehaviour
         }
 
         // TODO: Убрать, заменить на случайную генерацию
-        PlayerField[0, 0].MonsterData = availableMonsters[0];
-        PlayerField[1, 1].MonsterData = availableMonsters[1];
-        PlayerField[0, 2].MonsterData = availableMonsters[1];
+        PlayerField[1, 1].MonsterData = availableMonsters[0];
+        PlayerField[0, 2].MonsterData = availableMonsters[0];
 
-        EnemyField[0, 0].MonsterData = availableMonsters[0];
-        EnemyField[1, 1].MonsterData = availableMonsters[1];
+        EnemyField[0, 0].MonsterData = availableMonsters[1];
         EnemyField[0, 2].MonsterData = availableMonsters[1];
 
         for (var x = 0; x < FieldWidth; x++)
@@ -54,7 +59,7 @@ public class AutobattleController : MonoBehaviour
             for (var y = 0; y < FieldHeight; y++)
             {
                 SpawnMonster(PlayerField, x, y);
-                SpawnMonster(EnemyField, x, y, true);
+                SpawnMonster(EnemyField, x, y, isSecondField: true);
             }
         }
     }
@@ -82,7 +87,20 @@ public class AutobattleController : MonoBehaviour
 
             spawnedMonster.transform.parent = transform;
             spawnedMonster.name = $"Monster [{x},{y}]";
-            spawnedMonster.Initialize(cell.MonsterData.GetStats());
+            var monsterStats = cell.MonsterData.GetStats();
+
+#if DEBUG
+            monsterStats.Strength = 10;
+            monsterStats.Health = 50;
+
+            if (isSecondField)
+            {
+                monsterStats.Strength -= 5;
+                monsterStats.Health -= 5;
+            }
+#endif
+
+            spawnedMonster.Initialize(monsterStats);
         }
     }
 
@@ -103,6 +121,9 @@ public class AutobattleController : MonoBehaviour
 
     private void Update()
     {
+        if (!IsGameStarted)
+            return;
+
         PlayerField.AttackOnField(EnemyField);
         EnemyField.AttackOnField(PlayerField, reverseDefenderFieldByXAxis: true);
 
@@ -138,18 +159,14 @@ public class AutobattleController : MonoBehaviour
         if (!isPlayerWon && !isEnemyWon)
             return;
 
-        ChangeEndGameText(isPlayerWon, isEnemyWon);
+        ChangeEndGameText(isPlayerWon);
         EndGameText.transform.parent.gameObject.SetActive(true);
     }
 
-    private void ChangeEndGameText(bool isPlayerWon, bool isEnemyWon)
+    private void ChangeEndGameText(bool isPlayerWon)
     {
         switch (isPlayerWon)
         {
-            case true when isEnemyWon:
-                EndGameText.text = "Ничья";
-                EndGameText.color = Color.white;
-                return;
             case true:
                 EndGameText.text = "Победа";
                 EndGameText.color = Color.green;
