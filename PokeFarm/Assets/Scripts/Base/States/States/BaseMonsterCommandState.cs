@@ -68,7 +68,7 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
                 Debug.Log($"Break {_breakTile.name}");
                 _currentTileIndex = -1;
 
-                MonsterToolController.UseTool(_workTool, _monsterBehaviour.Monster, _currentTilePosition);
+                MonsterToolController.BreakTileUsingTool(_workTool, _monsterBehaviour.Monster, _currentTilePosition);
 
                 if (!_monsterBehaviour.Monster.SpendEnergy(CommandEnergyCost))
                 {

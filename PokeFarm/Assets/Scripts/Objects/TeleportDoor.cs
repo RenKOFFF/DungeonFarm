@@ -1,17 +1,44 @@
+using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportDoor : Door
 {
-    public string DurationTeleportBySceneName;
+    protected bool isSwitchingSceneNow;
+    public string durationTeleportBySceneName;
+
     public override void Interact()
     {
-        //base.Interact();
-        //if (isOpen)
-        Teleport();
+        if (isSwitchingSceneNow) return;
+        
+        StartCoroutine(WaitSwitchScene());
     }
 
-    private void Teleport()
+    protected void Teleport()
     {
-        SceneManager.LoadScene(DurationTeleportBySceneName);
+        SceneManager.LoadScene(durationTeleportBySceneName);
+    }
+    
+    protected IEnumerator WaitSwitchScene()
+    {
+        isSwitchingSceneNow = true;
+        
+        var waitFading = true;
+        Fader.Instance.FadeIn(() => waitFading = false);
+        while (waitFading)
+        {
+            yield return null;
+        }
+        
+        Teleport();
+        
+        waitFading = true;
+        Fader.Instance.FadeOut(() => waitFading = false);
+        while (waitFading)
+        {
+            yield return null;
+        }
+        
+        isSwitchingSceneNow = false;
     }
 }

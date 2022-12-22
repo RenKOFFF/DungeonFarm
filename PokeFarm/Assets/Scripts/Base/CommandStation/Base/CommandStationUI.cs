@@ -9,11 +9,11 @@ public class CommandStationUI : MonoBehaviour
 {
     [field : SerializeField] public GridLayoutGroup CommandList { get; private set; }
     [field: SerializeField] public GridLayoutGroup MonstersList { get; private set; }
-    
+
     private void OnEnable()
     {
-        CommandButton.OnCommandSelectedEvent.AddListener(HideCommandAndShowMonsters);
-        MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
+        CommandButton.OnCommandSelectedEvent.AddListener(HideCommand);
+        //MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
     }
     
     public void SetDefaultState()
@@ -21,20 +21,14 @@ public class CommandStationUI : MonoBehaviour
         CommandList.gameObject.SetActive(true);
     }
 
-    private void HideCommandAndShowMonsters(Command _)
+    private void HideCommand(Command _)
     {
-        //CommandList.gameObject.SetActive(false);
-        //MonstersList.gameObject.SetActive(true);
-    }
-    
-    private void HideMonstersAndShowCommand()
-    {
-        //CommandList.gameObject.SetActive(true);
+        CommandList.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommandAndShowMonsters);
-        MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
+        CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommand);
+        //MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
     }
 }
