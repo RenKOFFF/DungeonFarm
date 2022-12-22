@@ -12274,6 +12274,14 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8279661540096596497, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279661540096596497, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279661540096596497, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02
       objectReference: {fileID: 0}
@@ -12317,6 +12325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 8279661540096596503, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8ed02be18e974bd40ae8f73fe59bf722, type: 2}
     - target: {fileID: 9091087370559078292, guid: a2fd5e274c987604fba74eb976b0d086, type: 3}
       propertyPath: currentToolbar
       value: 

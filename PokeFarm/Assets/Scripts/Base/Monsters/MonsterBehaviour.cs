@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class MonsterBehaviour : MonoBehaviour, IInteractable
 {
     private Monster _monster;
+    public Animator Animator => _animator;
+    [SerializeField] private Animator _animator;
     public Monster Monster { get => _monster; private set => _monster = value; }
     public float Speed { get => _monster.Stats.Speed;}
     public bool isCanInteract => _isCanInteract;
@@ -39,6 +41,9 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
     {
         _monster = GetComponent<Monster>();
 
+        if (_animator == null) 
+            _animator = GetComponent<Animator>();
+        
         InitializeInteractionWays();
         InitializeStates();
         
@@ -82,7 +87,7 @@ public class MonsterBehaviour : MonoBehaviour, IInteractable
         var collider = collision.GetComponent<CharacterController2D>();
         if (collider != null)
         {
-            StateMachine.ChangeState(new FollowingState(_monster, _monster.Stats.Speed, collider.gameObject, StateMachine.CurrentState));
+            //StateMachine.ChangeState(new FollowingState(_monster, _monster.Stats.Speed, collider.gameObject, StateMachine.CurrentState));
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

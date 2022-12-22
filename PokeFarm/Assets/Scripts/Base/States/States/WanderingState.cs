@@ -9,12 +9,16 @@ public class WanderingState : State
     private float _waitTime;
     private float _startWaitTime = 2f;
 
+
     //точка от которой чача будет перемещаться на расстояние не больше чем maxWanderingDistance
     private Vector2 _centerWanderingArea;
     private Vector2 _movePoint;
     private float _maxWanderingDistance = 3f;
 
     private Vector2 probablyNextMovePoint;
+    
+    private bool _isWalking;
+    private static readonly int IsWalking = Animator.StringToHash("isWalking");
 
     private const float ARRIVAL_TO_POINT_DISTANCE = 1f;
 
@@ -91,18 +95,29 @@ public class WanderingState : State
     }
     private void MoveTo(Vector2 movePoint)
     {
-        _monster.transform.position = Vector2.MoveTowards(_monster.transform.position,
-            movePoint, 
-            Time.deltaTime * _speed);
-
         if (Vector2.Distance(_monster.transform.position, movePoint) <= ARRIVAL_TO_POINT_DISTANCE)
         {
+            _isWalking = false;
+            _monster.MonsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
+            
             if (_waitTime <= 0)
             {
                 FindNewPoint(_maxWanderingDistance);
                 _waitTime = _startWaitTime;
             }
-            else _waitTime -= Time.deltaTime;
+            else
+            {
+                _waitTime -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            _monster.transform.position = Vector2.MoveTowards(_monster.transform.position,
+                movePoint, 
+                Time.deltaTime * _speed);
+
+            _isWalking = true;
+            _monster.MonsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
         }
     }
 }
