@@ -21,7 +21,8 @@ public class MarkerManager : MonoBehaviour
     private void Update()
     {
         //TODO temp solve
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene")) return;
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene"))
+            return;
         
         var playerInstance = GameManager.Instance.player;
         var playerPosition = playerInstance.GetComponent<Rigidbody2D>().position;
