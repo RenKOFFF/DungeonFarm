@@ -7,6 +7,7 @@ public enum Scene
 {
     StartMenu = 0,
     MainScene = 1,
+    Autobattle = 4,
 }
 
 public class GameSceneManager : MonoBehaviour
@@ -16,6 +17,11 @@ public class GameSceneManager : MonoBehaviour
     public void LoadScene(int sceneBuildIndex)
     {
         SceneManager.LoadScene(sceneBuildIndex);
+    }
+
+    public static void LoadScene(Scene scene)
+    {
+        SceneManager.LoadScene((int) scene);
     }
 
     private void Awake()

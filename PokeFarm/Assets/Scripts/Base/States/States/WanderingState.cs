@@ -50,7 +50,7 @@ public class WanderingState : State
         var findStopCount = 10;
         while (findStopCount > 0)
         {
-            Debug.Log(findStopCount);
+            // Debug.Log(findStopCount);
             var rndDistance = Random.Range(0, maxWanderingDistance);
 
             //рандомное движение в точку на окружности

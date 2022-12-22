@@ -8,11 +8,6 @@ public class SelectCombatMonsters : MonoBehaviour
 {
     [SerializeField] private SelectCombatMonstersUI _ui;
 
-    private void Start()
-    {
-        HideUI();
-    }
-
     public void ShowUI()
     {
         _ui.gameObject.SetActive(true);
