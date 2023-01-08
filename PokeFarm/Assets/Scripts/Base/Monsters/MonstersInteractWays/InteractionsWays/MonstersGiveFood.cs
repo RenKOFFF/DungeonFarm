@@ -21,7 +21,7 @@ public class MonstersGiveFood : MonstersInteractionWay
     public override bool GetDisplayCondition()
     {
         Item itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
-        return (itemOnTheHand != null && itemOnTheHand.type is ItemType.Food);
+        return itemOnTheHand != null && itemOnTheHand.type is ItemType.Food && !_monsterBehaviour.Monster.Hunger.IsFedToday;
     }
 
     private void Awake()
