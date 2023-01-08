@@ -1062,6 +1062,7 @@ GameObject:
   - component: {fileID: 5889190248815067530}
   - component: {fileID: 5889190248815067531}
   - component: {fileID: 1802541650}
+  - component: {fileID: 8407093728912067654}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -1198,6 +1199,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &8407093728912067654
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889190248815067529}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &5973567986501599693
 GameObject:
   m_ObjectHideFlags: 0
