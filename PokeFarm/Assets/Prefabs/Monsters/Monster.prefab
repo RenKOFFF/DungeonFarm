@@ -1059,6 +1059,7 @@ GameObject:
   - component: {fileID: 5889190248815067572}
   - component: {fileID: 5889190248815067573}
   - component: {fileID: 5889190248815067575}
+  - component: {fileID: 3813637380279903384}
   - component: {fileID: 5889190248815067530}
   - component: {fileID: 5889190248815067531}
   - component: {fileID: 1802541650}
@@ -1113,6 +1114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MonsterData>k__BackingField: {fileID: 11400000, guid: fa114e2ccb1c987459143b691973b8d2, type: 2}
   _startAttachment: 30
+  _startSatiety: 2
+  Hunger: {fileID: 3813637380279903384}
 --- !u!114 &5889190248815067575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1130,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1802541650}
   _monstersInteractionWaysParent: {fileID: 5889190248297743877}
+--- !u!114 &3813637380279903384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889190248815067529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdbdee1543d4858a2539f66a2433ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &5889190248815067530
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1140,7 +1155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16933572, y: -0.2001239}
+  m_Offset: {x: -1.4686458, y: 0.37}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1151,7 +1166,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4926126, y: 0.5997522}
+  m_Size: {x: 2.2915704, y: 0.6696613}
   m_EdgeRadius: 0
 --- !u!61 &5889190248815067531
 BoxCollider2D:
@@ -1166,7 +1181,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.468646, y: 0.37}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

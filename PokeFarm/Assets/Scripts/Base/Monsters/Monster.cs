@@ -1,4 +1,6 @@
+using System;
 using Base.Monsters;
+using Base.Time;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterBehaviour))]
@@ -31,9 +33,12 @@ public class Monster : MonoBehaviour
 
     [SerializeField] private float _startAttachment = 30f;
 
+    [SerializeField] private Satiety _startSatiety;
+
+    public HungerSystem Hunger;
     public MonsterStats Stats => MonsterData.GetStats();
     
-    public MonsterBehaviour MonsterBehaviour { get => _monsterBehaviour; }
+    public MonsterBehaviour MonsterBehaviour => _monsterBehaviour;
     private MonsterBehaviour _monsterBehaviour;
 
     public ItemStorageContainer Inventory { get; private set; }
@@ -42,6 +47,8 @@ public class Monster : MonoBehaviour
         _monsterBehaviour = GetComponent<MonsterBehaviour>();
         Inventory = new ItemStorageContainer(Stats.InventorySize);
         CurrentEnergy = MaxEnergy;
+        
+        Hunger.Init(_startSatiety);
     }
     
     public bool SpendEnergy(int value = 1)

@@ -6,15 +6,14 @@ public class MonstersGiveFood : MonstersInteractionWay
 
     public override void Execute()
     {
-        Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
-
         Item itemOnTheHand = ToolbarManager.Instance.ItemOnTheHand;
         {
             _monsterBehaviour.Monster.Inventory.AddItem(itemOnTheHand);
             GameManager.Instance.inventory.Remove(itemOnTheHand);
+            _monsterBehaviour.Monster.Hunger.FeelFull();
+            
+            Debug.Log(_monsterBehaviour.Monster.Hunger.SatietyLevel);
         }
-
-        Debug.Log($"{_monsterBehaviour.Monster.Inventory.GetItem()?.Name}");
 
         gameObject.SetActive(false);
     }

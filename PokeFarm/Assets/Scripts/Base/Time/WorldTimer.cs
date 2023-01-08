@@ -51,12 +51,12 @@ namespace Base.Time
 
         private const int RealSecondsInOneWorldMinute = 1;
 
-        private readonly UnityEvent _onDayChanged = new();
+        public static readonly UnityEvent OnDayChangedEvent = new();
         private DateTime _lastWorldSecondInRealTime;
 
         public static void AddOnDayChangedHandler(UnityAction onDayChanged)
         {
-            Instance._onDayChanged.AddListener(onDayChanged);
+            OnDayChangedEvent.AddListener(onDayChanged);
         }
 
         public void SkipOneDay()
@@ -95,7 +95,7 @@ namespace Base.Time
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainScene"))
                 return;
 
-            _onDayChanged.Invoke();
+            OnDayChangedEvent.Invoke();
         }
 
         private void Save()
