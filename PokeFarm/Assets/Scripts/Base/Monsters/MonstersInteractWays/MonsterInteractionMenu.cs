@@ -10,13 +10,6 @@ public class MonsterInteractionMenu : MonoBehaviour
     private Monster _currentMonster;
     private MonstersInteractionWay[] _monstersInteractionWays;
 
-    private void OnEnable()
-    {
-        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(Init);
-        MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(OnInteracted);
-        MonsterInteractionButton.OnInteractedEvent.AddListener(OnInteracted);
-    }
-
     void Start()
     {
         Hide();
@@ -78,8 +71,17 @@ public class MonsterInteractionMenu : MonoBehaviour
         Hide();
     }
 
+    private void OnEnable()
+    {
+        ToolbarManager.Instance.OnItemOnTheHandChanged.AddListener(RefreshInteractButtons);
+        MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(Init);
+        MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(OnInteracted);
+        MonsterInteractionButton.OnInteractedEvent.AddListener(OnInteracted);
+    }
+    
     private void OnDisable()
     {
+        ToolbarManager.Instance.OnItemOnTheHandChanged.RemoveListener(RefreshInteractButtons);
         MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.RemoveListener(Init);
         MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.RemoveListener(OnInteracted);
         MonsterInteractionButton.OnInteractedEvent.RemoveListener(OnInteracted);
