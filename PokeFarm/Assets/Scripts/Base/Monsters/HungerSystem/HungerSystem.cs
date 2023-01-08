@@ -55,7 +55,11 @@ public class HungerSystem : MonoBehaviour
     {
         if (!IsFedToday) GetHungry();
         IsFedToday = false;
-        
+
+        if (SatietyLevel == Satiety.VeryHungry)
+        {
+            _monster.SpendAttachment();
+        }
         Debug.Log($"{_monster} is {SatietyLevel} \nand {(IsFedToday ? "fed today" : "not fed today")}");
     }
 }
