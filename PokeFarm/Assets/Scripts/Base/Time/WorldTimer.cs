@@ -124,7 +124,7 @@ namespace Base.Time
         private void Update()
         {
             CalculateWorldTime();
-            timerText.text = $"Day: {CurrentTime.Days}, \nTime: {CurrentTime.Time:HH:mm}";
+            timerText.text = $"{CurrentTime.Time:HH:mm}";
         }
 
         private void OnDestroy()

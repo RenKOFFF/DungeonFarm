@@ -30,6 +30,7 @@ namespace Base.States.States
         public override void Enter()
         {
             base.Enter();
+            
             CharacterMouseInteractController.OnPlantHarvestedEvent.AddListener(AddPlantTracking);
             ToolsController.OnGardenBedDigUpEvent.AddListener(AddPlantTracking);
             
@@ -38,6 +39,9 @@ namespace Base.States.States
         
         private void AddPlantTracking(PlantingCycleTile plantingCycleTile, Vector3Int position)
         {
+            if (!_plantingTrackingDictionary.ContainsKey(plantingCycleTile))
+                _plantingTrackingDictionary.Add(plantingCycleTile, new List<Vector3Int>());
+
             if (plantingCycleTile == null)
             {
                 var key = _plantingTrackingDictionary.Keys.ToArray()[0];
@@ -45,13 +49,17 @@ namespace Base.States.States
             }
             else
                 _plantingTrackingDictionary[plantingCycleTile].Add(position);
+
+            FindNearestTilePosition();
         }
 
         public override void Exit()
         {
             base.Exit();
+            
             ToolsController.OnGardenBedDigUpEvent.RemoveListener(AddPlantTracking);
             CharacterMouseInteractController.OnPlantHarvestedEvent.RemoveListener(AddPlantTracking);
+            
             _plantingTrackingDictionary.Clear();
         }
 

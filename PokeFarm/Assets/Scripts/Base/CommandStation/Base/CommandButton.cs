@@ -55,7 +55,7 @@ public class CommandButton : MonoBehaviour
 
         if (commandDataSO != null)
         {
-            _icon.sprite = commandDataSO.Icon;
+            //_icon.sprite = commandDataSO.Icon;
             _name.text = commandDataSO.CommandName;
             _discription.text = "-----------";
         }

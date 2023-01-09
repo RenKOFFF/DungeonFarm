@@ -68,8 +68,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 22466234, guid: 9dc5914a50eea8c4e9add2073483ef27, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4e23b8de93c8c9d45830298b216c3325, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -95,11 +95,11 @@ MonoBehaviour:
     m_Right: 12
     m_Top: 12
     m_Bottom: 12
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 48, y: 48}
-  m_Spacing: {x: 2, y: 2}
+  m_Spacing: {x: 7.05, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &3064466646612114535
@@ -114,6 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7ad4da62e138f4f8d9d3ac2cebda9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemContainer: {fileID: 0}
+  containerController: {fileID: 0}
   inventoryButtons: []
   containerButtonPrefab: {fileID: 1201753732079294936, guid: d8f8aaf0317793949a9d381c462a8272, type: 3}
