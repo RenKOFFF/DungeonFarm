@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class FixPSDImporter
 {
-    [UnityEditor.InitializeOnLoadMethod]
+    /*[UnityEditor.InitializeOnLoadMethod]
     public static void ResetPSDImporterFoldout()
     {
         UnityEditor.EditorPrefs.DeleteKey("PSDImporterEditor.m_PlatformSettingsFoldout");
-    }
+    }*/
 }
