@@ -51,12 +51,17 @@ namespace Base.Time
 
         private const int RealSecondsInOneWorldMinute = 1;
 
-        public static readonly UnityEvent OnDayChangedEvent = new();
+        private static readonly UnityEvent OnDayChangedEvent = new();
         private DateTime _lastWorldSecondInRealTime;
 
         public static void AddOnDayChangedHandler(UnityAction onDayChanged)
         {
             OnDayChangedEvent.AddListener(onDayChanged);
+        }
+
+        public static void RemoveOnDayChangedHandler(UnityAction onDayChanged)
+        {
+            OnDayChangedEvent.RemoveListener(onDayChanged);
         }
 
         public void SkipOneDay()
@@ -120,6 +125,11 @@ namespace Base.Time
         {
             CalculateWorldTime();
             timerText.text = $"Day: {CurrentTime.Days}, \nTime: {CurrentTime.Time:HH:mm}";
+        }
+
+        private void OnDestroy()
+        {
+            OnDayChangedEvent.RemoveAllListeners();
         }
     }
 }

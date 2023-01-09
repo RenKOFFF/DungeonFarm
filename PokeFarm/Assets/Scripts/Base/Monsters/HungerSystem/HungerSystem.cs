@@ -22,33 +22,33 @@ public class HungerSystem : MonoBehaviour
 
     public void GetHungry()
     {
-        _satietyLevel.Value = 
-            _satietyLevel.Value == Satiety.VeryHungry ? 
-            Satiety.VeryHungry : 
+        _satietyLevel.Value =
+            _satietyLevel.Value == Satiety.VeryHungry ?
+            Satiety.VeryHungry :
             _satietyLevel.Value - 1;
-        
+
         IsFedToday = false;
     }
-    
+
     public void FeelFull()
     {
-        _satietyLevel.Value = 
-            _satietyLevel.Value == Satiety.Full ? 
-                Satiety.Full : 
+        _satietyLevel.Value =
+            _satietyLevel.Value == Satiety.Full ?
+                Satiety.Full :
                 _satietyLevel.Value + 1;
-        
+
         IsFedToday = true;
     }
-    
-    
+
+
     private void OnEnable()
     {
-        WorldTimer.OnDayChangedEvent.AddListener(OnDaySkipped);
+        WorldTimer.AddOnDayChangedHandler(OnDaySkipped);
     }
 
     private void OnDisable()
     {
-        WorldTimer.OnDayChangedEvent.RemoveListener(OnDaySkipped);
+        WorldTimer.RemoveOnDayChangedHandler(OnDaySkipped);
     }
 
     private void OnDaySkipped()
