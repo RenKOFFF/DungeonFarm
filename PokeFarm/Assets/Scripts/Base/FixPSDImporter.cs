@@ -9,6 +9,6 @@ public static class FixPSDImporter
     public static void ResetPSDImporterFoldout()
     {
         UnityEditor.EditorPrefs.DeleteKey("PSDImporterEditor.m_PlatformSettingsFoldout");
-    }*/
+    }
 }
 */

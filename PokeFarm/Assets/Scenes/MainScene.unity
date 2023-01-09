@@ -10583,6 +10583,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3431860375407345110, guid: b52f1bec8af3c524ea2a2543397b0e1e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8016925782447699618, guid: b52f1bec8af3c524ea2a2543397b0e1e, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -12106,7 +12110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4921134209544127342, guid: 5b60e206624c9064e96aa69a5647a2ce, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25
+      value: 0.0000095367
       objectReference: {fileID: 0}
     - target: {fileID: 4921134209544127342, guid: 5b60e206624c9064e96aa69a5647a2ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
