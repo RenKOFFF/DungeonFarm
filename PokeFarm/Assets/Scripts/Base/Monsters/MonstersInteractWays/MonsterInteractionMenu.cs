@@ -13,6 +13,7 @@ public class MonsterInteractionMenu : MonoBehaviour
     void Start()
     {
         Hide();
+        ToolbarManager.Instance.OnItemOnTheHandChanged.AddListener(RefreshInteractButtons);
     }
 
     private void Update()
@@ -73,7 +74,6 @@ public class MonsterInteractionMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        ToolbarManager.Instance.OnItemOnTheHandChanged.AddListener(RefreshInteractButtons);
         MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(Init);
         MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(OnInteracted);
         MonsterInteractionButton.OnInteractedEvent.AddListener(OnInteracted);
@@ -81,7 +81,6 @@ public class MonsterInteractionMenu : MonoBehaviour
     
     private void OnDisable()
     {
-        ToolbarManager.Instance.OnItemOnTheHandChanged.RemoveListener(RefreshInteractButtons);
         MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.RemoveListener(Init);
         MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.RemoveListener(OnInteracted);
         MonsterInteractionButton.OnInteractedEvent.RemoveListener(OnInteracted);
