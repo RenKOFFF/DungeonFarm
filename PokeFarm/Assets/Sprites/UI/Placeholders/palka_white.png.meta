@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e521afda4297794ab26dc000de7dd0f
+guid: 4221cc6aaa341464c94203315742f2c2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -127,7 +127,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: palka_white 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 277
+        width: 730
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 33, z: 53, w: 28}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c67c286150ecfe441a439ee5635ed75a
+      internalID: 1976428546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: palka_white 1_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 149
+        width: 731
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 51, y: 15, z: 40, w: 17}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe722686bb83434bba1c54a2036b385
+      internalID: 1318869282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: palka_white 1_2
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 0
+        width: 455
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 46, y: 19, z: 51, w: 18}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 582f5f8ad6b24cd46ae80f2e15ae8830
+      internalID: 52155779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +201,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      palka_white 1_2: 52155779
+      palka_white 1_0: 1976428546
+      palka_white 1_1: 1318869282
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

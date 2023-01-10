@@ -545,10 +545,10 @@ RectTransform:
   m_Father: {fileID: 2146960964}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 9, y: -309.7}
-  m_SizeDelta: {x: 884, y: 410}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 9, y: 219.01508}
+  m_SizeDelta: {x: -1076.9802, y: -647.4302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212343782
 MonoBehaviour:
@@ -737,8 +737,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 0e521afda4297794ab26dc000de7dd0f, type: 3}
-    m_PressedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    m_PressedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -819,9 +819,13 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1191950708058641336, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    - target: {fileID: 1191950708058641336, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0e521afda4297794ab26dc000de7dd0f, type: 3}
+      objectReference: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     - target: {fileID: 1191950708058641337, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1035,9 +1039,13 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1191950708058641336, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    - target: {fileID: 1191950708058641336, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0e521afda4297794ab26dc000de7dd0f, type: 3}
+      objectReference: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     - target: {fileID: 1191950708058641337, guid: cb9759ac97f1a3b43928552af8504abf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
