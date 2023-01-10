@@ -10,6 +10,23 @@ internal class FieldCell
 {
     [CanBeNull] public MonsterDataSO MonsterData { get; set; }
     [CanBeNull] public AutobattleMonster SpawnedMonster { get; set; }
+
+    public int X { get; set; }
+    public int Y { get; }
+    public bool IsPlayerCell { get; }
+
+    public FieldCell(int x, int y, bool isPlayerCell)
+    {
+        X = x;
+        Y = y;
+        IsPlayerCell = isPlayerCell;
+    }
+
+    public void KillMonsterInCell()
+    {
+        SpawnedMonster?.Die();
+        SpawnedMonster = null;
+    }
 }
 
 public class AutobattleController : MonoBehaviour
@@ -28,6 +45,9 @@ public class AutobattleController : MonoBehaviour
     private FieldCell[,] PlayerField { get; set; }
     private FieldCell[,] EnemyField { get; set; }
 
+    private bool IsAnimationPlaying { get; set; }
+    private FieldCell LastFieldCell { get; set; } = null;
+
     public void StartGame()
     {
         IsGameStarted = true;
@@ -42,8 +62,8 @@ public class AutobattleController : MonoBehaviour
         {
             for (var y = 0; y < FieldHeight; y++)
             {
-                PlayerField[x, y] = new FieldCell();
-                EnemyField[x, y] = new FieldCell();
+                PlayerField[x, y] = new FieldCell(x, y, true);
+                EnemyField[x, y] = new FieldCell(x, y, false);
             }
         }
 
@@ -76,8 +96,8 @@ public class AutobattleController : MonoBehaviour
                 BackgroundTilemap,
                 new Vector3Int(x, FieldHeight - 1 - y) + GridOffset + secondFieldOffset);
 
-            cell.SpawnedMonster = SpawnManager.SpawnObject(position, MonsterPrefab);
-            var spawnedMonster = cell.SpawnedMonster;
+            var spawnedMonster = SpawnManager.SpawnObject(position, MonsterPrefab);
+            cell.SpawnedMonster = spawnedMonster;
 
             if (isSecondField)
             {
@@ -121,20 +141,95 @@ public class AutobattleController : MonoBehaviour
 
     private void Update()
     {
-        if (!IsGameStarted)
+        if (!IsGameStarted || LastFieldCell?.SpawnedMonster is { IsPlayingAnimation: true })
             return;
 
-        PlayerField.AttackOnField(EnemyField);
-        EnemyField.AttackOnField(PlayerField, reverseDefenderFieldByXAxis: true);
-
-        ForEachFieldCell(cell =>
+        if (LastFieldCell == null || LastFieldCell.IsPlayerCell)
         {
-            if (cell.SpawnedMonster is { IsDead: true })
+            for (var attackerY = LastFieldCell?.Y ?? 0; attackerY < PlayerField.GetLength(1); attackerY++)
+            for (var attackerX = LastFieldCell?.X ?? 0; attackerX < PlayerField.GetLength(0); attackerX++)
             {
-                cell.SpawnedMonster.Die();
-                cell.SpawnedMonster = null;
+                var attackerCell = PlayerField[attackerX, attackerY];
+                var attackingMonster = attackerCell.SpawnedMonster;
+
+                if (attackingMonster == null)
+                    continue;
+
+                if (attackingMonster.JustPlayedAnimation)
+                {
+                    attackingMonster.JustPlayedAnimation = false;
+                    LastFieldCell = null;
+                    continue;
+                }
+
+                attackingMonster.ReduceTimeLeftToMakeMove(Time.deltaTime);
+
+                if (!attackingMonster.IsReadyToAttack)
+                    continue;
+
+                for (var defenderY = 0; defenderY < EnemyField.GetLength(1); defenderY++)
+                for (var defenderX = 0; defenderX < EnemyField.GetLength(0); defenderX++)
+                {
+                    var defenderCell = EnemyField[defenderX, defenderY];
+
+                    if (defenderCell.SpawnedMonster is not { IsDead: false })
+                        continue;
+
+                    attackingMonster.Attack(defenderCell.SpawnedMonster);
+
+                    if (defenderCell.SpawnedMonster.IsDead)
+                        defenderCell.KillMonsterInCell();
+
+                    LastFieldCell = attackerCell;
+                    return;
+                }
+
+                if (attackingMonster.IsPlayingAnimation)
+                    return;
             }
-        });
+        }
+
+        for (var attackerY = LastFieldCell?.Y ?? 0; attackerY < EnemyField.GetLength(1); attackerY++)
+        for (var attackerX = LastFieldCell?.X ?? 0; attackerX < EnemyField.GetLength(0); attackerX++)
+        {
+            var attackerCell = EnemyField[attackerX, attackerY];
+            var attackingMonster = attackerCell.SpawnedMonster;
+
+            if (attackingMonster == null)
+                continue;
+
+            if (attackingMonster.JustPlayedAnimation)
+            {
+                attackingMonster.JustPlayedAnimation = false;
+                LastFieldCell = null;
+                continue;
+            }
+
+            attackingMonster.ReduceTimeLeftToMakeMove(Time.deltaTime);
+
+            if (!attackingMonster.IsReadyToAttack)
+                continue;
+
+            for (var defenderY = 0; defenderY < PlayerField.GetLength(1); defenderY++)
+            for (var defenderX = PlayerField.GetLength(0) - 1; defenderX >= 0; defenderX--)
+            {
+                var defenderCell = PlayerField[defenderX, defenderY];
+
+                if (defenderCell.SpawnedMonster is not { IsDead: false })
+                    continue;
+
+                attackingMonster.Attack(defenderCell.SpawnedMonster);
+
+                if (defenderCell.SpawnedMonster.IsDead)
+                    defenderCell.KillMonsterInCell();
+
+                LastFieldCell = attackerCell;
+                return;
+            }
+
+            if (attackingMonster.IsPlayingAnimation)
+                return;
+        }
 
         CheckWinCondition();
     }
@@ -212,22 +307,27 @@ internal static class FieldExtensions
             if (!attackingMonster.IsReadyToAttack)
                 return;
 
-            void DefenderAction(FieldCell enemyCell)
+            void EnemyCellAction(FieldCell enemyCell)
             {
                 if (!attackingMonster.IsReadyToAttack)
                     return;
 
-                if (enemyCell.SpawnedMonster != null && !enemyCell.SpawnedMonster.IsDead)
-                    attackingMonster.Attack(enemyCell.SpawnedMonster);
+                if (enemyCell.SpawnedMonster is not { IsDead: false })
+                    return;
+
+                attackingMonster.Attack(enemyCell.SpawnedMonster);
+
+                if (enemyCell.SpawnedMonster.IsDead)
+                    enemyCell.KillMonsterInCell();
             }
 
             if (reverseDefenderFieldByXAxis)
             {
-                defenderField.ForEachWithXReversed(DefenderAction);
+                defenderField.ForEachWithXReversed(EnemyCellAction);
                 return;
             }
 
-            defenderField.ForEach(DefenderAction);
+            defenderField.ForEach(EnemyCellAction);
         });
     }
 }

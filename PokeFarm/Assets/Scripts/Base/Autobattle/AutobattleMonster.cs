@@ -1,3 +1,4 @@
+using System;
 using Base.Monsters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,12 +8,14 @@ public class AutobattleMonster : MonoBehaviour
     [field: SerializeField] public Slider HealthSlider { get; set; }
     [field: SerializeField] public Slider EnergySlider { get; set; }
 
-    [field: SerializeField] public float TimeToMakeMoveInSeconds { get; set; } = 1;
-    [field: SerializeField] public float TimeLeftToMakeMoveInSeconds { get; set; } = 1;
-    [field: SerializeField] public float AttackTimeInSeconds { get; set; } = 0.3f;
+    [field: SerializeField] public float TimeToAttackInSeconds { get; set; } = 1;
+    [field: SerializeField] public float AttackAnimationTimeInSeconds { get; set; } = 0.3f;
+
+    public bool JustPlayedAnimation { get; set; }
 
     public bool IsDead => Health == 0;
-    public bool IsReadyToAttack => TimeLeftToMakeMoveInSeconds <= 0;
+    public bool IsReadyToAttack => TimeLeftToAttackInSeconds <= 0;
+    public bool IsPlayingAnimation => NeedPlayAttackAnimation || NeedPlayReturnFromAttackAnimation;
 
     private bool NeedPlayAttackAnimation { get; set; }
     private bool NeedPlayReturnFromAttackAnimation { get; set; }
@@ -24,6 +27,7 @@ public class AutobattleMonster : MonoBehaviour
 
     private MonsterStats Stats { get; set; }
     private float Health { get; set; }
+    private float TimeLeftToAttackInSeconds { get; set; }
 
     public void Initialize(MonsterStats stats)
     {
@@ -33,13 +37,13 @@ public class AutobattleMonster : MonoBehaviour
         HealthSlider.maxValue = Health;
         UpdateHealthSliderValue();
 
-        EnergySlider.maxValue = TimeToMakeMoveInSeconds;
+        EnergySlider.maxValue = TimeToAttackInSeconds;
         UpdateEnergySliderValue();
     }
 
     public void ReduceTimeLeftToMakeMove(float seconds)
     {
-        TimeLeftToMakeMoveInSeconds -= seconds;
+        TimeLeftToAttackInSeconds -= seconds;
         UpdateEnergySliderValue();
     }
 
@@ -48,7 +52,7 @@ public class AutobattleMonster : MonoBehaviour
         PlayAttackAnimation(enemy);
 
         enemy.GetDamage(Stats.Strength);
-        TimeLeftToMakeMoveInSeconds = TimeToMakeMoveInSeconds;
+        TimeLeftToAttackInSeconds = TimeToAttackInSeconds;
     }
 
     private void PlayAttackAnimation(AutobattleMonster autobattleMonster)
@@ -57,7 +61,7 @@ public class AutobattleMonster : MonoBehaviour
 
         EnemyMonster = autobattleMonster;
         StartAnimationPosition = transform.position;
-        AnimationSpeed = Vector3.Distance(StartAnimationPosition, endAnimationPosition) / AttackTimeInSeconds * 2;
+        AnimationSpeed = Vector3.Distance(StartAnimationPosition, endAnimationPosition) / AttackAnimationTimeInSeconds * 2;
 
         NeedPlayAttackAnimation = true;
     }
@@ -79,12 +83,17 @@ public class AutobattleMonster : MonoBehaviour
 
     private void UpdateEnergySliderValue()
     {
-        EnergySlider.value = TimeToMakeMoveInSeconds - TimeLeftToMakeMoveInSeconds;
+        EnergySlider.value = TimeToAttackInSeconds - TimeLeftToAttackInSeconds;
     }
 
     public void Die()
     {
         GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    private void Start()
+    {
+        TimeLeftToAttackInSeconds = TimeToAttackInSeconds;
     }
 
     private void Update()
@@ -119,7 +128,10 @@ public class AutobattleMonster : MonoBehaviour
             var distanceToEndAnimation = Vector3.Distance(transform.position, StartAnimationPosition);
 
             if (distanceToEndAnimation < MinimalDistanceToEndAnimation)
+            {
                 NeedPlayReturnFromAttackAnimation = false;
+                JustPlayedAnimation = true;
+            }
         }
     }
 }
