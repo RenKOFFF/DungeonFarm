@@ -46,13 +46,18 @@ namespace Base.Time
     {
         [SerializeField] private TMP_Text timerText;
 
-        public static WorldTimer Instance { get; set; }
+        public static WorldTimer Instance { get; private set; }
+
         public WorldTime CurrentTime { get; set; }
 
+        private int TimeMultiplier { get; set; } = 1;
+        private DateTime LastWorldSecondInRealTime { get; set; }
+
         private const int RealSecondsInOneWorldMinute = 1;
+        private const int TimeMultiplierForUsers = 10;
+        private const int TimeMultiplierForDevelopers = 50;
 
         private static readonly UnityEvent OnDayChangedEvent = new();
-        private DateTime _lastWorldSecondInRealTime;
 
         public static void AddOnDayChangedHandler(UnityAction onDayChanged)
         {
@@ -74,19 +79,13 @@ namespace Base.Time
 
         private void CalculateWorldTime()
         {
-            var realTimePassedFromLastWorldSecond = DateTime.Now - _lastWorldSecondInRealTime;
-            var passedSeconds = realTimePassedFromLastWorldSecond.TotalSeconds;
-
-#if DEBUG
-            const int developersTimeMultiplier = 50;
-
-            passedSeconds *= developersTimeMultiplier;
-#endif
+            var realTimePassedFromLastWorldSecond = DateTime.Now - LastWorldSecondInRealTime;
+            var passedSeconds = realTimePassedFromLastWorldSecond.TotalSeconds * TimeMultiplier;
 
             if (passedSeconds < RealSecondsInOneWorldMinute)
                 return;
 
-            _lastWorldSecondInRealTime = DateTime.Now;
+            LastWorldSecondInRealTime = DateTime.Now;
 
             if (CurrentTime.AddMinutes((int) passedSeconds))
                 OnDayChanged();
@@ -117,7 +116,13 @@ namespace Base.Time
         {
             Instance = this;
 
-            _lastWorldSecondInRealTime = DateTime.Now;
+            LastWorldSecondInRealTime = DateTime.Now;
+            TimeMultiplier = TimeMultiplierForUsers;
+
+#if DEBUG
+            TimeMultiplier = TimeMultiplierForDevelopers;
+#endif
+
             Load();
         }
 
