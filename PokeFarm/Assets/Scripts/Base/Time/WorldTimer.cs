@@ -54,7 +54,7 @@ namespace Base.Time
         private DateTime LastWorldSecondInRealTime { get; set; }
 
         private const int RealSecondsInOneWorldMinute = 1;
-        private const int TimeMultiplierForUsers = 10;
+        private const int TimeMultiplierForUsers = 4;
         private const int TimeMultiplierForDevelopers = 50;
 
         private static readonly UnityEvent OnDayChangedEvent = new();
