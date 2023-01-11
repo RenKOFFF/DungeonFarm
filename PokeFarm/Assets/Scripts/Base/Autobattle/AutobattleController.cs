@@ -144,6 +144,8 @@ public class AutobattleController : MonoBehaviour
         if (!IsGameStarted || LastFieldCell?.SpawnedMonster is { IsPlayingAnimation: true })
             return;
 
+        //TODO: refactor this
+
         if (LastFieldCell == null || LastFieldCell.IsPlayerCell)
         {
             for (var attackerY = LastFieldCell?.Y ?? 0; attackerY < PlayerField.GetLength(1); attackerY++)
