@@ -10246,6 +10246,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 840632603931730960, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 840632603931730960, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.145214
       objectReference: {fileID: 0}
@@ -10285,6 +10289,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 840632603931730961, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 840632603931730963, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
       propertyPath: m_Name
       value: Whale
@@ -10299,7 +10307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840632603931730966, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
       propertyPath: m_Offset.x
-      value: -0.51499176
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 840632603931730966, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
       propertyPath: m_Offset.y

@@ -23,17 +23,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 817ec3a0c1b0c324c892d6e4d15b09df, type: 2}
   _prefab: {fileID: 3308167743470976149, guid: cd95bb19355fac04da082cb2293bdf7e, type: 3}
   _stats:
-    Strength: 0
-    Speed: 0
-    Health: 0
-    Luck: 0
-    Defense: 0
-    Dexterity: 0
-    InventorySize: 0
-  _strength: 4
-  _luck: 1
-  _defense: 1
-  _health: 80
-  _dexterity: 1
-  _speed: 1.5
-  _inventorySize: 1
+    Strength: 4
+    Speed: 1
+    Health: 100
+    Luck: 5
+    Defense: 32
+    Dexterity: 4
+    InventorySize: 2
