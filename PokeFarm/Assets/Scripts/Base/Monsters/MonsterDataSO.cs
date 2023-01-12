@@ -28,7 +28,6 @@ public class MonsterDataSO : ScriptableObject
     {
         get
         {
-            if (Instanse == null) return _currentStats;
             if (!Instanse.IsImprovedStats)
             {
                 Instanse.IsImprovedStats = true;

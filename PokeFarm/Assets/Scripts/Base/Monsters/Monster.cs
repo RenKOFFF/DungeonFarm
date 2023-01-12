@@ -7,7 +7,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [field:SerializeField] public MonsterDataSO MonsterData { get; private set; }
-    public bool IsImprovedStats;
+    [HideInInspector] public bool IsImprovedStats;
     public float MaxEnergy
     {
         get => _maxEnergy;
@@ -46,12 +46,16 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         _monsterBehaviour = GetComponent<MonsterBehaviour>();
+    }
+
+    private void Start()
+    {
         Inventory = new ItemStorageContainer(Stats.InventorySize);
         CurrentEnergy = MaxEnergy;
         
         Hunger.Init(_startSatiety);
     }
-    
+
     public bool SpendEnergy(int value = 1)
     {
         if (CurrentEnergy - value >= 0)

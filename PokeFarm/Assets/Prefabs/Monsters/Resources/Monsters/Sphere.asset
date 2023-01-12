@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92f19710ac66074bbe793568242080d, type: 3}
+  m_Name: Sphere
+  m_EditorClassIdentifier: 
+  _monsterName: "\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0444\u0435\u0440\u0430"
+  _icon: {fileID: 21300000, guid: 990689faf7a51b84ebbf12bae16ba4be, type: 3}
+  _interactionWay:
+  - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
+  - {fileID: 11400000, guid: 15b2740b83c7c8c4dab66129f56e5423, type: 2}
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+  _commandDataSO:
+  - {fileID: 11400000, guid: a7e5adcba80f4814fb5282d611af2b76, type: 2}
+  - {fileID: 11400000, guid: d1e3dbe90f085af43a98a6ed36235de0, type: 2}
+  _prefab: {fileID: 6513299942769712500, guid: 2239b44fb392efe42986edb0fe62b250, type: 3}
+  _startStats:
+    Strength: 4
+    Speed: 1.5
+    Health: 22
+    Luck: 4
+    Defense: 3
+    Dexterity: 2
+    InventorySize: 1
