@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f61d8776b6e430ebf03f8a82824323f, type: 3}
-  m_Name: Tomato_end
+  m_Name: Turnip
   m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
-  tile: {fileID: 11400000, guid: 8e69535404da03c479435adcd91e9741, type: 2}
+  tile: {fileID: 11400000, guid: 9d2e2c5ec3937d2448b7f2be9168a157, type: 2}
   dropsItem: {fileID: 11400000, guid: 20b3a6990be3dd643809a0d5e0795573, type: 2}
   dropAmount: 5
   breaksByTool: {fileID: 0}

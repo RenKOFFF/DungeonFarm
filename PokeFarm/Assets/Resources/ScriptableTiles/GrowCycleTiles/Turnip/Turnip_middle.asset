@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7afd5472b7f095409d21a34950539f5, type: 3}
-  m_Name: Tomato_start
+  m_Name: Turnip_middle
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 5cd322de2595e524099f3be145b51efc, type: 2}
-  nextCycleTile: {fileID: 11400000, guid: 129e4d03b9c6fd74b87b58e0d57ba65e, type: 2}
+  tile: {fileID: 11400000, guid: 34e7e6d8dae64074b8e70a5905215e92, type: 2}
+  nextCycleTile: {fileID: 11400000, guid: 9d2e2c5ec3937d2448b7f2be9168a157, type: 2}

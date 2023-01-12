@@ -24,7 +24,7 @@ MonoBehaviour:
   _prefab: {fileID: 3308167743470976149, guid: cd95bb19355fac04da082cb2293bdf7e, type: 3}
   _stats:
     Strength: 4
-    Speed: 1
+    Speed: 1.5
     Health: 100
     Luck: 5
     Defense: 32

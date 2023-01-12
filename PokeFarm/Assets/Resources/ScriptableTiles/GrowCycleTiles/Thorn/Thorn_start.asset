@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7afd5472b7f095409d21a34950539f5, type: 3}
+  m_Name: Thorn_start
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: 520d06cb1daf14b4f9184fbd7da37baf, type: 2}
+  nextCycleTile: {fileID: 11400000, guid: eefb208166c9cf543b32278a04f4b242, type: 2}
