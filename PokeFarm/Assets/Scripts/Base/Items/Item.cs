@@ -23,9 +23,7 @@ public class Item : ScriptableObject
 
     public ItemType type;
 
-    [CanBeNull] public GrowCycleTile growCycleStartTile;
+    [CanBeNull, Header("Plant seeds")] public GrowCycleTile growCycleStartTile;
 
-    [CanBeNull, Header("Buildings")] 
-    
-    public GameObject BuildingPrefab;
+    [CanBeNull, Header("Buildings")] public GameObject BuildingPrefab;
 }
