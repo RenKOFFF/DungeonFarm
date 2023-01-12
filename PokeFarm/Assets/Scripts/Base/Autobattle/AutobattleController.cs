@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Base.Managers;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = System.Random;
 
 internal class FieldCell
 {
     [CanBeNull] public MonsterDataSO MonsterData { get; set; }
     [CanBeNull] public AutobattleMonster SpawnedMonster { get; set; }
 
-    public int X { get; set; }
+    public int X { get; }
     public int Y { get; }
     public bool IsPlayerCell { get; }
 
@@ -37,6 +39,8 @@ public class AutobattleController : MonoBehaviour
     [field: SerializeField] private AutobattleMonster MonsterPrefab { get; set; }
     [field: SerializeField] private TMP_Text EndGameText { get; set; }
 
+    private static Random Random { get; } = new();
+
     private const int FieldWidth = 2;
     private const int FieldHeight = 3;
 
@@ -44,16 +48,28 @@ public class AutobattleController : MonoBehaviour
 
     private FieldCell[,] PlayerField { get; set; }
     private FieldCell[,] EnemyField { get; set; }
-
-    private bool IsAnimationPlaying { get; set; }
-    private FieldCell LastFieldCell { get; set; } = null;
+    private FieldCell LastFieldCell { get; set; }
 
     public void StartGame()
     {
         IsGameStarted = true;
     }
 
-    private void Initialize(IList<MonsterDataSO> availableMonsters)
+    private void Initialize(IList<MonsterDataSO> playerMonsters)
+    {
+        InitializeFields();
+
+        var enemyMonsters = GetEnemyMonsters();
+
+        if (playerMonsters.Count > 0)
+            SetRandomMonstersLocation(PlayerField, playerMonsters);
+
+        SetRandomMonstersLocation(EnemyField, enemyMonsters);
+
+        SpawnAllMonsters();
+    }
+
+    private void InitializeFields()
     {
         PlayerField = new FieldCell[FieldWidth, FieldHeight];
         EnemyField = new FieldCell[FieldWidth, FieldHeight];
@@ -66,62 +82,89 @@ public class AutobattleController : MonoBehaviour
                 EnemyField[x, y] = new FieldCell(x, y, false);
             }
         }
+    }
 
-        // TODO: Убрать, заменить на случайную генерацию
-        PlayerField[1, 1].MonsterData = availableMonsters[0];
-        PlayerField[0, 2].MonsterData = availableMonsters[0];
+    private static List<MonsterDataSO> GetEnemyMonsters()
+    {
+        var allMonsters = MonstersManager.GetAllMonstersData();
+        var enemyMonsters = new List<MonsterDataSO>();
 
-        EnemyField[0, 0].MonsterData = availableMonsters[1];
-        EnemyField[0, 2].MonsterData = availableMonsters[1];
-
-        for (var x = 0; x < FieldWidth; x++)
+        for (var i = 0; i < Math.Min(2, allMonsters.Length); i++)
         {
-            for (var y = 0; y < FieldHeight; y++)
-            {
-                SpawnMonster(PlayerField, x, y);
-                SpawnMonster(EnemyField, x, y, isSecondField: true);
-            }
+            var randomIndex = Random.Next(0, allMonsters.Length);
+            enemyMonsters.Add(allMonsters[randomIndex]);
+        }
+
+        return enemyMonsters;
+    }
+
+    private static void SetRandomMonstersLocation(FieldCell[,] field, IList<MonsterDataSO> monstersPool)
+    {
+        while (monstersPool.Count > 0)
+        {
+            var randomWidth = Random.Next(0, FieldWidth);
+            var randomHeight = Random.Next(0, FieldHeight);
+
+            var existingMonsterData = field[randomWidth, randomHeight].MonsterData;
+
+            if (existingMonsterData != null)
+                continue;
+
+            var monster = monstersPool[0];
+            field[randomWidth, randomHeight].MonsterData = monster;
+            monstersPool.Remove(monster);
+        }
+    }
+
+    private void SpawnAllMonsters()
+    {
+        for (var x = 0; x < FieldWidth; x++)
+        for (var y = 0; y < FieldHeight; y++)
+        {
+            SpawnMonster(PlayerField, x, y);
+            SpawnMonster(EnemyField, x, y, isSecondField: true);
         }
     }
 
     private void SpawnMonster(FieldCell[,] field, int x, int y, bool isSecondField = false)
     {
         var cell = field[x, y];
+        var cellMonsterData = cell.MonsterData;
 
-        if (cell.MonsterData != null)
-        {
-            var secondFieldOffset = new Vector3Int(isSecondField ? CellDistanceBetweenFields + FieldWidth : 0, 0);
+        if (cellMonsterData == null)
+            return;
 
-            var position = TileMapReadManager.GetCellCenterWorldPosition(
-                BackgroundTilemap,
-                new Vector3Int(x, FieldHeight - 1 - y) + GridOffset + secondFieldOffset);
+        var secondFieldOffset = new Vector3Int(isSecondField ? CellDistanceBetweenFields + FieldWidth : 0, 0);
 
-            var spawnedMonster = SpawnManager.SpawnObject(position, MonsterPrefab);
-            cell.SpawnedMonster = spawnedMonster;
+        var position = TileMapReadManager.GetCellCenterWorldPosition(
+            BackgroundTilemap,
+            new Vector3Int(x, FieldHeight - 1 - y) + GridOffset + secondFieldOffset);
 
-            if (isSecondField)
-            {
-                var spriteRenderer = spawnedMonster.GetComponent<SpriteRenderer>();
-                spriteRenderer.flipX = !spriteRenderer.flipX;
-            }
+        var spawnedMonster = SpawnManager.SpawnObject(position, MonsterPrefab);
+        cell.SpawnedMonster = spawnedMonster;
 
-            spawnedMonster.transform.parent = transform;
-            spawnedMonster.name = $"Monster [{x},{y}]";
-            var monsterStats = cell.MonsterData.GetStats();
+        var spriteRenderer = spawnedMonster.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = cellMonsterData.Icon;
+
+        if (isSecondField)
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+
+        spawnedMonster.transform.parent = transform;
+        spawnedMonster.name = $"Monster [{x},{y}]";
+        var monsterStats = cellMonsterData.GetStats();
 
 #if DEBUG
-            monsterStats.Strength = 10;
-            monsterStats.Health = 50;
+        monsterStats.Strength = 10;
+        monsterStats.Health = 50;
 
-            if (isSecondField)
-            {
-                monsterStats.Strength -= 5;
-                monsterStats.Health -= 5;
-            }
+        if (isSecondField)
+        {
+            monsterStats.Strength -= 5;
+            monsterStats.Health -= 5;
+        }
 #endif
 
-            spawnedMonster.Initialize(monsterStats);
-        }
+        spawnedMonster.Initialize(monsterStats);
     }
 
     private void ForEachFieldCell(Action<FieldCell> action)
@@ -136,7 +179,11 @@ public class AutobattleController : MonoBehaviour
 
     private void Start()
     {
-        Initialize(MonstersManager.GetAllMonstersData());
+        var playerMonsters = MonstersManager.SelectedCombatMonsters
+            .Select(m => m.MonsterData)
+            .ToList();
+
+        Initialize(playerMonsters);
     }
 
     private void Update()

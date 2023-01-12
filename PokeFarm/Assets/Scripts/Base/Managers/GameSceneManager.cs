@@ -14,14 +14,14 @@ public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager Instance { get; private set; }
 
-    public void LoadScene(int sceneBuildIndex)
+    public static void LoadScene(int sceneBuildIndex)
     {
         SceneManager.LoadScene(sceneBuildIndex);
     }
 
     public static void LoadScene(Scene scene)
     {
-        SceneManager.LoadScene((int) scene);
+        LoadScene((int) scene);
     }
 
     private void Awake()

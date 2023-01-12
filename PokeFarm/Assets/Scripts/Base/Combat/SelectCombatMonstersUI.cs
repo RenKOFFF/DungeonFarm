@@ -25,7 +25,7 @@ namespace Base.Combat
         private void InitSelectCmb()
         {
             var selectCmbCount = MonstersManager.Instance.AllMonstersOnTheFarm.Count + 
-                                 MonstersManager.Instance.SelectedCombatMonsters.Count;
+                                 MonstersManager.SelectedCombatMonsters.Count;
             _sButtons = new SelectCombatMonstersButton[selectCmbCount];
 
             for (int i = 0; i < selectCmbCount; i++)
@@ -47,7 +47,7 @@ namespace Base.Combat
         private void InitDeselectCmb()
         {
             var deselectCmbCount = MonstersManager.Instance.AllMonstersOnTheFarm.Count + 
-                                   MonstersManager.Instance.SelectedCombatMonsters.Count;
+                                   MonstersManager.SelectedCombatMonsters.Count;
             _dsButtons = new DeselectCombatMonstersButton[deselectCmbCount];
 
             for (int i = 0; i < deselectCmbCount; i++)
@@ -58,9 +58,9 @@ namespace Base.Combat
                         AddComponent<DeselectCombatMonstersButton>();
                 }
                 
-                if (i < MonstersManager.Instance.SelectedCombatMonsters.Count)
+                if (i < MonstersManager.SelectedCombatMonsters.Count)
                 {
-                    _dsButtons[i].AttachedMonster = MonstersManager.Instance.SelectedCombatMonsters[i];
+                    _dsButtons[i].AttachedMonster = MonstersManager.SelectedCombatMonsters[i];
                 }
                 _dsButtons[i].RefreshData();
             }

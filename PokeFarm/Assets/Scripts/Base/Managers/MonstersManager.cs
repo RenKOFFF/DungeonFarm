@@ -10,7 +10,7 @@ namespace Base.Managers
         public CommandDataSO[] AllMonstersCommand { get; set; }
         private MonsterDataSO[] _allMonstersData;
         public List<Monster> AllMonstersOnTheFarm = new();
-        public List<Monster> SelectedCombatMonsters = new();
+        public static List<Monster> SelectedCombatMonsters = new();
 
         [SerializeField] private Transform _parentMonsters;
 
@@ -19,6 +19,7 @@ namespace Base.Managers
         private void Awake()
         {
             Instance = this;
+            SelectedCombatMonsters = new List<Monster>();
             _allMonstersData = GetAllMonstersData();
             AllMonstersCommand = Resources.LoadAll<CommandDataSO>("Monsters/Commands");
         }
