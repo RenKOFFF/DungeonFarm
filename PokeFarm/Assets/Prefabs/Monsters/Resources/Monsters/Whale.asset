@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92f19710ac66074bbe793568242080d, type: 3}
+  m_Name: Whale
+  m_EditorClassIdentifier: 
+  _monsterName: "\u041A\u0438\u0442"
+  _icon: {fileID: 21300000, guid: 3840d47f621954242bd7973a0863ce84, type: 3}
+  _interactionWay:
+  - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
+  - {fileID: 11400000, guid: 15b2740b83c7c8c4dab66129f56e5423, type: 2}
+  - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
+  _commandDataSO:
+  - {fileID: 11400000, guid: a7e5adcba80f4814fb5282d611af2b76, type: 2}
+  - {fileID: 11400000, guid: d1e3dbe90f085af43a98a6ed36235de0, type: 2}
+  _prefab: {fileID: 840632603931730971, guid: 36543b498b4857e4fb3284dbf75aa911, type: 3}
+  _stats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
+  _strength: 4
+  _luck: 1
+  _defense: 1
+  _health: 80
+  _dexterity: 1
+  _speed: 1.5
+  _inventorySize: 1

@@ -10,22 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a92f19710ac66074bbe793568242080d, type: 3}
-  m_Name: TreeMonsterData
+  m_Name: Pear
   m_EditorClassIdentifier: 
-  _monsterName: "\u041B\u0435\u0441\u043E\u0440\u0443\u0431"
-  _icon: {fileID: 21300000, guid: 3840d47f621954242bd7973a0863ce84, type: 3}
+  _monsterName: "\u0413\u0440\u0443\u0448\u0430"
+  _icon: {fileID: 21300000, guid: d59763f4cfbc0bd4ea49e41433c1b396, type: 3}
   _interactionWay:
   - {fileID: 11400000, guid: 07905d5819d8f8143b9dc5563e64b7c8, type: 2}
   - {fileID: 11400000, guid: 15b2740b83c7c8c4dab66129f56e5423, type: 2}
   - {fileID: 11400000, guid: 8e57048944812ca478586a692a66fd9a, type: 2}
   _commandDataSO:
   - {fileID: 11400000, guid: a7e5adcba80f4814fb5282d611af2b76, type: 2}
-  - {fileID: 11400000, guid: d1e3dbe90f085af43a98a6ed36235de0, type: 2}
-  _prefab: {fileID: 5889190248815067573, guid: 5f544c7fba9abef489bd2be80bee36fc, type: 3}
+  - {fileID: 11400000, guid: 817ec3a0c1b0c324c892d6e4d15b09df, type: 2}
+  _prefab: {fileID: 3308167743470976149, guid: cd95bb19355fac04da082cb2293bdf7e, type: 3}
+  _stats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
   _strength: 4
-  _luck: 0
-  _defense: 0
+  _luck: 1
+  _defense: 1
   _health: 80
-  _dexterity: 0
+  _dexterity: 1
   _speed: 1.5
   _inventorySize: 1
