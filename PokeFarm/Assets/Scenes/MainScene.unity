@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 64547358}
   - component: {fileID: 64547357}
   - component: {fileID: 64547356}
+  - component: {fileID: 64547359}
   m_Layer: 5
   m_Name: GoCombatButton
   m_TagString: Untagged
@@ -482,6 +483,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64547354}
   m_CullTransparentMesh: 1
+--- !u!114 &64547359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64547354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9e8361399f4db4b739cc7659b55479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &93387089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4269636626066293643, guid: 6db647fa2e4222e489b09bbadb017750, type: 3}
@@ -2930,7 +2943,6 @@ MonoBehaviour:
   AllMonstersOnTheFarm:
   - {fileID: 1646669563}
   - {fileID: 1431048017}
-  SelectedCombatMonsters: []
   _parentMonsters: {fileID: 319884041}
 --- !u!114 &812349707
 MonoBehaviour:
