@@ -7,6 +7,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [field:SerializeField] public MonsterDataSO MonsterData { get; private set; }
+    public bool IsImprovedStats;
     public float MaxEnergy
     {
         get => _maxEnergy;
@@ -36,7 +37,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private Satiety _startSatiety;
 
     public HungerSystem Hunger;
-    public MonsterStats Stats => MonsterData.GetStats();
+    public MonsterStats Stats => MonsterData.Stats;
     
     public MonsterBehaviour MonsterBehaviour => _monsterBehaviour;
     private MonsterBehaviour _monsterBehaviour;
@@ -105,6 +106,6 @@ public class Monster : MonoBehaviour
     public void ImproveStats(Item itemOnTheHand)
     {
         var newStats = new MonsterStats(itemOnTheHand.AddingStats);
-        MonsterData.SetStats(newStats);
+        MonsterData.AddStats(newStats);
     }
 }

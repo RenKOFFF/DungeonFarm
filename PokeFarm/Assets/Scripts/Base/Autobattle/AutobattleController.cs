@@ -151,7 +151,7 @@ public class AutobattleController : MonoBehaviour
 
         spawnedMonster.transform.parent = transform;
         spawnedMonster.name = $"Monster [{x},{y}]";
-        var monsterStats = cellMonsterData.GetStats();
+        var monsterStats = cellMonsterData.Stats;
 
 #if DEBUG
         monsterStats.Strength = 10;

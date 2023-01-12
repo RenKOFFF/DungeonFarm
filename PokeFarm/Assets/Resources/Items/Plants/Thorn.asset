@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd083d151c9da34aaf6e23ebb6f6b17, type: 3}
   m_Name: Thorn
   m_EditorClassIdentifier: 
-  id: 7
+  id: 10
   Name: "\u0428\u0438\u043F\u043E\u0432\u0438\u043A"
   icon: {fileID: -1782899759, guid: 762261623cd759e4bb4df0d11e244290, type: 3}
   isStackable: 1
   type: 2
   growCycleStartTile: {fileID: 0}
+  _addingStats:
+    Strength: 1
+    Speed: 0
+    Health: 44
+    Luck: 2
+    Defense: 5
+    Dexterity: 1
+    InventorySize: 0
   BuildingPrefab: {fileID: 0}

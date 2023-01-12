@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Thorn
   m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
   tile: {fileID: 11400000, guid: 23ea84da302d325428a68399bae42a02, type: 2}
-  dropsItem: {fileID: 11400000, guid: 20b3a6990be3dd643809a0d5e0795573, type: 2}
+  dropsItem: {fileID: 11400000, guid: 5a3d59481a18eb34caffca2965f2665a, type: 2}
   dropAmount: 5
   breaksByTool: {fileID: 0}
   breaksByAny: 1

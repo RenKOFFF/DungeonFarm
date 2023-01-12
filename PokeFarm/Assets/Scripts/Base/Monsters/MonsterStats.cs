@@ -31,11 +31,24 @@ namespace Base.Monsters
             Speed = stats.Speed;
             InventorySize = stats.InventorySize;
         }
+        
+        public static MonsterStats operator +(MonsterStats ms1, MonsterStats ms2)
+        {
+            var newStats = new MonsterStats(
+                ms1.Strength + ms2.Strength, 
+                ms1.Luck + ms2.Luck,
+                ms1.Defense + ms2.Defense,
+                ms1.Health + ms2.Health,
+                ms1.Dexterity + ms2.Dexterity,
+                ms1.Speed + ms2.Speed,
+                ms1.InventorySize + ms2.InventorySize);
+            return newStats;
+        }
 
         public override string ToString()
         {
-            return $" Сила: {Strength}\n, Скорость: {Speed}\n, ХР: {Health}\n, Удача: {Luck}\n" +
-                   $", Броня? {Defense}\n, хз: {Dexterity}\n, Инвентарь: {InventorySize}";
+            return $" Сила: {Strength},\n Скорость: {Speed},\nХР: {Health}, \nУдача: {Luck},\n" +
+                   $"Броня? {Defense},\nхз: {Dexterity},\nИнвентарь: {InventorySize}";
         }
     }
 }

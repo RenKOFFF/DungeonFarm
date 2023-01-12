@@ -1,4 +1,3 @@
-using System;
 using Base.CommandStation.Commands;
 using Base.Managers;
 using Base.Monsters;
@@ -25,17 +24,21 @@ public class MonsterDataSO : ScriptableObject
     [SerializeField] private MonsterStats _startStats;
     private MonsterStats _currentStats;
     
-
     public MonsterStats Stats
     {
-        get => _currentStats;
+        get
+        {
+            if (Instanse == null) return _currentStats;
+            if (!Instanse.IsImprovedStats)
+            {
+                Instanse.IsImprovedStats = true;
+                _currentStats = _startStats;
+            }
+            return _currentStats;
+        }
         private set => _currentStats = value;
     }
-
-    private void Awake()
-    {
-        _currentStats = _startStats;
-    }
+    
 
     /*[SerializeField, Min(1)] private float _strength;
     [SerializeField, Min(1)] private int _luck;
@@ -45,15 +48,9 @@ public class MonsterDataSO : ScriptableObject
     
     [SerializeField, Min(1)] private float _speed;
     [SerializeField, Min(1)] private int _inventorySize;*/
-    
 
-    public MonsterStats GetStats()
+    public void AddStats(MonsterStats newStats)
     {
-        return Stats;  //new MonsterStats(_strength, _luck, _defense, _health, _dexterity, _speed, _inventorySize);
-    }
-
-    public void SetStats(MonsterStats newStats)
-    {
-        Stats = newStats;
+        Stats += newStats;
     }
 }

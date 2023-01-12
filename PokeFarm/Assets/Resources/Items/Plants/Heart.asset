@@ -18,4 +18,12 @@ MonoBehaviour:
   isStackable: 1
   type: 2
   growCycleStartTile: {fileID: 0}
+  _addingStats:
+    Strength: 1
+    Speed: 0
+    Health: 44
+    Luck: 2
+    Defense: 5
+    Dexterity: 1
+    InventorySize: 0
   BuildingPrefab: {fileID: 0}

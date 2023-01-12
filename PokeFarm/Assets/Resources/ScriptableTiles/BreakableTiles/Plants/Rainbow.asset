@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rainbow
   m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
   tile: {fileID: 11400000, guid: bf4cb9b0f790937498501248cae24bd7, type: 2}
-  dropsItem: {fileID: 11400000, guid: 20b3a6990be3dd643809a0d5e0795573, type: 2}
+  dropsItem: {fileID: 11400000, guid: 8b6b0049e440d3f428ad180557a77d65, type: 2}
   dropAmount: 5
   breaksByTool: {fileID: 0}
   breaksByAny: 1

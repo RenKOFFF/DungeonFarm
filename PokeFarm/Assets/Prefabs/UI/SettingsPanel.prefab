@@ -110,7 +110,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     m_PressedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
-    m_SelectedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     m_PressedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
-    m_SelectedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     m_PressedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
-    m_SelectedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3692861556901239144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -865,6 +865,7 @@ GameObject:
   - component: {fileID: 5777069033070303261}
   - component: {fileID: 964872321663606631}
   - component: {fileID: 6111886801658794357}
+  - component: {fileID: 2132747812}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -975,10 +976,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3692861556901239063}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2132747812}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -987,6 +988,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2132747812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3786708933833241384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5127816519c4f349a3f9cfd59b43798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 0
 --- !u!1 &3876869002835700936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0437\u0430\u0434"
+  m_text: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf0d9a79b6269ff428890701249046ca, type: 2}
   m_sharedMaterial: {fileID: -3333808610226424914, guid: cf0d9a79b6269ff428890701249046ca, type: 2}
@@ -1390,7 +1404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0417\u0432\u0443\u043A"
+  m_text: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf0d9a79b6269ff428890701249046ca, type: 2}
   m_sharedMaterial: {fileID: -3333808610226424914, guid: cf0d9a79b6269ff428890701249046ca, type: 2}
@@ -2109,7 +2123,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
     m_PressedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
-    m_SelectedSprite: {fileID: 52155779, guid: 4221cc6aaa341464c94203315742f2c2, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2121,4 +2135,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9178816042461569917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3692861556901239063}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

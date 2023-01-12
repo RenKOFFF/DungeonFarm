@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Turnip
   m_EditorClassIdentifier: Assembly-CSharp::BreakableTile
   tile: {fileID: 11400000, guid: 9d2e2c5ec3937d2448b7f2be9168a157, type: 2}
-  dropsItem: {fileID: 11400000, guid: 20b3a6990be3dd643809a0d5e0795573, type: 2}
+  dropsItem: {fileID: 11400000, guid: a9dd95835cbc25445b1871a926e22b2e, type: 2}
   dropAmount: 5
   breaksByTool: {fileID: 0}
   breaksByAny: 1
