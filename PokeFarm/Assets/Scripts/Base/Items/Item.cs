@@ -1,3 +1,4 @@
+using Base.Monsters;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -23,7 +24,10 @@ public class Item : ScriptableObject
 
     public ItemType type;
 
-    [CanBeNull, Header("Plant seeds")] public GrowCycleTile growCycleStartTile;
+    [CanBeNull, Header("Plants")] public GrowCycleTile growCycleStartTile;
+    [SerializeField] private MonsterStats _addingStats;
+
+    public MonsterStats AddingStats => _addingStats;
 
     [CanBeNull, Header("Buildings")] public GameObject BuildingPrefab;
 }

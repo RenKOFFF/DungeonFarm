@@ -1,3 +1,4 @@
+using System;
 using Base.CommandStation.Commands;
 using Base.Managers;
 using Base.Monsters;
@@ -21,8 +22,21 @@ public class MonsterDataSO : ScriptableObject
     [SerializeField] private Monster _prefab;
 
     [Header("Характеристики бесомонов")] 
-    [SerializeField] private MonsterStats _stats;
+    [SerializeField] private MonsterStats _startStats;
+    private MonsterStats _currentStats;
     
+
+    public MonsterStats Stats
+    {
+        get => _currentStats;
+        private set => _currentStats = value;
+    }
+
+    private void Awake()
+    {
+        _currentStats = _startStats;
+    }
+
     /*[SerializeField, Min(1)] private float _strength;
     [SerializeField, Min(1)] private int _luck;
     [SerializeField, Min(1)] private int _defense;
@@ -35,6 +49,11 @@ public class MonsterDataSO : ScriptableObject
 
     public MonsterStats GetStats()
     {
-        return _stats;  //new MonsterStats(_strength, _luck, _defense, _health, _dexterity, _speed, _inventorySize);
+        return Stats;  //new MonsterStats(_strength, _luck, _defense, _health, _dexterity, _speed, _inventorySize);
+    }
+
+    public void SetStats(MonsterStats newStats)
+    {
+        Stats = newStats;
     }
 }

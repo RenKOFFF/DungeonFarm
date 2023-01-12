@@ -101,4 +101,10 @@ public class Monster : MonoBehaviour
         m = Instantiate(m, parentMonsters);
         return m;
     }
+
+    public void ImproveStats(Item itemOnTheHand)
+    {
+        var newStats = new MonsterStats(itemOnTheHand.AddingStats);
+        MonsterData.SetStats(newStats);
+    }
 }

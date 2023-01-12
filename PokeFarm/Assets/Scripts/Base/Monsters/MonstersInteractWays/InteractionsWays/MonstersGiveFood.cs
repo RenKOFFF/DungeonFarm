@@ -11,7 +11,9 @@ public class MonstersGiveFood : MonstersInteractionWay
             _monsterBehaviour.Monster.Inventory.AddItem(itemOnTheHand);
             GameManager.Instance.inventory.Remove(itemOnTheHand);
             _monsterBehaviour.Monster.Hunger.FeelFull();
+            _monsterBehaviour.Monster.ImproveStats(itemOnTheHand);
             
+            Debug.Log(_monsterBehaviour.Monster.MonsterData.Stats);
             Debug.Log(_monsterBehaviour.Monster.Hunger.SatietyLevel);
         }
 
