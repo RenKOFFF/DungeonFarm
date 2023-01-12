@@ -1,9 +1,13 @@
-﻿namespace Base.Monsters
+﻿using System;
+using System.Numerics;
+
+namespace Base.Monsters
 {
+    [Serializable]
     public struct MonsterStats
     {
         public float Strength, Speed, Health, Luck, Defense, Dexterity;
-        public int InventorySize; 
+        public int InventorySize;
 
         public MonsterStats(float strength, float luck, float defense, float health, float dexterity, float speed, int inventorySize)
         {
