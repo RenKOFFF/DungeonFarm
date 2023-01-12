@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   Name: "\u0428\u0438\u043F\u043E\u0432\u0438\u043A"
-  icon: {fileID: -1782899759, guid: 762261623cd759e4bb4df0d11e244290, type: 3}
+  icon: {fileID: -916517780, guid: 30d3b679679783a439922739da5e235b, type: 3}
   isStackable: 1
   type: 2
   growCycleStartTile: {fileID: 0}
