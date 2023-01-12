@@ -10749,6 +10749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3692861556901239063, guid: 86b1f36852f60c645a36fd6035046fba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3692861556901239144, guid: 86b1f36852f60c645a36fd6035046fba, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

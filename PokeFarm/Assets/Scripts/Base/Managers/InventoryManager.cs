@@ -45,7 +45,7 @@ public class InventoryManager : MonoBehaviour
         if (GameManager.Instance.HasDifferentActiveUIPanel(inventoryPanel.gameObject))
             return;
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchInventoryPanelState();
             return;
