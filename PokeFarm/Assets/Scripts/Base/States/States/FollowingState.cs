@@ -30,11 +30,15 @@ public class FollowingState : BaseMonsterState
         distanceToTarget = Vector2.Distance(_monsterBehaviour.transform.position, _target.position);
         if (distanceToTarget >= _socialDistance)
         {
+            _isWalking = true;
+            _monsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
             _monsterBehaviour.transform.position = Vector2.MoveTowards(_monsterBehaviour.transform.position, _target.position, Time.deltaTime * _speed);
         }
 
         if (distanceToTarget > _stopFollowingDistance)
         {
+            _isWalking = false;
+            _monsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
             _monsterBehaviour.StateMachine.ChangeState(PreviousState);
         }
     }

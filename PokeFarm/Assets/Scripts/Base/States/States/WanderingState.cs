@@ -117,6 +117,23 @@ public class WanderingState : State
                 movePoint, 
                 Time.deltaTime * _speed);
 
+            
+            var localScale = _monster.transform.localScale;
+            if (_monster.transform.position.x < movePoint.x)
+            {
+                _monster.transform.localScale = new Vector3(
+                    Mathf.Abs(localScale.x) * -1,
+                    localScale.y,
+                    localScale.z);
+            }
+            else
+            {
+                _monster.transform.localScale = new Vector3(
+                    Mathf.Abs(localScale.x),
+                    localScale.y,
+                    localScale.z);
+            }
+            
             _isWalking = true;
             _monster.MonsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
         }

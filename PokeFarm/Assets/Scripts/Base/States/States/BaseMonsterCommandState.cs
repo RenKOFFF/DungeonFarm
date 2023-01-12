@@ -51,10 +51,14 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
     }
     private void MoveTo(Vector3Int movePoint)
     {
+        
         if (_currentTileIndex == -1 ) return;
         
         if (Vector3.Distance(_monsterBehaviour.Monster.transform.position, movePoint) > .5f)
         {
+            _isWalking = true;
+            _monsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
+            
             _monsterBehaviour.Monster.transform.position = Vector3.MoveTowards
             (_monsterBehaviour.Monster.transform.position, 
                 movePoint, 
@@ -62,6 +66,9 @@ public abstract class BaseMonsterCommandState : BaseMonsterState
         }
         else
         {
+            _isWalking = false;
+            _monsterBehaviour.Animator.SetBool(IsWalking, _isWalking);
+            
             if (IsWorkDone())
             {
                 LandscapeController.Instance.SpawnableTilesDictionary[_breakTile].RemoveAt(_currentTileIndex);
