@@ -20,10 +20,10 @@ public class MonsterDataSO : ScriptableObject
     [SerializeField] private CommandDataSO[] _commandDataSO;
     [SerializeField] private Monster _prefab;
 
-    [Header("Характеристики бесомонов")] 
+    [Header("Характеристики бесомонов")]
     [SerializeField] private MonsterStats _startStats;
     private MonsterStats _currentStats;
-    
+
     public MonsterStats Stats
     {
         get
@@ -38,7 +38,8 @@ public class MonsterDataSO : ScriptableObject
         }
         private set => _currentStats = value;
     }
-    
+
+    public MonsterStats AutoBattleStats => _startStats;
 
     /*[SerializeField, Min(1)] private float _strength;
     [SerializeField, Min(1)] private int _luck;

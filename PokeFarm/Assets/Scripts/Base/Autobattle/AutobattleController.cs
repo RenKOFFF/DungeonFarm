@@ -151,18 +151,18 @@ public class AutobattleController : MonoBehaviour
 
         spawnedMonster.transform.parent = transform;
         spawnedMonster.name = $"Monster [{x},{y}]";
-        var monsterStats = cellMonsterData.Stats;
+        var monsterStats = cellMonsterData.AutoBattleStats;
 
-#if DEBUG
+// #if DEBUG
         monsterStats.Strength = 10;
         monsterStats.Health = 50;
 
         if (isSecondField)
         {
-            monsterStats.Strength -= 5;
+            monsterStats.Strength -= 1;
             monsterStats.Health -= 5;
         }
-#endif
+// #endif
 
         spawnedMonster.Initialize(monsterStats);
     }
