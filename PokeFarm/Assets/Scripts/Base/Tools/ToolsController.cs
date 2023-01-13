@@ -5,9 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
 {
-
     public static UnityEvent<PlantingCycleTile, Vector3Int> OnGardenBedDigUpEvent = new();
-    
+
     private static void UseTool(Item tool)
     {
         var currentGridPosition = MarkerManager.Instance.markedCellPosition;
@@ -25,12 +24,16 @@ public class ToolsController : MonoBehaviour
                 landscapeTileData,
                 landscapeTilemap,
                 currentGridPosition);
+
+            TileMapReadManager.SaveTileMap(landscapeTilemap);
             return;
         }
 
         if (backgroundTileData.IsPlantingCycleTile)
         {
             UseToolOnPlantingCycleTile(tool, backgroundTileData, backgroundTilemap, currentGridPosition);
+
+            TileMapReadManager.SaveTileMap(backgroundTilemap);
             return;
         }
     }
@@ -70,7 +73,7 @@ public class ToolsController : MonoBehaviour
         backgroundTilemap.SetTile(
             currentGridPosition,
             plantingCycleTile.nextCycleTile);
-        
+
         //поставили грядку или полили
         OnGardenBedDigUpEvent.Invoke(plantingCycleTile, currentGridPosition);
     }

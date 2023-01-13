@@ -195,6 +195,24 @@ public class TileMapReadManager : MonoBehaviour
             });
     }
 
+    public static void SaveTileMap(Tilemap tilemap)
+    {
+        var cellBounds = tilemap.cellBounds;
+        var tilePositionToTile = new Dictionary<string, string>();
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+        {
+            var gridPosition = new Vector3Int(x, y);
+            var tile = tilemap.GetTile(gridPosition);
+
+            tilePositionToTile.Add(GetTileCoordinatesSaveItem(x, y), tile?.name);
+        }
+
+        Debug.Log(tilemap.name);
+        GameDataController.Save(tilePositionToTile, DataCategory.Tilemaps, tilemap.name);
+    }
+
     private static void SaveTileMap(Tilemap tilemap, Dictionary<string, string> tilePositionToTile)
     {
         GameDataController.Save(tilePositionToTile, DataCategory.Tilemaps, tilemap.name);
@@ -211,10 +229,14 @@ public class TileMapReadManager : MonoBehaviour
 
         foreach (var (tileCoordinatesString, tileName) in tilePositionToTile)
         {
-            if (!TileNameToTile.ContainsKey(tileName))
+            if (tileName != null && !TileNameToTile.ContainsKey(tileName))
                 continue;
 
-            var tile = TileNameToTile[tileName];
+            TileBase tile = null;
+
+            if (tileName != null)
+                tile = TileNameToTile[tileName];
+
             var tileGridPosition = TryParseTileGridPosition(tileCoordinatesString);
 
             if (tileGridPosition == null)
