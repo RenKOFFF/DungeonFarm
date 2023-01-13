@@ -19,6 +19,7 @@ public enum DataCategory
     Containers,
     Time,
     WorldData,
+    Tilemaps,
 }
 
 public static class GameDataController

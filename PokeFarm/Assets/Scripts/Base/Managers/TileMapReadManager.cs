@@ -26,7 +26,10 @@ public class TileMapReadManager : MonoBehaviour
 
     public static TileMapReadManager Instance { get; private set; }
 
-    private static Dictionary<TileBase, TileData> _dataFromTiles;
+    private static Dictionary<TileBase, TileData> DataFromTiles { get; set; } = new();
+    private static Dictionary<string, TileBase> TileNameToTile { get; } = new();
+
+    private const string CoordinatesSaveItemSeparator = ", ";
 
     public static Vector3Int GetGridPosition(GridLayout tilemap, Vector2 position, bool isMousePosition)
     {
@@ -63,30 +66,10 @@ public class TileMapReadManager : MonoBehaviour
 
     private static TileData GetTileData(TileBase tileBase)
     {
-        if (tileBase == null || !_dataFromTiles.ContainsKey(tileBase))
+        if (tileBase == null || !DataFromTiles.ContainsKey(tileBase))
             return new TileData();
 
-        return _dataFromTiles[tileBase];
-    }
-
-    private void Awake()
-    {
-        Instance = this;
-
-        _dataFromTiles = new Dictionary<TileBase, TileData>();
-
-        LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
-
-        LoadScriptableTilesData<PlantingCycleTile>(
-            setTileData: tile => new TileData { PlantingCycleTile = tile },
-            updateTileData: (tileData, tile) => tileData.PlantingCycleTile = tile);
-
-        LoadScriptableTilesData<GrowCycleTile>(
-            setTileData: tile => new TileData { GrowCycleTile = tile },
-            updateTileData: (tileData, tile) => tileData.GrowCycleTile = tile);
-
-        WorldTimer.AddOnDayChangedHandler(UpdatePlantingCycleTiles);
-        WorldTimer.AddOnDayChangedHandler(UpdateGrowCycleTiles);
+        return DataFromTiles[tileBase];
     }
 
     private static void LoadScriptableTilesData<T>(
@@ -95,19 +78,19 @@ public class TileMapReadManager : MonoBehaviour
         where T : ScriptableTileData
     {
         var path = $"ScriptableTiles/{typeof(T)}s";
-        var scriptableTilesData = Resources.LoadAll<T>(path)
+        var tileToScriptableTileData = Resources.LoadAll<T>(path)
             .ToDictionary(t => t.tile);
 
-        if (scriptableTilesData.Count == 0)
+        if (tileToScriptableTileData.Count == 0)
         {
             Debug.LogError($"Не найдено ни одного [{typeof(T)}] в директории [Resources/{path}]." +
                            " Проверьте правильность названия директории.");
             return;
         }
 
-        foreach (var (tileBase, scriptableTileData) in scriptableTilesData)
+        foreach (var (tileBase, scriptableTileData) in tileToScriptableTileData)
         {
-            if (_dataFromTiles.ContainsKey(tileBase))
+            if (DataFromTiles.ContainsKey(tileBase))
             {
                 UpdateTileData(updateTileData, scriptableTileData, tileBase);
                 continue;
@@ -115,6 +98,15 @@ public class TileMapReadManager : MonoBehaviour
 
             SetTileData(setTileData, scriptableTileData, tileBase);
         }
+
+        AddScriptableTilesToAllTiles(tileToScriptableTileData);
+    }
+
+    private static void AddScriptableTilesToAllTiles<T>(Dictionary<TileBase, T> tileToScriptableTileData)
+        where T : ScriptableTileData
+    {
+        foreach (var (tile, _) in tileToScriptableTileData)
+            TileNameToTile[tile.name] = tile;
     }
 
     private static void SetTileData<T>(Func<T, TileData> setTileData, T scriptableTileData, TileBase tileBase)
@@ -127,7 +119,7 @@ public class TileMapReadManager : MonoBehaviour
             return;
         }
 
-        _dataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
+        DataFromTiles[tileBase] = setTileData.Invoke(scriptableTileData);
     }
 
     private static void UpdateTileData<T>(Action<TileData, T> updateTileData, T scriptableTileData, TileBase tileBase)
@@ -140,54 +132,145 @@ public class TileMapReadManager : MonoBehaviour
             return;
         }
 
-        updateTileData.Invoke(_dataFromTiles[tileBase], scriptableTileData);
+        updateTileData.Invoke(DataFromTiles[tileBase], scriptableTileData);
+    }
+
+    private static void UpdateTilemap(Tilemap tilemap, Action<Tilemap, Vector3Int> updateTileByCoordinates)
+    {
+        var cellBounds = tilemap.cellBounds;
+        var tilePositionToTile = new Dictionary<string, string>();
+
+        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
+        for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+        {
+            var gridPosition = new Vector3Int(x, y);
+            updateTileByCoordinates(tilemap, gridPosition);
+
+            var tile = tilemap.GetTile(gridPosition);
+
+            if (tile != null)
+                tilePositionToTile.Add(GetTileCoordinatesSaveItem(x, y), tile.name);
+        }
+
+        SaveTileMap(tilemap, tilePositionToTile);
     }
 
     private void UpdatePlantingCycleTiles()
     {
-        var cellBounds = backgroundTilemap.cellBounds;
-
-        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
-        {
-            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+        UpdateTilemap(
+            backgroundTilemap,
+            (tilemap, gridPosition) =>
             {
-                var gridPosition = new Vector3Int(x, y);
                 var tileData = GetBackgroundTileDataByGridPosition(gridPosition);
 
                 if (!tileData.IsPlantingCycleTile)
-                    continue;
+                    return;
 
                 var plantingCycleTile = tileData.PlantingCycleTile;
 
                 if (plantingCycleTile.previousCycleTile != null)
-                    backgroundTilemap.SetTile(gridPosition, plantingCycleTile.previousCycleTile);
-            }
-        }
+                    tilemap.SetTile(gridPosition, plantingCycleTile.previousCycleTile);
+            });
     }
 
     private void UpdateGrowCycleTiles()
     {
-        var cellBounds = plantsTilemap.cellBounds;
-
-        for (var x = cellBounds.xMin; x < cellBounds.xMax; x++)
-        {
-            for (var y = cellBounds.yMin; y < cellBounds.yMax; y++)
+        UpdateTilemap(
+            plantsTilemap,
+            (tilemap, gridPosition) =>
             {
-                var gridPosition = new Vector3Int(x, y);
                 var plantsTileData = GetPlantsTileDataByGridPosition(gridPosition);
 
                 if (!plantsTileData.IsGrowCycleTile)
-                    continue;
+                    return;
 
                 var backgroundTileData = GetBackgroundTileDataByGridPosition(gridPosition);
                 var growCycleTile = plantsTileData.GrowCycleTile;
 
                 if (growCycleTile.nextCycleTile != null)
-                    plantsTilemap.SetTile(gridPosition, growCycleTile.nextCycleTile);
+                    tilemap.SetTile(gridPosition, growCycleTile.nextCycleTile);
 
                 if (!backgroundTileData.IsPlantingCycleTile || !backgroundTileData.PlantingCycleTile.availableForPlant)
-                    plantsTilemap.SetTile(gridPosition, null);
-            }
+                    tilemap.SetTile(gridPosition, null);
+            });
+    }
+
+    private static void SaveTileMap(Tilemap tilemap, Dictionary<string, string> tilePositionToTile)
+    {
+        GameDataController.Save(tilePositionToTile, DataCategory.Tilemaps, tilemap.name);
+    }
+
+    private static string GetTileCoordinatesSaveItem(int x, int y)
+        => $"{x}{CoordinatesSaveItemSeparator}{y}";
+
+    private static void LoadTileMap(Tilemap tilemap)
+    {
+        var tilePositionToTile = GameDataController.LoadWithInitializationIfEmpty<Dictionary<string, string>>(
+            DataCategory.Tilemaps,
+            tilemap.name);
+
+        foreach (var (tileCoordinatesString, tileName) in tilePositionToTile)
+        {
+            if (!TileNameToTile.ContainsKey(tileName))
+                continue;
+
+            var tile = TileNameToTile[tileName];
+            var tileGridPosition = TryParseTileGridPosition(tileCoordinatesString);
+
+            if (tileGridPosition == null)
+                continue;
+
+            tilemap.SetTile(tileGridPosition.Value, tile);
         }
+    }
+
+    private static Vector3Int? TryParseTileGridPosition(string tileCoordinatesString)
+    {
+        var splitData = tileCoordinatesString.Split(CoordinatesSaveItemSeparator);
+
+        if (splitData.Length != 2)
+            return null;
+
+        if (!int.TryParse(splitData[0], out var x) || !int.TryParse(splitData[0], out var y))
+            return null;
+
+        return new Vector3Int(x, y);
+    }
+
+    private static void LoadScriptableTiles()
+    {
+        LoadScriptableTilesData<BreakableTile>(setTileData: tile => new TileData { BreakableTile = tile });
+
+        LoadScriptableTilesData<PlantingCycleTile>(
+            setTileData: tile => new TileData { PlantingCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.PlantingCycleTile = tile);
+
+        LoadScriptableTilesData<GrowCycleTile>(
+            setTileData: tile => new TileData { GrowCycleTile = tile },
+            updateTileData: (tileData, tile) => tileData.GrowCycleTile = tile);
+    }
+
+    private void LoadTilemaps()
+    {
+        LoadTileMap(backgroundTilemap);
+        LoadTileMap(landscapeTilemap);
+        LoadTileMap(plantsTilemap);
+    }
+
+    private void AddOnDayChangedHandlers()
+    {
+        WorldTimer.AddOnDayChangedHandler(UpdatePlantingCycleTiles);
+        WorldTimer.AddOnDayChangedHandler(UpdateGrowCycleTiles);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+
+        DataFromTiles = new Dictionary<TileBase, TileData>();
+
+        LoadScriptableTiles();
+        LoadTilemaps();
+        AddOnDayChangedHandlers();
     }
 }
