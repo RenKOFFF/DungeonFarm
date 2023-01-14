@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   Name: Axe
-  icon: {fileID: 1119437427, guid: 3de3095b7a1c337499614d430d97df62, type: 3}
+  icon: {fileID: 72573902, guid: 7f8c353b49315a64ab5f8cc79104b28f, type: 3}
   isStackable: 0
   type: 1
-  isFood: 0
+  growCycleStartTile: {fileID: 0}
+  _addingStats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
+  BuildingPrefab: {fileID: 0}

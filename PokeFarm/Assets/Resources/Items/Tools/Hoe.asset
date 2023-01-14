@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7
   Name: Hoe
-  icon: {fileID: 828861682, guid: bac64618c27186641b8e0c25c32e4f34, type: 3}
+  icon: {fileID: -1009980733, guid: 7f8c353b49315a64ab5f8cc79104b28f, type: 3}
   isStackable: 0
   type: 1
   growCycleStartTile: {fileID: 0}
+  _addingStats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
+  BuildingPrefab: {fileID: 0}

@@ -15,8 +15,16 @@ MonoBehaviour:
   id: 3
   Name: "\u0421\u0435\u043C\u044F \u0441\u0435\u0440\u0434\u0435\u0447\u043D\u043E\u0433\u043E
     \u043A\u043E\u0440\u043D\u044F"
-  icon: {fileID: 21300000, guid: 6dad5c4939904ea42ad2586142d9b8ad, type: 3}
+  icon: {fileID: -28579535, guid: 8149195df61275f44b94c44017de3dfa, type: 3}
   isStackable: 1
   type: 4
   growCycleStartTile: {fileID: 11400000, guid: 83c07f017ff6d1f4d9869e5a62954091, type: 2}
+  _addingStats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
   BuildingPrefab: {fileID: 0}

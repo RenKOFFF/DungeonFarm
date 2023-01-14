@@ -3,6 +3,9 @@ using UnityEngine;
 public class ContainerPanelSpawnable : ContainerPanel
 {
     [SerializeField] private ContainerButton containerButtonPrefab;
+    [SerializeField] private ContainerButton toolbarButtonPrefab;
+    [SerializeField] private Transform _parentContainerButtons;
+    [SerializeField] private Transform _parentToolbarContainerButtons;
 
     private bool _isInitialized;
 
@@ -10,9 +13,26 @@ public class ContainerPanelSpawnable : ContainerPanel
     {
         this.containerController = containerController;
 
-        foreach (var _ in containerController.Slots)
+        var ToolbarButtonsCount = ToolbarManager.Instance.ToolbarSize;
+        Debug.Log(ToolbarButtonsCount);
+
+        /*foreach (var _ in containerController.Slots)
         {
-            var inventoryButton = Instantiate(containerButtonPrefab, transform, false);
+            var inventoryButton = Instantiate(containerButtonPrefab, _parentContainerButtons, false);
+            inventoryButtons.Add(inventoryButton);
+        }*/
+
+        for (int i = 0; i < containerController.Slots.Count; i++)
+        {
+            ContainerButton inventoryButton;
+            if (i < ToolbarButtonsCount)
+            {
+                inventoryButton = Instantiate(toolbarButtonPrefab, _parentToolbarContainerButtons, false);
+            }
+            else
+            {
+                inventoryButton = Instantiate(containerButtonPrefab, _parentContainerButtons, false);
+            }
             inventoryButtons.Add(inventoryButton);
         }
 

@@ -16,6 +16,7 @@ public class ToolbarManager : MonoBehaviour
     private const string NumericKeyboardButtonsKeyCodeName = "Alpha";
 
     private int _toolbarSize;
+    public int ToolbarSize => _toolbarSize;
     private int _selectedToolbarSlotIndex;
 
     public void SetSlotIndex(int index)

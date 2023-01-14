@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   Name: "\u0421\u0435\u043C\u044F \u043F\u0430\u0440\u044F\u0449\u0435\u0439 \u0440\u0435\u043F\u044B"
-  icon: {fileID: 21300000, guid: 6dad5c4939904ea42ad2586142d9b8ad, type: 3}
+  icon: {fileID: 254142606, guid: 8149195df61275f44b94c44017de3dfa, type: 3}
   isStackable: 1
   type: 4
   growCycleStartTile: {fileID: 11400000, guid: 62cbf9bd31a1d484bb021dbb4ded0657, type: 2}
+  _addingStats:
+    Strength: 0
+    Speed: 0
+    Health: 0
+    Luck: 0
+    Defense: 0
+    Dexterity: 0
+    InventorySize: 0
   BuildingPrefab: {fileID: 0}
