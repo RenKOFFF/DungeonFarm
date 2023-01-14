@@ -32,7 +32,7 @@ namespace Base.Buildings
                 var building = b.GetComponent<Buildings>();
                 if (building)
                 {
-                    var bPos = building.transform.position;
+                    var bPos = building.gameObject.transform.position;
                     WriteBuildData((int)bPos.x, (int)bPos.y, building);
                 }
             }
@@ -169,6 +169,7 @@ namespace Base.Buildings
             MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(ReturnBuild);
             MonsterInteractionButton.OnInteractedEvent.AddListener(ReturnBuild);
             CommandStationUI.IsUiActiveEvent.AddListener(HideOrReturnBuild);
+            InventoryManager.IsInventoryOpenEvent.AddListener(HideOrReturnBuild);
         }
 
         private void OnDisable()
@@ -177,6 +178,7 @@ namespace Base.Buildings
             MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.RemoveListener(ReturnBuild);
             MonsterInteractionButton.OnInteractedEvent.RemoveListener(ReturnBuild);
             CommandStationUI.IsUiActiveEvent.RemoveListener(HideOrReturnBuild);
+            InventoryManager.IsInventoryOpenEvent.RemoveListener(HideOrReturnBuild);
         }
     }
 }

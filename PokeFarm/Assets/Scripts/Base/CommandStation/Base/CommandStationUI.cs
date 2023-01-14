@@ -25,7 +25,6 @@ public class CommandStationUI : MonoBehaviour
     private void OnEnable()
     {
         IsUiActiveEvent.Invoke(true);
-        Debug.Log($"IsUiActiveEvent.Invoke(true)");
         CommandButton.OnCommandSelectedEvent.AddListener(HideCommand);
         //MonsterCommandStationButton.OnCommandExecutedEvent.AddListener(HideMonstersAndShowCommand);
     }
@@ -33,7 +32,6 @@ public class CommandStationUI : MonoBehaviour
     private void OnDisable()
     {
         IsUiActiveEvent.Invoke(false);
-        Debug.Log($"IsUiActiveEvent.Invoke(false)");
         CommandButton.OnCommandSelectedEvent.RemoveListener(HideCommand);
         //MonsterCommandStationButton.OnCommandExecutedEvent.RemoveListener(HideMonstersAndShowCommand);
     }

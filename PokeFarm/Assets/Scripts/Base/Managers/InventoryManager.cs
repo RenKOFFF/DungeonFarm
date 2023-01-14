@@ -1,11 +1,13 @@
 using Base.GameData;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private ContainerPanel inventoryPanel;
     [SerializeField] private ToolbarPanel toolbarPanel;
     [SerializeField] private ContainerController containerController;
+    public static UnityEvent<bool> IsInventoryOpenEvent = new();
 
     public static InventoryManager Instance { get; private set; }
 
@@ -60,6 +62,8 @@ public class InventoryManager : MonoBehaviour
 
     private void SwitchInventoryPanelState()
     {
+        IsInventoryOpenEvent.Invoke(!inventoryPanel.gameObject.activeInHierarchy);
+
         inventoryPanel.gameObject.SetActive(!inventoryPanel.gameObject.activeInHierarchy);
         toolbarPanel.gameObject.SetActive(!toolbarPanel.gameObject.activeInHierarchy);
 

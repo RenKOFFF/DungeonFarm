@@ -14,13 +14,6 @@ public class ContainerPanelSpawnable : ContainerPanel
         this.containerController = containerController;
 
         var ToolbarButtonsCount = ToolbarManager.Instance.ToolbarSize;
-        Debug.Log(ToolbarButtonsCount);
-
-        /*foreach (var _ in containerController.Slots)
-        {
-            var inventoryButton = Instantiate(containerButtonPrefab, _parentContainerButtons, false);
-            inventoryButtons.Add(inventoryButton);
-        }*/
 
         for (int i = 0; i < containerController.Slots.Count; i++)
         {
