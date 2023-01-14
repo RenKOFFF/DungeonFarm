@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5500dc83e7994740a612946f1e31b078, type: 3}
   m_Name: WateredDirt
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: a9cacf72e78dee8499a7b066eee4fc4e, type: 2}
-  previousCycleTile: {fileID: 11400000, guid: a38fadcc5938a4e48966399a22daf0cc, type: 2}
+  tile: {fileID: 11400000, guid: b4c0da2041193a94ca2d6603cfc621aa, type: 2}
+  previousCycleTile: {fileID: 11400000, guid: 37a8d567967b0d84eb22c4fbb55bd17d, type: 2}
   nextCycleTile: {fileID: 0}
   interactsWithTool: {fileID: 0}
   availableForPlant: 1
