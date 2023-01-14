@@ -10,15 +10,10 @@ namespace Base.Buildings
 
         [SerializeField] private Transform _parentBuilding;
         [SerializeField] private Buildings _flyingBuilding;
-        private bool _isAvailable;
-
-        private void OnEnable()
-        {
-            MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(HideBuild);
-            MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(ReturnBuild);
-            MonsterInteractionButton.OnInteractedEvent.AddListener(ReturnBuild);
-        }
-
+        private bool _isAvailableToBuild;
+        private bool _isCanBuild = true;
+        
+        
         private void Start()
         {
             CellBounds = TileMapReadManager.Instance.backgroundTilemap.cellBounds;
@@ -45,6 +40,8 @@ namespace Base.Buildings
 
         void Update()
         {
+            if (!_isCanBuild) return;
+            
             if (ToolbarManager.Instance?.ItemOnTheHand?.type == ItemType.Building)
             {
                 _flyingBuilding.gameObject.SetActive(true);
@@ -53,13 +50,13 @@ namespace Base.Buildings
                 var mousePosition = TileMapReadManager.Instance.GetCurrentBackgroundGridPositionByMousePosition();
                 _flyingBuilding.transform.position = mousePosition;
             
-                _isAvailable = CheckMarker(mousePosition) &&
+                _isAvailableToBuild = CheckMarker(mousePosition) &&
                                CheckBoundsForBuildAvailable(mousePosition) &&
                                !IsPlaceTaken(mousePosition.x, mousePosition.y);
             
-                _flyingBuilding.SetAvailableColor(_isAvailable);
+                _flyingBuilding.SetAvailableColor(_isAvailableToBuild);
 
-                if (_isAvailable && Input.GetMouseButtonDown(0))
+                if (_isAvailableToBuild && Input.GetMouseButtonDown(0))
                 {
                     DoBuild(mousePosition.x, mousePosition.y);
                 }
@@ -147,14 +144,31 @@ namespace Base.Buildings
 
         private void HideBuild(Monster _, List<MonstersInteractionWay> __)
         {
-            _isAvailable = false;
-            gameObject.SetActive(false);
+            _isCanBuild = false;
+            _flyingBuilding.gameObject.SetActive(false);
+            _isAvailableToBuild = false;
         }
 
         private void ReturnBuild()
         {
-            gameObject.SetActive(true);
-            _isAvailable = true;
+            _isCanBuild = true;
+            _flyingBuilding.gameObject.SetActive(true);
+            _isAvailableToBuild = true;
+        }
+
+        private void HideOrReturnBuild(bool isNeedHide)
+        {
+            _isCanBuild = !isNeedHide;
+            _flyingBuilding.gameObject.SetActive(!isNeedHide);
+            _isAvailableToBuild = !isNeedHide;
+        }
+        
+        private void OnEnable()
+        {
+            MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.AddListener(HideBuild);
+            MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.AddListener(ReturnBuild);
+            MonsterInteractionButton.OnInteractedEvent.AddListener(ReturnBuild);
+            CommandStationUI.IsUiActiveEvent.AddListener(HideOrReturnBuild);
         }
 
         private void OnDisable()
@@ -162,6 +176,7 @@ namespace Base.Buildings
             MonsterBehaviour.OnPlayerCalledInteractionMenuEvent.RemoveListener(HideBuild);
             MonsterBehaviour.OnPlayerExitInteractionDistanceEvent.RemoveListener(ReturnBuild);
             MonsterInteractionButton.OnInteractedEvent.RemoveListener(ReturnBuild);
+            CommandStationUI.IsUiActiveEvent.RemoveListener(HideOrReturnBuild);
         }
     }
 }
